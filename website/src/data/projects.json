@@ -1,19 +1,28 @@
 [
   {
+    "id": "marinasicher-locationlagomaggiore",
+    "image": "/images/projects/marinasicher-locationlagomaggiore.png",
+    "imageAlt": "projects.items.projectTwo.imageAlt",
+    "technologies": [
+      "AWS",
+      "CloudFront", 
+      "S3", 
+      "Route53",
+      "Terraform",
+      "Vue.js",
+      "HTML",
+      "CSS"
+    ],
+    "url": "https://locationlagomaggiore.com/",
+    "translationKey": "projects.items.marinasicher-locationlagomaggiore"
+  },
+  {
     "id": "project-one",
     "image": "/images/projects/project-placeholder-1.svg",
     "imageAlt": "projects.items.projectOne.imageAlt",
     "technologies": ["Vue.js", "TypeScript", "AWS", "Terraform"],
     "url": null,
     "translationKey": "projects.items.projectOne"
-  },
-  {
-    "id": "project-two",
-    "image": "/images/projects/project-placeholder-2.svg",
-    "imageAlt": "projects.items.projectTwo.imageAlt",
-    "technologies": ["AWS", "Lambda", "S3", "CloudFront"],
-    "url": null,
-    "translationKey": "projects.items.projectTwo"
   },
   {
     "id": "project-three",

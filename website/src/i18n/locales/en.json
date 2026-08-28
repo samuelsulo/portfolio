@@ -60,10 +60,10 @@
         "description": "Multi-account AWS architecture with automated provisioning via Terraform and separate deploy pipelines per environment.",
         "imageAlt": "Project preview: multi-account cloud platform"
       },
-      "projectTwo": {
-        "title": "Serverless Showcase Site",
-        "description": "High-performance static site distributed via S3 and CloudFront, with automatically managed SSL certificates.",
-        "imageAlt": "Project preview: serverless showcase site"
+      "marinasicher-locationlagomaggiore": {
+        "title": "Lake Maggiore Venue Showcase Site",
+        "description": "High-performance static site distributed via S3 and CloudFront, with automatically managed domain and SSL certificates.",
+        "imageAlt": "Project preview: Lake Maggiore Venue Showcase Site"
       },
       "projectThree": {
         "title": "Infrastructure CI/CD Pipeline",

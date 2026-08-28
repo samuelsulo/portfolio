@@ -60,10 +60,10 @@
         "description": "Architettura AWS multi-account con provisioning automatizzato via Terraform e pipeline di deploy separate per ambiente.",
         "imageAlt": "Anteprima del progetto: piattaforma cloud multi-account"
       },
-      "projectTwo": {
-        "title": "Sito Vetrina Serverless",
-        "description": "Sito statico ad alte prestazioni distribuito su S3 e CloudFront, con certificati SSL gestiti automaticamente.",
-        "imageAlt": "Anteprima del progetto: sito vetrina serverless"
+      "marinasicher-locationlagomaggiore": {
+        "title": "Sito Vetrina Location Lago Maggiore",
+        "description": "Sito statico ad alte prestazioni distribuito su S3 e CloudFront, con dominio e certificati SSL gestiti automaticamente.",
+        "imageAlt": "Anteprima del progetto: Sito Vetrina Location Lago Maggiore"
       },
       "projectThree": {
         "title": "Pipeline CI/CD per Infrastruttura",
