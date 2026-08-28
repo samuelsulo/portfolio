@@ -39,6 +39,7 @@ template. Vedi il README di ogni sottocartella per i dettagli:
 ## Stack tecnologico
 
 - **Frontend**: Vue 3 + TypeScript + Vite, Composition API.
+- **Internazionalizzazione**: vue-i18n, italiano come lingua di default e inglese come seconda lingua.
 - **Infrastruttura**: Terraform, provider AWS ufficiale. Stack di hosting di
   default: sito statico su S3 + CloudFront.
 - **Test**: Vitest (unit), Playwright (e2e).

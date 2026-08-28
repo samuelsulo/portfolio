@@ -36,6 +36,7 @@ Regole architetturali fisse:
 ## 3. Stack tecnologico
 
 - **Frontend**: Vue 3 + TypeScript + Vite. Composition API (`<script setup>`), niente Options API nel codice nuovo.
+- **Internazionalizzazione**: vue-i18n (Composition API, `useI18n`), unico strumento di gestione traduzioni in ogni progetto. Lingua di default: italiano (`it`); seconda lingua: inglese (`en`). Non introdurre altre lingue né altri tool di gestione traduzioni senza richiesta esplicita del cliente.
 - **Styling**: CSS scoped nei componenti o CSS variabile condiviso in `src/styles/`. Evitare l'introduzione di framework CSS pesanti (Tailwind, Bootstrap...) salvo richiesta esplicita: la maggior parte di questi siti sono poche pagine e non giustificano la dipendenza.
 - **Infrastruttura**: Terraform (ultima versione stabile, provider AWS ufficiale). Nessun CloudFormation, CDK o Pulumi: uno strumento solo, per coerenza tra tutti i progetti cliente.
 - **Package manager**: npm (coerenza tra progetti, evitare di mischiare yarn/pnpm tra clienti diversi senza motivo).
@@ -81,6 +82,10 @@ Non spostare né rinominare queste cartelle di primo livello: gli script e la do
 - Performance: immagini ottimizzate/responsive, niente librerie pesanti per effetti che si possono fare in CSS.
 - SEO di base obbligatorio per siti vetrina: meta title/description per pagina, Open Graph, sitemap, dati struttura locale (LocalBusiness schema.org) quando pertinente.
 - Contenuti reali del cliente (testi, immagini, orari, contatti) vivono in un punto unico (es. file di configurazione/CMS-lite), non sparsi e duplicati nei componenti.
+- Nessuna stringa di interfaccia (voci di navigazione, bottoni, etichette dei form, messaggi di stato, titoli di sezione) va scritta direttamente nei template o negli script dei componenti: passa sempre da `useI18n()` e dalla funzione `t()`, con chiave definita nei file di traduzione (`src/i18n/locales/it.json` come sorgente di verità, `en.json` mantenuto in parallelo con le stesse chiavi).
+- I contenuti reali del cliente che sono testo discorsivo destinato a essere letto in entrambe le lingue (nome attività, claim, descrizioni, etichette di giorni/orari) vivono anch'essi nei file di traduzione, non nel file di configurazione: quest'ultimo contiene solo i dati non traducibili o identici in ogni lingua (telefono, email, indirizzo, orari come intervallo numerico, URL dei social).
+- Il selettore di lingua è sempre presente nella barra di navigazione principale, accessibile da tastiera, e la scelta dell'utente viene ricordata tra le visite (es. `localStorage`).
+- Aggiungere una lingua non prevista in questo file è una **modifica che richiede revisione manuale** (vedi sezione 11): di norma il progetto resta limitato a italiano e inglese.
 
 ## 7. Testing
 
@@ -127,6 +132,7 @@ Ferma il lavoro e segnala esplicitamente prima di procedere se una richiesta imp
 - Qualunque `terraform apply` diretto su `environments/production`
 - Introdurre autenticazione utenti, aree riservate, e-commerce/pagamenti
 - Cambiare il modello di hosting (es. passare da statico a server-rendered)
+- Aggiungere una lingua oltre a italiano e inglese, o sostituire vue-i18n con un altro strumento/servizio di gestione traduzioni
 - Qualunque cosa che avvicini il progetto a un modello SaaS/multi-tenant/gestione centralizzata di più clienti nello stesso account o stack
 
 In questi casi: proponi la soluzione, spiega perché esce dal perimetro standard, e aspetta conferma esplicita prima di implementare.
