@@ -1,0 +1,39 @@
+# --- Terraform ---
+**/.terraform/
+**/.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+!*.tfvars
+!*.tfvars.example
+!project.auto.tfvars
+backend.hcl
+tfplan
+crash.log
+crash.*.log
+
+# --- Secrets / env ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# --- Node ---
+node_modules/
+website/dist/
+website/.vite/
+website/coverage/
+*.tsbuildinfo
+website/vite.config.js
+website/vite.config.d.ts
+
+# --- Test artifacts ---
+test-results/
+playwright-report/
+.vite/
+
+# --- OS / editor ---
+.DS_Store
+.idea/
+*.log

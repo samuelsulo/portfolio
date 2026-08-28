@@ -1,0 +1,5 @@
+owner           = "Owner Name"
+project         = "Project Name"
+project_code    = "projectcode"
+aws_region      = "eu-south-1"
+aws_region_code = "eus1"

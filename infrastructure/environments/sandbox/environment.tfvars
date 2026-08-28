@@ -1,0 +1,14 @@
+environment           = "sandbox"
+environment_code      = "sbx"
+aws_account_id        = "000000000000"
+aws_role_enabled      = false
+aws_role_arn          = "arn:aws:iam::000000000000:role/SamuelSuloAdminRole"
+aws_role_external_id  = "e7173316-2830-4fcd-9000-e6482907cc64"
+enable_cloudtrail     = false
+bucket_force_destroy  = true
+route53_zone_id       = "Z056385545KJLOV8R9W3"
+domain_name           = "project-sbx.samuelsulo.it"
+budget_unit           = "USD"
+budget_monthly_amount = "20"
+budget_annual_amount  = "20"
+budget_alert_emails   = ["work.samuelsulo@gmail.com"]
