@@ -1,0 +1,109 @@
+{
+  "meta": {
+    "title": "Samuel Sulo | Cloud Engineer & Web Developer",
+    "description": "Samuel Sulo, Cloud Engineer & Web Developer. Portfolio, servizi e progetti."
+  },
+  "nav": {
+    "skipToContent": "Vai al contenuto principale",
+    "about": "Chi sono",
+    "services": "Servizi",
+    "projects": "Progetti",
+    "contact": "Contatti",
+    "toggleMenu": "Apri/chiudi il menu di navigazione",
+    "languageSwitcher": "Cambia lingua",
+    "brandAlt": "Logo di Samuel Sulo"
+  },
+  "hero": {
+    "eyebrow": "Cloud Engineer & Web Developer",
+    "name": "Samuel Sulo",
+    "role": "Costruisco infrastrutture cloud solide e prodotti web moderni",
+    "intro": "Progetto architetture cloud scalabili su AWS e sviluppo applicazioni web moderne con Vue.js e TypeScript, unendo affidabilità infrastrutturale e cura per il dettaglio nell'esperienza utente.",
+    "ctaPrimary": "Contattami",
+    "ctaSecondary": "Guarda i progetti",
+    "profileImageAlt": "Ritratto di Samuel Sulo"
+  },
+  "services": {
+    "eyebrow": "Cosa faccio",
+    "title": "Servizi",
+    "subtitle": "Dall'infrastruttura cloud all'interfaccia utente, un unico punto di riferimento per il tuo progetto digitale.",
+    "items": {
+      "cloudArchitecture": {
+        "title": "Architetture Cloud",
+        "description": "Progettazione e implementazione di infrastrutture AWS scalabili, sicure e cost-effective, gestite interamente come codice."
+      },
+      "webDevelopment": {
+        "title": "Sviluppo Web",
+        "description": "Applicazioni web moderne, performanti e accessibili, costruite con Vue.js e TypeScript."
+      },
+      "infrastructureAsCode": {
+        "title": "Infrastructure as Code",
+        "description": "Automazione dell'infrastruttura con Terraform: ambienti riproducibili, versionati e facilmente evolvibili."
+      },
+      "securityBestPractices": {
+        "title": "Sicurezza & Best Practice",
+        "description": "Configurazioni cloud allineate al principio del privilegio minimo, HTTPS ovunque e monitoraggio dei costi."
+      }
+    }
+  },
+  "projects": {
+    "eyebrow": "Il mio lavoro",
+    "title": "Progetti",
+    "subtitle": "Una selezione di progetti recenti tra sviluppo web e infrastruttura cloud.",
+    "scrollHint": "Scorri per vedere altri progetti",
+    "prevAriaLabel": "Progetto precedente",
+    "nextAriaLabel": "Progetto successivo",
+    "comingSoon": "Dettagli in arrivo",
+    "viewProject": "Vedi il progetto",
+    "items": {
+      "projectOne": {
+        "title": "Piattaforma Cloud Multi-Account",
+        "description": "Architettura AWS multi-account con provisioning automatizzato via Terraform e pipeline di deploy separate per ambiente.",
+        "imageAlt": "Anteprima del progetto: piattaforma cloud multi-account"
+      },
+      "projectTwo": {
+        "title": "Sito Vetrina Serverless",
+        "description": "Sito statico ad alte prestazioni distribuito su S3 e CloudFront, con certificati SSL gestiti automaticamente.",
+        "imageAlt": "Anteprima del progetto: sito vetrina serverless"
+      },
+      "projectThree": {
+        "title": "Pipeline CI/CD per Infrastruttura",
+        "description": "Automazione end-to-end di validazione, plan e apply Terraform integrata nel flusso di sviluppo.",
+        "imageAlt": "Anteprima del progetto: pipeline CI/CD per infrastruttura"
+      }
+    }
+  },
+  "contact": {
+    "eyebrow": "Parliamone",
+    "title": "Contattami",
+    "subtitle": "Hai un progetto in mente? Scrivimi e troviamo insieme la soluzione migliore.",
+    "form": {
+      "nameLabel": "Nome",
+      "namePlaceholder": "Il tuo nome",
+      "emailLabel": "Email",
+      "emailPlaceholder": "tuonome{'@'}esempio.com",
+      "messageLabel": "Messaggio",
+      "messagePlaceholder": "Raccontami del tuo progetto",
+      "submit": "Invia messaggio",
+      "submitting": "Invio in corso...",
+      "successTitle": "Messaggio inviato",
+      "successMessage": "Grazie per avermi scritto, ti risponderò il prima possibile.",
+      "errorTitle": "Invio non riuscito",
+      "errorMessage": "Qualcosa è andato storto. Riprova più tardi oppure scrivimi direttamente via email.",
+      "validation": {
+        "nameRequired": "Inserisci il tuo nome.",
+        "emailRequired": "Inserisci un indirizzo email.",
+        "emailInvalid": "Inserisci un indirizzo email valido.",
+        "messageRequired": "Scrivi un messaggio.",
+        "messageTooShort": "Il messaggio deve contenere almeno 10 caratteri."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Cloud Engineer & Web Developer",
+    "rights": "Tutti i diritti riservati.",
+    "githubAriaLabel": "Profilo GitHub di Samuel Sulo",
+    "linkedinAriaLabel": "Profilo LinkedIn di Samuel Sulo",
+    "emailAriaLabel": "Invia un'email a Samuel Sulo",
+    "backToTop": "Torna all'inizio"
+  }
+}

@@ -1,0 +1,99 @@
+/**
+ * Design tokens: cyberpunk-professional dark theme.
+ * Every color, spacing, radius and motion value used across the app is
+ * defined here so the visual identity stays consistent and easy to tune
+ * from a single place.
+ */
+
+:root {
+  /* --- Color: surfaces --- */
+  --color-bg: #05060a;
+  --color-bg-alt: #090b12;
+  --color-surface: #10131c;
+  --color-surface-alt: #161a26;
+  --color-surface-raised: #1a1e2c;
+
+  /* --- Color: borders --- */
+  --color-border: rgba(230, 232, 240, 0.09);
+  --color-border-strong: rgba(230, 232, 240, 0.16);
+
+  /* --- Color: text --- */
+  --color-text: #e9ebf3;
+  --color-text-muted: #a3a9bd;
+  --color-text-dim: #6b7186;
+
+  /* --- Color: neon accents --- */
+  --color-neon-primary: #35e6ff;
+  --color-neon-primary-strong: #7df3ff;
+  --color-neon-primary-rgb: 53, 230, 255;
+  --color-neon-secondary: #b24bf3;
+  --color-neon-secondary-rgb: 178, 75, 243;
+  --color-neon-success: #45f0a6;
+  --color-neon-success-rgb: 69, 240, 166;
+  --color-neon-danger: #ff5470;
+  --color-neon-danger-rgb: 255, 84, 112;
+
+  /* --- Typography --- */
+  --font-sans: 'Space Grotesk Variable', 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+
+  --fs-h1: clamp(2.5rem, 4vw + 1rem, 4.5rem);
+  --fs-h2: clamp(1.75rem, 2vw + 1rem, 2.75rem);
+  --fs-h3: clamp(1.15rem, 1vw + 0.9rem, 1.5rem);
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+  --fs-mono: 0.8125rem;
+
+  --lh-heading: 1.15;
+  --lh-body: 1.65;
+
+  /* --- Spacing scale --- */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 8rem;
+
+  --container-width: 1200px;
+  --container-padding: clamp(1.25rem, 4vw, 3rem);
+
+  /* --- Radius --- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 999px;
+
+  /* --- Elevation / glow --- */
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.45);
+  --glow-primary: 0 0 0 1px rgba(var(--color-neon-primary-rgb), 0.4),
+    0 0 20px rgba(var(--color-neon-primary-rgb), 0.25);
+  --glow-primary-strong: 0 0 0 1px rgba(var(--color-neon-primary-rgb), 0.6),
+    0 0 32px rgba(var(--color-neon-primary-rgb), 0.4);
+  --glow-secondary: 0 0 0 1px rgba(var(--color-neon-secondary-rgb), 0.4),
+    0 0 20px rgba(var(--color-neon-secondary-rgb), 0.22);
+  --glow-danger: 0 0 0 1px rgba(var(--color-neon-danger-rgb), 0.5),
+    0 0 16px rgba(var(--color-neon-danger-rgb), 0.25);
+
+  /* --- Motion --- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 500ms;
+
+  --z-navbar: 100;
+  --z-overlay: 200;
+}
+
+/* Respect the user's OS-level motion preference everywhere in the app. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+  }
+}

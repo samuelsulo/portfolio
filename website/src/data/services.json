@@ -1,0 +1,26 @@
+[
+  {
+    "id": "cloud-architecture",
+    "icon": "cloud",
+    "technologies": ["AWS", "Terraform", "CloudFront"],
+    "translationKey": "services.items.cloudArchitecture"
+  },
+  {
+    "id": "web-development",
+    "icon": "code",
+    "technologies": ["Vue.js", "TypeScript", "Vite"],
+    "translationKey": "services.items.webDevelopment"
+  },
+  {
+    "id": "infrastructure-as-code",
+    "icon": "infrastructure",
+    "technologies": ["Terraform", "CI/CD"],
+    "translationKey": "services.items.infrastructureAsCode"
+  },
+  {
+    "id": "security-best-practices",
+    "icon": "security",
+    "technologies": ["IAM", "ACM", "OAC"],
+    "translationKey": "services.items.securityBestPractices"
+  }
+]
