@@ -13,6 +13,7 @@ const year = new Date().getFullYear()
       <div class="footer__identity">
         <span class="footer__name">Samuel Sulo</span>
         <span class="footer__tagline">{{ t('footer.tagline') }}</span>
+        <a :href="`mailto:${siteConfig.email}`" class="footer__email">{{ siteConfig.email }}</a>
       </div>
 
       <div class="footer__links">
@@ -88,7 +89,19 @@ const year = new Date().getFullYear()
 
 .footer__links {
   display: flex;
+  align-items: center;
   gap: var(--space-sm);
+}
+
+.footer__email {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.footer__email:hover {
+  color: var(--color-neon-primary);
 }
 
 .footer__icon-link {
