@@ -81,6 +81,8 @@
       "namePlaceholder": "Your name",
       "emailLabel": "Email",
       "emailPlaceholder": "you{'@'}example.com",
+      "phoneLabel": "Phone (optional)",
+      "phonePlaceholder": "Your phone number",
       "messageLabel": "Message",
       "messagePlaceholder": "Tell me about your project",
       "submit": "Send message",
@@ -93,6 +95,7 @@
         "nameRequired": "Please enter your name.",
         "emailRequired": "Please enter an email address.",
         "emailInvalid": "Please enter a valid email address.",
+        "phoneInvalid": "Please enter a valid phone number.",
         "messageRequired": "Please write a message.",
         "messageTooShort": "The message must be at least 10 characters long."
       }

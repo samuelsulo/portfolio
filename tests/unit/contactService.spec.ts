@@ -8,6 +8,7 @@ import {
 const sampleValues = {
   name: 'Ada Lovelace',
   email: 'ada@example.com',
+  phone: '',
   message: 'Hello, I would like to get in touch about a project.',
 }
 

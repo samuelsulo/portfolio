@@ -58,6 +58,25 @@ const { values, errors, status, handleSubmit, resetStatusIfNeeded } = useContact
         </div>
 
         <div class="contact__field">
+          <label for="contact-phone">{{ t('contact.form.phoneLabel') }}</label>
+          <input
+            id="contact-phone"
+            v-model="values.phone"
+            type="tel"
+            name="phone"
+            autocomplete="tel"
+            :placeholder="t('contact.form.phonePlaceholder')"
+            :aria-invalid="Boolean(errors.phone)"
+            :aria-describedby="errors.phone ? 'contact-phone-error' : undefined"
+            @input="resetStatusIfNeeded"
+          />
+          <p v-if="errors.phone" id="contact-phone-error" class="contact__error">
+            <AppIcon name="alert-circle" :size="14" />
+            {{ t(`contact.form.validation.${errors.phone}`) }}
+          </p>
+        </div>
+
+        <div class="contact__field">
           <label for="contact-message">{{ t('contact.form.messageLabel') }}</label>
           <textarea
             id="contact-message"

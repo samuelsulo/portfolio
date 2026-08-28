@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { isValidEmail, validateContactForm } from '../../website/src/utils/validation'
+import { isValidEmail, isValidPhone, validateContactForm } from '../../website/src/utils/validation'
 
 describe('isValidEmail', () => {
   it('accepts well-formed addresses', () => {
@@ -15,15 +15,37 @@ describe('isValidEmail', () => {
   })
 })
 
+describe('isValidPhone', () => {
+  it('accepts well-formed phone numbers', () => {
+    expect(isValidPhone('+39 333 1234567')).toBe(true)
+    expect(isValidPhone('(02) 1234-5678')).toBe(true)
+  })
+
+  it('rejects malformed phone numbers', () => {
+    expect(isValidPhone('abc')).toBe(false)
+    expect(isValidPhone('123')).toBe(false)
+  })
+})
+
 describe('validateContactForm', () => {
   const validValues = {
     name: 'Ada Lovelace',
     email: 'ada@example.com',
+    phone: '',
     message: 'Hello, I would like to get in touch about a project.',
   }
 
   it('returns no errors for valid input', () => {
     expect(validateContactForm(validValues)).toEqual({})
+  })
+
+  it('accepts a well-formed phone number', () => {
+    expect(validateContactForm({ ...validValues, phone: '+39 333 1234567' })).toEqual({})
+  })
+
+  it('flags a malformed phone number', () => {
+    const errors = validateContactForm({ ...validValues, phone: 'not-a-phone' })
+    expect(errors.phone).toBe('phoneInvalid')
   })
 
   it('flags a missing name', () => {
@@ -52,7 +74,12 @@ describe('validateContactForm', () => {
   })
 
   it('reports every invalid field at once', () => {
-    const errors = validateContactForm({ name: '', email: '', message: '' })
+    const errors = validateContactForm({ name: '', email: '', phone: '', message: '' })
     expect(Object.keys(errors).sort()).toEqual(['email', 'message', 'name'])
+  })
+
+  it('reports the phone field too when it is invalid alongside others', () => {
+    const errors = validateContactForm({ name: '', email: '', phone: 'not-a-phone', message: '' })
+    expect(Object.keys(errors).sort()).toEqual(['email', 'message', 'name', 'phone'])
   })
 })

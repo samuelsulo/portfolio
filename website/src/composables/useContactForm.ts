@@ -5,7 +5,7 @@ import { submitContactForm } from '@/services/contactService'
 export type ContactFormStatus = 'idle' | 'loading' | 'success' | 'error'
 
 export function useContactForm() {
-  const values = reactive<ContactFormValues>({ name: '', email: '', message: '' })
+  const values = reactive<ContactFormValues>({ name: '', email: '', phone: '', message: '' })
   const errors = ref<ContactFormErrors>({})
   const status = ref<ContactFormStatus>('idle')
 
@@ -30,6 +30,7 @@ export function useContactForm() {
       status.value = 'success'
       values.name = ''
       values.email = ''
+      values.phone = ''
       values.message = ''
     } catch {
       status.value = 'error'
