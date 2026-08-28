@@ -2,25 +2,25 @@
   {
     "id": "cloud-architecture",
     "icon": "cloud",
-    "technologies": ["AWS", "Terraform", "CloudFront"],
+    "technologies": ["AWS", "Terraform", "CI/CD"],
     "translationKey": "services.items.cloudArchitecture"
   },
   {
     "id": "web-development",
     "icon": "code",
-    "technologies": ["Vue.js", "TypeScript", "Vite"],
+    "technologies": ["Vue.js", "TypeScript", "Vite", "HTML", "CSS"],
     "translationKey": "services.items.webDevelopment"
   },
   {
     "id": "infrastructure-as-code",
     "icon": "infrastructure",
-    "technologies": ["Terraform", "CI/CD"],
+    "technologies": ["Terraform", "CI/CD", "GitHub"],
     "translationKey": "services.items.infrastructureAsCode"
   },
   {
     "id": "security-best-practices",
     "icon": "security",
-    "technologies": ["IAM", "ACM", "OAC"],
+    "technologies": ["AWS", "IAM", "ACM"],
     "translationKey": "services.items.securityBestPractices"
   }
 ]
