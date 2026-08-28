@@ -21,7 +21,7 @@ const { t } = useI18n()
       <div class="hero__media">
         <div class="hero__media-frame">
           <img
-            src="/images/profile/placeholder.svg"
+            src="/images/profile/half-body.png"
             :alt="t('hero.profileImageAlt')"
             class="hero__media-image"
           />
