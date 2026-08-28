@@ -102,6 +102,10 @@ onUnmounted(() => {
 
 <style scoped>
 .projects {
+  /* Extra room reserved above the card track so the hover lift + glow
+     (see .projects__track) never get clipped by the scroll container. */
+  --project-card-hover-space: 28px;
+
   padding-block: var(--space-2xl);
 }
 
@@ -152,7 +156,11 @@ onUnmounted(() => {
 }
 
 .projects__viewport {
-  margin-top: var(--space-lg);
+  /* .projects__track below adds matching top padding (to give the card
+     hover lift + glow room so they aren't clipped by the scroll
+     container); the negative margin here cancels it out so the visual
+     gap after the heading stays the same. */
+  margin-top: calc(var(--space-lg) - var(--project-card-hover-space));
 }
 
 .projects__track {
@@ -160,6 +168,7 @@ onUnmounted(() => {
   gap: var(--space-md);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  padding-top: var(--project-card-hover-space);
   padding-bottom: var(--space-sm);
   scrollbar-width: thin;
   scrollbar-color: var(--color-neon-primary) transparent;
