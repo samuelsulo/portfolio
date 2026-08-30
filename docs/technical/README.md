@@ -10,3 +10,4 @@ all'interno di ogni modulo sotto `infrastructure/`.
 
 | Documento | Descrizione |
 |---|---|
+| [`deployment.md`](./deployment.md) | Guida al deployment di `website/` su un ambiente, da zero: prerequisiti, script di deploy, strategia di cache/invalidazione, tracciamento, rollback. |
