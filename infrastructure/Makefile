@@ -38,15 +38,15 @@ endef
 
 # ── SCAFFOLDING ───────────────────────────────────────────────────────────────
 
-## scaffold-env: Scaffold a new environment from ACCOUNT_ID + live/project.auto.tfvars (usage: make scaffold-env ENV=<name> ACCOUNT_ID=<12-digit-id>)
-scaffold-env:
+## scaffold-environment: Scaffold a new environment from ACCOUNT_ID + live/project.auto.tfvars (usage: make scaffold-environment ENV=<name> ACCOUNT_ID=<12-digit-id>)
+scaffold-environment:
 	@if [ "$(ENV)" != "sandbox" ] && [ "$(ENV)" != "production" ]; then \
 		echo "$(RED)✗ ENV must be either 'sandbox' or 'production'.$(RESET)"; \
 		exit 1; \
 	fi
 	@if [ -z "$(ACCOUNT_ID)" ]; then \
 		echo "$(RED)✗ Missing ACCOUNT_ID parameter.$(RESET)"; \
-		echo "  Usage: make scaffold-env ENV=<sandbox|production> ACCOUNT_ID=<12-digit-account-id>"; \
+		echo "  Usage: make scaffold-environment ENV=<sandbox|production> ACCOUNT_ID=<12-digit-account-id>"; \
 		exit 1; \
 	fi
 	@if ! echo "$(ACCOUNT_ID)" | grep -qE '^[0-9]{12}$$'; then \

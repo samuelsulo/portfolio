@@ -34,7 +34,7 @@ prima. Non presente finché il progetto non raggiunge quello stadio.
 ## Aggiungere un ambiente
 
 ```
-make scaffold-env ENV=<sandbox|production> ACCOUNT_ID=<id-account-12-cifre>
+make scaffold-environment ENV=<sandbox|production> ACCOUNT_ID=<id-account-12-cifre>
 ```
 
 Genera `environment.tfvars` e `backend.hcl` per l'account AWS indicato,

@@ -58,7 +58,7 @@ make scaffold-module MODULE=<name>          # nuovo modulo sotto modules/local/
 make catalog-modules                        # elenca i moduli disponibili in terraform-aws-catalog
 make catalog-versions MODULE=<name>         # elenca le versioni disponibili di un modulo del catalogo
 make vendor-module MODULE=<name> REF=<tag>  # copia quella versione sotto modules/vendor/
-make scaffold-env ENV=<env> ACCOUNT_ID=<id> # nuovo ambiente sotto environments/
+make scaffold-environment ENV=<env> ACCOUNT_ID=<id> # nuovo ambiente sotto environments/
 ```
 
 ## Documentazione

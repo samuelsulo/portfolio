@@ -71,3 +71,18 @@ variable "aws_role_external_id" {
     error_message = "aws_role_external_id is required when aws_role_enabled is true."
   }
 }
+
+variable "s3_bucket_force_destroy" {
+  description = "(Required) Whether to force the deletion of the S3 bucket content during a Terraform destroy. true in sandbox (disposable environment), false in production."
+  type        = bool
+}
+
+variable "domain_name" {
+  description = "(Required) Primary domain of the website served by website_hosting. A dedicated subdomain in sandbox, the apex domain in production, so the two environments never contend for the same DNS record in the same AWS account."
+  type        = string
+}
+
+variable "route53_zone_id" {
+  description = "(Required) ID of the existing Route 53 hosted zone for domain_name, passed through to website_hosting. Same hosted zone for sandbox and production: the subdomain used in sandbox is delegated within it."
+  type        = string
+}

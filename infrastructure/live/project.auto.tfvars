@@ -1,4 +1,4 @@
-owner        = "Owner"
-project      = "terraform-aws-live"
-project_code = "tfaws"
+owner        = "Samuel Sulo"
+project      = "Portfolio for Samuel Sulo"
+project_code = "portfolio"
 aws_region   = "eu-south-1"
