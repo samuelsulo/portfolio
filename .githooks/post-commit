@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+#
+# Restores unstaged edits that .githooks/pre-commit set aside (via a
+# temporary stash) before formatting the staged Terraform files, now that
+# the commit exists.
+#
+# stash@{0}^2 is the index state at stash time (what was staged, before
+# formatting); stash@{0} is the full working tree at stash time (staged +
+# unstaged combined). Diffing the two isolates exactly the unstaged edits,
+# at the hunk level, regardless of what formatting/committing later did to
+# the staged content, even within a file that had both staged and unstaged
+# hunks.
+#
+# Restoring here rather than in pre-commit matters: it can conflict when
+# formatting touched lines immediately adjacent to an unstaged edit in the
+# same file. Doing it after the commit means such a conflict only affects
+# the working tree, never the commit that was just made.
+#
+# Reused as-is by every client project cloned from this template.
+
+set -euo pipefail
+
+repo_root=$(git rev-parse --show-toplevel)
+stash_marker="pre-commit: isolate unstaged changes"
+
+top_stash=$(git -C "$repo_root" stash list | head -n 1)
+
+case "$top_stash" in
+  *"$stash_marker"*) ;;
+  *) exit 0 ;;
+esac
+
+patch=$(git -C "$repo_root" diff 'stash@{0}^2' 'stash@{0}')
+
+if [ -z "$patch" ]; then
+  # Everything that was stashed is already covered by the commit: nothing
+  # left to restore.
+  git -C "$repo_root" stash drop -q
+  exit 0
+fi
+
+if echo "$patch" | git -C "$repo_root" apply --3way -; then
+  git -C "$repo_root" stash drop -q
+else
+  echo "⚠ Could not automatically restore your unstaged changes (formatting" >&2
+  echo "  touched lines right next to them). They are safe in the stash:" >&2
+  git -C "$repo_root" stash list | head -1 >&2
+  echo "  Resolve manually with 'git stash pop'." >&2
+fi
+
+exit 0

@@ -71,42 +71,96 @@ scaffold-env:
 	echo "  $(GREEN)✓$(RESET) $(ENV_DIR)/backend.hcl written (project=$$PROJECT, aws_region=$$AWS_REGION)"
 	$(call log_ok, Scaffold created: $(ENV_DIR)/)
 
-SCAFFOLD_LIVE_FILES := main.tf variables.tf outputs.tf README.md
-
-## scaffold-live: Scaffold the live directory with Terraform files (won't overwrite existing files)
-scaffold-live:
-	$(call log, Scaffolding live directory: $(BOLD)$(LIVE_DIR)/$(RESET))
-	@mkdir -p $(LIVE_DIR)
-	@for f in $(SCAFFOLD_LIVE_FILES); do \
-		if [ -f "$(LIVE_DIR)/$$f" ]; then \
-			echo "  $(YELLOW)⤳ $(LIVE_DIR)/$$f already exists, skipping$(RESET)"; \
-		else \
-			touch "$(LIVE_DIR)/$$f"; \
-			echo "  $(GREEN)✓$(RESET) $(LIVE_DIR)/$$f created"; \
-		fi; \
-	done
-	$(call log_ok, Live scaffold complete: $(LIVE_DIR)/)
-
 SCAFFOLD_MODULE_FILES := main.tf variables.tf outputs.tf versions.tf README.md
 
-## scaffold-module: Scaffold a new Terraform module (usage: make scaffold-module MODULE=<name>)
+## scaffold-module: Scaffold a new project-specific Terraform module under modules/local/ (usage: make scaffold-module MODULE=<name>)
 scaffold-module:
 	@if [ -z "$(MODULE)" ]; then \
 		echo "$(RED)✗ Missing MODULE parameter.$(RESET)"; \
 		echo "  Usage: make scaffold-module MODULE=<module-name>"; \
 		exit 1; \
 	fi
-	$(call log, Scaffolding module: $(BOLD)modules/$(MODULE)$(RESET))
-	@mkdir -p modules/$(MODULE)
+	$(call log, Scaffolding module: $(BOLD)modules/local/$(MODULE)$(RESET))
+	@mkdir -p modules/local/$(MODULE)
 	@for f in $(SCAFFOLD_MODULE_FILES); do \
-		if [ -f "modules/$(MODULE)/$$f" ]; then \
-			echo "  $(YELLOW)⤳ modules/$(MODULE)/$$f already exists, skipping$(RESET)"; \
+		if [ -f "modules/local/$(MODULE)/$$f" ]; then \
+			echo "  $(YELLOW)⤳ modules/local/$(MODULE)/$$f already exists, skipping$(RESET)"; \
 		else \
-			touch "modules/$(MODULE)/$$f"; \
-			echo "  $(GREEN)✓$(RESET) modules/$(MODULE)/$$f created"; \
+			touch "modules/local/$(MODULE)/$$f"; \
+			echo "  $(GREEN)✓$(RESET) modules/local/$(MODULE)/$$f created"; \
 		fi; \
 	done
-	$(call log_ok, Module scaffold complete: modules/$(MODULE)/)
+	$(call log_ok, Module scaffold complete: modules/local/$(MODULE)/)
+
+CATALOG_REPO ?= git@github.com:samuelsulo/terraform-aws-catalog.git
+
+define require_catalog_repo
+	@if [ -z "$(CATALOG_REPO)" ] || [ "$(CATALOG_REPO)" = "<set-me>" ]; then \
+		echo "$(RED)✗ CATALOG_REPO is not set.$(RESET)"; \
+		echo "  Set it in this Makefile or pass it explicitly: CATALOG_REPO=<git-url>"; \
+		exit 1; \
+	fi
+endef
+
+## catalog-modules: List modules available in terraform-aws-catalog (tagged as <module>/vX.Y.Z)
+catalog-modules:
+	$(call require_catalog_repo)
+	$(call log, Modules available in $(BOLD)$(CATALOG_REPO)$(RESET))
+	@git ls-remote --tags "$(CATALOG_REPO)" \
+		| awk '{print $$2}' \
+		| sed -E 's#^refs/tags/##; s/\^\{\}$$//' \
+		| sed -E 's#^(.*)/[^/]+$$#\1#' \
+		| sort -u
+
+## catalog-versions: List available versions of a catalog module (usage: make catalog-versions MODULE=<name>)
+catalog-versions:
+	@if [ -z "$(MODULE)" ]; then \
+		echo "$(RED)✗ Missing MODULE parameter.$(RESET)"; \
+		echo "  Usage: make catalog-versions MODULE=<module-name>"; \
+		exit 1; \
+	fi
+	$(call require_catalog_repo)
+	$(call log, Versions of $(BOLD)$(MODULE)$(RESET) in $(CATALOG_REPO))
+	@VERSIONS=$$(git ls-remote --tags "$(CATALOG_REPO)" "$(MODULE)/*" \
+		| awk '{print $$2}' \
+		| sed -E 's#^refs/tags/##; s/\^\{\}$$//' \
+		| sed -E 's#^[^/]+/##' \
+		| sort -uV); \
+	if [ -z "$$VERSIONS" ]; then \
+		echo "$(RED)✗ No tagged versions found for module '$(MODULE)'.$(RESET)"; \
+		exit 1; \
+	fi; \
+	echo "$$VERSIONS" | tac
+
+## vendor-module: Copy a module from terraform-aws-catalog into modules/vendor/, pinned to a tag (usage: make vendor-module MODULE=<name> REF=<tag>)
+vendor-module:
+	@if [ -z "$(MODULE)" ] || [ -z "$(REF)" ]; then \
+		echo "$(RED)✗ Missing MODULE and/or REF parameter.$(RESET)"; \
+		echo "  Usage: make vendor-module MODULE=<module-name> REF=<catalog-tag>"; \
+		exit 1; \
+	fi
+	$(call require_catalog_repo)
+	$(call log, Vendoring module: $(BOLD)$(MODULE)$(RESET) from $(CATALOG_REPO)@$(REF))
+	@TMP_DIR=$$(mktemp -d); \
+	trap 'rm -rf "$$TMP_DIR"' EXIT; \
+	if ! git clone --quiet --depth 1 --branch "$(REF)" "$(CATALOG_REPO)" "$$TMP_DIR" 2>/dev/null; then \
+		echo "$(RED)✗ Could not clone $(CATALOG_REPO) at ref '$(REF)'.$(RESET)"; \
+		exit 1; \
+	fi; \
+	if [ ! -d "$$TMP_DIR/modules/$(MODULE)" ]; then \
+		echo "$(RED)✗ Module '$(MODULE)' not found in catalog at ref '$(REF)'.$(RESET)"; \
+		exit 1; \
+	fi; \
+	COMMIT=$$(git -C "$$TMP_DIR" rev-parse HEAD); \
+	rm -rf "modules/vendor/$(MODULE)"; \
+	mkdir -p "modules/vendor"; \
+	cp -R "$$TMP_DIR/modules/$(MODULE)" "modules/vendor/$(MODULE)"; \
+	rm -rf "modules/vendor/$(MODULE)/.git"; \
+	printf '# Vendored module\n\nCopied verbatim from `terraform-aws-catalog`. Do not modify: see\n[CLAUDE.md](../../../CLAUDE.md) §5 and [../README.md](../README.md).\n\n| | |\n|---|---|\n| Source | %s |\n| Module | %s |\n| Ref | %s |\n| Commit | %s |\n| Vendored on | %s |\n' \
+		"$(CATALOG_REPO)" "$(MODULE)" "$(REF)" "$$COMMIT" "$$(date +%Y-%m-%d)" \
+		> "modules/vendor/$(MODULE)/VENDORED.md"; \
+	echo "  $(GREEN)✓$(RESET) modules/vendor/$(MODULE)/ vendored from $(REF) (commit $$COMMIT)"
+	$(call log_ok, Vendoring complete: modules/vendor/$(MODULE)/)
 
 # ── TERRAFORM WORKFLOW ────────────────────────────────────────────────────────
 
@@ -133,6 +187,17 @@ fmt:
 		$(TF) fmt - < "$$f" > "$$tmp" && mv "$$tmp" "$$f" || { rm -f "$$tmp"; exit 1; }; \
 	done
 	$(call log_ok, Formatting complete)
+
+## fmt-staged: Format only the given files, same rules as fmt (used by .githooks/pre-commit; usage: make fmt-staged FILES="path1 path2 ...")
+fmt-staged:
+	@for f in $(FILES); do \
+		case "$$f" in \
+			*.tftest.hcl) ;; \
+			*.tf|*.tfvars) $(TF) fmt "$$f" || exit 1 ;; \
+			*.hcl) tmp="$$f.tmp"; \
+				$(TF) fmt - < "$$f" > "$$tmp" && mv "$$tmp" "$$f" || { rm -f "$$tmp"; exit 1; } ;; \
+		esac; \
+	done
 
 ## fmt-check: Check Terraform and HCL formatting without modifying files (useful in CI)
 fmt-check:
@@ -343,7 +408,7 @@ docs:
 		echo "$(RED)✗ terraform-docs not found.$(RESET) Install it: https://terraform-docs.io/user-guide/installation/"; \
 		exit 1; \
 	}
-	@for d in modules/*/; do \
+	@for d in modules/*/*/; do \
 		echo "$(CYAN)→ $$d$(RESET)"; \
 		terraform-docs markdown table --output-file README.md --output-mode inject "$$d"; \
 	done

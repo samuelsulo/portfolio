@@ -19,8 +19,8 @@
 #   terraform-state-<account-id>-eu-south-1-an
 #
 # Run with the target account's credentials already active in the shell:
-#   - sandbox account (mine)     -> normal developer credentials
-#   - client/production account  -> `eval $(make assume-role ENV=production)` first
+#  - sandbox account (mine)     -> normal developer credentials
+#  - client/production account  -> cross-account role
 # The account it operates on is the one of the current credentials (aws sts
 # get-caller-identity): no ID to pass by hand, zero risk of a typo on the
 # target account.

@@ -9,6 +9,7 @@ bootstrap, operazioni da riga di comando sull'account AWS di destinazione.
 | Script | Scopo |
 |---|---|
 | [`bootstrap-terraform-backend.sh`](./bootstrap-terraform-backend.sh) | Crea (una volta sola) il bucket S3 per lo stato Terraform di tutti i progetti di un account AWS: versioning, cifratura, blocco accesso pubblico, policy solo-HTTPS, lifecycle sulle versioni non correnti. Idempotente: se il bucket esiste già, ne riallinea solo la configurazione. |
+| [`install-hooks.sh`](./install-hooks.sh) | Punta `core.hooksPath` a [`../.githooks/`](../.githooks) e rende gli hook eseguibili. Da eseguire una volta dopo ogni clone. Unico script qui che non opera su un account AWS: eccezione ai prerequisiti sotto. |
 
 ## Prerequisiti
 
@@ -16,7 +17,7 @@ bootstrap, operazioni da riga di comando sull'account AWS di destinazione.
   già attive nella shell al momento dell'esecuzione: gli script operano
   sull'account restituito da `aws sts get-caller-identity`, mai su un ID
   passato a mano.
-  - **sandbox** (mio account): credenziali developer normali.
+  - **sandbox** (mio account): `aws login --profile my-profile`.
   - **production** (account del cliente): a differenza dei comandi
     Terraform del Makefile, che assumono il ruolo cross-account
     nativamente tramite il blocco `assume_role` del provider (vedi
