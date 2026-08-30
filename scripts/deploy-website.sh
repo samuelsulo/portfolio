@@ -62,8 +62,9 @@ INVALIDATION_ID=$(aws cloudfront create-invalidation \
 
 COMMIT="$(git -C "$ROOT_DIR" rev-parse --short HEAD)"
 DEPLOYED_AT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-LOG_FILE="$ENV_DIR/deploy-log.md"
+LOG_FILE="$WEBSITE_DIR/deploy-log/$ENVIRONMENT.md"
 if [[ ! -f "$LOG_FILE" ]]; then
+  mkdir -p "$(dirname "$LOG_FILE")"
   printf '# Deploy log: %s\n\n| Data (UTC) | Commit | Bucket | Distribuzione CloudFront | Invalidation |\n|---|---|---|---|---|\n' "$ENVIRONMENT" >"$LOG_FILE"
 fi
 printf '| %s | %s | %s | %s | %s |\n' "$DEPLOYED_AT" "$COMMIT" "$BUCKET" "$DISTRIBUTION_ID" "$INVALIDATION_ID" >>"$LOG_FILE"

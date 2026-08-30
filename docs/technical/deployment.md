@@ -36,9 +36,9 @@ Lo script, in ordine:
    scadenza della cache lato client;
 5. invalida la distribuzione CloudFront (`/*`), cosi la CDN smette di
    servire le versioni precedenti degli asset con cache;
-6. registra il deploy in `infrastructure/environments/<env>/deploy-log.md`
-   (data UTC, commit, bucket, distribuzione, ID invalidation), tracciabilità
-   richiesta per ogni deploy in production da
+6. registra il deploy in `website/deploy-log/<env>.md` (data UTC, commit,
+   bucket, distribuzione, ID invalidation), tracciabilità richiesta per ogni
+   deploy in production da
    [`CLAUDE.md` §7](../../CLAUDE.md#7-regole-di-deployment).
 
 Nessun deploy diretto in production senza che l'ambiente sandbox sia stato

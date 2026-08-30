@@ -177,6 +177,18 @@ onUnmounted(() => {
 
 .projects__item {
   display: flex;
+  /* The card's width lives here, on the direct flex child of the scroll
+     track (.projects__track), not on .project-card itself: a nested flex
+     item's own flex-basis does not reliably drive its non-flex ancestor's
+     size, so the actual scrollable/non-shrinking box must own it directly. */
+  flex: 0 0 clamp(260px, 80vw, 340px);
+  scroll-snap-align: start;
+}
+
+@media (min-width: 640px) {
+  .projects__item {
+    flex-basis: 380px;
+  }
 }
 
 .projects__scroll-hint {

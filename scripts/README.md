@@ -9,7 +9,7 @@ bootstrap, operazioni da riga di comando sull'account AWS di destinazione.
 | Script | Scopo |
 |---|---|
 | [`bootstrap-terraform-backend.sh`](./bootstrap-terraform-backend.sh) | Crea (una volta sola) il bucket S3 per lo stato Terraform di tutti i progetti di un account AWS: versioning, cifratura, blocco accesso pubblico, policy solo-HTTPS, lifecycle sulle versioni non correnti. Idempotente: se il bucket esiste già, ne riallinea solo la configurazione. |
-| [`deploy-website.sh`](./deploy-website.sh) | Builda `website/` (test + `vue-tsc` + `vite build`) e pubblica `dist/` sul bucket S3 e la distribuzione CloudFront dell'ambiente indicato (letti dallo stato Terraform di `infrastructure/live`, mai hardcoded), poi invalida la cache CloudFront. Traccia ogni deploy in `infrastructure/environments/<env>/deploy-log.md` (data, commit, bucket, distribuzione, invalidation). Idempotente: rieseguibile senza effetti collaterali. Usage: `./scripts/deploy-website.sh <sandbox\|production>`. |
+| [`deploy-website.sh`](./deploy-website.sh) | Builda `website/` (test + `vue-tsc` + `vite build`) e pubblica `dist/` sul bucket S3 e la distribuzione CloudFront dell'ambiente indicato (letti dallo stato Terraform di `infrastructure/live`, mai hardcoded), poi invalida la cache CloudFront. Traccia ogni deploy in `website/deploy-log/<env>.md` (data, commit, bucket, distribuzione, invalidation). Idempotente: rieseguibile senza effetti collaterali. Usage: `./scripts/deploy-website.sh <sandbox\|production>`. |
 | [`install-hooks.sh`](./install-hooks.sh) | Punta `core.hooksPath` a [`../.githooks/`](../.githooks) e rende gli hook eseguibili. Da eseguire una volta dopo ogni clone. Unico script qui che non opera su un account AWS: eccezione ai prerequisiti sotto. |
 
 ## Prerequisiti

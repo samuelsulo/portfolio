@@ -46,8 +46,11 @@ const { t } = useI18n()
 .project-card {
   display: flex;
   flex-direction: column;
-  flex: 0 0 clamp(260px, 80vw, 340px);
-  scroll-snap-align: start;
+  /* Width comes from .projects__item (the direct, non-shrinking flex child
+     of the scroll track): this just fills whatever box that wrapper gives
+     it, so there is a single source of truth for the card width. */
+  flex: 1 1 auto;
+  width: 100%;
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
@@ -56,12 +59,6 @@ const { t } = useI18n()
     border-color var(--duration-base) var(--ease-out),
     box-shadow var(--duration-base) var(--ease-out),
     transform var(--duration-base) var(--ease-out);
-}
-
-@media (min-width: 640px) {
-  .project-card {
-    flex-basis: 380px;
-  }
 }
 
 .project-card:hover {

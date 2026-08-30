@@ -5,6 +5,7 @@ import AppIcon from '@/components/ui/AppIcon.vue'
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue'
 import { useScrollSpy } from '@/composables/useScrollSpy'
 import { useBodyScrollLock } from '@/composables/useBodyScrollLock'
+import { useClickOutside } from '@/composables/useClickOutside'
 
 const { t } = useI18n()
 
@@ -16,6 +17,8 @@ const links = computed(() => sections.map((id) => ({ id, label: t(`nav.${id}`) }
 const isMenuOpen = ref(false)
 useBodyScrollLock(isMenuOpen)
 
+const navbarRef = ref<HTMLElement | null>(null)
+
 function closeMenu() {
   isMenuOpen.value = false
 }
@@ -23,6 +26,10 @@ function closeMenu() {
 function toggleMenu() {
   isMenuOpen.value = !isMenuOpen.value
 }
+
+// Tapping anywhere outside the navbar (toggle button included) closes the
+// mobile menu, same as Escape.
+useClickOutside(navbarRef, isMenuOpen, closeMenu)
 
 function handleKeydown(event: KeyboardEvent) {
   if (event.key === 'Escape' && isMenuOpen.value) {
@@ -32,7 +39,7 @@ function handleKeydown(event: KeyboardEvent) {
 </script>
 
 <template>
-  <header class="navbar glass-surface" @keydown="handleKeydown">
+  <header ref="navbarRef" class="navbar glass-surface" @keydown="handleKeydown">
     <a class="navbar__skip skip-link" href="#main-content">{{ t('nav.skipToContent') }}</a>
 
     <div class="navbar__inner container">
@@ -73,7 +80,7 @@ function handleKeydown(event: KeyboardEvent) {
       <nav
         v-if="isMenuOpen"
         id="mobile-nav"
-        class="navbar__mobile glass-surface"
+        class="navbar__mobile"
         aria-label="Mobile"
       >
         <a
@@ -94,6 +101,12 @@ function handleKeydown(event: KeyboardEvent) {
 
 <style scoped>
 .navbar {
+  /* .navbar__inner's height plus this element's own border-bottom below:
+     shared with .navbar__mobile so its max-height can subtract exactly the
+     header's real rendered height (a % would need an explicit height on
+     .navbar itself, which it doesn't have, being sized by its content). */
+  --navbar-height: 73px;
+
   position: sticky;
   top: 0;
   z-index: var(--z-navbar);
@@ -223,10 +236,24 @@ function handleKeydown(event: KeyboardEvent) {
 }
 
 .navbar__mobile {
+  /* Overlay the page instead of sitting in normal flow: .navbar is
+     position: sticky (itself a positioned element), so this is positioned
+     relative to it and floats below it without adding to the header's own
+     height, so opening it never pushes the rest of the page down. */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
+  max-height: calc(100vh - var(--navbar-height));
+  overflow-y: auto;
   padding: var(--space-md) var(--container-padding) var(--space-lg);
+  /* Solid, not .glass-surface's translucent blur: that utility is tuned for
+     a slim bar over scrolled-past content, but this now overlays a full
+     section of the page (hero, etc.), so it needs to actually obscure it. */
+  background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -245,8 +272,10 @@ function handleKeydown(event: KeyboardEvent) {
   }
 }
 
-.mobile-nav-enter-active,
-.mobile-nav-leave-active {
+/* Animate opening only: a transition on closing made the menu feel slow to
+   dismiss, which matters more than the entrance since closing is the more
+   frequent, dismissive action (tap a link, tap outside, Escape). */
+.mobile-nav-enter-active {
   transition:
     opacity var(--duration-base) var(--ease-out),
     transform var(--duration-base) var(--ease-out);
