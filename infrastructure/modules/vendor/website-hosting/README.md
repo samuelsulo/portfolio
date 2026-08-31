@@ -1,58 +1,57 @@
 # website-hosting
 
-Crea l'infrastruttura AWS per l'hosting statico di una SPA (Single Page
-Application): bucket S3 privato come origine, distribuzione CloudFront con
-Origin Access Control, certificato ACM per il dominio custom e record DNS
-in una hosted zone Route 53 esistente.
+Creates the AWS infrastructure for static hosting of a SPA (Single Page
+Application): a private S3 bucket as the origin, a CloudFront distribution
+with Origin Access Control, an ACM certificate for the custom domain, and
+DNS records in an existing Route 53 hosted zone.
 
-Il modulo non crea mai una hosted zone Route 53: si aspetta di riceverne
-una gia' esistente tramite `route53_zone_id`.
+The module never creates a Route 53 hosted zone: it expects to receive an
+existing one via `route53_zone_id`.
 
-## Cosa crea
+## What it creates
 
-- Un bucket S3 (namespace account-regional), privato, versionato e
-  cifrato lato server, con policy che consente l'accesso in lettura alla
-  sola distribuzione CloudFront tramite Origin Access Control.
-- Una distribuzione CloudFront con HTTPS obbligatorio, comportamento SPA
-  opzionale (redirect di 403/404 su `index.html`) e certificato ACM per il
-  dominio custom.
-- Un certificato ACM (in us-east-1, richiesto da CloudFront) validato via
-  DNS, con i relativi record di validazione nella hosted zone passata in
-  input.
-- Un record Route 53 di tipo A (alias) che punta il dominio alla
-  distribuzione CloudFront.
+- An S3 bucket (account-regional namespace), private, versioned and
+  server-side encrypted, with a policy that allows read access only to the
+  CloudFront distribution via Origin Access Control.
+- A CloudFront distribution with mandatory HTTPS, optional SPA behavior
+  (403/404 redirected to `index.html`) and an ACM certificate for the
+  custom domain.
+- An ACM certificate (in us-east-1, required by CloudFront) validated via
+  DNS, with its validation records in the hosted zone passed as input.
+- A Route 53 A (alias) record pointing the domain at the CloudFront
+  distribution.
 
 ## Input
 
-| Nome | Descrizione | Obbligatoria |
+| Name | Description | Required |
 | --- | --- | --- |
-| `name_prefix` | Prefisso applicato al nome di tutte le risorse create dal modulo. | Si |
-| `s3_bucket_force_destroy` | Se forzare la cancellazione del contenuto del bucket S3 durante un `terraform destroy`. | Si |
-| `domain_name` | Dominio principale del sito (es. `trattoriadamario.it`). | Si |
-| `route53_zone_id` | ID di una hosted zone Route 53 gia' esistente per `domain_name`. | Si |
-| `price_class` | Price class di CloudFront. Default `PriceClass_100`. | No |
-| `default_root_object` | Oggetto servito alla radice del sito. Default `index.html`. | No |
-| `spa_mode` | Se configurare le risposte di errore 403/404 verso `index.html` (necessario per router SPA in modalita' history). Default `true`. | No |
+| `name_prefix` | Prefix applied to the name of every resource created by the module. | Yes |
+| `s3_bucket_force_destroy` | Whether to force deletion of the S3 bucket content during a `terraform destroy`. | Yes |
+| `domain_name` | Primary domain of the site (e.g. `trattoriadamario.it`). | Yes |
+| `route53_zone_id` | ID of an existing Route 53 hosted zone for `domain_name`. | Yes |
+| `price_class` | CloudFront price class. Default `PriceClass_100`. | No |
+| `default_root_object` | Object served at the root of the site. Default `index.html`. | No |
+| `spa_mode` | Whether to configure 403/404 error responses towards `index.html` (required for a SPA router in history mode). Default `true`. | No |
 
 ## Output
 
-| Nome | Descrizione |
+| Name | Description |
 | --- | --- |
-| `s3_bucket_id` | ID (nome) del bucket S3 che contiene il contenuto del sito. |
-| `s3_bucket_arn` | ARN del bucket S3. |
-| `s3_bucket_regional_domain_name` | Regional domain name del bucket, usato come origine CloudFront. |
-| `cloudfront_distribution_id` | ID della distribuzione CloudFront. |
-| `cloudfront_distribution_arn` | ARN della distribuzione CloudFront. |
-| `cloudfront_distribution_domain_name` | Dominio di default assegnato da CloudFront alla distribuzione. |
-| `cloudfront_distribution_hosted_zone_id` | Hosted zone ID di CloudFront, utile per creare ulteriori record alias. |
-| `acm_certificate_arn` | ARN del certificato ACM validato per `domain_name`. |
-| `website_url` | URL pubblico HTTPS del sito. |
+| `s3_bucket_id` | ID (name) of the S3 bucket holding the site content. |
+| `s3_bucket_arn` | ARN of the S3 bucket. |
+| `s3_bucket_regional_domain_name` | Regional domain name of the bucket, used as the CloudFront origin. |
+| `cloudfront_distribution_id` | ID of the CloudFront distribution. |
+| `cloudfront_distribution_arn` | ARN of the CloudFront distribution. |
+| `cloudfront_distribution_domain_name` | Default domain assigned by CloudFront to the distribution. |
+| `cloudfront_distribution_hosted_zone_id` | CloudFront's hosted zone ID, useful for creating further alias records. |
+| `acm_certificate_arn` | ARN of the validated ACM certificate for `domain_name`. |
+| `website_url` | Public HTTPS URL of the site. |
 
-## Note
+## Notes
 
-- Il modulo non configura un provider `aws`: chi lo consuma deve passare
-  sia il provider di default sia un alias `aws.us_east_1`, necessario per
-  richiedere il certificato ACM usato da CloudFront:
+- The module doesn't configure an `aws` provider: whoever consumes it must
+  pass both the default provider and an `aws.us_east_1` alias, required to
+  request the ACM certificate used by CloudFront:
 
   ```hcl
   module "website" {
@@ -70,6 +69,7 @@ una gia' esistente tramite `route53_zone_id`.
   }
   ```
 
-- I tag obbligatori (`Project`, `Owner`, `Environment`, `ManagedBy`)
-  arrivano automaticamente dal `default_tags` del provider del progetto che
-  consuma il modulo: il modulo non dichiara una propria variabile `tags`.
+- The mandatory tags (`Project`, `Owner`, `Environment`, `ManagedBy`) come
+  automatically from the `default_tags` of the provider in the project
+  that consumes the module: the module doesn't declare its own `tags`
+  variable.

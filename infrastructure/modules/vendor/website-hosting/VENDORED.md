@@ -7,6 +7,6 @@ Copied verbatim from `terraform-aws-catalog`. Do not modify: see
 |---|---|
 | Source | git@github.com:samuelsulo/terraform-aws-catalog.git |
 | Module | website-hosting |
-| Ref | website-hosting/v1.0.0 |
-| Commit | 4aabba4267881d7246c9edb7dce55ab86608609f |
-| Vendored on | 2026-08-30 |
+| Ref | website-hosting/v1.0.1 |
+| Commit | a5173a68a754c214759892c390beda5b03428ade |
+| Vendored on | 2026-08-31 |
