@@ -132,35 +132,41 @@ catalog-versions:
 	fi; \
 	echo "$$VERSIONS" | tac
 
-## vendor-module: Copy a module from terraform-aws-catalog into modules/vendor/, pinned to a tag (usage: make vendor-module MODULE=<name> REF=<tag>)
+## vendor-module: Copy a module from terraform-aws-catalog into modules/vendor/, pinned to a tag (usage: make vendor-module REF=<module-name>/vX.Y.Z)
 vendor-module:
-	@if [ -z "$(MODULE)" ] || [ -z "$(REF)" ]; then \
-		echo "$(RED)✗ Missing MODULE and/or REF parameter.$(RESET)"; \
-		echo "  Usage: make vendor-module MODULE=<module-name> REF=<catalog-tag>"; \
+	@if [ -z "$(REF)" ]; then \
+		echo "$(RED)✗ Missing REF parameter.$(RESET)"; \
+		echo "  Usage: make vendor-module REF=<module-name>/vX.Y.Z"; \
+		echo "  (REF is a tag from 'make catalog-versions MODULE=<name>', e.g. website-hosting/v1.0.1)"; \
 		exit 1; \
 	fi
 	$(call require_catalog_repo)
-	$(call log, Vendoring module: $(BOLD)$(MODULE)$(RESET) from $(CATALOG_REPO)@$(REF))
-	@TMP_DIR=$$(mktemp -d); \
+	@MODULE=$$(echo "$(REF)" | sed -E 's#^(.*)/[^/]+$$#\1#'); \
+	if [ -z "$$MODULE" ] || [ "$$MODULE" = "$(REF)" ]; then \
+		echo "$(RED)✗ REF must be in the form <module-name>/vX.Y.Z, as tagged in the catalog.$(RESET)"; \
+		exit 1; \
+	fi; \
+	echo "$(BOLD)$(CYAN)[infrastructure | $(ENV)]$(RESET) Vendoring module: $(BOLD)$$MODULE$(RESET) from $(CATALOG_REPO)@$(REF)"; \
+	TMP_DIR=$$(mktemp -d); \
 	trap 'rm -rf "$$TMP_DIR"' EXIT; \
 	if ! git clone --quiet --depth 1 --branch "$(REF)" "$(CATALOG_REPO)" "$$TMP_DIR" 2>/dev/null; then \
 		echo "$(RED)✗ Could not clone $(CATALOG_REPO) at ref '$(REF)'.$(RESET)"; \
 		exit 1; \
 	fi; \
-	if [ ! -d "$$TMP_DIR/modules/$(MODULE)" ]; then \
-		echo "$(RED)✗ Module '$(MODULE)' not found in catalog at ref '$(REF)'.$(RESET)"; \
+	if [ ! -d "$$TMP_DIR/modules/$$MODULE" ]; then \
+		echo "$(RED)✗ Module '$$MODULE' not found in catalog at ref '$(REF)'.$(RESET)"; \
 		exit 1; \
 	fi; \
 	COMMIT=$$(git -C "$$TMP_DIR" rev-parse HEAD); \
-	rm -rf "modules/vendor/$(MODULE)"; \
+	rm -rf "modules/vendor/$$MODULE"; \
 	mkdir -p "modules/vendor"; \
-	cp -R "$$TMP_DIR/modules/$(MODULE)" "modules/vendor/$(MODULE)"; \
-	rm -rf "modules/vendor/$(MODULE)/.git"; \
+	cp -R "$$TMP_DIR/modules/$$MODULE" "modules/vendor/$$MODULE"; \
+	rm -rf "modules/vendor/$$MODULE/.git"; \
 	printf '# Vendored module\n\nCopied verbatim from `terraform-aws-catalog`. Do not modify: see\n[CLAUDE.md](../../../CLAUDE.md) §5 and [../README.md](../README.md).\n\n| | |\n|---|---|\n| Source | %s |\n| Module | %s |\n| Ref | %s |\n| Commit | %s |\n| Vendored on | %s |\n' \
-		"$(CATALOG_REPO)" "$(MODULE)" "$(REF)" "$$COMMIT" "$$(date +%Y-%m-%d)" \
-		> "modules/vendor/$(MODULE)/VENDORED.md"; \
-	echo "  $(GREEN)✓$(RESET) modules/vendor/$(MODULE)/ vendored from $(REF) (commit $$COMMIT)"
-	$(call log_ok, Vendoring complete: modules/vendor/$(MODULE)/)
+		"$(CATALOG_REPO)" "$$MODULE" "$(REF)" "$$COMMIT" "$$(date +%Y-%m-%d)" \
+		> "modules/vendor/$$MODULE/VENDORED.md"; \
+	echo "  $(GREEN)✓$(RESET) modules/vendor/$$MODULE/ vendored from $(REF) (commit $$COMMIT)"; \
+	echo "$(BOLD)$(GREEN)✓$(RESET) Vendoring complete: modules/vendor/$$MODULE/"
 
 # ── TERRAFORM WORKFLOW ────────────────────────────────────────────────────────
 

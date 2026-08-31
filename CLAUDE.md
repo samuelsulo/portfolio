@@ -113,8 +113,10 @@ documentazione e l'infrastruttura assumono questa struttura.
   l'intero repo), così un breaking change in un modulo non fa salire la 
   versione anche di moduli non correlati. Si esplora il catalogo e si copia 
   con `make catalog-modules`, `make catalog-versions MODULE=<name>` e 
-  `make vendor-module MODULE=<name> REF=<tag>` (vedi 
-  `infrastructure/Makefile`); quest'ultimo genera anche `VENDORED.md` accanto 
+  `make vendor-module REF=<name>/<tag>` (vedi 
+  `infrastructure/Makefile`); quest'ultimo ricava il nome del modulo 
+  direttamente da `REF`, senza richiederlo come parametro separato, e genera 
+  anche `VENDORED.md` accanto 
   ai file del modulo con fonte, nome modulo, tag, commit e data della copia: 
   la provenienza vive lì, mai in un commento dentro il codice del modulo. Se 
   un modulo del catalogo non copre esattamente lo scope richiesto, non va 

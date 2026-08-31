@@ -40,12 +40,13 @@ del tipo `<module-name>/vX.Y.Z` (es. `s3-static-site/v1.3.0`,
 ```
 make catalog-modules                        # elenca i moduli disponibili nel catalogo
 make catalog-versions MODULE=<name>         # elenca le versioni disponibili di un modulo
-make vendor-module MODULE=<name> REF=<tag>  # copia quella versione in modules/vendor/<name>/
+make vendor-module REF=<name>/<tag>         # copia quella versione in modules/vendor/<name>/
 ```
 
-`vendor-module` clona `terraform-aws-catalog` al tag indicato, copia
-`modules/<name>/` dal catalogo dentro `modules/vendor/<name>/` e scrive
-`modules/vendor/<name>/VENDORED.md` con la provenienza. `CATALOG_REPO` va
+`vendor-module` ricava il nome del modulo direttamente da `REF` (il tag è
+sempre nella forma `<name>/<tag>`), clona `terraform-aws-catalog` al tag
+indicato, copia `modules/<name>/` dal catalogo dentro `modules/vendor/<name>/`
+e scrive `modules/vendor/<name>/VENDORED.md` con la provenienza. `CATALOG_REPO` va
 impostato una volta sola in [`../../Makefile`](../../Makefile) (o passato
 inline a ciascuno di questi comandi). Dopo la copia, collega il modulo in
 [`../../live/main.tf`](../../live/main.tf) e aggiungi una riga alla tabella
