@@ -1,0 +1,13 @@
+>> NUOVO MESSAGGIO DAL SITO
+
+Hai ricevuto un nuovo contatto dal modulo del sito.
+
+Nome     : {{name}}
+Email    : {{email}}
+Telefono : {{phone}}
+
+--- Messaggio ---
+{{message}}
+-----------------
+
+Rispondi direttamente a questa email per contattare {{name}}.

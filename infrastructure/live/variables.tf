@@ -86,3 +86,8 @@ variable "route53_zone_id" {
   description = "(Required) ID of the existing Route 53 hosted zone for domain_name, passed through to website_hosting. Same hosted zone for sandbox and production: the subdomain used in sandbox is delegated within it."
   type        = string
 }
+
+variable "client_email" {
+  description = "(Required) The client's email for aws notifications (e.g. alarms and budgets) and for the contact me api."
+  type        = string
+}

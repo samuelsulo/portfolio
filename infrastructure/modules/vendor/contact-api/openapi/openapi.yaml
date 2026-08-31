@@ -1,0 +1,184 @@
+openapi: 3.0.1
+info:
+  title: ${name_prefix}-contact-api
+  version: "1.0.0"
+paths:
+  /email:
+    post:
+      operationId: ContactViaEmail
+      summary: Submit a message from the site's contact form, delivered by email.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactViaEmailRequest"
+      x-amazon-apigateway-request-validator: validateBody
+      responses:
+        "202":
+          description: >-
+            Request accepted: Amazon SES has accepted the
+            SendTemplatedEmail call and returned a MessageId. SES sends
+            asynchronously, so this only confirms the message was queued
+            for delivery, not that it reached the recipient's mailbox.
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactViaEmailSuccess"
+        "400":
+          description: >-
+            Invalid request (missing body or fields not conforming to the
+            schema), or the send was rejected by Amazon SES. Covers the
+            errors documented for SendTemplatedEmail: MessageRejected,
+            TemplateDoesNotExist, MailFromDomainNotVerified,
+            AccountSendingPaused, ConfigurationSetDoesNotExist,
+            ConfigurationSetSendingPaused.
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactViaEmailError"
+        "500":
+          description: Unexpected error communicating with Amazon SES.
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactViaEmailError"
+      x-amazon-apigateway-integration:
+        type: aws
+        httpMethod: POST
+        # The service component here is "email", not "ses": API Gateway's
+        # AWS service integration validates it against the service's SDK
+        # endpoint prefix (email.<region>.amazonaws.com), not its IAM/ARN
+        # prefix (ses:...). Using "ses" fails CreateDeployment with
+        # "AWS Service of type ses not supported".
+        uri: "arn:aws:apigateway:${aws_region}:email:path//"
+        credentials: "${ses_role_arn}"
+        passthroughBehavior: "NEVER"
+        requestParameters:
+          integration.request.header.Content-Type: "'application/x-www-form-urlencoded'"
+        requestTemplates:
+          application/json: |
+            #set($inputRoot = $input.path('$'))
+            #set($templateData = "{\"name\":\"$util.escapeJavaScript($inputRoot.name)\",\"email\":\"$util.escapeJavaScript($inputRoot.email)\",\"phone\":\"$util.escapeJavaScript($!inputRoot.phone)\",\"message\":\"$util.escapeJavaScript($inputRoot.message)\"}")
+            Action=SendTemplatedEmail&Source=$util.urlEncode('${recipient_email}')&Destination.ToAddresses.member.1=$util.urlEncode('${recipient_email}')&ReplyToAddresses.member.1=$util.urlEncode($inputRoot.email)&Template=$util.urlEncode('${ses_template_name}')&TemplateData=$util.urlEncode($templateData)
+        responses:
+          default:
+            statusCode: "202"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'${cors_allowed_origin}'"
+            responseTemplates:
+              application/json: |
+                #set($messageId = $input.body.replaceAll("(?s).*<MessageId>(.*?)</MessageId>.*", "$1"))
+                {
+                  "message": "Message accepted for delivery.",
+                  "messageId": "$util.escapeJavaScript($messageId)"
+                }
+          "4\\d{2}":
+            statusCode: "400"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'${cors_allowed_origin}'"
+            responseTemplates:
+              application/json: |
+                #set($errorCode = $input.body.replaceAll("(?s).*<Code>(.*?)</Code>.*", "$1"))
+                #set($errorMessage = $input.body.replaceAll("(?s).*<Message>(.*?)</Message>.*", "$1"))
+                {
+                  "message": "Unable to send the message.",
+                  "code": "$util.escapeJavaScript($errorCode)",
+                  "detail": "$util.escapeJavaScript($errorMessage)"
+                }
+          "5\\d{2}":
+            statusCode: "500"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'${cors_allowed_origin}'"
+            responseTemplates:
+              application/json: |
+                {
+                  "message": "Internal error in the email service. Please try again later."
+                }
+    options:
+      summary: CORS preflight for the ContactViaEmail operation.
+      responses:
+        "200":
+          description: CORS preflight response.
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+          content: {}
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: '{"statusCode": 200}'
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'${cors_allowed_origin}'"
+              method.response.header.Access-Control-Allow-Methods: "'POST,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type'"
+            responseTemplates:
+              application/json: "{}"
+components:
+  schemas:
+    ContactViaEmailRequest:
+      type: object
+      required:
+        - name
+        - email
+        - message
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 200
+        email:
+          type: string
+          minLength: 1
+          maxLength: 200
+          pattern: '^[^@\s]+@[^@\s]+\.[^@\s]+$'
+        phone:
+          type: string
+          minLength: 1
+          maxLength: 50
+        message:
+          type: string
+          minLength: 1
+          maxLength: 5000
+    ContactViaEmailSuccess:
+      type: object
+      properties:
+        message:
+          type: string
+        messageId:
+          type: string
+    ContactViaEmailError:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+        detail:
+          type: string
+x-amazon-apigateway-request-validators:
+  validateBody:
+    validateRequestBody: true
+    validateRequestParameters: false

@@ -21,3 +21,16 @@ module "website_hosting" {
   domain_name             = var.domain_name
   route53_zone_id         = var.route53_zone_id
 }
+
+module "contact_api" {
+  source = "../modules/vendor/contact-api"
+
+  name_prefix                     = local.name_prefix
+  contact_via_email_recipient     = var.client_email
+  contact_via_email_subject       = "New contact from website ${var.domain_name}: {{name}}"
+  contact_via_email_text_template = file("${path.module}/templates/contact.txt")
+  contact_via_email_html_template = file("${path.module}/templates/contact.html")
+  cors_allowed_origin             = "https://${var.domain_name}"
+  domain_name                     = "contact.${var.domain_name}"
+  route53_zone_id                 = var.route53_zone_id
+}
