@@ -8,6 +8,8 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
     "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "emitDeclarationOnly": true,
     "strict": true,
     "noUncheckedSideEffectImports": true,
     "outDir": "./node_modules/.tmp/tsconfig.node",

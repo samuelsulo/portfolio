@@ -1,7 +1,7 @@
 import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig, mergeConfig } from 'vitest/config'
-import viteConfig from './vite.config'
+import viteConfig from './vite.config.ts'
 
 // Unit test sources live in the top-level `tests/unit/` directory (see
 // repository structure in CLAUDE.md), while the app they exercise lives in

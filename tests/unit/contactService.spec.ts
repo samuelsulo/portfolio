@@ -24,15 +24,15 @@ describe('submitContactForm', () => {
     await expect(submitContactForm(sampleValues)).rejects.toBeInstanceOf(ContactApiNotConfiguredError)
   })
 
-  it('posts the form values as JSON to the configured endpoint', async () => {
-    vi.stubEnv('VITE_CONTACT_API_URL', 'https://api.example.com/contact')
-    const fetchMock = vi.fn().mockResolvedValue({ ok: true, status: 200 })
+  it('posts the form values as JSON to the /email operation of the configured endpoint', async () => {
+    vi.stubEnv('VITE_CONTACT_API_URL', 'https://api.example.com')
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true, status: 202 })
     vi.stubGlobal('fetch', fetchMock)
 
     await submitContactForm(sampleValues)
 
     expect(fetchMock).toHaveBeenCalledWith(
-      'https://api.example.com/contact',
+      'https://api.example.com/email',
       expect.objectContaining({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -42,7 +42,7 @@ describe('submitContactForm', () => {
   })
 
   it('throws ContactApiRequestError when the backend responds with an error status', async () => {
-    vi.stubEnv('VITE_CONTACT_API_URL', 'https://api.example.com/contact')
+    vi.stubEnv('VITE_CONTACT_API_URL', 'https://api.example.com')
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false, status: 500 }))
 
     await expect(submitContactForm(sampleValues)).rejects.toBeInstanceOf(ContactApiRequestError)

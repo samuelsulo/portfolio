@@ -3,17 +3,17 @@ import type { ContactFormValues } from '@/utils/validation'
 /**
  * Contact form submission.
  *
- * PENDING BACKEND: this project currently ships as a static site (S3 +
- * CloudFront) with no server-side component. The contact form is fully
- * built (validation, states, accessibility) but wired to call a backend
- * endpoint that does not exist yet: an AWS API Gateway + Lambda + SES stack
- * is planned for a later phase, and adding it is an architectural change
- * that needs explicit review before being provisioned (see CLAUDE.md,
- * section 11).
+ * Backed by the `contact_api` module (API Gateway + SES), whose custom
+ * domain is injected at build time as `VITE_CONTACT_API_URL` (see
+ * `scripts/deploy-website.sh`, which reads it from the Terraform state of
+ * `infrastructure/live` rather than hardcoding it). The module exposes a
+ * single operation, `POST /email`, so it's appended here rather than baked
+ * into the configured base URL.
  *
- * Until `VITE_CONTACT_API_URL` is configured, submission fails predictably
- * with `ContactApiNotConfiguredError` so the UI surfaces its real error
- * state instead of a fake success.
+ * If `VITE_CONTACT_API_URL` is unset (e.g. the `contact_api` module hasn't
+ * been applied yet in an environment), submission fails predictably with
+ * `ContactApiNotConfiguredError` so the UI surfaces its real error state
+ * instead of a fake success.
  */
 
 export class ContactApiNotConfiguredError extends Error {
@@ -31,13 +31,13 @@ export class ContactApiRequestError extends Error {
 }
 
 export async function submitContactForm(values: ContactFormValues): Promise<void> {
-  const endpoint = import.meta.env.VITE_CONTACT_API_URL
+  const baseUrl = import.meta.env.VITE_CONTACT_API_URL
 
-  if (!endpoint) {
+  if (!baseUrl) {
     throw new ContactApiNotConfiguredError()
   }
 
-  const response = await fetch(endpoint, {
+  const response = await fetch(`${baseUrl}/email`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(values),

@@ -10,7 +10,12 @@ production), a partire da zero.
   (vedi il suo [README](../../infrastructure/README.md)). Il modulo
   `website_hosting` deve esistere nello stato Terraform di quell'ambiente:
   è da lì che [`deploy-website.sh`](../../scripts/deploy-website.sh) legge
-  bucket S3 e distribuzione CloudFront, mai da valori hardcoded.
+  bucket S3 e distribuzione CloudFront, mai da valori hardcoded. Se anche il
+  modulo `contact_api` è stato applicato, lo script ne legge il dominio
+  custom dallo stesso stato e lo inietta nella build come
+  `VITE_CONTACT_API_URL`; se non è ancora presente, il form di contatto
+  viene comunque buildato e deployato, solo disabilitato (vedi
+  [`../../website/README.md`](../../website/README.md#contact-form-backend)).
 - AWS CLI configurata, con le credenziali dell'account AWS di destinazione
   già attive nella shell (stesso prerequisito degli altri script in
   [`../../scripts/README.md`](../../scripts/README.md#prerequisiti)).
@@ -26,10 +31,11 @@ production), a partire da zero.
 Lo script, in ordine:
 
 1. installa le dipendenze (`npm ci`) ed esegue gli unit test (`npm run test`);
-2. builda il bundle di produzione (`npm run build`, con type-check incluso),
-   in `website/dist/`;
-3. legge bucket S3 e distribuzione CloudFront dallo stato Terraform
-   dell'ambiente indicato;
+2. legge bucket S3, distribuzione CloudFront ed (se presente) il dominio
+   custom di `contact_api` dallo stato Terraform dell'ambiente indicato;
+3. builda il bundle di produzione (`npm run build`, con type-check incluso),
+   in `website/dist/`, con `VITE_CONTACT_API_URL` valorizzata dal passo
+   precedente;
 4. sincronizza `dist/` sul bucket (`aws s3 sync --delete`): asset con hash
    nel nome (JS/CSS/font) con cache lunga e immutabile, `index.html` sempre
    senza cache, così un deploy è visibile subito senza attendere la

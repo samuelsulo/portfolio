@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Build website/ and deploy it to the S3 bucket + CloudFront distribution of
-# the given environment. Bucket name and distribution ID are read from the
-# Terraform state of infrastructure/live (website_hosting module), never
-# guessed or hardcoded.
+# the given environment. Bucket name, distribution ID and the contact_api
+# custom domain (injected into the build as VITE_CONTACT_API_URL) are read
+# from the Terraform state of infrastructure/live, never guessed or
+# hardcoded.
 #
 # Usage: ./scripts/deploy-website.sh <sandbox|production>
 set -euo pipefail
@@ -29,10 +30,7 @@ echo "==> [$ENVIRONMENT] Installing dependencies"
 echo "==> [$ENVIRONMENT] Running unit tests"
 (cd "$WEBSITE_DIR" && npm run test)
 
-echo "==> [$ENVIRONMENT] Building production bundle"
-(cd "$WEBSITE_DIR" && npm run build)
-
-echo "==> [$ENVIRONMENT] Reading S3 bucket and CloudFront distribution from Terraform state"
+echo "==> [$ENVIRONMENT] Reading infrastructure endpoints from Terraform state"
 (cd "$LIVE_DIR" && terraform init -backend-config="../environments/$ENVIRONMENT/backend.hcl" -reconfigure >/dev/null)
 
 BUCKET=$(cd "$LIVE_DIR" && terraform state show module.website_hosting.aws_s3_bucket.this 2>/dev/null | awk -F'"' '/^ *id *= /{print $2; exit}')
@@ -43,6 +41,21 @@ if [[ -z "$BUCKET" || -z "$DISTRIBUTION_ID" ]]; then
   echo "  Has 'make apply ENV=$ENVIRONMENT' been run for the website_hosting module?" >&2
   exit 1
 fi
+
+# The contact_api module is optional: an environment without it yet still
+# builds and deploys, just with the contact form shipping disabled (see
+# ContactApiNotConfiguredError in contactService.ts).
+CONTACT_API_DOMAIN=$(cd "$LIVE_DIR" && terraform state show module.contact_api.aws_api_gateway_domain_name.this 2>/dev/null | awk -F'"' '/^ *domain_name *= /{print $2; exit}')
+
+if [[ -n "$CONTACT_API_DOMAIN" ]]; then
+  export VITE_CONTACT_API_URL="https://$CONTACT_API_DOMAIN"
+  echo "==> [$ENVIRONMENT] Contact API endpoint: $VITE_CONTACT_API_URL"
+else
+  echo "⚠ [$ENVIRONMENT] contact_api module not found in Terraform state: the contact form will ship disabled." >&2
+fi
+
+echo "==> [$ENVIRONMENT] Building production bundle"
+(cd "$WEBSITE_DIR" && npm run build)
 
 echo "==> [$ENVIRONMENT] Syncing dist/ to s3://$BUCKET"
 # Hashed assets (JS/CSS/fonts): cached forever, safe because the filename

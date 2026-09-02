@@ -34,8 +34,8 @@ describe('useContactForm', () => {
   })
 
   it('moves to the success state and clears the form on a successful submission', async () => {
-    vi.stubEnv('VITE_CONTACT_API_URL', 'https://api.example.com/contact')
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, status: 200 }))
+    vi.stubEnv('VITE_CONTACT_API_URL', 'https://api.example.com')
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, status: 202 }))
     const { values, status, handleSubmit } = useContactForm()
     values.name = 'Ada Lovelace'
     values.email = 'ada@example.com'

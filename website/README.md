@@ -65,11 +65,13 @@ Gli unit test vivono nella cartella `tests/unit/` alla radice del repository (no
 
 I contenuti attualmente presenti (bio, elenco servizi, progetti, email, link social) sono **placeholder** pensati per essere sostituiti con i contenuti reali senza modificare alcun componente Vue.
 
-## Contact form: stato del backend
+## Contact form: backend
 
-Il form di contatto è completo lato frontend (validazione, stati idle/loading/success/error, accessibilità) ma **non ha ancora un backend collegato**. L'invio effettivo richiede un endpoint AWS (API Gateway + Lambda + SES), pianificato ma non ancora implementato: introdurlo è un cambio architetturale che richiede revisione esplicita (vedi `CLAUDE.md`, sezione 11) e verrà affrontato nella fase di deployment.
+Il form di contatto è collegato al modulo `contact_api` (API Gateway + SES) descritto in [`../infrastructure/`](../infrastructure). Il frontend chiama `POST {VITE_CONTACT_API_URL}/email`, dove `VITE_CONTACT_API_URL` è il dominio custom del modulo (es. `https://contact.samuelsulo.it`).
 
-Fino ad allora, `src/services/contactService.ts` restituisce un errore esplicito (`ContactApiNotConfiguredError`) se la variabile d'ambiente `VITE_CONTACT_API_URL` non è impostata, cosicché il form mostri correttamente lo stato di errore invece di un falso successo.
+In sandbox/production questa variabile viene iniettata automaticamente da [`../scripts/deploy-website.sh`](../scripts/deploy-website.sh), che la legge dallo stato Terraform di `infrastructure/live` invece di averla hardcoded. Per sviluppo locale (`npm run dev`) contro un ambiente già applicato, copia `.env.example` in `.env.local` e valorizzala a mano; `.env.local` non va mai committato.
+
+Se `VITE_CONTACT_API_URL` non è impostata (es. il modulo `contact_api` non è ancora stato applicato in quell'ambiente), `src/services/contactService.ts` restituisce un errore esplicito (`ContactApiNotConfiguredError`) e il form mostra correttamente lo stato di errore invece di un falso successo.
 
 ## Accessibilità e responsive
 
@@ -79,7 +81,5 @@ Fino ad allora, `src/services/contactService.ts` restituisce un errore esplicito
 
 ## Prossimi passi (fuori dallo scope di questa iterazione)
 
-- Backend del contact form (API Gateway + Lambda + SES), da approvare esplicitamente prima dell'implementazione.
 - Suite di test e2e (Playwright) in `tests/e2e/`.
-- Infrastruttura Terraform in `infrastructure/` e documentazione in `docs/`, da introdurre nella fase di deployment su AWS.
 - Sostituzione dei contenuti placeholder (bio, progetti, immagini, contatti reali).
