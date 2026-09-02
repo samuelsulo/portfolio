@@ -1,15 +1,15 @@
-# Documentazione
+# Documentation
 
-In questa cartella e' raccolta tutta la documentazione di progetto.
+This folder collects all the project documentation.
 
-## Documentazione tecnica ([technical/](technical/))
+## Technical documentation ([technical/](technical/))
 
-Documenti relativi alla parte tecnica del progetto.
+Documents related to the technical side of the project.
 
-## Documenti architetturali ([architecture/](architecture/))
+## Architectural documents ([architecture/](architecture/))
 
-Documenti relativi alle decisioni architetturali del progetto.
+Documents related to the project's architectural decisions.
 
-## Documenti funzionali ([functional/](functional/))
+## Functional documents ([functional/](functional/))
 
-Documenti relativi ai requisiti e alle specifiche funzionali.
+Documents related to the requirements and functional specifications.

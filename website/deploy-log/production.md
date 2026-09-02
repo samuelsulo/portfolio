@@ -1,6 +1,6 @@
 # Deploy log: production
 
-| Data (UTC) | Commit | Bucket | Distribuzione CloudFront | Invalidation |
+| Date (UTC) | Commit | Bucket | CloudFront Distribution | Invalidation |
 |---|---|---|---|---|
 | 2026-08-30T21:16:39Z | eb7e009 | portfolio-prd-website-000000000000-eu-south-1-an | E33L4ZO8U9EEZE | ICJFCIEZ3UFU0XPWFWJC97VNJ6 |
 | 2026-08-30T21:44:14Z | 0e2eb4f | portfolio-prd-website-000000000000-eu-south-1-an | E33L4ZO8U9EEZE | IC4E0TO5O7UO7AQVEBTU8RGSIO |

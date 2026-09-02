@@ -30,24 +30,24 @@ pattern="^(${allowed_types})\(([a-z0-9-]+)\)!?: .{1,100}$"
 
 if ! echo "$subject_line" | grep -qE "$pattern"; then
   cat >&2 <<EOF
-✗ Commit message non valido: non segue Conventional Commits.
+✗ Invalid commit message: doesn't follow Conventional Commits.
 
-  Ricevuto:
+  Received:
     $subject_line
 
-  Formato atteso:
+  Expected format:
     <type>(<scope>): <description>
 
-  type ammessi: feat, fix, refactor, docs, chore, test, style, perf, build, ci, revert
-  scope: kebab-case, l'area del progetto toccata dal commit (es.
+  Allowed types: feat, fix, refactor, docs, chore, test, style, perf, build, ci, revert
+  scope: kebab-case, the area of the project touched by the commit (e.g.
          infrastructure, modules, docs).
 
-  Esempi:
+  Examples:
     feat(infrastructure): add cloudfront distribution
     fix(modules): correct budget threshold comparison
     docs(readme): update deployment guide
 
-  Vedi CLAUDE.md §10.
+  See CLAUDE.md §10.
 EOF
   exit 1
 fi

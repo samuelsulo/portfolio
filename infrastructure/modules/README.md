@@ -1,36 +1,36 @@
 # Modules
 
-Moduli Terraform riutilizzabili, uno per ciascuna competenza AWS, composti
-insieme in [`../live/main.tf`](../live/main.tf): lo stesso set per ogni
-`environment` (CLAUDE.md §5: gli ambienti restano simmetrici).
+Reusable Terraform modules, one per AWS concern, composed together in
+[`../live/main.tf`](../live/main.tf): the same set for every `environment`
+(CLAUDE.md §5: environments stay symmetric).
 
-## Struttura
+## Structure
 
 ```
 modules/
-├── vendor/     # copie 1:1 da terraform-aws-catalog, mai modificate
-└── local/      # moduli scritti per questo progetto
+├── vendor/     # 1:1 copies from terraform-aws-catalog, never modified
+└── local/      # modules written for this project
 ```
 
-Vedi [`vendor/README.md`](./vendor/README.md) e [`local/README.md`](./local/README.md)
-per la provenienza e le regole di ciascuna delle due sottocartelle
+See [`vendor/README.md`](./vendor/README.md) and [`local/README.md`](./local/README.md)
+for the provenance and rules of each of the two subfolders
 (CLAUDE.md §5).
 
-## Convenzioni comuni
+## Common conventions
 
-Valgono per i moduli in entrambe le sottocartelle:
+Apply to modules in both subfolders:
 
-- Una competenza AWS per modulo; nessuna risorsa viene creata direttamente
-  in `environments/` o `live/` se esiste (o ha senso creare) un modulo per
-  quello scopo.
-- Ogni modulo ha la stessa struttura di file: `main.tf`, `variables.tf`,
+- One AWS concern per module; no resource is created directly in
+  `environments/` or `live/` if a module for that purpose already exists
+  (or it makes sense to create one).
+- Every module has the same file structure: `main.tf`, `variables.tf`,
   `outputs.tf`, `versions.tf`, `README.md`.
-- Ogni variabile e output ha una `description`: le tabelle Input/Output del
-  README di ciascun modulo le rispecchiano.
-- I moduli non configurano il backend né il provider AWS stesso (a parte
-  l'alias `aws.us_east_1` richiesto da `website` per ACM/CloudFront): è
-  responsabilità di `live/`, così lo stesso modulo funziona invariato in
-  ogni ambiente.
-- I tag (`Project`, `Owner`, `Environment`, `ManagedBy`) sono applicati una
-  sola volta tramite `default_tags` sul provider in `live/providers.tf`, non
-  ripetuti in ogni modulo.
+- Every variable and output has a `description`: each module's README
+  Input/Output tables mirror them.
+- Modules don't configure the backend or the AWS provider itself (aside
+  from the `aws.us_east_1` alias required by `website` for ACM/CloudFront):
+  that's `live/`'s responsibility, so the same module works unchanged in
+  every environment.
+- Tags (`Project`, `Owner`, `Environment`, `ManagedBy`) are applied once
+  via `default_tags` on the provider in `live/providers.tf`, not repeated
+  in every module.

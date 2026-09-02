@@ -1,50 +1,51 @@
 # Issue Template
 
-Template per aprire issue GitHub durante lo sviluppo di un progetto cliente,
-per tracciare il lavoro in modo uniforme dall'obiettivo di alto livello fino
-al singolo bug.
+Templates for opening GitHub issues during the development of a client
+project, to track work uniformly from the high-level goal down to the
+individual bug.
 
-## Template disponibili
+## Available templates
 
-| Template | File | Uso | Label |
+| Template | File | Use | Label |
 |---|---|---|---|
-| 🚀 Epic | [`epic.md`](./epic.md) | Funzionalità di alto livello, da suddividere in User Story, Technical Story o Spike | `epic` |
-| 💡 User Story | [`user-story.md`](./user-story.md) | Funzionalità dal punto di vista dell'utente finale | `user-story` |
-| ⚙️ Technical Story | [`technical-story.md`](./technical-story.md) | Funzionalità o attività dal punto di vista tecnico (implementazione, configurazione, infrastruttura) | `technical-story` |
-| 🔍 Spike | [`spike.md`](./spike.md) | Attività di ricerca o esplorazione tecnica senza deliverable immediato (PoC, valutazione strumenti) | `spike` |
-| 🐛 Bug Report | [`bug-report.md`](./bug-report.md) | Malfunzionamento o comportamento inatteso | `bug` |
+| 🚀 Epic | [`epic.md`](./epic.md) | High-level feature, to be broken down into User Story, Technical Story or Spike | `epic` |
+| 💡 User Story | [`user-story.md`](./user-story.md) | Feature from the end user's point of view | `user-story` |
+| ⚙️ Technical Story | [`technical-story.md`](./technical-story.md) | Feature or task from the technical point of view (implementation, configuration, infrastructure) | `technical-story` |
+| 🔍 Spike | [`spike.md`](./spike.md) | Research or technical exploration activity with no immediate deliverable (PoC, tool evaluation) | `spike` |
+| 🐛 Bug Report | [`bug-report.md`](./bug-report.md) | Malfunction or unexpected behavior | `bug` |
 
-## Gerarchia
+## Hierarchy
 
 ```
 Epic
-├── User Story        (valore per l'utente finale)
-├── Technical Story   (lavoro tecnico non direttamente visibile all'utente)
-└── Spike             (ricerca preliminare, apre Story/Task successivi)
+├── User Story        (value for the end user)
+├── Technical Story   (technical work not directly visible to the user)
+└── Spike             (preliminary research, opens follow-up Story/Task)
 
-Bug Report            (indipendente, non fa parte di un'Epic)
+Bug Report            (independent, not part of an Epic)
 ```
 
-Ogni Epic elenca nella propria issue le Story e gli Spike che la
-compongono (tabella "Breakdown"); ogni Story/Spike riporta, quando
-pertinente, l'Epic di riferimento nei "Riferimenti"/"References".
+Every Epic lists in its own issue the Story and Spike items that make it
+up (the "Breakdown" table); every Story/Spike reports, when relevant, the
+parent Epic in its "References".
 
-## Convenzioni
+## Conventions
 
-- Titolo dell'issue con il prefisso già impostato dal template (es.
-  `[Epic] `, `[Story] `, `[Bug] `): non rimuoverlo, serve a riconoscere il
-  tipo di issue a colpo d'occhio nella lista.
-- Ogni template imposta già `labels` e `type`: non aggiungere label
-  alternative per lo stesso concetto (es. non usare `feature` insieme a
+- Issue title with the prefix already set by the template (e.g.
+  `[Epic] `, `[Story] `, `[Bug] `): don't remove it, it's there to
+  recognize the issue type at a glance in the list.
+- Every template already sets `labels` and `type`: don't add alternative
+  labels for the same concept (e.g. don't use `feature` alongside
   `user-story`).
-- I criteri di accettazione e la Definition of Done vanno compilati prima di
-  iniziare il lavoro, non a posteriori: sono la base per chiudere l'issue.
-- Le sezioni tra parentesi quadre (es. `[Descrivi...]`) sono placeholder da
-  sostituire, non testo da lasciare nell'issue pubblicata.
+- Acceptance criteria and the Definition of Done must be filled in before
+  starting the work, not after the fact: they're the basis for closing
+  the issue.
+- The sections in square brackets (e.g. `[Describe...]`) are placeholders
+  to be replaced, not text to leave in the published issue.
 
-## Aggiungere un template
+## Adding a template
 
-Un nuovo file `.md` in questa cartella con il front matter YAML
-(`name`, `type`, `about`, `title`, `labels`, `assignees`) compare
-automaticamente tra i template proposti alla creazione di una issue, senza
-bisogno di ulteriore configurazione.
+A new `.md` file in this folder with the YAML front matter
+(`name`, `type`, `about`, `title`, `labels`, `assignees`) automatically
+shows up among the templates offered when creating an issue, with no
+further configuration needed.

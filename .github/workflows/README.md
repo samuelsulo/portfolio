@@ -1,39 +1,38 @@
 # Workflows
 
-Workflow GitHub Actions per il controllo automatico dell'infrastruttura
-Terraform. Al momento questa cartella non contiene ancora nessun workflow:
-i controlli descritti in [`CLAUDE.md` §5](../../CLAUDE.md#5-regole-terraform)
-(`terraform validate` e un `plan` pulito prima di ogni `apply`) sono oggi
-eseguiti manualmente tramite i target del 
-[`Makefile`](../../infrastructure/Makefile) (`make validate`, `make fmt-check`, 
-`make plan`, ...).
+GitHub Actions workflows for automated checks on the Terraform
+infrastructure. This folder currently contains no workflow yet: the checks
+described in [`CLAUDE.md` §5](../../CLAUDE.md#5-terraform-rules)
+(`terraform validate` and a clean `plan` before every `apply`) are today
+run manually via the [`Makefile`](../../infrastructure/Makefile) targets
+(`make validate`, `make fmt-check`, `make plan`, ...).
 
-## Ambito consentito
+## Allowed scope
 
-Un workflow introdotto in questa cartella può:
+A workflow introduced in this folder may:
 
-- Eseguire `make fmt-check` e `make validate ENV=sandbox` su ogni pull
-  request, come controllo prima del merge.
-- Eseguire `make plan ENV=sandbox` per mostrare l'esecuzione prevista, senza
-  applicarla.
+- Run `make fmt-check` and `make validate ENV=sandbox` on every pull
+  request, as a pre-merge check.
+- Run `make plan ENV=sandbox` to show the planned execution, without
+  applying it.
 
-Un workflow **non** deve mai:
+A workflow must **never**:
 
-- Eseguire `make apply` (o `apply-auto`) su `environments/production`: ogni
-  `apply` in produzione richiede un `plan` rivisto manualmente, non solo
-  dall'assistente AI (vedi [`CLAUDE.md` §5](../../CLAUDE.md#5-regole-terraform)
-  e [§9](../../CLAUDE.md#9-modifiche-che-richiedono-revisione-manuale)).
-- Contenere credenziali AWS in chiaro nel file del workflow: le credenziali
-  vanno lette da secret configurati su GitHub, mai committate.
+- Run `make apply` (or `apply-auto`) on `environments/production`: every
+  `apply` in production requires a manually reviewed plan, not just by
+  the AI assistant (see [`CLAUDE.md` §5](../../CLAUDE.md#5-terraform-rules)
+  and [§9](../../CLAUDE.md#9-changes-that-require-manual-review)).
+- Contain AWS credentials in plain text in the workflow file: credentials
+  must be read from secrets configured on GitHub, never committed.
 
-Introdurre un workflow che automatizzi l'`apply` su `production`, anche
-dietro approvazione manuale nel workflow stesso, è una modifica al flusso di
-deployment e va segnalata e concordata prima di essere implementata (vedi
-[`CLAUDE.md` §9](../../CLAUDE.md#9-modifiche-che-richiedono-revisione-manuale)).
+Introducing a workflow that automates `apply` on `production`, even behind
+manual approval within the workflow itself, is a change to the deployment
+flow and must be flagged and agreed upon before being implemented (see
+[`CLAUDE.md` §9](../../CLAUDE.md#9-changes-that-require-manual-review)).
 
-## Aggiungere un workflow
+## Adding a workflow
 
-Un nuovo file `.yaml` in questa cartella viene raccolto automaticamente da 
-GitHub Actions, senza ulteriore configurazione. Alla sua aggiunta, aggiorna 
-questo README con nome del workflow, trigger (es. `pull_request`) e cosa 
-verifica.
+A new `.yaml` file in this folder is picked up automatically by
+GitHub Actions, with no further configuration. When adding one, update
+this README with the workflow's name, trigger (e.g. `pull_request`) and
+what it checks.

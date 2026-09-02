@@ -1,67 +1,67 @@
 # Infrastructure
 
-Infrastruttura AWS per l'applicativo del cliente, gestita interamente con 
+AWS infrastructure for the client's application, managed entirely with
 Terraform.
 
-## Struttura
+## Structure
 
 ```
 infrastructure/
 ├── modules/
-│   ├── vendor/       # copie 1:1 da terraform-aws-catalog, mai modificate
-│   └── local/        # moduli scritti per questo progetto
-├── live/             # modulo radice: compone i moduli
-├── environments/     # configurazione backend + variabili per ambiente
-└── Makefile          # workflow Terraform (init/plan/apply/...), wrappa live/ 
+│   ├── vendor/       # 1:1 copies from terraform-aws-catalog, never modified
+│   └── local/        # modules written for this project
+├── live/             # root module: composes the modules
+├── environments/     # backend configuration + variables per environment
+└── Makefile          # Terraform workflow (init/plan/apply/...), wraps live/
 │                       + environments/
 ```
 
-Vedi il README di ogni sottocartella per i dettagli:
+See the README of each subfolder for details:
 - [`modules/`](./modules)
 - [`live/`](./live)
 - [`environments/`](./environments).
 
-## Ambienti
+## Environments
 
-- **sandbox**: ambiente di sviluppo/test, nel mio account AWS, eliminabile
-  per ogni progetto.
-- **production**: l'account AWS di proprietà del cliente, raggiungibile
-  solo tramite `AssumeRole` cross-account. Creato quando il progetto cliente
-  raggiunge quello stadio.
+- **sandbox**: development/test environment, in my AWS account, deletable
+  per project.
+- **production**: the AWS account owned by the client, reachable only via
+  cross-account `AssumeRole`. Created when the client project reaches that
+  stage.
 
-## Prerequisiti
+## Prerequisites
 
-- Terraform >= 1.10 (richiesto dal locking nativo `use_lockfile` del backend
-  S3, nessuna tabella DynamoDB coinvolta)
-- AWS CLI configurata con le credenziali del mio account developer.
-  L'`AssumeRole` verso l'account cliente in production è gestito nativamente da 
-  Terraform (`aws_role_enabled`, `aws_role_arn`, `aws_role_external_id` in 
-  [`environments/production/environment.tfvars`](./environments/production)):
-  non serve assumere il ruolo a mano prima di `init`/`plan`/`apply`.
+- Terraform >= 1.10 (required by the S3 backend's native `use_lockfile`
+  locking, no DynamoDB table involved)
+- AWS CLI configured with my developer account's credentials. The
+  `AssumeRole` into the client account in production is handled natively
+  by Terraform (`aws_role_enabled`, `aws_role_arn`, `aws_role_external_id`
+  in [`environments/production/environment.tfvars`](./environments/production)):
+  there's no need to assume the role by hand before `init`/`plan`/`apply`.
 
 ## Quickstart
 
 ```
-make init ENV=sandbox   # terraform init con il backend dell'ambiente
-make plan ENV=sandbox   # terraform plan, salvato in environments/sandbox/tfplan
-make apply ENV=sandbox  # applica il plan salvato
+make init ENV=sandbox   # terraform init with the environment's backend
+make plan ENV=sandbox   # terraform plan, saved to environments/sandbox/tfplan
+make apply ENV=sandbox  # apply the saved plan
 ```
 
-Esegui `make help` per l'elenco completo dei target (validate, fmt, destroy,
-gestione dello state, docs, ...). `ENV` di default è `sandbox`; passa
-`ENV=production` esplicitamente, e solo dopo un plan rivisto manualmente.
+Run `make help` for the complete list of targets (validate, fmt, destroy,
+state management, docs, ...). `ENV` defaults to `sandbox`; pass
+`ENV=production` explicitly, and only after a manually reviewed plan.
 
 ## Scaffolding
 
 ```
-make scaffold-module MODULE=<name>          # nuovo modulo sotto modules/local/
-make catalog-modules                        # elenca i moduli disponibili in terraform-aws-catalog
-make catalog-versions MODULE=<name>         # elenca le versioni disponibili di un modulo del catalogo
-make vendor-module REF=<name>/<tag>         # copia quella versione sotto modules/vendor/
-make scaffold-environment ENV=<env> ACCOUNT_ID=<id> # nuovo ambiente sotto environments/
+make scaffold-module MODULE=<name>          # new module under modules/local/
+make catalog-modules                        # list the modules available in terraform-aws-catalog
+make catalog-versions MODULE=<name>         # list the available versions of a catalog module
+make vendor-module REF=<name>/<tag>         # copy that version under modules/vendor/
+make scaffold-environment ENV=<env> ACCOUNT_ID=<id> # new environment under environments/
 ```
 
-## Documentazione
+## Documentation
 
-La documentazione di progetto vive in [`../docs/`](../docs) e va tenuta 
-aggiornata a ogni modifica dell'infrastruttura.
+The project documentation lives in [`../docs/`](../docs) and must be kept
+up to date on every change to the infrastructure.

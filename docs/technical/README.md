@@ -1,13 +1,13 @@
-# Documentazione Tecnica
+# Technical documentation
 
-Questa cartella contiene la documentazione tecnica del progetto. 
-Ogni documento descrive un livello o componente specifico dello stack.
+This folder contains the project's technical documentation.
+Each document describes a specific layer or component of the stack.
 
-> La documentazione dettagliata dei singoli moduli Terraform si trova nei README
-all'interno di ogni modulo sotto `infrastructure/`.
+> The detailed documentation of individual Terraform modules is in the READMEs
+inside each module under `infrastructure/`.
 
-## Indice
+## Index
 
-| Documento | Descrizione |
+| Document | Description |
 |---|---|
-| [`deployment.md`](./deployment.md) | Guida al deployment di `website/` su un ambiente, da zero: prerequisiti, script di deploy, strategia di cache/invalidazione, tracciamento, rollback. |
+| [`deployment.md`](./deployment.md) | Guide to deploying `website/` to an environment, from scratch: prerequisites, deploy script, cache/invalidation strategy, tracking, rollback. |

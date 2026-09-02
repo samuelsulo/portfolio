@@ -1,8 +1,8 @@
-## Documentazione Architetturale
+## Architectural documentation
 
-Questa cartella contiene la documentazione architetturale del progetto.
+This folder contains the project's architectural documentation.
 
-## Indice
+## Index
 
-| Documento | Descrizione |
+| Document | Description |
 |---|---|

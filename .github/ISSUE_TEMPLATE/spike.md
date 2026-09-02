@@ -1,26 +1,26 @@
 ---
 name: 🔍 Spike
 type: Spike
-about: Attività di ricerca o esplorazione tecnica senza deliverable immediato.
+about: Research or technical exploration activity with no immediate deliverable.
 title: "[Spike] "
 labels: ["spike"]
 assignees: []
 ---
 
-## 🔍 Obiettivo
+## 🔍 Goal
 
-[Definisci la domanda a cui la ricerca deve rispondere.]
+[Define the question the research must answer.]
 
-## 🧩 Ambito
+## 🧩 Scope
 
-[Descrivi i limiti e cosa NON sarà incluso.]
+[Describe the boundaries and what will NOT be included.]
 
-## 🧠 Approccio
+## 🧠 Approach
 
-[Specifica cosa verrà esplorato: tecnologie, strumenti, prove di concetto, benchmark, ecc.]
+[Specify what will be explored: technologies, tools, proofs of concept, benchmarks, etc.]
 
-## 📈 Deliverable
+## 📈 Deliverables
 
-* [ ] Documento di sintesi con conclusioni  
-* [ ] Prototipo o PoC (se previsto)  
-* [ ] Raccomandazioni per le future implementazioni
+* [ ] Summary document with conclusions  
+* [ ] Prototype or PoC (if planned)  
+* [ ] Recommendations for future implementations

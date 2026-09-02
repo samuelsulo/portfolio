@@ -1,23 +1,22 @@
 # Local
 
-Moduli Terraform scritti specificamente per questo progetto: si usa questa
-cartella solo quando nessun modulo di `terraform-aws-catalog` copre lo scope
-necessario e il bisogno non è abbastanza generico da giustificare
-l'aggiunta di un nuovo modulo al catalogo (CLAUDE.md §5). Diversamente da
-[`../vendor/`](../vendor), questi moduli sono di proprietà del progetto e si
-possono modificare liberamente.
+Terraform modules written specifically for this project: this folder is
+used only when no module from `terraform-aws-catalog` covers the needed
+scope and the need isn't generic enough to justify adding a new module to
+the catalog (CLAUDE.md §5). Unlike [`../vendor/`](../vendor), these
+modules are owned by the project and can be modified freely.
 
-## Moduli disponibili
+## Available modules
 
-| Modulo | Scopo |
+| Module | Purpose |
 |---|---|
 
-## Aggiungere un modulo
+## Adding a module
 
 ```
 make scaffold-module MODULE=<name>
 ```
 
-Crea `modules/local/<name>/{main,variables,outputs,versions}.tf` + `README.md`.
-Dopo averlo compilato, collegalo in [`../../live/main.tf`](../../live/main.tf)
-e aggiungi una riga alla tabella qui sopra.
+Creates `modules/local/<name>/{main,variables,outputs,versions}.tf` + `README.md`.
+After filling it in, wire it into [`../../live/main.tf`](../../live/main.tf)
+and add a row to the table above.

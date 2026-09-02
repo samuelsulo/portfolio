@@ -1,62 +1,62 @@
-# Guida al deployment
+# Deployment guide
 
-Come pubblicare `website/` sull'infrastruttura di un ambiente (sandbox o
-production), a partire da zero.
+How to publish `website/` to an environment's infrastructure (sandbox or
+production), starting from scratch.
 
-## Prerequisiti
+## Prerequisites
 
-- L'infrastruttura dell'ambiente di destinazione deve essere già applicata:
-  `make apply ENV=<sandbox|production>` da [`../../infrastructure/`](../../infrastructure)
-  (vedi il suo [README](../../infrastructure/README.md)). Il modulo
-  `website_hosting` deve esistere nello stato Terraform di quell'ambiente:
-  è da lì che [`deploy-website.sh`](../../scripts/deploy-website.sh) legge
-  bucket S3 e distribuzione CloudFront, mai da valori hardcoded. Se anche il
-  modulo `contact_api` è stato applicato, lo script ne legge il dominio
-  custom dallo stesso stato e lo inietta nella build come
-  `VITE_CONTACT_API_URL`; se non è ancora presente, il form di contatto
-  viene comunque buildato e deployato, solo disabilitato (vedi
+- The target environment's infrastructure must already be applied:
+  `make apply ENV=<sandbox|production>` from [`../../infrastructure/`](../../infrastructure)
+  (see its [README](../../infrastructure/README.md)). The `website_hosting`
+  module must exist in that environment's Terraform state: that's where
+  [`deploy-website.sh`](../../scripts/deploy-website.sh) reads the S3
+  bucket and CloudFront distribution from, never from hardcoded values. If
+  the `contact_api` module has also been applied, the script reads its
+  custom domain from the same state and injects it into the build as
+  `VITE_CONTACT_API_URL`; if it isn't there yet, the contact form is still
+  built and deployed, just disabled (see
   [`../../website/README.md`](../../website/README.md#contact-form-backend)).
-- AWS CLI configurata, con le credenziali dell'account AWS di destinazione
-  già attive nella shell (stesso prerequisito degli altri script in
-  [`../../scripts/README.md`](../../scripts/README.md#prerequisiti)).
-- Versioni di `node` e `terraform` allineate a [`../../mise.toml`](../../mise.toml)
-  (`mise install` dalla root del repository).
+- AWS CLI configured, with the target AWS account's credentials already
+  active in the shell (same prerequisite as the other scripts in
+  [`../../scripts/README.md`](../../scripts/README.md#prerequisites)).
+- `node` and `terraform` versions aligned with [`../../mise.toml`](../../mise.toml)
+  (`mise install` from the repository root).
 
 ## Deploy
 
 ```bash
-./scripts/deploy-website.sh sandbox      # o production
+./scripts/deploy-website.sh sandbox      # or production
 ```
 
-Lo script, in ordine:
+The script, in order:
 
-1. installa le dipendenze (`npm ci`) ed esegue gli unit test (`npm run test`);
-2. legge bucket S3, distribuzione CloudFront ed (se presente) il dominio
-   custom di `contact_api` dallo stato Terraform dell'ambiente indicato;
-3. builda il bundle di produzione (`npm run build`, con type-check incluso),
-   in `website/dist/`, con `VITE_CONTACT_API_URL` valorizzata dal passo
-   precedente;
-4. sincronizza `dist/` sul bucket (`aws s3 sync --delete`): asset con hash
-   nel nome (JS/CSS/font) con cache lunga e immutabile, `index.html` sempre
-   senza cache, così un deploy è visibile subito senza attendere la
-   scadenza della cache lato client;
-5. invalida la distribuzione CloudFront (`/*`), cosi la CDN smette di
-   servire le versioni precedenti degli asset con cache;
-6. registra il deploy in `website/deploy-log/<env>.md` (data UTC, commit,
-   bucket, distribuzione, ID invalidation), tracciabilità richiesta per ogni
-   deploy in production da
-   [`CLAUDE.md` §7](../../CLAUDE.md#7-regole-di-deployment).
+1. installs the dependencies (`npm ci`) and runs the unit tests (`npm run test`);
+2. reads the S3 bucket, CloudFront distribution and (if present) the
+   `contact_api` custom domain from the target environment's Terraform state;
+3. builds the production bundle (`npm run build`, including type-check),
+   into `website/dist/`, with `VITE_CONTACT_API_URL` set from the previous
+   step;
+4. syncs `dist/` to the bucket (`aws s3 sync --delete`): hashed assets
+   (JS/CSS/fonts) with long, immutable cache, `index.html` always without
+   cache, so a deploy is visible immediately without waiting for the
+   client-side cache to expire;
+5. invalidates the CloudFront distribution (`/*`), so the CDN stops
+   serving previous, cached versions of the assets;
+6. records the deploy in `website/deploy-log/<env>.md` (UTC date, commit,
+   bucket, distribution, invalidation ID), traceability required for every
+   deploy to production by
+   [`CLAUDE.md` §7](../../CLAUDE.md#7-deployment-rules).
 
-Nessun deploy diretto in production senza che l'ambiente sandbox sia stato
-prima validato con lo stesso script (vedi
-[`CLAUDE.md` §7](../../CLAUDE.md#7-regole-di-deployment)).
+No direct deploy to production without the sandbox environment first
+having been validated with the same script (see
+[`CLAUDE.md` §7](../../CLAUDE.md#7-deployment-rules)).
 
 ## Rollback
 
-Il bucket S3 del modulo `website_hosting` è versionato: una versione
-precedente di un oggetto può essere ripristinata da console o CLI
-(`aws s3api list-object-versions` / `aws s3api copy-object` con la
-`VersionId` desiderata), seguita da una nuova invalidazione CloudFront
-sullo stesso `distribution_id` letto dallo stato Terraform. In alternativa,
-eseguire di nuovo `deploy-website.sh` dopo un `git checkout` del commit da
-ripristinare.
+The `website_hosting` module's S3 bucket is versioned: a previous version
+of an object can be restored from the console or CLI
+(`aws s3api list-object-versions` / `aws s3api copy-object` with the
+desired `VersionId`), followed by a new CloudFront invalidation on the
+same `distribution_id` read from the Terraform state. Alternatively,
+run `deploy-website.sh` again after a `git checkout` of the commit to
+restore.

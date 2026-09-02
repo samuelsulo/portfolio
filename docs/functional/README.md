@@ -1,8 +1,8 @@
-# Documentazione Funzionale
+# Functional documentation
 
-Questa cartella contiene la documentazione funzionale del progetto.
+This folder contains the project's functional documentation.
 
-## Indice
+## Index
 
-| Documento | Descrizione |
+| Document | Description |
 |---|---|

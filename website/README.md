@@ -1,85 +1,85 @@
 # Portfolio Website
 
-Sito vetrina single-page per la presentazione professionale di Samuel Sulo come Cloud Engineer & Web Developer: sezioni Chi sono, Servizi, Progetti e Contatti, con identità visiva dark cyberpunk/neon e supporto bilingue italiano/inglese.
+Single-page showcase site for the professional presentation of Samuel Sulo as Cloud Engineer & Web Developer: About, Services, Projects and Contact sections, with a dark cyberpunk/neon visual identity and bilingual Italian/English support.
 
-## Stack tecnologico
+## Technology stack
 
 - Vue 3 (Composition API, `<script setup>`) + TypeScript in strict mode
-- Vite come build tool
-- vue-i18n per l'internazionalizzazione (italiano di default, inglese come seconda lingua)
-- CSS scoped nei componenti + design token condivisi in `src/styles/` (nessun CSS framework)
-- Font self-hosted (`@fontsource-variable`), nessuna chiamata a servizi esterni in fase di runtime
-- Vitest + Vue Test Utils per gli unit test
-- ESLint + Prettier per la qualità del codice
+- Vite as the build tool
+- vue-i18n for internationalization (Italian as default, English as second language)
+- CSS scoped in components + shared design tokens in `src/styles/` (no CSS framework)
+- Self-hosted fonts (`@fontsource-variable`), no calls to external services at runtime
+- Vitest + Vue Test Utils for unit tests
+- ESLint + Prettier for code quality
 
-## Requisiti
+## Requirements
 
-Le versioni degli strumenti sono gestite tramite `mise` (vedi `mise.toml` nella root del repository). Da questa cartella:
+Tool versions are managed via `mise` (see `mise.toml` at the repository root). From this folder:
 
 ```bash
 mise exec -- npm install
 ```
 
-## Script disponibili
+## Available scripts
 
 ```bash
-npm run dev          # dev server con hot reload
-npm run build         # type-check + build di produzione in dist/
-npm run preview       # anteprima della build di produzione
-npm run test          # unit test (una sola esecuzione)
-npm run test:watch    # unit test in watch mode
-npm run type-check    # solo type-check (vue-tsc)
-npm run lint          # ESLint con --fix
-npm run format         # Prettier su src/
+npm run dev          # dev server with hot reload
+npm run build         # type-check + production build into dist/
+npm run preview       # preview of the production build
+npm run test          # unit tests (single run)
+npm run test:watch    # unit tests in watch mode
+npm run type-check    # type-check only (vue-tsc)
+npm run lint          # ESLint with --fix
+npm run format         # Prettier on src/
 ```
 
-Tutti i comandi vanno eseguiti tramite `mise exec --` (o con una shell in cui `mise` ha già attivato le versioni di `mise.toml`).
+All commands must be run through `mise exec --` (or in a shell where `mise` has already activated the versions from `mise.toml`).
 
-## Struttura del progetto
+## Project structure
 
 ```text
 website/
-├── public/                  # asset statici serviti as-is (favicon, immagini placeholder)
+├── public/                  # static assets served as-is (favicon, placeholder images)
 ├── src/
 │   ├── components/
 │   │   ├── layout/          # NavBar, AppFooter
 │   │   ├── sections/        # Hero/About, Services, Projects, Contact
-│   │   └── ui/               # componenti riutilizzabili (card, bottoni, icone, ecc.)
-│   ├── composables/          # logica riutilizzabile (scroll spy, form contatti, ecc.)
-│   ├── data/                 # contenuti data-driven (services.json, projects.json, site-config.json)
-│   ├── i18n/                 # configurazione vue-i18n + file di traduzione it/en
-│   ├── services/              # layer di integrazione con servizi esterni (contact form API)
-│   ├── styles/                # design token e reset condivisi
-│   ├── types/                  # tipi TypeScript condivisi
-│   └── utils/                  # funzioni pure (validazione form, ecc.)
+│   │   └── ui/               # reusable components (cards, buttons, icons, etc.)
+│   ├── composables/          # reusable logic (scroll spy, contact form, etc.)
+│   ├── data/                 # data-driven content (services.json, projects.json, site-config.json)
+│   ├── i18n/                 # vue-i18n configuration + it/en translation files
+│   ├── services/              # integration layer with external services (contact form API)
+│   ├── styles/                # shared design tokens and reset
+│   ├── types/                  # shared TypeScript types
+│   └── utils/                  # pure functions (form validation, etc.)
 └── vite.config.ts / vitest.config.ts / tsconfig*.json
 ```
 
-Gli unit test vivono nella cartella `tests/unit/` alla radice del repository (non dentro `website/`), come previsto dalla struttura standard di progetto descritta in `CLAUDE.md`; `vitest.config.ts` è configurato per scoprirli da lì.
+Unit tests live in the `tests/unit/` folder at the repository root (not inside `website/`), per the standard project structure described in `CLAUDE.md`; `vitest.config.ts` is configured to discover them there.
 
-## Contenuti: come modificarli
+## Content: how to edit it
 
-- **Testi discorsivi (bio, servizi, progetti, etichette UI)**: vivono nei file di traduzione `src/i18n/locales/it.json` e `src/i18n/locales/en.json`. Ogni chiave va aggiornata in entrambi i file.
-- **Dati non traducibili di Services e Projects** (icona, tecnologie, immagini, URL): vivono in `src/data/services.json` e `src/data/projects.json`. Ogni voce fa riferimento a una `translationKey` che punta al blocco corrispondente nei file di traduzione.
-- **Dati di contatto/social** (email, social link): `src/data/site-config.json`.
+- **Prose text (bio, services, projects, UI labels)**: lives in the translation files `src/i18n/locales/it.json` and `src/i18n/locales/en.json`. Every key must be updated in both files.
+- **Non-translatable data for Services and Projects** (icon, technologies, images, URLs): lives in `src/data/services.json` and `src/data/projects.json`. Each entry references a `translationKey` pointing to the corresponding block in the translation files.
+- **Contact/social data** (email, social links): `src/data/site-config.json`.
 
-I contenuti attualmente presenti (bio, elenco servizi, progetti, email, link social) sono **placeholder** pensati per essere sostituiti con i contenuti reali senza modificare alcun componente Vue.
+The content currently in place (bio, service list, projects, email, social links) is **placeholder** content meant to be replaced with real content without modifying any Vue component.
 
 ## Contact form: backend
 
-Il form di contatto è collegato al modulo `contact_api` (API Gateway + SES) descritto in [`../infrastructure/`](../infrastructure). Il frontend chiama `POST {VITE_CONTACT_API_URL}/email`, dove `VITE_CONTACT_API_URL` è il dominio custom del modulo (es. `https://contact.samuelsulo.it`).
+The contact form is wired to the `contact_api` module (API Gateway + SES) described in [`../infrastructure/`](../infrastructure). The frontend calls `POST {VITE_CONTACT_API_URL}/email`, where `VITE_CONTACT_API_URL` is the module's custom domain (e.g. `https://contact.samuelsulo.it`).
 
-In sandbox/production questa variabile viene iniettata automaticamente da [`../scripts/deploy-website.sh`](../scripts/deploy-website.sh), che la legge dallo stato Terraform di `infrastructure/live` invece di averla hardcoded. Per sviluppo locale (`npm run dev`) contro un ambiente già applicato, copia `.env.example` in `.env.local` e valorizzala a mano; `.env.local` non va mai committato.
+In sandbox/production this variable is injected automatically by [`../scripts/deploy-website.sh`](../scripts/deploy-website.sh), which reads it from `infrastructure/live`'s Terraform state instead of having it hardcoded. For local development (`npm run dev`) against an already-applied environment, copy `.env.example` to `.env.local` and set it by hand; `.env.local` must never be committed.
 
-Se `VITE_CONTACT_API_URL` non è impostata (es. il modulo `contact_api` non è ancora stato applicato in quell'ambiente), `src/services/contactService.ts` restituisce un errore esplicito (`ContactApiNotConfiguredError`) e il form mostra correttamente lo stato di errore invece di un falso successo.
+If `VITE_CONTACT_API_URL` isn't set (e.g. the `contact_api` module hasn't been applied yet in that environment), `src/services/contactService.ts` returns an explicit error (`ContactApiNotConfiguredError`) and the form correctly shows the error state instead of a false success.
 
-## Accessibilità e responsive
+## Accessibility and responsiveness
 
-- Skip link, markup semantico, focus visibile, `aria-*` sugli elementi interattivi, form con label associate ed errori non basati solo sul colore.
-- Rispetto di `prefers-reduced-motion` sia in CSS sia nelle animazioni/transizioni gestite via JavaScript.
-- Layout responsive mobile-first; la sezione Progetti usa uno scroll orizzontale touch-friendly con frecce di navigazione su desktop.
+- Skip link, semantic markup, visible focus, `aria-*` on interactive elements, forms with associated labels and errors that aren't color-only.
+- Respects `prefers-reduced-motion` both in CSS and in animations/transitions handled via JavaScript.
+- Mobile-first responsive layout; the Projects section uses a touch-friendly horizontal scroll with navigation arrows on desktop.
 
-## Prossimi passi (fuori dallo scope di questa iterazione)
+## Next steps (out of scope for this iteration)
 
-- Suite di test e2e (Playwright) in `tests/e2e/`.
-- Sostituzione dei contenuti placeholder (bio, progetti, immagini, contatti reali).
+- E2E test suite (Playwright) in `tests/e2e/`.
+- Replacement of the placeholder content (bio, projects, images, real contacts).

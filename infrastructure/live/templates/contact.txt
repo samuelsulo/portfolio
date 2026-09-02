@@ -1,13 +1,13 @@
->> NUOVO MESSAGGIO DAL SITO
+>> NEW MESSAGE FROM THE SITE
 
-Hai ricevuto un nuovo contatto dal modulo del sito.
+You received a new contact from the site's form.
 
-Nome     : {{name}}
-Email    : {{email}}
-Telefono : {{phone}}
+Name  : {{name}}
+Email : {{email}}
+Phone : {{phone}}
 
---- Messaggio ---
+--- Message ---
 {{message}}
------------------
+---------------
 
-Rispondi direttamente a questa email per contattare {{name}}.
+Reply directly to this email to contact {{name}}.

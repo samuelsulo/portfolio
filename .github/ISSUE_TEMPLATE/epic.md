@@ -1,7 +1,7 @@
 ---
 name: 🚀 Epic
 type: Epic
-about: Descrive una funzionalità di alto livello da suddividere in User Story, Spike o Technical Task.
+about: Describes a high-level feature to be broken down into User Story, Spike or Technical Task.
 title: "[Epic] "
 labels: ["epic"]
 assignees: []
@@ -9,82 +9,82 @@ assignees: []
 
 ## 🚀 Epic
 
-**Titolo**: [Nome descrittivo dell'Epic]
+**Title**: [Descriptive name of the Epic]
 
 ---
 
-## 🎯 Obiettivo
+## 🎯 Goal
 
-[Descrivi l'obiettivo principale di questa Epic. Qual è il valore di business o il problema che risolve?]
+[Describe the main goal of this Epic. What is the business value or the problem it solves?]
 
 ---
 
-## 🧾 Descrizione / Contesto
+## 🧾 Description / Context
 
 **Background:**  
-[Fornisci il contesto necessario per comprendere questa Epic. Perché è importante? Qual è la situazione attuale?]
+[Provide the context needed to understand this Epic. Why does it matter? What is the current situation?]
 
-**Utenti target:**  
-* [Tipo di utente 1]
-* [Tipo di utente 2]
+**Target users:**  
+* [User type 1]
+* [User type 2]
 
-**Impatto atteso:**  
-[Descrivi i benefici attesi una volta completata l'Epic.]
+**Expected impact:**  
+[Describe the expected benefits once the Epic is completed.]
 
 ---
 
 ## 📦 Scope
 
 **In scope:**  
-* [Funzionalità o aspetto incluso 1]
-* [Funzionalità o aspetto incluso 2]
+* [Included feature or aspect 1]
+* [Included feature or aspect 2]
 
 **Out of scope:**  
-* [Cosa NON è incluso in questa Epic]
-* [Eventuali limitazioni o esclusioni]
+* [What is NOT included in this Epic]
+* [Any limitations or exclusions]
 
 ---
 
 ## 🧩 Breakdown (Story / Task / Spike)
 
-*Elenca le User Story, Technical Task o Spike che compongono questa Epic:*
+*List the User Story, Technical Task or Spike items that make up this Epic:*
 
-| Tipo | Titolo | Issue |
+| Type | Title | Issue |
 |------|--------|-------|
-| User Story | [Titolo story 1] | #ID |
-| User Story | [Titolo story 2] | #ID |
-| Technical Task | [Titolo task 1] | #ID |
-| Spike | [Titolo spike 1] | #ID |
+| User Story | [Story title 1] | #ID |
+| User Story | [Story title 2] | #ID |
+| Technical Task | [Task title 1] | #ID |
+| Spike | [Spike title 1] | #ID |
 
 ---
 
 ## ✅ Acceptance Criteria (Epic Level)
 
-* [ ] [Criterio di alto livello 1]
-* [ ] [Criterio di alto livello 2]
-* [ ] [Criterio di alto livello 3]
+* [ ] [High-level criterion 1]
+* [ ] [High-level criterion 2]
+* [ ] [High-level criterion 3]
 
 ---
 
 ## 📊 Definition of Done (Epic Level)
 
-* [ ] Tutte le User Story e Task associati sono completati
-* [ ] Funzionalità validata in ambiente di staging/test
-* [ ] Documentazione aggiornata
-* [ ] Stakeholder hanno approvato il risultato finale
+* [ ] All associated User Story and Task items are completed
+* [ ] Feature validated in staging/test environment
+* [ ] Documentation updated
+* [ ] Stakeholders have approved the final result
 
 ---
 
-## 📅 Timeline (opzionale)
+## 📅 Timeline (optional)
 
-**Target Start:** [Data inizio prevista]  
-**Target End:** [Data fine prevista]  
-**Sprint/Iteration:** [Numero sprint o iterazione]
+**Target Start:** [Expected start date]  
+**Target End:** [Expected end date]  
+**Sprint/Iteration:** [Sprint or iteration number]
 
 ---
 
-## 🔗 Riferimenti
+## 🔗 References
 
-* [Link a documenti di design o specifiche]
-* [Link a mockup o wireframe]
-* [Epic o issue correlate — es. #ID]
+* [Link to design documents or specifications]
+* [Link to mockups or wireframes]
+* [Related Epics or issues, e.g. #ID]

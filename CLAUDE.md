@@ -1,263 +1,287 @@
-# CLAUDE.md: Guardrail di progetto
+# CLAUDE.md: Project guardrails
 
-Questo file istruisce chi lavora su questo repository (umano o assistente AI) su
-come operare all'interno di questo progetto. Vale per **ogni cliente**: 
-la struttura, le convenzioni e le regole sono standard e non vanno reinventate 
-progetto per progetto. Se una richiesta del cliente sembra richiedere di deviare
-da queste regole, fermati e segnala la deviazione invece di procedere in 
-autonomia (vedi "Modifiche che richiedono revisione manuale").
+This file instructs whoever works on this repository (human or AI assistant)
+on how to operate within this project. It applies to **every client**: the
+structure, conventions and rules are standard and must not be reinvented
+project by project. If a client request seems to require deviating from
+these rules, stop and flag the deviation instead of proceeding on your own
+(see "Changes that require manual review").
 
-## 1. Cos'è questo progetto
+## 1. What this project is
 
-Il template dell'infrastruttura AWS per i miei progetti cliente gestiti con 
-Terraform: tipicamente un piccolo cliente locale (ristorante, bar, negozio, 
-attività di servizi) che ha bisogno di presenza online o di un'infrastruttura 
-AWS di base, a prescindere da cosa giri sopra quell'infrastruttura. 
-Questo repository contiene di base infrastruttura Terraform, script di supporto 
-e documentazione: qualunque codice applicativo del cliente (sito, app, altro)
-dev'essere aggiunto in base alla tipologia di progetto del cliente. Il progetto 
-è **a consegna unica**: al termine, il cliente riceve infrastruttura e 
-documentazione complete e diventa autonomo. Non è una piattaforma SaaS, non ha 
-multi-tenancy, non ha dashboard di gestione clienti, non prevede hosting 
-permanente nel mio AWS account.
+The AWS infrastructure template for my client projects, managed with
+Terraform: typically a small local client (restaurant, bar, shop, service
+business) who needs an online presence or basic AWS infrastructure,
+regardless of what runs on top of that infrastructure. This repository
+contains, by default, Terraform infrastructure, support scripts and
+documentation: any client application code (website, app, other) must be
+added based on the client's project type. The project is **single-delivery**:
+at the end, the client receives complete infrastructure and documentation
+and becomes autonomous. It is not a SaaS platform, has no multi-tenancy, no
+client-management dashboard, and no permanent hosting in my AWS account.
 
-Modello: `cliente → progetto → sviluppo → test → consegna → chiusura`.
+Model: `client -> project -> development -> testing -> delivery -> closure`.
 
-## 2. Architettura
+## 2. Architecture
 
 ```
-MY AWS ACCOUNT (sviluppo/sandbox)
+MY AWS ACCOUNT (development/sandbox)
       |
-      | AssumeRole (cross-account, a tempo/revocabile)
+      | AssumeRole (cross-account, time-limited/revocable)
       v
-CLIENT AWS ACCOUNT (produzione, di proprietà del cliente)
+CLIENT AWS ACCOUNT (production, owned by the client)
       |
-      +-- rilascio dell'infrastruttura AWS
-      +-- rilascio dell'applicativo richiesto dal cliente (e.g. sito web)
+      +-- AWS infrastructure release
+      +-- release of the application requested by the client (e.g. website)
 ```
 
-Regole architetturali fisse:
+Fixed architectural rules:
 
-- La produzione vive **esclusivamente** nell'AWS account del cliente, mai nel 
-  mio.
-- Lo sviluppo e i test avvengono nel mio account, in un ambiente sandbox isolato
-  per cliente, eliminabile dopo la consegna.
-- L'accesso al cliente avviene solo tramite ruolo cross-account (`AssumeRole`),
-  mai con credenziali root o IAM permanenti.
-- Il cliente deve poter revocare il mio accesso in autonomia in qualsiasi
-  momento (rimozione/modifica del ruolo cross-account).
-- Lo stack dell'infrastruttura dipende dalla tipologia di applicativo richiesto
-  dal cliente.
+- Production lives **exclusively** in the client's AWS account, never in
+  mine.
+- Development and testing happen in my account, in a sandbox environment
+  isolated per client, deletable after delivery.
+- Access to the client happens only via a cross-account role
+  (`AssumeRole`), never with root or permanent IAM credentials.
+- The client must be able to revoke my access autonomously at any time
+  (removal/modification of the cross-account role).
+- The infrastructure stack depends on the type of application requested by
+  the client.
 
-## 3. Stack tecnologico
+## 3. Technology stack
 
-- **Infrastruttura**: Terraform (ultima versione stabile, provider AWS 
-  ufficiale). Nessun CloudFormation, CDK o Pulumi: uno strumento solo, per 
-  coerenza tra tutti i progetti cliente.
-- **Frontend**: Vue 3 + TypeScript + Vite. Composition API (`<script setup>`), niente Options API nel codice nuovo.
-- **Internazionalizzazione**: vue-i18n (Composition API, `useI18n`), unico strumento di gestione traduzioni in ogni progetto. Lingua di default: italiano (`it`); seconda lingua: inglese (`en`). Non introdurre altre lingue né altri tool di gestione traduzioni senza richiesta esplicita del cliente.
-- **Styling**: CSS scoped nei componenti o CSS variabile condiviso in `src/styles/`. Evitare l'introduzione di framework CSS pesanti (Tailwind, Bootstrap...) salvo richiesta esplicita: la maggior parte di questi siti sono poche pagine e non giustificano la dipendenza.
-- **Package manager**: npm (coerenza tra progetti, evitare di mischiare yarn/pnpm tra clienti diversi senza motivo).
+- **Infrastructure**: Terraform (latest stable version, official AWS
+  provider). No CloudFormation, CDK or Pulumi: a single tool, for
+  consistency across all client projects.
+- **Frontend**: Vue 3 + TypeScript + Vite. Composition API (`<script setup>`), no Options API in new code.
+- **Internationalization**: vue-i18n (Composition API, `useI18n`), the only translation management tool in every project. Default language: Italian (`it`); second language: English (`en`). Do not introduce other languages or other translation management tools without an explicit client request.
+- **Styling**: CSS scoped in components or shared CSS variables in `src/styles/`. Avoid introducing heavy CSS frameworks (Tailwind, Bootstrap...) unless explicitly requested: most of these sites are a handful of pages and don't justify the dependency.
+- **Package manager**: npm (consistency across projects, avoid mixing yarn/pnpm between different clients without reason).
 
-## 4. Struttura del repository
+## 4. Repository structure
 
 ```
 client-project/
 ├── infrastructure/
 │   ├── modules/
-│   │   ├── vendor/           # copie 1:1 da terraform-aws-catalog, mai modificate
-│   │   └── local/            # moduli scritti per questo progetto
-│   ├── live/                 # modulo radice: compone i moduli
+│   │   ├── vendor/           # 1:1 copies from terraform-aws-catalog, never modified
+│   │   └── local/            # modules written for this project
+│   ├── live/                 # root module: composes the modules
 │   ├── environments/
-│   │   ├── sandbox/          # backend + variabili per l'ambiente di sviluppo
-│   │   └── production/       # backend + variabili per l'ambiente di produzione
-│   └── Makefile              # workflow Terraform (init/plan/apply/...), wrappa
+│   │   ├── sandbox/          # backend + variables for the development environment
+│   │   └── production/       # backend + variables for the production environment
+│   └── Makefile              # Terraform workflow (init/plan/apply/...), wraps
 │                               live/ + environments/
 ├── docs/
-│   ├── architecture/         # diagrammi e decisioni architetturali
-│   └── functional/           # documentazione funzionale
-│   └── technical/            # documentazione tecnica
-├── scripts/                  # automazioni (e.g. bootstrap terraform backend)
-├── .githooks/                # git hook versionati (commit-msg, pre-commit)
-├── README.md                 # README di progetto
-└── CLAUDE.md                 # direttive per claude
-└── mise.toml                 # mise gestisce i tool del progetto
-├── website/                  # sorgente Vue.js/TypeScript/Vite
+│   ├── architecture/         # diagrams and architectural decisions
+│   └── functional/           # functional documentation
+│   └── technical/            # technical documentation
+├── scripts/                  # automation (e.g. bootstrap terraform backend)
+├── .githooks/                # versioned git hooks (commit-msg, pre-commit)
+├── README.md                 # project README
+└── CLAUDE.md                 # directives for claude
+└── mise.toml                 # mise manages the project's tools
+├── website/                  # Vue.js/TypeScript/Vite source
 ├── tests/
 │   ├── unit/
 │   └── e2e/
 ```
 
-Non spostare né rinominare queste cartelle di primo livello: gli scripts, la
-documentazione e l'infrastruttura assumono questa struttura.
+Do not move or rename these top-level folders: the scripts, documentation
+and infrastructure assume this structure.
 
-## 5. Regole Terraform
+## 5. Terraform rules
 
-- Ogni risorsa AWS passa da un modulo in `infrastructure/modules/`. Non scrivere
-  risorse "inline" in `live/` o in `environments/` se esiste già (o ha senso 
-  creare) un modulo.
-- `infrastructure/modules/` ha due sottocartelle, una per ciascuna fonte 
-  ammessa per un modulo:
-  - `modules/vendor/`: copia da `terraform-aws-catalog`, quando un modulo del 
-    catalogo copre lo scope necessario. Il suo codice va copiato dentro il 
-    progetto nel momento in cui serve. Mai un `source` Git remoto verso il 
-    catalogo, nemmeno in sviluppo: il progetto dev'essere autosufficiente fin 
-    dal primo commit, non solo alla consegna.
-  - `modules/local/`: modulo nuovo, scritto per questo progetto, quando 
-    nessun modulo del catalogo copre lo scope e il bisogno non è abbastanza 
-    generico da giustificare l'aggiunta di un modulo al catalogo.
-- Un modulo in `modules/vendor/` **non va mai modificato** nel progetto 
-  cliente: resta una copia 1:1, byte per byte, per restare tracciabile e 
-  allineato alla versione del catalogo. In `terraform-aws-catalog` ogni 
-  modulo si tagga singolarmente (`<module-name>/vX.Y.Z`, mai un tag unico per 
-  l'intero repo), così un breaking change in un modulo non fa salire la 
-  versione anche di moduli non correlati. Si esplora il catalogo e si copia 
-  con `make catalog-modules`, `make catalog-versions MODULE=<name>` e 
-  `make vendor-module REF=<name>/<tag>` (vedi 
-  `infrastructure/Makefile`); quest'ultimo ricava il nome del modulo 
-  direttamente da `REF`, senza richiederlo come parametro separato, e genera 
-  anche `VENDORED.md` accanto 
-  ai file del modulo con fonte, nome modulo, tag, commit e data della copia: 
-  la provenienza vive lì, mai in un commento dentro il codice del modulo. Se 
-  un modulo del catalogo non copre esattamente lo scope richiesto, non va 
-  adattato in `modules/vendor/`: si combinano più moduli del catalogo in 
-  `live/`, oppure (se lo scope è generico) si aggiunge un nuovo modulo al 
-  catalogo stesso; solo se il bisogno è davvero specifico di questo cliente 
-  si scrive un nuovo modulo in `modules/local/`.
-- `environments/sandbox` ed `environments/production` devono restare simmetrici:
-  stesse variabili, stessi moduli (tramite lo stesso `live/`), valori diversi. 
-  Se production diverge strutturalmente da sandbox, è una modifica che richiede 
-  revisione manuale.
-- **Mai** committare: credenziali AWS, access key, secret, file `.env` con 
-  valori reali, `terraform.tfstate` o `.tfvars` con dati sensibili.
-- Il backend dello stato Terraform va configurato per ogni progetto 
-  separatamente (es. S3 backend nel mio account per sandbox, S3 backend 
-  nell'account del cliente per production) e mai lasciato locale in un repo 
-  consegnato.
-- Ogni risorsa deve avere almeno i tag: `Project`, `Owner`, `Environment`, 
-  `ManagedBy = "terraform"`.
-- AWS Budgets è obbligatorio in ogni environment di produzione, con soglia di 
-  allarme concordata con il cliente.
-- Prima di ogni `apply` in production, deve esserci stato un `plan` rivisto da 
-  me, non solo dall'assistente AI: vedi sezione 9.
-- `terraform validate` e un `terraform plan` pulito sono parte obbligatoria del 
-  processo di deploy, non opzionali, per ogni ambiente prima dell'apply.
+- Every AWS resource goes through a module in `infrastructure/modules/`. Do
+  not write "inline" resources in `live/` or `environments/` if a module
+  already exists (or it makes sense to create one).
+- `infrastructure/modules/` has two subfolders, one for each allowed source
+  of a module:
+  - `modules/vendor/`: copied from `terraform-aws-catalog`, when a catalog
+    module covers the needed scope. Its code is copied into the project the
+    moment it's needed. Never a remote Git `source` pointing at the
+    catalog, not even in development: the project must be self-sufficient
+    from the first commit, not only at delivery.
+  - `modules/local/`: a new module, written for this project, when no
+    catalog module covers the scope and the need isn't generic enough to
+    justify adding a module to the catalog.
+- A module in `modules/vendor/` **must never be modified** in the client
+  project: it stays a 1:1, byte-for-byte copy, to remain traceable and
+  aligned with the catalog version. In `terraform-aws-catalog` each module
+  is tagged individually (`<module-name>/vX.Y.Z`, never a single tag for
+  the whole repo), so a breaking change in one module doesn't bump the
+  version of unrelated modules too. The catalog is explored and copied with
+  `make catalog-modules`, `make catalog-versions MODULE=<name>` and
+  `make vendor-module REF=<name>/<tag>` (see `infrastructure/Makefile`);
+  the latter derives the module name directly from `REF`, without
+  requiring it as a separate parameter, and also generates `VENDORED.md`
+  next to the module's files with source, module name, tag, commit and
+  copy date: provenance lives there, never in a comment inside the
+  module's code. If a catalog module doesn't cover exactly the requested
+  scope, it must not be adapted in `modules/vendor/`: multiple catalog
+  modules are combined in `live/`, or (if the scope is generic) a new
+  module is added to the catalog itself; only if the need is truly
+  specific to this client is a new module written in `modules/local/`.
+- `environments/sandbox` and `environments/production` must remain
+  symmetric: same variables, same modules (through the same `live/`),
+  different values. If production diverges structurally from sandbox, it's
+  a change that requires manual review.
+- **Never** commit: AWS credentials, access keys, secrets, `.env` files
+  with real values, `terraform.tfstate` or `.tfvars` with sensitive data.
+- The Terraform state backend must be configured separately for each
+  project (e.g. S3 backend in my account for sandbox, S3 backend in the
+  client's account for production) and never left local in a delivered
+  repo.
+- Every resource must have at least the tags: `Project`, `Owner`,
+  `Environment`, `ManagedBy = "terraform"`.
+- AWS Budgets is mandatory in every production environment, with an alert
+  threshold agreed with the client.
+- Before every `apply` in production, there must have been a `plan`
+  reviewed by me, not just by the AI assistant: see section 9.
+- `terraform validate` and a clean `terraform plan` are a mandatory part of
+  the deploy process, not optional, for every environment before the
+  apply.
 
-## 6. Sicurezza
+## 6. Security
 
-- Nessuna credenziale, chiave o segreto in chiaro nel repository, in nessun 
-  commit, nemmeno nella storia.
-- Il ruolo cross-account dev'essere utilizzato per l'accesso all'account del
-  cliente.
-- MFA obbligatorio sul root account del cliente (verificato durante la call di 
-  setup) e sul mio account AWS.
-- HTTPS obbligatorio ovunque, nessun endpoint pubblico in solo HTTP.
-- Bucket S3 di hosting mai pubblici direttamente: accesso solo tramite 
+- No credential, key or secret in plain text in the repository, in any
+  commit, not even in the history.
+- The cross-account role must be used for access to the client's account.
+- MFA is mandatory on the client's root account (verified during the setup
+  call) and on my AWS account.
+- HTTPS is mandatory everywhere, no public endpoint over plain HTTP.
+- Hosting S3 buckets are never made public directly: access only through
   CloudFront (Origin Access Control).
-- Nessun dato personale del cliente (email, form di contatto) va salvato o 
-  processato al di fuori dell'infrastruttura del cliente stesso senza il suo 
-  consenso esplicito.
+- No personal data of the client (email, contact form) is stored or
+  processed outside the client's own infrastructure without their explicit
+  consent.
 
-## 7. Regole di deployment
+## 7. Deployment rules
 
-- Flusso obbligatorio: sviluppo in sandbox → test → review interna → 
-  `AssumeRole` nell'account cliente → deploy in production → validazione → 
-  handover.
-- Nessun deploy diretto in production senza che sandbox sia stato validato.
-- Ogni deploy in production è tracciato (log di cosa è stato applicato, quando, con quale versione del codice/Terraform state).
-- Dopo la consegna, l'ambiente sandbox relativo al cliente va smantellato 
-  (evitare costi residui a mio carico).
+- Mandatory flow: development in sandbox -> testing -> internal review ->
+  `AssumeRole` into the client account -> deploy to production ->
+  validation -> handover.
+- No direct deploy to production without sandbox having been validated.
+- Every deploy to production is tracked (log of what was applied, when,
+  with which code/Terraform state version).
+- After delivery, the sandbox environment for that client must be torn
+  down (avoid residual costs on my side).
 
-## 8. Documentazione obbligatoria
+## 8. Mandatory documentation
 
-Ogni progetto, prima della chiusura, deve avere in `docs/`:
+Every project, before closure, must have in `docs/`:
 
-- Documentazione funzionale (cosa fa il progetto, per chi, contenuti)
-- Documentazione tecnica (stack, come sviluppare/estendere il codice)
-- Documentazione architetturale con foto dei diagrammi
-- Guida al deployment (come fare un deploy da zero)
-- Guida operativa (come aggiornare contenuti, monitorare costi, gestire il 
-  dominio)
-- Documentazione di handover (in `docs/handover/`): checklist di consegna, 
-  accessi trasferiti, cosa il cliente possiede ora
+- Functional documentation (what the project does, for whom, contents)
+- Technical documentation (stack, how to develop/extend the code)
+- Architectural documentation with pictures of the diagrams
+- Deployment guide (how to deploy from scratch)
+- Operational guide (how to update content, monitor costs, manage the
+  domain)
+- Handover documentation (in `docs/handover/`): delivery checklist,
+  transferred accesses, what the client now owns
 
-La documentazione va aggiornata **ad ogni modifica rilevante** al codice o 
-all'infrastruttura, non solo alla fine. Se generi o modifichi codice che rende 
-una parte della documentazione obsoleta, aggiorna anche quella nello stesso 
-intervento.
+The documentation must be updated **on every relevant change** to the code
+or infrastructure, not only at the end. If you generate or modify code that
+makes part of the documentation outdated, update that documentation in the
+same change.
 
-## 9. Modifiche che richiedono revisione manuale
+## 9. Changes that require manual review
 
-Ferma il lavoro e segnala esplicitamente prima di procedere se una richiesta
-implica una di queste cose:
+Stop the work and explicitly flag it before proceeding if a request implies
+any of the following:
 
-- Modificare i permessi del ruolo cross-account (allargarli)
-- Qualunque `terraform apply` diretto su `environments/production`
-- Introdurre autenticazione utenti, aree riservate, e-commerce/pagamenti
-- Cambiare il modello di hosting (es. passare da statico a server-rendered)
-- Qualunque cosa che avvicini il progetto a un modello SaaS/multi-tenant con
-  gestione centralizzata di più clienti nello stesso account o stack
+- Modifying the cross-account role's permissions (widening them)
+- Any direct `terraform apply` on `environments/production`
+- Introducing user authentication, restricted areas, e-commerce/payments
+- Changing the hosting model (e.g. moving from static to server-rendered)
+- Anything that moves the project closer to a SaaS/multi-tenant model with
+  centralized management of multiple clients in the same account or stack
 
-In questi casi: proponi la soluzione, spiega perché esce dal perimetro standard,
-e aspetta conferma esplicita prima di implementare.
+In these cases: propose the solution, explain why it falls outside the
+standard scope, and wait for explicit confirmation before implementing.
 
-## 10. Convenzioni generali
+## 10. General conventions
 
-- **Nessun riferimento allo strumento di AI generativa usato per sviluppare.** 
-  Codice sorgente, commenti, nomi di variabili/risorse, file di configurazione, 
-  contenuti Markdown (README, `docs/`), messaggi di commit e ogni contenuto 
-  pubblicato per il cliente non devono mai nominare lo strumento (o il 
-  fornitore) di AI usato, né segnalare in altro modo che una parte del progetto 
-  è stata generata da un'AI. Il repository viene consegnato al cliente come un 
-  normale lavoro di sviluppo: chi lo riceve non deve poter dedurre quali 
-  strumenti siano stati usati internamente. L'unica eccezione tecnica è il nome 
-  di questo file (`CLAUDE.md`), imposto dallo strumento di sviluppo stesso e non
-  rinominabile senza perderne il riconoscimento automatico.
-- **Lingua**: codice sorgente, commenti, `description` di variabili/output, 
-  messaggi di errore, file di configurazione (Terraform, CI, ecc.) e commit 
-  message sono sempre in inglese. Tutti i file `.md` del repository (README, 
-  `docs/`) sono sempre in italiano. In entrambi i casi i termini tecnici senza 
-  una traduzione naturale (AWS, S3, Terraform, CloudFront, deploy, ecc.) restano
-  in inglese anche dentro un file `.md`.
-- **Punteggiatura**: mai usare il trattino lungo em dash (`—`) in nessun testo 
-  del repository, incluso codice, commenti, commit message, contenuti pubblicati
-  per il cliente e file `.md`. Preferire sempre la punteggiatura italiana 
-  corretta a seconda del contesto: virgola, punto, due punti, punto e virgola, o
-  trattino breve con spazi (` - `) per gli incisi. Nei testi in inglese usare la
-  punteggiatura equivalente in inglese (virgola, parentesi, due punti) evitando 
-  comunque l'em dash.
-- Commit message in inglese, imperativo, conformi a
-  [Conventional Commits](https://www.conventionalcommits.org/it/)
-  (`feat(infrastructure): add contact form validation`, non `added stuff`),
-  verificati da un git hook locale (`.githooks/commit-msg`). Dopo ogni clone
-  va eseguito una volta `./scripts/install-hooks.sh`, che installa anche
-  `.githooks/pre-commit` (formatta solo i file Terraform già in stage
-  tramite `make fmt-staged`, mai l'intero albero) e `.githooks/post-commit`
-  (ripristina eventuali modifiche non in stage isolate temporaneamente
-  durante la formattazione), così un commit non entra mai con Terraform non
-  formattato.
-- Nomi file/cartelle in kebab-case.
-- Variabili Terraform e output documentati con `description` sempre presente.
-- Ogni modulo Terraform ha un proprio `README.md` con input/output principali.
-- Niente TODO lasciati nel codice consegnato: o si risolvono, o si documentano
-  in `docs/` come lavoro futuro fatturabile separatamente.
+- **No reference to the generative AI tool used to develop.** Source code,
+  comments, variable/resource names, configuration files, Markdown content
+  (README, `docs/`), commit messages and any content published for the
+  client must never name the AI tool (or vendor) used, nor otherwise
+  signal that part of the project was AI-generated. The repository is
+  delivered to the client as ordinary development work: whoever receives
+  it must not be able to infer which tools were used internally. The only
+  technical exception is the name of this file (`CLAUDE.md`), imposed by
+  the development tool itself and not renameable without losing its
+  automatic recognition.
+- **Language**: source code, comments, `description` of variables/outputs,
+  error messages, configuration files (Terraform, CI, etc.), commit
+  messages, scripts, and every `.md` file in the repository (README,
+  `docs/`) are always in English. The one exception is the website's own
+  content, which stays bilingual per section 3: Italian as the default
+  language, with an English switch. In every case, technical terms without
+  a natural translation (AWS, S3, Terraform, CloudFront, deploy, etc.) stay
+  in English regardless.
+- **Punctuation**: never use the em dash (`—`) in any text in the
+  repository, including code, comments, commit messages, content published
+  for the client and `.md` files. Always prefer correct punctuation for the
+  context: comma, period, colon, semicolon, or a short hyphen with spaces
+  (` - `) for asides.
+- Commit messages in English, imperative, conforming to
+  [Conventional Commits](https://www.conventionalcommits.org/)
+  (`feat(infrastructure): add contact form validation`, not `added stuff`),
+  checked by a local git hook (`.githooks/commit-msg`). After every clone,
+  run `./scripts/install-hooks.sh` once, which also installs
+  `.githooks/pre-commit` (formats only the Terraform files already staged,
+  via `make fmt-staged`, never the whole tree) and `.githooks/post-commit`
+  (restores any unstaged changes temporarily set aside during formatting),
+  so a commit never goes in with unformatted Terraform.
+- File/folder names in kebab-case.
+- Terraform variables and outputs always documented with a `description`.
+- Every Terraform module has its own `README.md` with the main
+  inputs/outputs.
+- No TODOs left in delivered code: either resolve them, or document them
+  in `docs/` as separately billable future work.
 
-## 11. Regole frontend
+## 11. Frontend rules
 
-- Componenti piccoli e mirati: una sezione di pagina = un componente quando ha senso, non monoliti da centinaia di righe.
-- TypeScript strict mode attivo (`tsconfig.json` del template non va allentato senza motivo).
-- Accessibilità di base obbligatoria: markup semantico, `alt` sulle immagini, contrasto colori adeguato, form navigabili da tastiera.
-- Performance: immagini ottimizzate/responsive, niente librerie pesanti per effetti che si possono fare in CSS.
-- SEO di base obbligatorio per siti vetrina: meta title/description per pagina, Open Graph, sitemap, dati struttura locale (LocalBusiness schema.org) quando pertinente.
-- Contenuti reali del cliente (testi, immagini, orari, contatti) vivono in un punto unico (es. file di configurazione/CMS-lite), non sparsi e duplicati nei componenti.
-- Nessuna stringa di interfaccia (voci di navigazione, bottoni, etichette dei form, messaggi di stato, titoli di sezione) va scritta direttamente nei template o negli script dei componenti: passa sempre da `useI18n()` e dalla funzione `t()`, con chiave definita nei file di traduzione (`src/i18n/locales/it.json` come sorgente di verità, `en.json` mantenuto in parallelo con le stesse chiavi).
-- I contenuti reali del cliente che sono testo discorsivo destinato a essere letto in entrambe le lingue (nome attività, claim, descrizioni, etichette di giorni/orari) vivono anch'essi nei file di traduzione, non nel file di configurazione: quest'ultimo contiene solo i dati non traducibili o identici in ogni lingua (telefono, email, indirizzo, orari come intervallo numerico, URL dei social).
-- Il selettore di lingua è sempre presente nella barra di navigazione principale, accessibile da tastiera, e la scelta dell'utente viene ricordata tra le visite (es. `localStorage`).
-- Aggiungere una lingua non prevista in questo file è una **modifica che richiede revisione manuale** (vedi sezione 11): di norma il progetto resta limitato a italiano e inglese.
+- Small, focused components: one page section = one component when it
+  makes sense, not hundred-line monoliths.
+- TypeScript strict mode enabled (the template's `tsconfig.json` should not
+  be loosened without reason).
+- Basic accessibility is mandatory: semantic markup, `alt` on images,
+  adequate color contrast, keyboard-navigable forms.
+- Performance: optimized/responsive images, no heavy libraries for effects
+  that can be done in CSS.
+- Basic SEO is mandatory for showcase sites: meta title/description per
+  page, Open Graph, sitemap, local structured data (LocalBusiness
+  schema.org) when relevant.
+- The client's real content (text, images, hours, contacts) lives in a
+  single place (e.g. configuration file/lite-CMS), not scattered and
+  duplicated across components.
+- No interface string (navigation entries, buttons, form labels, status
+  messages, section titles) is written directly in component templates or
+  scripts: it always goes through `useI18n()` and the `t()` function, with
+  the key defined in the translation files (`src/i18n/locales/it.json` as
+  the source of truth, `en.json` kept in parallel with the same keys).
+- The client's real content that is prose text meant to be read in both
+  languages (business name, tagline, descriptions, day/hour labels) also
+  lives in the translation files, not in the configuration file: the
+  latter only contains non-translatable data or data identical in every
+  language (phone, email, address, hours as a numeric range, social URLs).
+- The language switcher is always present in the main navigation bar,
+  keyboard-accessible, and the user's choice is remembered across visits
+  (e.g. `localStorage`).
+- Adding a language not covered by this file is a **change that requires
+  manual review** (see section 9): as a rule, the project stays limited to
+  Italian and English.
 
 ## 12. Testing
 
-- **Unit test** obbligatori per logica non banale (composables, utility, validazione form). Framework: Vitest.
-- **E2E test** minimi obbligatori prima della consegna: caricamento homepage, navigazione principale, invio form di contatto (se presente), verifica responsive di base. Framework: Playwright.
-- Nessuna consegna al cliente senza che la suite di test, per quanto minima, passi.
-- I test infrastrutturali (validazione Terraform: `terraform validate`, `terraform plan` pulito) sono parte del processo di deploy, non opzionali.
+- **Unit tests** are mandatory for non-trivial logic (composables,
+  utilities, form validation). Framework: Vitest.
+- **E2E tests**, at a minimum, are mandatory before delivery: homepage
+  load, main navigation, contact form submission (if present), basic
+  responsive check. Framework: Playwright.
+- No delivery to the client without the test suite, however minimal,
+  passing.
+- Infrastructure tests (Terraform validation: `terraform validate`, clean
+  `terraform plan`) are part of the deploy process, not optional.

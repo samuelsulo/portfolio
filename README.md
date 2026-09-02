@@ -1,54 +1,54 @@
 # Terraform AWS Infrastructure Template
 
-Questo repository gestisce l'infrastruttura AWS e il sito vetrina di Samuel Sulo. Le regole vincolanti per chi lavora su un progetto nato
-da questo template (struttura, stack, sicurezza, flusso di consegna) sono
-definite in [`CLAUDE.md`](./CLAUDE.md) e valgono per ogni cliente.
+This repository manages the AWS infrastructure and the showcase website of Samuel Sulo. The binding rules for whoever works on a project born
+from this template (structure, stack, security, delivery flow) are
+defined in [`CLAUDE.md`](./CLAUDE.md) and apply to every client.
 
-## Modello
+## Model
 
 ```
-cliente -> progetto -> sviluppo -> consegna -> chiusura
+client -> project -> development -> delivery -> closure
 ```
 
-Sviluppo e test avvengono in un ambiente sandbox isolato nel mio account
-AWS, eliminabile dopo la consegna. La produzione vive esclusivamente
-nell'account AWS del cliente, raggiunto solo tramite `AssumeRole`
-cross-account, mai con credenziali permanenti in mio possesso.
+Development and testing happen in a sandbox environment isolated in my AWS
+account, deletable after delivery. Production lives exclusively in the
+client's AWS account, reached only via cross-account `AssumeRole`, never
+with permanent credentials in my possession.
 
-## Struttura
+## Structure
 
 ```
 client-project/
-├── infrastructure/   # infrastruttura AWS in Terraform
-├── docs/             # documentazione di progetto
-├── scripts/          # automazioni
-├── .githooks/        # git hook versionati (commit-msg, pre-commit)
-├── README.md         # README di progetto
-└── CLAUDE.md         # guardrail di progetto
-├── website/          # sorgente Vue.js/TypeScript/Vite del sito
-├── tests/            # test unit (Vitest) ed e2e (Playwright)
+├── infrastructure/   # AWS infrastructure in Terraform
+├── docs/             # project documentation
+├── scripts/          # automation
+├── .githooks/        # versioned git hooks (commit-msg, pre-commit)
+├── README.md         # project README
+└── CLAUDE.md         # project guardrails
+├── website/          # Vue.js/TypeScript/Vite source of the site
+├── tests/            # unit tests (Vitest) and e2e tests (Playwright)
 ```
 
-Vedi il README di ogni sottocartella per i dettagli:
+See the README of each subfolder for details:
  - [`docs/`](./docs)
  - [`infrastructure/`](./infrastructure)
  - [`scripts/`](./scripts)
  - [`website/`](./website)
 
-Dopo il clone, installa una volta l'hook che verifica i commit e formatta
-Terraform prima di ogni commit:
+After cloning, install once the hook that checks commits and formats
+Terraform before every commit:
 
 ```
 ./scripts/install-hooks.sh
 ```
 
-## Stack tecnologico
+## Technology stack
 
-- **Infrastruttura**: Terraform e provider AWS ufficiale.
+- **Infrastructure**: Terraform and the official AWS provider.
 
-## Documentazione
+## Documentation
 
-La documentazione di ogni progetto cliente vive in `docs/` e va tenuta 
-aggiornata a ogni modifica rilevante del codice o dell'infrastruttura. 
-Le regole complete su cosa deve contenere sono in 
-[`CLAUDE.md`](./CLAUDE.md#8-documentazione-obbligatoria).
+The documentation of every client project lives in `docs/` and must be kept
+up to date on every relevant change to the code or infrastructure.
+The complete rules on what it must contain are in
+[`CLAUDE.md`](./CLAUDE.md#8-mandatory-documentation).

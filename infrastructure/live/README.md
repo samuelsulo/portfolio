@@ -1,58 +1,57 @@
 # Live
 
-Il modulo Terraform radice effettivamente applicato da ogni ambiente. I file
-qui sono condivisi: `sandbox` e `production` eseguono esattamente la stessa
-configurazione e differiscono solo nei valori forniti da
+The root Terraform module actually applied by every environment. The files
+here are shared: `sandbox` and `production` run exactly the same
+configuration and differ only in the values provided by
 [`../environments/`](../environments).
 
-## File
+## Files
 
-- [`versions.tf`](./versions.tf): versione minima di Terraform e provider
-  richiesti.
-- [`backend.tf`](./backend.tf): blocco `backend "s3"`, lasciato senza valori.
-- [`providers.tf`](./providers.tf): tag di default e configurazione dei
-  provider AWS.
-- [`main.tf`](./main.tf): locals condivisi e composizione dei moduli da
-  [`../modules/`](../modules).
-- [`variables.tf`](./variables.tf) / [`outputs.tf`](./outputs.tf): input e
-  output del modulo radice.
+- [`versions.tf`](./versions.tf): minimum Terraform and provider versions
+  required.
+- [`backend.tf`](./backend.tf): the `backend "s3"` block, left without
+  values.
+- [`providers.tf`](./providers.tf): default tags and AWS provider
+  configuration.
+- [`main.tf`](./main.tf): shared locals and composition of the modules
+  from [`../modules/`](../modules).
+- [`variables.tf`](./variables.tf) / [`outputs.tf`](./outputs.tf): input
+  and output of the root module.
 
-## Cosa fa
+## What it does
 
-- Configura due provider AWS: quello di default (regione = `var.aws_region`)
-  e un alias `us_east_1`, necessario perché i certificati ACM usati da
-  CloudFront devono esistere in `us-east-1` indipendentemente dalla regione
-  dello stack.
-- Entrambi i provider impostano `allowed_account_ids = [var.aws_account_id]`
-  come guardia contro un apply sull'account sbagliato, e un blocco
-  `assume_role` condizionato da `aws_role_enabled` (`true` di default, cioè
-  produzione: ruolo cross-account nell'account del cliente; impostato a
-  `false` in sandbox, dove vengono usate direttamente le credenziali attive
-  del mio account).
-- Applica i tag obbligatori (`Project`, `Owner`, `Environment`,
-  `ManagedBy = "terraform"`) a ogni risorsa tramite `default_tags`.
-- Istanzia i moduli da [`../modules/`](../modules), man mano che il progetto
-  cliente li richiede (nessun modulo ancora presente: vedi CLAUDE.md §5 per
-  le regole su provenienza ed uso dei moduli).
+- Configures two AWS providers: the default one (region = `var.aws_region`)
+  and a `us_east_1` alias, needed because the ACM certificates used by
+  CloudFront must exist in `us-east-1` regardless of the stack's region.
+- Both providers set `allowed_account_ids = [var.aws_account_id]` as a
+  guard against applying to the wrong account, and an `assume_role` block
+  conditioned on `aws_role_enabled` (`true` by default, i.e. production:
+  cross-account role in the client's account; set to `false` in sandbox,
+  where my active account's credentials are used directly).
+- Applies the mandatory tags (`Project`, `Owner`, `Environment`,
+  `ManagedBy = "terraform"`) to every resource via `default_tags`.
+- Instantiates the modules from [`../modules/`](../modules), as the client
+  project requires them (no module present yet: see CLAUDE.md §5 for the
+  rules on module provenance and usage).
 
 ## Backend
 
-Il blocco `backend "s3"` è lasciato intenzionalmente vuoto: i valori reali
-(bucket, key, region, `use_lockfile`, `encrypt`) arrivano dal `backend.hcl`
-di ogni ambiente al momento dell'init, così `sandbox` e `production`
-condividono questo file ma scrivono lo stato in bucket diversi.
+The `backend "s3"` block is intentionally left empty: the real values
+(bucket, key, region, `use_lockfile`, `encrypt`) come from each
+environment's `backend.hcl` at init time, so `sandbox` and `production`
+share this file but write their state to different buckets.
 
 ```
 terraform init -backend-config=../environments/<env>/backend.hcl
 ```
 
-Il Makefile fa da wrapper: `make init ENV=<sandbox|production>`.
+The Makefile wraps this: `make init ENV=<sandbox|production>`.
 
-## Utilizzo
+## Usage
 
-Passare sempre dal Makefile in [`../`](../), mai eseguire `terraform`
-direttamente in questa cartella: è lui che si occupa di
-`-backend-config` e `-var-file` per ogni ambiente:
+Always go through the Makefile in [`../`](../), never run `terraform`
+directly in this folder: it's the one that takes care of
+`-backend-config` and `-var-file` per environment:
 
 ```
 make init ENV=sandbox
@@ -62,27 +61,27 @@ make apply ENV=sandbox
 
 ## Input
 
-Definizioni complete in [`variables.tf`](./variables.tf); i valori vengono
-forniti per ambiente tramite `../environments/<env>/environment.tfvars`, più
-[`project.auto.tfvars`](./project.auto.tfvars) per i valori condivisi da
-ogni ambiente del progetto.
+Full definitions in [`variables.tf`](./variables.tf); values are provided
+per environment via `../environments/<env>/environment.tfvars`, plus
+[`project.auto.tfvars`](./project.auto.tfvars) for values shared by every
+environment of the project.
 
-| Nome | Descrizione | Obbligatoria |
+| Name | Description | Required |
 |---|---|---|
-| `owner` | Nome del titolare del progetto, applicato come tag `Owner`. | sì |
-| `project` | Nome del progetto, applicato come tag `Project`. | sì |
-| `project_code` | Codice progetto usato nel prefisso di naming delle risorse. | sì |
-| `environment` | `sandbox` o `production`. | sì |
-| `environment_code` | `sbx` o `prd`, usato nel prefisso di naming delle risorse. | sì |
-| `aws_account_id` | ID dell'account AWS di destinazione (guardia contro l'apply sull'account sbagliato). | sì |
-| `aws_region` | Regione AWS di destinazione. | sì |
-| `aws_role_enabled` | Se assumere `aws_role_arn`. Default `true` (produzione); impostato a `false` in sandbox. | no (default `true`) |
-| `aws_role_arn` | ARN del ruolo cross-account da assumere. Obbligatorio quando `aws_role_enabled = true`, ignorato altrimenti. | sì se `aws_role_enabled = true` |
-| `aws_role_external_id` | External ID richiesto dalla trust policy di `aws_role_arn`. Obbligatorio quando `aws_role_enabled = true`, ignorato altrimenti. | sì se `aws_role_enabled = true` |
+| `owner` | Name of the project's owner, applied as the `Owner` tag. | yes |
+| `project` | Project name, applied as the `Project` tag. | yes |
+| `project_code` | Project code used in the resource naming prefix. | yes |
+| `environment` | `sandbox` or `production`. | yes |
+| `environment_code` | `sbx` or `prd`, used in the resource naming prefix. | yes |
+| `aws_account_id` | ID of the target AWS account (guard against applying to the wrong account). | yes |
+| `aws_region` | Target AWS region. | yes |
+| `aws_role_enabled` | Whether to assume `aws_role_arn`. Default `true` (production); set to `false` in sandbox. | no (default `true`) |
+| `aws_role_arn` | ARN of the cross-account role to assume. Required when `aws_role_enabled = true`, ignored otherwise. | yes if `aws_role_enabled = true` |
+| `aws_role_external_id` | External ID required by `aws_role_arn`'s trust policy. Required when `aws_role_enabled = true`, ignored otherwise. | yes if `aws_role_enabled = true` |
 
 ## Output
 
-Nessun output ancora definito: verranno aggiunti in
-[`outputs.tf`](./outputs.tf) man mano che i moduli composti in
-[`main.tf`](./main.tf) ne espongono di utili (es. URL del sito, ARN di
-risorse da referenziare nella documentazione di handover).
+No output defined yet: they will be added in
+[`outputs.tf`](./outputs.tf) as the modules composed in
+[`main.tf`](./main.tf) expose useful ones (e.g. site URL, ARNs of
+resources to reference in the handover documentation).

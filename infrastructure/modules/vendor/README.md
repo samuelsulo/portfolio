@@ -1,53 +1,56 @@
 # Vendor
 
-Copie 1:1 di moduli presi da `terraform-aws-catalog` (repo separato con i
-moduli Terraform riutilizzabili tra tutti i progetti cliente).
+1:1 copies of modules taken from `terraform-aws-catalog` (a separate repo
+with the Terraform modules reused across all client projects).
 
-## Moduli disponibili
+## Available modules
 
-| Modulo | Scopo |
+| Module | Purpose |
 |---|---|
 
-## Regole (CLAUDE.md §5)
+## Rules (CLAUDE.md §5)
 
-- Il codice va **copiato qui** nel momento in cui il progetto ne ha bisogno.
-  Mai un `source` Git remoto verso il catalogo, nemmeno in sviluppo: il
-  progetto dev'essere autosufficiente da subito, non solo alla consegna.
-- Un modulo copiato qui **non va mai modificato**: resta una copia 1:1, byte
-  per byte, di quello nel catalogo, per restare tracciabile e allineato alla
-  sua versione.
-- La provenienza vive in un file `VENDORED.md` accanto ai file del modulo
-  (fonte, nome modulo, tag, commit, data), generato automaticamente dal
-  comando di copia. Mai un commento infilato nel codice Terraform: terrebbe
-  il modulo diverso, byte per byte, dall'originale nel catalogo.
-- Se un modulo del catalogo non copre esattamente lo scope richiesto dal
-  progetto, non va adattato qui: si combinano più moduli in `live/`, oppure
-  (se lo scope è generico) si aggiunge un nuovo modulo al catalogo stesso. Se
-  invece il bisogno è davvero specifico di questo cliente, il modulo va
-  scritto in [`../local/`](../local), non qui.
+- The code is **copied here** the moment the project needs it. Never a
+  remote Git `source` pointing at the catalog, not even in development:
+  the project must be self-sufficient right away, not only at delivery.
+- A module copied here **must never be modified**: it stays a 1:1,
+  byte-for-byte copy of the one in the catalog, to remain traceable and
+  aligned with its version.
+- Provenance lives in a `VENDORED.md` file next to the module's files
+  (source, module name, tag, commit, date), generated automatically by
+  the copy command. Never a comment stuffed into the Terraform code: that
+  would make the module differ, byte for byte, from the original in the
+  catalog.
+- If a catalog module doesn't cover exactly the scope required by the
+  project, it must not be adapted here: multiple modules are combined in
+  `live/`, or (if the scope is generic) a new module is added to the
+  catalog itself. If instead the need is truly specific to this client,
+  the module must be written in [`../local/`](../local), not here.
 
-## Versionamento
+## Versioning
 
-Il catalogo è un monorepo con più moduli: un tag unico per l'intero repo
-(es. `v2.0.0`) confonderebbe il versionamento di moduli non correlati (un
-breaking change nel modulo A farebbe salire la major anche per B, che magari
-non è cambiato). Per questo ogni modulo si tagga **singolarmente**, con tag
-del tipo `<module-name>/vX.Y.Z` (es. `s3-static-site/v1.3.0`,
-`budgets/v2.0.0`): un bump riguarda solo il modulo a cui appartiene.
+The catalog is a monorepo with multiple modules: a single tag for the
+whole repo (e.g. `v2.0.0`) would conflate the versioning of unrelated
+modules (a breaking change in module A would bump the major version for B
+too, even though it may not have changed). That's why each module is
+tagged **individually**, with tags of the form `<module-name>/vX.Y.Z`
+(e.g. `s3-static-site/v1.3.0`, `budgets/v2.0.0`): a bump only concerns the
+module it belongs to.
 
-## Aggiungere un modulo
+## Adding a module
 
 ```
-make catalog-modules                        # elenca i moduli disponibili nel catalogo
-make catalog-versions MODULE=<name>         # elenca le versioni disponibili di un modulo
-make vendor-module REF=<name>/<tag>         # copia quella versione in modules/vendor/<name>/
+make catalog-modules                        # list the modules available in the catalog
+make catalog-versions MODULE=<name>         # list the available versions of a module
+make vendor-module REF=<name>/<tag>         # copy that version into modules/vendor/<name>/
 ```
 
-`vendor-module` ricava il nome del modulo direttamente da `REF` (il tag è
-sempre nella forma `<name>/<tag>`), clona `terraform-aws-catalog` al tag
-indicato, copia `modules/<name>/` dal catalogo dentro `modules/vendor/<name>/`
-e scrive `modules/vendor/<name>/VENDORED.md` con la provenienza. `CATALOG_REPO` va
-impostato una volta sola in [`../../Makefile`](../../Makefile) (o passato
-inline a ciascuno di questi comandi). Dopo la copia, collega il modulo in
-[`../../live/main.tf`](../../live/main.tf) e aggiungi una riga alla tabella
-qui sopra.
+`vendor-module` derives the module name directly from `REF` (the tag is
+always in the form `<name>/<tag>`), clones `terraform-aws-catalog` at the
+given tag, copies `modules/<name>/` from the catalog into
+`modules/vendor/<name>/` and writes `modules/vendor/<name>/VENDORED.md`
+with the provenance. `CATALOG_REPO` must be set once in
+[`../../Makefile`](../../Makefile) (or passed inline to each of these
+commands). After copying, wire the module into
+[`../../live/main.tf`](../../live/main.tf) and add a row to the table
+above.

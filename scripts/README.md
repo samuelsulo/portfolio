@@ -1,53 +1,53 @@
 # Scripts
 
-Automazioni di supporto al progetto che non passano da Terraform o dal
-Makefile di [`../infrastructure/`](../infrastructure): setup una tantum,
-bootstrap, operazioni da riga di comando sull'account AWS di destinazione.
+Support automation for the project that doesn't go through Terraform or
+the [`../infrastructure/`](../infrastructure) Makefile: one-off setup,
+bootstrap, command-line operations on the target AWS account.
 
-## Script disponibili
+## Available scripts
 
-| Script | Scopo |
+| Script | Purpose |
 |---|---|
-| [`bootstrap-terraform-backend.sh`](./bootstrap-terraform-backend.sh) | Crea (una volta sola) il bucket S3 per lo stato Terraform di tutti i progetti di un account AWS: versioning, cifratura, blocco accesso pubblico, policy solo-HTTPS, lifecycle sulle versioni non correnti. Idempotente: se il bucket esiste già, ne riallinea solo la configurazione. |
-| [`deploy-website.sh`](./deploy-website.sh) | Builda `website/` (test + `vue-tsc` + `vite build`) e pubblica `dist/` sul bucket S3 e la distribuzione CloudFront dell'ambiente indicato (letti dallo stato Terraform di `infrastructure/live`, mai hardcoded), poi invalida la cache CloudFront. Traccia ogni deploy in `website/deploy-log/<env>.md` (data, commit, bucket, distribuzione, invalidation). Idempotente: rieseguibile senza effetti collaterali. Usage: `./scripts/deploy-website.sh <sandbox\|production>`. |
-| [`install-hooks.sh`](./install-hooks.sh) | Punta `core.hooksPath` a [`../.githooks/`](../.githooks) e rende gli hook eseguibili. Da eseguire una volta dopo ogni clone. Unico script qui che non opera su un account AWS: eccezione ai prerequisiti sotto. |
+| [`bootstrap-terraform-backend.sh`](./bootstrap-terraform-backend.sh) | Creates (once) the S3 bucket for the Terraform state of every project in an AWS account: versioning, encryption, public access block, HTTPS-only policy, lifecycle on non-current versions. Idempotent: if the bucket already exists, it only realigns its configuration. |
+| [`deploy-website.sh`](./deploy-website.sh) | Builds `website/` (tests + `vue-tsc` + `vite build`) and publishes `dist/` to the given environment's S3 bucket and CloudFront distribution (read from `infrastructure/live`'s Terraform state, never hardcoded), then invalidates the CloudFront cache. Tracks every deploy in `website/deploy-log/<env>.md` (date, commit, bucket, distribution, invalidation). Idempotent: safe to rerun without side effects. Usage: `./scripts/deploy-website.sh <sandbox\|production>`. |
+| [`install-hooks.sh`](./install-hooks.sh) | Points `core.hooksPath` to [`../.githooks/`](../.githooks) and makes the hooks executable. Run once after every clone. The only script here that doesn't operate on an AWS account: exception to the prerequisites below. |
 
-## Prerequisiti
+## Prerequisites
 
-- AWS CLI configurata, con le credenziali dell'account AWS di destinazione
-  già attive nella shell al momento dell'esecuzione: gli script operano
-  sull'account restituito da `aws sts get-caller-identity`, mai su un ID
-  passato a mano.
-  - **sandbox** (mio account): `aws login --profile my-profile`.
-  - **production** (account del cliente): a differenza dei comandi
-    Terraform del Makefile, che assumono il ruolo cross-account
-    nativamente tramite il blocco `assume_role` del provider (vedi
-    [`../infrastructure/README.md`](../infrastructure/README.md#prerequisiti)),
-    questi script eseguono chiamate AWS CLI dirette e richiedono quindi di
-    assumere il ruolo a mano prima di lanciarli (es. `aws sts assume-role`
-    con l'ARN e l'external ID del cliente, esportando le credenziali
-    temporanee restituite nella shell).
+- AWS CLI configured, with the target AWS account's credentials already
+  active in the shell at execution time: the scripts operate on the
+  account returned by `aws sts get-caller-identity`, never on an ID passed
+  by hand.
+  - **sandbox** (my account): `aws login --profile my-profile`.
+  - **production** (client's account): unlike the Terraform commands in
+    the Makefile, which assume the cross-account role natively via the
+    provider's `assume_role` block (see
+    [`../infrastructure/README.md`](../infrastructure/README.md#prerequisites)),
+    these scripts make direct AWS CLI calls and therefore require
+    assuming the role by hand before running them (e.g. `aws sts
+    assume-role` with the client's ARN and external ID, exporting the
+    returned temporary credentials into the shell).
 
-## Utilizzo
+## Usage
 
 ```
 ./scripts/bootstrap-terraform-backend.sh
 ```
 
-Va eseguito una sola volta per ogni account AWS (mio account per sandbox,
-account del cliente per production), prima del primo `make init` in
-[`../infrastructure/`](../infrastructure) su quell'account: il bucket
-creato è quello referenziato da `backend.hcl` in
+Must be run once per AWS account (my account for sandbox, the client's
+account for production), before the first `make init` in
+[`../infrastructure/`](../infrastructure) on that account: the bucket it
+creates is the one referenced by `backend.hcl` in
 [`../infrastructure/environments/`](../infrastructure/environments).
 
-## Aggiungere uno script
+## Adding a script
 
-Un nuovo script qui deve:
+A new script here must:
 
-- avere estensione `.sh`, essere eseguibile (`chmod +x`) e usare
+- have a `.sh` extension, be executable (`chmod +x`) and use
   `set -euo pipefail`;
-- operare sempre sull'account AWS delle credenziali correnti, mai su un ID
-  account passato come parametro;
-- essere idempotente quando possibile (rieseguibile senza effetti
-  collaterali se lo stato desiderato è già raggiunto);
-- essere aggiunto alla tabella qui sopra.
+- always operate on the AWS account of the current credentials, never on
+  an account ID passed as a parameter;
+- be idempotent when possible (safe to rerun without side effects if the
+  desired state has already been reached);
+- be added to the table above.

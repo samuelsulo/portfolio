@@ -78,7 +78,7 @@ DEPLOYED_AT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 LOG_FILE="$WEBSITE_DIR/deploy-log/$ENVIRONMENT.md"
 if [[ ! -f "$LOG_FILE" ]]; then
   mkdir -p "$(dirname "$LOG_FILE")"
-  printf '# Deploy log: %s\n\n| Data (UTC) | Commit | Bucket | Distribuzione CloudFront | Invalidation |\n|---|---|---|---|---|\n' "$ENVIRONMENT" >"$LOG_FILE"
+  printf '# Deploy log: %s\n\n| Date (UTC) | Commit | Bucket | CloudFront Distribution | Invalidation |\n|---|---|---|---|---|\n' "$ENVIRONMENT" >"$LOG_FILE"
 fi
 printf '| %s | %s | %s | %s | %s |\n' "$DEPLOYED_AT" "$COMMIT" "$BUCKET" "$DISTRIBUTION_ID" "$INVALIDATION_ID" >>"$LOG_FILE"
 

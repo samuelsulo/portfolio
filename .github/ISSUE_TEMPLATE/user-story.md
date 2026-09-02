@@ -1,7 +1,7 @@
 ---
 name: 💡 User Story
 type: User Story
-about: Descrive una funzionalità dal punto di vista dell'utente finale.
+about: Describes a feature from the end user's point of view.
 title: "[Story] "
 labels: ["user-story"]
 assignees: []
@@ -9,28 +9,28 @@ assignees: []
 
 ## 🎯 User Story
 
-**As a**: [Ruolo utente]  
-**I want to**: [Azione o funzionalità desiderata]  
-**So that**: [Beneficio o valore ottenuto]
+**As a**: [User role]  
+**I want to**: [Desired action or feature]  
+**So that**: [Benefit or value obtained]
 
 ---
 
 ## 🧾 Description / Context
 
-[Descrivi il contesto, il problema o l’obiettivo che motiva questa user story.]
+[Describe the context, problem or goal that motivates this user story.]
 
 ---
 
 ## ✅ Acceptance Criteria
 
-* [ ] [Criterio 1]
-* [ ] [Criterio 2]
-* [ ] [Criterio 3]
+* [ ] [Criterion 1]
+* [ ] [Criterion 2]
+* [ ] [Criterion 3]
 
 ---
 
 ## 📋 Definition of Done
 
-* [ ] Codice completato, testato e documentato  
-* [ ] Pull request approvata e merge completato  
-* [ ] Demo o validazione effettuata
+* [ ] Code completed, tested and documented  
+* [ ] Pull request approved and merged  
+* [ ] Demo or validation performed

@@ -1,42 +1,42 @@
 ---
 name: 🐛 Bug Report
 type: Bug
-about: Segnala un malfunzionamento o comportamento inatteso.
+about: Report a malfunction or unexpected behavior.
 title: "[Bug] "
 labels: ["bug"]
 assignees: []
 ---
 
-## 🐛 Descrizione del problema
+## 🐛 Problem description
 
-[Descrivi chiaramente cosa non funziona.]
+[Clearly describe what isn't working.]
 
-**Passi per riprodurre:**
+**Steps to reproduce:**
 1. 
 2. 
 3. 
 
-**Comportamento atteso:**  
-[Descrivi cosa dovrebbe accadere.]
+**Expected behavior:**  
+[Describe what should happen.]
 
-**Comportamento attuale:**  
-[Descrivi cosa accade realmente.]
+**Actual behavior:**  
+[Describe what actually happens.]
 
-**Screenshot o log (se disponibili):**  
-[Allega evidenze.]
-
----
-
-## 🧩 Contesto
-
-* Versione / branch:
-* Ambiente (dev/prod/test):
-* Sistema operativo / browser:
+**Screenshots or logs (if available):**  
+[Attach evidence.]
 
 ---
 
-## ✅ Criteri di chiusura
+## 🧩 Context
 
-* [ ] Il bug è riproducibile e confermato  
-* [ ] La fix è implementata e validata  
-* [ ] I test automatici sono aggiornati (se applicabile)
+* Version / branch:
+* Environment (dev/prod/test):
+* Operating system / browser:
+
+---
+
+## ✅ Closing criteria
+
+* [ ] The bug is reproducible and confirmed  
+* [ ] The fix is implemented and validated  
+* [ ] Automated tests are updated (if applicable)

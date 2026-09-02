@@ -1,7 +1,7 @@
 ---
 name: ⚙️ Technical Story
 type: Technical Story
-about: Descrive una funzionalità dal punto di vista tecnico lato CE / CD.
+about: Describes a feature from a technical CE / CD point of view.
 title: "[Technical Story] "
 labels: ["technical-story"]
 assignees: []
@@ -9,60 +9,60 @@ assignees: []
 
 ## ⚙️ Technical Story
 
-**As a**: [Ruolo o persona]  
-**I want to**: [Obiettivo tecnico o funzionale]  
-**So that**: [Motivo o valore di business/tecnico]
+**As a**: [Role or persona]  
+**I want to**: [Technical or functional goal]  
+**So that**: [Reason or business/technical value]
 
 ---
 
 ## 🧾 Description / Context
 
 **Background or problem statement:**  
-[Descrivi il contesto, la motivazione o il problema tecnico che giustifica questa story.  
-Spiega *perché* è necessaria e *cosa* risolve nel ciclo di vita del progetto.]
+[Describe the context, motivation, or technical problem that justifies this story.  
+Explain *why* it's needed and *what* it solves in the project's lifecycle.]
 
 **Technical motivation or dependencies:**  
-* [Elenca eventuali dipendenze da altre story o attività]  
-* [Specifica se questa story è un “enabler” o un prerequisito per altre implementazioni]  
+* [List any dependencies on other stories or activities]  
+* [Specify whether this story is an "enabler" or a prerequisite for other implementations]  
 
 **Related features or systems affected:**  
-* [Elenca le aree o i sistemi che verranno impattati]  
-* [Collega eventuali issue o task tecnici correlati — es. #ID]
+* [List the areas or systems that will be impacted]  
+* [Link any related issues or technical tasks, e.g. #ID]
 
 ---
 
 ## 🧠 Technical Approach / Implementation Notes
 
 **Proposed solution or design:**  
-Questa story sarà completata implementando i seguenti step tecnici:
+This story will be completed by implementing the following technical steps:
 
-1. [Step tecnico 1 — es. configurazione, setup, sviluppo]
-2. [Step tecnico 2 — es. validazione, testing, integrazione]
-3. [Eventuali dettagli architetturali, diagrammi, design pattern o strumenti da adottare]
+1. [Technical step 1, e.g. configuration, setup, development]
+2. [Technical step 2, e.g. validation, testing, integration]
+3. [Any architectural details, diagrams, design patterns or tools to adopt]
 
-*I dettagli specifici sono definiti nei task figli o nelle sotto-issue.*
+*Specific details are defined in the child tasks or sub-issues.*
 
 ---
 
 ## ✅ Acceptance Criteria
 
-* [ ] [Criterio 1 — risultato verificabile o condizione misurabile]  
-* [ ] [Criterio 2 — test, output o comportamento atteso]  
-* [ ] [Criterio 3 — eventuale documentazione o validazione completata]
+* [ ] [Criterion 1, verifiable outcome or measurable condition]  
+* [ ] [Criterion 2, test, output or expected behavior]  
+* [ ] [Criterion 3, any documentation or validation completed]
 
 ---
 
 ## 📊 Definition of Done (DoD)
 
-* [ ] Tutti i task associati sono completati e merged su `develop` o sul branch principale.  
-* [ ] Il codice è validato, testato e conforme agli standard definiti (lint/test/build).  
-* [ ] La documentazione tecnica è aggiornata (`README.md`, Wiki o commenti nel codice).  
-* [ ] Sono state eseguite verifiche di sicurezza, performance e compliance ove applicabili.  
+* [ ] All associated tasks are completed and merged into `develop` or the main branch.  
+* [ ] The code is validated, tested and compliant with the defined standards (lint/test/build).  
+* [ ] The technical documentation is updated (`README.md`, Wiki or code comments).  
+* [ ] Security, performance and compliance checks have been performed where applicable.  
 
 ---
 
 ### 🔗 References (optional)
 
-* [Documenti tecnici o diagrammi di supporto]  
-* [Link ad architetture, repo, standard aziendali o API reference]  
-* [Eventuali note di design o link a pull request rilevanti]
+* [Supporting technical documents or diagrams]  
+* [Links to architecture, repos, company standards or API reference]  
+* [Any design notes or links to relevant pull requests]
