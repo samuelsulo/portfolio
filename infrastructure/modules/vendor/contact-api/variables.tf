@@ -3,9 +3,24 @@ variable "name_prefix" {
   type        = string
 }
 
-variable "contact_via_email_recipient" {
-  description = "(Required) Mailbox that receives every ContactViaEmail submission. Verified as an SES email identity (AWS sends a confirmation link to it) and used as both the Source and the Destination of the notification, so the module never needs a second, separately verified sender identity. The visitor's own email, taken from the request body, is set as the Reply-To address instead: replying from this mailbox reaches the visitor directly."
+variable "contact_via_email_source" {
+  description = "(Required) Verified SES sending identity used as the Source of every ContactViaEmail notification. AWS sends a confirmation link to this address; the identity stays unverified until it's opened."
   type        = string
+
+  validation {
+    condition     = can(regex("^[^@,\\s]+@[^@,\\s]+\\.[^@,\\s]+$", var.contact_via_email_source))
+    error_message = "Must be a single email address (e.g. \"a@example.com\")."
+  }
+}
+
+variable "contact_via_email_to_addresses" {
+  description = "(Required) Mailbox(es) that receive every ContactViaEmail submission, as a single string with addresses separated by a comma, no spaces (e.g. \"a@example.com,b@example.com\")."
+  type        = string
+
+  validation {
+    condition     = can(regex("^[^@,\\s]+@[^@,\\s]+\\.[^@,\\s]+(,[^@,\\s]+@[^@,\\s]+\\.[^@,\\s]+)*$", var.contact_via_email_to_addresses))
+    error_message = "Must be one or more email addresses separated by a comma, no spaces (e.g. \"a@example.com,b@example.com\")."
+  }
 }
 
 variable "contact_via_email_subject" {
@@ -41,7 +56,7 @@ variable "cors_allowed_origin" {
 }
 
 variable "throttling_rate_limit" {
-  description = "(Optional) Steady-state request rate limit (requests per second) applied to the whole API, to protect the SES sending reputation of contact_via_email_recipient and the AWS bill from this unauthenticated public endpoint. Default is `5`"
+  description = "(Optional) Steady-state request rate limit (requests per second) applied to the whole API, to protect the SES sending reputation of contact_via_email_source and the AWS bill from this unauthenticated public endpoint. Default is `5`"
   type        = number
   default     = 5
 }

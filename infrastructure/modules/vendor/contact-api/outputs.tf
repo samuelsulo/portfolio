@@ -29,6 +29,6 @@ output "ses_template_name" {
 }
 
 output "ses_identity_arn" {
-  description = "ARN of the verified SES email identity (contact_via_email_recipient), used as both Source and Destination of the notification."
-  value       = aws_ses_email_identity.recipient.arn
+  description = "ARN of the verified SES email identity (contact_via_email_source), used as the Source of every notification."
+  value       = aws_ses_email_identity.source.arn
 }

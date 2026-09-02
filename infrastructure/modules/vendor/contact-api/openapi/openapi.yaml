@@ -58,21 +58,31 @@ paths:
       x-amazon-apigateway-integration:
         type: aws
         httpMethod: POST
-        # The service component here is "email", not "ses": API Gateway's
-        # AWS service integration validates it against the service's SDK
-        # endpoint prefix (email.<region>.amazonaws.com), not its IAM/ARN
-        # prefix (ses:...). Using "ses" fails CreateDeployment with
-        # "AWS Service of type ses not supported".
-        uri: "arn:aws:apigateway:${aws_region}:email:path//"
+        # Action-style ARN (action/SendTemplatedEmail): SES's v2 REST API
+        # (SendEmail, JSON) was tried here instead and abandoned. It got
+        # as far as executing this integration (unlike v1's own
+        # path-style attempt below, which never did), but API Gateway
+        # signed the request with the wrong SigV4 service name for that
+        # path ("Credential should be scoped to correct service: 'ses'"):
+        # the "email" service component (required for CreateDeployment,
+        # see below) only gets correctly remapped to "ses" for the
+        # recognized v1 Query API actions, not for an arbitrary v2 REST
+        # path. Path-style itself (action/SendTemplatedEmail's sibling,
+        # path//) was tried too and failed differently, unable to execute
+        # its request template at all on a real deployment ("Execution
+        # failed due to configuration error: Unable to transform
+        # request"), regardless of the template's own content. The
+        # service component is "email", not "ses" either way: API
+        # Gateway validates it against the service's SDK endpoint prefix
+        # (email.<region>.amazonaws.com), not its IAM/ARN prefix (ses:...).
+        uri: "arn:aws:apigateway:${aws_region}:email:action/SendTemplatedEmail"
         credentials: "${ses_role_arn}"
-        passthroughBehavior: "NEVER"
+        passthroughBehavior: "when_no_templates"
         requestParameters:
           integration.request.header.Content-Type: "'application/x-www-form-urlencoded'"
         requestTemplates:
           application/json: |
-            #set($inputRoot = $input.path('$'))
-            #set($templateData = "{\"name\":\"$util.escapeJavaScript($inputRoot.name)\",\"email\":\"$util.escapeJavaScript($inputRoot.email)\",\"phone\":\"$util.escapeJavaScript($!inputRoot.phone)\",\"message\":\"$util.escapeJavaScript($inputRoot.message)\"}")
-            Action=SendTemplatedEmail&Source=$util.urlEncode('${recipient_email}')&Destination.ToAddresses.member.1=$util.urlEncode('${recipient_email}')&ReplyToAddresses.member.1=$util.urlEncode($inputRoot.email)&Template=$util.urlEncode('${ses_template_name}')&TemplateData=$util.urlEncode($templateData)
+            ${indent(12, contact_via_email_request_template)}
         responses:
           default:
             statusCode: "202"
@@ -80,33 +90,21 @@ paths:
               method.response.header.Access-Control-Allow-Origin: "'${cors_allowed_origin}'"
             responseTemplates:
               application/json: |
-                #set($messageId = $input.body.replaceAll("(?s).*<MessageId>(.*?)</MessageId>.*", "$1"))
-                {
-                  "message": "Message accepted for delivery.",
-                  "messageId": "$util.escapeJavaScript($messageId)"
-                }
+                ${indent(16, contact_via_email_response_success_template)}
           "4\\d{2}":
             statusCode: "400"
             responseParameters:
               method.response.header.Access-Control-Allow-Origin: "'${cors_allowed_origin}'"
             responseTemplates:
               application/json: |
-                #set($errorCode = $input.body.replaceAll("(?s).*<Code>(.*?)</Code>.*", "$1"))
-                #set($errorMessage = $input.body.replaceAll("(?s).*<Message>(.*?)</Message>.*", "$1"))
-                {
-                  "message": "Unable to send the message.",
-                  "code": "$util.escapeJavaScript($errorCode)",
-                  "detail": "$util.escapeJavaScript($errorMessage)"
-                }
+                ${indent(16, contact_via_email_response_client_error_template)}
           "5\\d{2}":
             statusCode: "500"
             responseParameters:
               method.response.header.Access-Control-Allow-Origin: "'${cors_allowed_origin}'"
             responseTemplates:
               application/json: |
-                {
-                  "message": "Internal error in the email service. Please try again later."
-                }
+                ${indent(16, contact_via_email_response_server_error_template)}
     options:
       summary: CORS preflight for the ContactViaEmail operation.
       responses:
@@ -156,7 +154,6 @@ components:
           pattern: '^[^@\s]+@[^@\s]+\.[^@\s]+$'
         phone:
           type: string
-          minLength: 1
           maxLength: 50
         message:
           type: string
@@ -164,21 +161,51 @@ components:
           maxLength: 5000
     ContactViaEmailSuccess:
       type: object
+      required:
+        - message
+        - messageId
       properties:
         message:
           type: string
         messageId:
           type: string
+    # Error shape for both 400 and 500, loosely modeled after RFC 7807
+    # (Problem Details for HTTP APIs): a machine-readable code identifying
+    # the class of error, plus a human-readable message. A 400 reflects
+    # the SES error (code = MessageRejected, TemplateDoesNotExist, ...;
+    # message = SES's own description); a 500 uses a fixed code
+    # ("InternalError") since it isn't tied to a specific SES error.
     ContactViaEmailError:
       type: object
+      required:
+        - code
+        - message
       properties:
-        message:
-          type: string
         code:
           type: string
-        detail:
+        message:
           type: string
 x-amazon-apigateway-request-validators:
   validateBody:
     validateRequestBody: true
     validateRequestParameters: false
+# A request that fails validation (or hits API Gateway before reaching any
+# integration at all, e.g. an unknown path/method) gets a Gateway
+# Response, not one of the "responses" defined above: it never reaches
+# the POST /email integration, so its Access-Control-Allow-Origin mapping
+# never applies. Without this, such a request looks to the browser like a
+# bare CORS failure (no Access-Control-Allow-Origin header at all) instead
+# of the actual 4xx/5xx, which is confusing to debug from the frontend.
+x-amazon-apigateway-gateway-responses:
+  DEFAULT_4XX:
+    responseParameters:
+      gatewayresponse.header.Access-Control-Allow-Origin: "'${cors_allowed_origin}'"
+    responseTemplates:
+      application/json: |
+        ${indent(8, gateway_error_template)}
+  DEFAULT_5XX:
+    responseParameters:
+      gatewayresponse.header.Access-Control-Allow-Origin: "'${cors_allowed_origin}'"
+    responseTemplates:
+      application/json: |
+        ${indent(8, gateway_error_template)}

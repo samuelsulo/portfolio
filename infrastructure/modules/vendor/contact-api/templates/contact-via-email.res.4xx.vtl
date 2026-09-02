@@ -1,0 +1,6 @@
+#set($errorCode = $input.body.replaceAll("(?s).*<Code>(.*?)</Code>.*", "$1"))
+#set($errorMessage = $input.body.replaceAll("(?s).*<Message>(.*?)</Message>.*", "$1"))
+{
+  "code": "$util.escapeJavaScript($errorCode)",
+  "message": "$util.escapeJavaScript($errorMessage)"
+}

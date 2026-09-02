@@ -26,7 +26,8 @@ module "contact_api" {
   source = "../modules/vendor/contact-api"
 
   name_prefix                     = local.name_prefix
-  contact_via_email_recipient     = var.client_email
+  contact_via_email_source        = var.client_email
+  contact_via_email_to_addresses  = var.client_email
   contact_via_email_subject       = "New contact from website ${var.domain_name}: {{name}}"
   contact_via_email_text_template = file("${path.module}/templates/contact.txt")
   contact_via_email_html_template = file("${path.module}/templates/contact.html")

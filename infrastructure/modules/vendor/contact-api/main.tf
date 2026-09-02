@@ -3,32 +3,66 @@ data "aws_region" "current" {}
 locals {
   name = "${var.name_prefix}-contact"
 
+  # Velocity templates for the ContactViaEmail integration, kept as their
+  # own files under templates/ rather than inlined in the OAS document.
+  # contact-via-email.req.vtl is the one exception to "plain file(), no
+  # Terraform variable": it embeds Source/Destination/Template directly
+  # (via templatefile(), the same ${...} syntax as the rest of this OAS
+  # document), rather than reading them from stage variables at request
+  # time. Stage variables were tried first, but their values are
+  # restricted to alphanumeric characters plus " -._:/?&=,", which a real
+  # email address violates outright ("@" is mandatory, "+" from plus
+  # addressing is common), forcing an unnecessary encode/decode
+  # workaround; templatefile() has no such restriction; it's plain string
+  # substitution. The other templates below take no Terraform variable at
+  # all, so a plain file() is enough for them.
+  contact_via_email_request_template = templatefile("${path.module}/templates/contact-via-email.req.vtl", {
+    contact_via_email_source       = var.contact_via_email_source
+    contact_via_email_to_addresses = var.contact_via_email_to_addresses
+    ses_template_name              = aws_ses_template.contact.name
+  })
+  contact_via_email_response_success_template      = file("${path.module}/templates/contact-via-email.res.vtl")
+  contact_via_email_response_client_error_template = file("${path.module}/templates/contact-via-email.res.4xx.vtl")
+  contact_via_email_response_server_error_template = file("${path.module}/templates/contact-via-email.res.5xx.vtl")
+
+  # Shared by DEFAULT_4XX/DEFAULT_5XX below: not channel-specific (it
+  # applies to any request that never reaches an operation's own
+  # integration, current or future), so it isn't named contact_via_email_*
+  # like the templates above.
+  gateway_error_template = file("${path.module}/templates/gateway-error.vtl")
+
   # OAS body handed to aws_api_gateway_rest_api. Defines the ContactViaEmail
   # operation (POST /email) and its CORS preflight (OPTIONS /email). Future
   # channels (phone, WhatsApp, Teams, Slack, ...) are meant to be added as
   # sibling paths (e.g. /phone) in this same document, each with its own
   # integration, next to this one.
   openapi_body = templatefile("${path.module}/openapi/openapi.yaml", {
-    name_prefix         = var.name_prefix
-    aws_region          = data.aws_region.current.region
-    ses_role_arn        = aws_iam_role.ses_integration.arn
-    recipient_email     = var.contact_via_email_recipient
-    ses_template_name   = aws_ses_template.contact.name
-    cors_allowed_origin = var.cors_allowed_origin
+    name_prefix                                      = var.name_prefix
+    aws_region                                       = data.aws_region.current.region
+    ses_role_arn                                     = aws_iam_role.ses_integration.arn
+    cors_allowed_origin                              = var.cors_allowed_origin
+    contact_via_email_request_template               = local.contact_via_email_request_template
+    contact_via_email_response_success_template      = local.contact_via_email_response_success_template
+    contact_via_email_response_client_error_template = local.contact_via_email_response_client_error_template
+    contact_via_email_response_server_error_template = local.contact_via_email_response_server_error_template
+    gateway_error_template                           = local.gateway_error_template
   })
 }
 
-# SES identity verified as both the Source and the Destination of every
-# ContactViaEmail notification. AWS sends a confirmation link to this
-# address; the identity stays unverified until it's opened.
-resource "aws_ses_email_identity" "recipient" {
-  email = var.contact_via_email_recipient
+# SES identity verified as the Source of every ContactViaEmail
+# notification. AWS sends a confirmation link to this address; the
+# identity stays unverified until it's opened. Destination addresses
+# (contact_via_email_to_addresses and friends) never need their own SES
+# identity: SES only requires the Source to be verified while the account
+# remains in the sending sandbox.
+resource "aws_ses_email_identity" "source" {
+  email = var.contact_via_email_source
 }
 
-# Template rendered for the notification sent to contact_via_email_recipient.
-# The html/text bodies are not read from a file in this module: they are
-# real content that varies per client, so they arrive as variables (see
-# contact_via_email_html_template/contact_via_email_text_template),
+# Template rendered for the notification sent on every ContactViaEmail
+# submission. The html/text bodies are not read from a file in this
+# module: they are real content that varies per client, so they arrive as
+# variables (see contact_via_email_html_template/contact_via_email_text_template),
 # typically the result of a file() call on a copy of the template living
 # in the consumer project.
 resource "aws_ses_template" "contact" {
@@ -40,7 +74,7 @@ resource "aws_ses_template" "contact" {
 
 # Role assumed by API Gateway (not by the caller of the API) to call SES on
 # behalf of the ContactViaEmail integration. Scoped to the single action it
-# needs, with a condition tying it to contact_via_email_recipient so it
+# needs, with a condition tying it to contact_via_email_source so it
 # cannot be used to send as a different identity.
 resource "aws_iam_role" "ses_integration" {
   name = "${local.name}-ses-integration"
@@ -67,7 +101,7 @@ resource "aws_iam_role_policy" "ses_integration" {
       Resource = "*"
       Condition = {
         StringEquals = {
-          "ses:FromAddress" = var.contact_via_email_recipient
+          "ses:FromAddress" = var.contact_via_email_source
         }
       }
     }]
@@ -111,7 +145,7 @@ resource "aws_api_gateway_stage" "this" {
 }
 
 # The API is public and unauthenticated: throttling protects both the AWS
-# bill and the SES sending reputation of contact_via_email_recipient from
+# bill and the SES sending reputation of contact_via_email_source from
 # abuse (e.g. scripted spam submissions). "*/*" covers every operation and
 # channel alike, current (POST/OPTIONS /email) and future.
 resource "aws_api_gateway_method_settings" "this" {

@@ -1,0 +1,42 @@
+## Terraform template variables
+#set($source = "${contact_via_email_source}")
+#set($toAddresses = "${contact_via_email_to_addresses}")
+#set($template = "${ses_template_name}")
+## Velocity template
+#set($body = $input.path('$'))
+## $phone is resolved into its own variable, never by mutating $body
+## itself: "N/A" when the phone key is missing from the body entirely,
+## $body.phone otherwise (including an explicit empty string, kept as
+## "", distinct from a genuinely omitted key).
+#if($body.containsKey("phone"))
+#set($phone = $body.phone)
+#else
+#set($phone = "N/A")
+#end
+## TemplateData is hand-assembled
+#set($name = $util.escapeJavaScript($body.name))
+#set($email = $util.escapeJavaScript($body.email))
+#set($phone = $util.escapeJavaScript($phone))
+#set($message = $util.escapeJavaScript($body.message))
+#set($quote = '"')
+#set($templateData = "{")
+#set($templateData = "$${templateData}$${quote}name$${quote}:$${quote}$${name}$${quote}")
+#set($templateData = "$${templateData},$${quote}email$${quote}:$${quote}$${email}$${quote}")
+#set($templateData = "$${templateData},$${quote}phone$${quote}:$${quote}$${phone}$${quote}")
+#set($templateData = "$${templateData},$${quote}message$${quote}:$${quote}$${message}$${quote}")
+#set($templateData = "$${templateData}}")
+## $util.escapeJavaScript also escapes single quotes as \' (needed for a
+## JS string literal, invalid as a JSON escape): stripped back to a bare
+## quote here. Needs 4 backslashes in this source: #set's own string
+## literal collapses \\ to one backslash before replaceAll ever sees the
+## pattern, so 2 backslashes here would leave replaceAll matching (and
+## replacing with itself) a bare quote, not the \' sequence to fix.
+#set($templateData = $templateData.replaceAll("\\\\'","'"))
+Action=SendTemplatedEmail
+&Source=$util.urlEncode($source)
+#foreach($toAddress in $toAddresses.split(","))
+&Destination.ToAddresses.member.$foreach.count=$util.urlEncode($toAddress)
+#end
+&ReplyToAddresses.member.1=$util.urlEncode($body.email)
+&TemplateData=$util.urlEncode($templateData)
+&Template=$util.urlEncode($template)

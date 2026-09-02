@@ -1,0 +1,5 @@
+#set($messageId = $input.body.replaceAll("(?s).*<MessageId>(.*?)</MessageId>.*", "$1"))
+{
+  "message": "Message accepted for delivery.",
+  "messageId": "$util.escapeJavaScript($messageId)"
+}
