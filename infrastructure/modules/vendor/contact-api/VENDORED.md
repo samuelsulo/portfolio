@@ -7,6 +7,6 @@ Copied verbatim from `terraform-aws-catalog`. Do not modify: see
 |---|---|
 | Source | git@github.com:samuelsulo/terraform-aws-catalog.git |
 | Module | contact-api |
-| Ref | contact-api/v2.0.1 |
-| Commit | f69d43bbecf819574eb1570012b6cf3fb20f738f |
-| Vendored on | 2026-09-01 |
+| Ref | contact-api/v2.0.2 |
+| Commit | 87bf0a52429a14dc85a8c841a4902bf8ca8ec91b |
+| Vendored on | 2026-09-02 |

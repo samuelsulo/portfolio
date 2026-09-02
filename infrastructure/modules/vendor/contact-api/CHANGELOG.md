@@ -3,6 +3,22 @@
 All notable changes to this module are documented in this file, in
 [Keep a Changelog](https://keepachangelog.com/) format.
 
+## [2.0.2] - 2026-09-02
+
+### Fixed
+
+- Reverted `2.0.1`'s change of `$templateData.replaceAll("\\'", "'")`
+  from 2 backslashes to 4: that change assumed `#set`'s own string
+  literal collapses a bare `\\` pair to one backslash the way a Java or
+  Python string literal would, the same way it does for `\"`. On API
+  Gateway's engine it doesn't, so with 2 backslashes the pattern already
+  reached `replaceAll` as the literal 2-character sequence `\'` (a
+  Java-regex-escaped backslash, then the quote) needed to match
+  `$util.escapeJavaScript()`'s own `\'` output; the extra pair `2.0.1`
+  added was itself the bug, confirmed against the raw `TemplateData`
+  actually received by SES with an apostrophe in a field. Back to 2
+  backslashes.
+
 ## [2.0.1] - 2026-09-01
 
 ### Fixed

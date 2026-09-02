@@ -27,11 +27,13 @@
 #set($templateData = "$${templateData}}")
 ## $util.escapeJavaScript also escapes single quotes as \' (needed for a
 ## JS string literal, invalid as a JSON escape): stripped back to a bare
-## quote here. Needs 4 backslashes in this source: #set's own string
-## literal collapses \\ to one backslash before replaceAll ever sees the
-## pattern, so 2 backslashes here would leave replaceAll matching (and
-## replacing with itself) a bare quote, not the \' sequence to fix.
-#set($templateData = $templateData.replaceAll("\\\\'","'"))
+## quote here. 2 backslashes are correct in this source: unlike \", a
+## bare \\ pair is not collapsed by #set's own string literal on this
+## engine, so the pattern reaches replaceAll as the literal 2-character
+## sequence \' (a Java-regex-escaped backslash, then the quote),
+## matching the exact \' sequence escapeJavaScript produces. Confirmed
+## against the raw TemplateData actually received by SES.
+#set($templateData = $templateData.replaceAll("\\'","'"))
 Action=SendTemplatedEmail
 &Source=$util.urlEncode($source)
 #foreach($toAddress in $toAddresses.split(","))
