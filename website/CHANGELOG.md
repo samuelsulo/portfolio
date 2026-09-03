@@ -3,6 +3,21 @@
 All notable changes to this project are documented in this file, in
 [Keep a Changelog](https://keepachangelog.com/) format.
 
+## [1.0.1] - 2026-09-03
+
+### Added
+
+- New project in the Projects section: Nexus E-commerce Webapp, an
+  e-commerce web application for next-generation gaming peripherals
+  (Vue.js, TypeScript, Pinia, AWS, Terraform).
+
+### Changed
+
+- Replaced the placeholder "Multi-Account Cloud Platform" entry with the
+  Nexus project above.
+- Simplified the technology tags shown on the Lake Maggiore Venue
+  Showcase project card.
+
 ## [1.0.0] - 2026-09-03
 
 ### Added
