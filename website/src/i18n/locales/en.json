@@ -104,6 +104,7 @@
   "footer": {
     "tagline": "Cloud Engineer & Web Developer",
     "rights": "All rights reserved.",
+    "version": "v{version}",
     "githubAriaLabel": "Samuel Sulo's GitHub profile",
     "linkedinAriaLabel": "Samuel Sulo's LinkedIn profile",
     "emailAriaLabel": "Send Samuel Sulo an email",

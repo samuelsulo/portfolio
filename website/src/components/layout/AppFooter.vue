@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import AppIcon from '@/components/ui/AppIcon.vue'
+import SignatureFox from '@/components/ui/SignatureFox.vue'
+import SiteVersion from '@/components/ui/SiteVersion.vue'
 import siteConfig from '@/data/site-config.json'
 
 const { t } = useI18n()
@@ -51,7 +53,19 @@ const year = new Date().getFullYear()
     </div>
 
     <div class="footer__bottom container">
-      <p class="footer__rights">&copy; {{ year }} Samuel Sulo. {{ t('footer.rights') }}</p>
+      <p class="footer__rights">
+        &copy; {{ year }} Samuel Sulo. {{ t('footer.rights') }} <SiteVersion />
+      </p>
+      <SignatureFox
+        :size="24"
+        color-light="var(--color-neon-primary-strong)"
+        color-mid="var(--color-neon-primary)"
+        color-dark="var(--color-neon-secondary)"
+        color-accent="var(--color-neon-success)"
+        badge-fill="rgba(var(--color-neon-primary-rgb), 0.1)"
+        badge-border="rgba(var(--color-neon-primary-rgb), 0.35)"
+        class="footer__signature"
+      />
     </div>
   </footer>
 </template>
@@ -139,6 +153,10 @@ const year = new Date().getFullYear()
 }
 
 .footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
   padding-block: var(--space-md);
   border-top: 1px solid var(--color-border);
 }
@@ -146,5 +164,9 @@ const year = new Date().getFullYear()
 .footer__rights {
   font-size: var(--fs-small);
   color: var(--color-text-dim);
+}
+
+.footer__signature {
+  flex-shrink: 0;
 }
 </style>
