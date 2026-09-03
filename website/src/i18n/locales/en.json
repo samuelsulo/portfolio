@@ -55,10 +55,10 @@
     "comingSoon": "Details coming soon",
     "viewProject": "View project",
     "items": {
-      "projectOne": {
-        "title": "Multi-Account Cloud Platform",
-        "description": "Multi-account AWS architecture with automated provisioning via Terraform and separate deploy pipelines per environment.",
-        "imageAlt": "Project preview: multi-account cloud platform"
+      "samuelsulo-nexus": {
+        "title": "Nexus E-commerce Webapp",
+        "description": "E-commerce web application for next-generation gaming peripherals engineered for competitive performance.",
+        "imageAlt": "Project preview: Nexus E-commerce Webapp"
       },
       "marinasicher-locationlagomaggiore": {
         "title": "Lake Maggiore Venue Showcase Site",

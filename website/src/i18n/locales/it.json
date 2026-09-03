@@ -55,10 +55,10 @@
     "comingSoon": "Dettagli in arrivo",
     "viewProject": "Vedi il progetto",
     "items": {
-      "projectOne": {
-        "title": "Piattaforma Cloud Multi-Account",
-        "description": "Architettura AWS multi-account con provisioning automatizzato via Terraform e pipeline di deploy separate per ambiente.",
-        "imageAlt": "Anteprima del progetto: piattaforma cloud multi-account"
+      "samuelsulo-nexus": {
+        "title": "Nexus E-commerce Webapp",
+        "description": "Applicazione web e-commerce per periferiche gaming di nuova generazione progettate per prestazioni competitive.",
+        "imageAlt": "Anteprima del progetto: Nexus E-commerce Webapp"
       },
       "marinasicher-locationlagomaggiore": {
         "title": "Sito Vetrina Location Lago Maggiore",
