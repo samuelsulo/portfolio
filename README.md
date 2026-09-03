@@ -1,4 +1,4 @@
-# Terraform AWS Infrastructure Template
+# Portfolio for Samuel Sulo
 
 This repository manages the AWS infrastructure and the showcase website of Samuel Sulo. The binding rules for whoever works on a project born
 from this template (structure, stack, security, delivery flow) are
