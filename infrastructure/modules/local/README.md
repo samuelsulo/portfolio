@@ -14,7 +14,7 @@ modules are owned by the project and can be modified freely.
 ## Adding a module
 
 ```
-make scaffold-module MODULE=<name>
+kitsu terraform scaffold module <name>
 ```
 
 Creates `modules/local/<name>/{main,variables,outputs,versions}.tf` + `README.md`.

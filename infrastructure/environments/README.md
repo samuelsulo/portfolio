@@ -34,7 +34,7 @@ reviewed `plan` first. Not present until the project reaches that stage.
 ## Adding an environment
 
 ```
-make scaffold-environment ENV=<sandbox|production> ACCOUNT_ID=<12-digit-account-id>
+kitsu terraform scaffold environment --env <sandbox|production> --account-id=<12-digit-account-id>
 ```
 
 Generates `environment.tfvars` and `backend.hcl` for the given AWS account,
@@ -42,9 +42,10 @@ reading `project`/`aws_region` from `../live/project.auto.tfvars`.
 
 ## Usage
 
-Selected via the `ENV` variable on every Makefile target (default
+Selected via the `--env` flag on every
+[kitsu](https://github.com/samuelsulo/kitsu) terraform command (default
 `sandbox`):
 
 ```
-make plan ENV=production
+kitsu terraform plan --env production
 ```

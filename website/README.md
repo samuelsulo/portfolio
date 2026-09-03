@@ -38,11 +38,11 @@ All commands must be run through `mise exec --` (or in a shell where `mise` has 
 ## Versioning and deploys
 
 - Every notable change is recorded in [`CHANGELOG.md`](./CHANGELOG.md), in [Keep a Changelog](https://keepachangelog.com/) format.
-- Production releases are tracked with `website/vX.Y.Z` git tags, not branches or a deploy log: [`../scripts/deploy-website.sh`](../scripts/deploy-website.sh) deploys the commit pointed at by the `website/vX.Y.Z` tag given explicitly as its second argument (never auto-selected) to production, and whatever commit is currently checked out (its short SHA as version) to every other environment.
+- Production releases are tracked with `website/vX.Y.Z` git tags, not branches or a deploy log: [kitsu](https://github.com/samuelsulo/kitsu) (`kitsu website deploy`) deploys the commit pointed at by the `website/vX.Y.Z` tag given explicitly via `--tag` (never auto-selected) to production, and whatever commit is currently checked out (its short SHA as version) to every other environment.
 - The resolved version is injected into the build as the `VITE_APP_VERSION` env var and shown in the footer by `src/components/ui/SiteVersion.vue`.
-- To release to production: update `CHANGELOG.md`, commit, tag the release commit `website/vX.Y.Z`, push the tag, then run `../scripts/deploy-website.sh production website/vX.Y.Z`. Deploying the same tag twice is a no-op: the script checks a marker recorded in S3 and skips with a warning instead of redeploying.
-- The currently live release is also recorded in S3, at `_deploy-versions/current` (its content is the deployed tag name). Deploying a tag older than that one is refused: it would silently downgrade production, so the script errors out unless it's a deliberate rollback (see below).
-- Two situations require `--force` as a third argument: redeploying a tag that already has its marker (`../scripts/deploy-website.sh production website/vX.Y.Z --force`), or deploying an older tag than the currently live one, i.e. a rollback. Either way, `--force` only skips that specific check; everything else (build, tests, sync, invalidation) runs as normal, and `_deploy-versions/current` is updated to the tag just deployed.
+- To release to production: update `CHANGELOG.md`, commit, tag the release commit `website/vX.Y.Z`, push the tag, then run `kitsu website deploy --env production --tag website/vX.Y.Z`. Deploying the same tag twice is a no-op: the command checks a marker recorded in S3 and skips with a warning instead of redeploying.
+- The currently live release is also recorded in S3, at `_deploy-versions/current` (its content is the deployed tag name). Deploying a tag older than that one is refused: it would silently downgrade production, so the command errors out unless it's a deliberate rollback (see below).
+- Two situations require the `--force` flag: redeploying a tag that already has its marker (`kitsu website deploy --env production --tag website/vX.Y.Z --force`), or deploying an older tag than the currently live one, i.e. a rollback. Either way, `--force` only skips that specific check; everything else (build, tests, sync, invalidation) runs as normal, and `_deploy-versions/current` is updated to the tag just deployed.
 
 ## Project structure
 
@@ -78,7 +78,7 @@ The content currently in place (bio, service list, projects, email, social links
 
 The contact form is wired to the `contact_api` module (API Gateway + SES) described in [`../infrastructure/`](../infrastructure). The frontend calls `POST {VITE_CONTACT_API_URL}/email`, where `VITE_CONTACT_API_URL` is the module's custom domain (e.g. `https://contact.samuelsulo.it`).
 
-In sandbox/production this variable is injected automatically by [`../scripts/deploy-website.sh`](../scripts/deploy-website.sh), which reads it from `infrastructure/live`'s Terraform state instead of having it hardcoded. For local development (`npm run dev`) against an already-applied environment, copy `.env.example` to `.env.local` and set it by hand; `.env.local` must never be committed.
+In sandbox/production this variable is injected automatically by `kitsu website deploy`, which reads it from `infrastructure/live`'s Terraform state instead of having it hardcoded. For local development (`npm run dev`) against an already-applied environment, copy `.env.example` to `.env.local` and set it by hand; `.env.local` must never be committed.
 
 If `VITE_CONTACT_API_URL` isn't set (e.g. the `contact_api` module hasn't been applied yet in that environment), `src/services/contactService.ts` returns an explicit error (`ContactApiNotConfiguredError`) and the form correctly shows the error state instead of a false success.
 

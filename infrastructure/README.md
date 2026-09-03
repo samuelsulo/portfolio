@@ -11,10 +11,13 @@ infrastructure/
 │   ├── vendor/       # 1:1 copies from terraform-aws-catalog, never modified
 │   └── local/        # modules written for this project
 ├── live/             # root module: composes the modules
-├── environments/     # backend configuration + variables per environment
-└── Makefile          # Terraform workflow (init/plan/apply/...), wraps live/
-│                       + environments/
+└── environments/     # backend configuration + variables per environment
 ```
+
+The Terraform workflow (init/plan/apply/...) that wraps `live/` +
+`environments/` is handled by
+[kitsu](https://github.com/samuelsulo/kitsu), not a Makefile: see its
+README for the full command reference.
 
 See the README of each subfolder for details:
 - [`modules/`](./modules)
@@ -42,23 +45,24 @@ See the README of each subfolder for details:
 ## Quickstart
 
 ```
-make init ENV=sandbox   # terraform init with the environment's backend
-make plan ENV=sandbox   # terraform plan, saved to environments/sandbox/tfplan
-make apply ENV=sandbox  # apply the saved plan
+kitsu terraform init --env sandbox   # terraform init with the environment's backend
+kitsu terraform plan --env sandbox   # terraform plan, saved to environments/sandbox/tfplan
+kitsu terraform apply --env sandbox  # apply the saved plan
 ```
 
-Run `make help` for the complete list of targets (validate, fmt, destroy,
-state management, docs, ...). `ENV` defaults to `sandbox`; pass
-`ENV=production` explicitly, and only after a manually reviewed plan.
+Run `kitsu terraform --help` for the complete list of subcommands
+(validate, fmt, destroy, state management, docs, ...). `--env` defaults to
+`sandbox`; pass `--env production` explicitly, and only after a manually
+reviewed plan.
 
 ## Scaffolding
 
 ```
-make scaffold-module MODULE=<name>          # new module under modules/local/
-make catalog-modules                        # list the modules available in terraform-aws-catalog
-make catalog-versions MODULE=<name>         # list the available versions of a catalog module
-make vendor-module REF=<name>/<tag>         # copy that version under modules/vendor/
-make scaffold-environment ENV=<env> ACCOUNT_ID=<id> # new environment under environments/
+kitsu terraform scaffold module <name>                          # new module under modules/local/
+kitsu terraform catalog list                                    # list the modules available in terraform-aws-catalog
+kitsu terraform catalog versions <name>                         # list the available versions of a catalog module
+kitsu terraform catalog vendor <name> <tag>                     # copy that version under modules/vendor/
+kitsu terraform scaffold environment --env <env> --account-id=<id> # new environment under environments/
 ```
 
 ## Documentation

@@ -2,8 +2,8 @@
 #
 # Formats staged Terraform files before every commit (CLAUDE.md §5:
 # `terraform fmt` is part of the deploy process, not optional). Only the
-# files actually staged for this commit are touched: unlike `make fmt`
-# (whole tree), this never reformats files you aren't committing.
+# files actually staged for this commit are touched: unlike `kitsu terraform
+# fmt` (whole tree), this never reformats files you aren't committing.
 #
 # If a file has both staged and unstaged hunks (partial `git add -p`), any
 # unstaged edits are isolated with a temporary stash before formatting, so
@@ -26,10 +26,10 @@ if [ -z "$staged" ]; then
   exit 0
 fi
 
-if ! command -v terraform >/dev/null 2>&1; then
-  echo "✗ 'terraform' not found on PATH: can't run 'make fmt-staged'." >&2
+if ! command -v kitsu >/dev/null 2>&1; then
+  echo "✗ 'kitsu' not found on PATH: can't run 'kitsu terraform fmt-staged'." >&2
   echo "  If you use mise, run this from a shell where 'mise activate' already" >&2
-  echo "  ran (the same one where 'make plan' works), or run 'mise install' first." >&2
+  echo "  ran (the same one where 'kitsu terraform plan' works), or run 'mise install' first." >&2
   exit 1
 fi
 
@@ -65,8 +65,8 @@ while IFS= read -r f; do
   abs_files="$abs_files $repo_root/$f"
 done <<< "$staged"
 
-if ! make -C "$repo_root/infrastructure" fmt-staged FILES="$abs_files" >/dev/null; then
-  echo "✗ 'make fmt-staged' failed: fix the Terraform syntax error above before committing." >&2
+if ! (cd "$repo_root" && kitsu terraform fmt-staged $abs_files) >/dev/null; then
+  echo "✗ 'kitsu terraform fmt-staged' failed: fix the Terraform syntax error above before committing." >&2
   exit 1
 fi
 

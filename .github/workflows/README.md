@@ -4,22 +4,23 @@ GitHub Actions workflows for automated checks on the Terraform
 infrastructure. This folder currently contains no workflow yet: the checks
 described in [`CLAUDE.md` §5](../../CLAUDE.md#5-terraform-rules)
 (`terraform validate` and a clean `plan` before every `apply`) are today
-run manually via the [`Makefile`](../../infrastructure/Makefile) targets
-(`make validate`, `make fmt-check`, `make plan`, ...).
+run manually via [kitsu](https://github.com/samuelsulo/kitsu)
+(`kitsu terraform validate`, `kitsu terraform fmt-check`,
+`kitsu terraform plan`, ...).
 
 ## Allowed scope
 
 A workflow introduced in this folder may:
 
-- Run `make fmt-check` and `make validate ENV=sandbox` on every pull
-  request, as a pre-merge check.
-- Run `make plan ENV=sandbox` to show the planned execution, without
-  applying it.
+- Run `kitsu terraform fmt-check` and `kitsu terraform validate --env sandbox`
+  on every pull request, as a pre-merge check.
+- Run `kitsu terraform plan --env sandbox` to show the planned execution,
+  without applying it.
 
 A workflow must **never**:
 
-- Run `make apply` (or `apply-auto`) on `environments/production`: every
-  `apply` in production requires a manually reviewed plan, not just by
+- Run `kitsu terraform apply` (or `apply-auto`) on `environments/production`:
+  every `apply` in production requires a manually reviewed plan, not just by
   the AI assistant (see [`CLAUDE.md` §5](../../CLAUDE.md#5-terraform-rules)
   and [§9](../../CLAUDE.md#9-changes-that-require-manual-review)).
 - Contain AWS credentials in plain text in the workflow file: credentials

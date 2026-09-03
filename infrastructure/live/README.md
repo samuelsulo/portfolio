@@ -45,18 +45,19 @@ share this file but write their state to different buckets.
 terraform init -backend-config=../environments/<env>/backend.hcl
 ```
 
-The Makefile wraps this: `make init ENV=<sandbox|production>`.
+[kitsu](https://github.com/samuelsulo/kitsu) wraps this:
+`kitsu terraform init --env <sandbox|production>`.
 
 ## Usage
 
-Always go through the Makefile in [`../`](../), never run `terraform`
-directly in this folder: it's the one that takes care of
-`-backend-config` and `-var-file` per environment:
+Always go through kitsu, never run `terraform` directly in this folder:
+it's the one that takes care of `-backend-config` and `-var-file` per
+environment:
 
 ```
-make init ENV=sandbox
-make plan ENV=sandbox
-make apply ENV=sandbox
+kitsu terraform init --env sandbox
+kitsu terraform plan --env sandbox
+kitsu terraform apply --env sandbox
 ```
 
 ## Input
