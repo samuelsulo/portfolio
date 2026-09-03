@@ -3,6 +3,15 @@
 All notable changes to this module are documented in this file, in
 [Keep a Changelog](https://keepachangelog.com/) format.
 
+## [2.0.0] - 2026-09-03
+
+### Added
+
+- `s3_bucket_versioning_enabled` (required): controls whether versioning is
+  enabled on the S3 bucket storing the website content. Previously
+  versioning was always enabled with no way to opt out. **Breaking
+  change**: existing callers must now pass this variable explicitly.
+
 ## [1.0.1] - 2026-08-31
 
 ### Changed

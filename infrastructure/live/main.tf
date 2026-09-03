@@ -16,10 +16,11 @@ module "website_hosting" {
     aws.us_east_1 = aws.us_east_1
   }
 
-  name_prefix             = local.name_prefix
-  s3_bucket_force_destroy = var.s3_bucket_force_destroy
-  domain_name             = var.domain_name
-  route53_zone_id         = var.route53_zone_id
+  name_prefix                  = local.name_prefix
+  s3_bucket_force_destroy      = var.s3_bucket_force_destroy
+  s3_bucket_versioning_enabled = false
+  domain_name                  = var.domain_name
+  route53_zone_id              = var.route53_zone_id
 }
 
 module "contact_api" {

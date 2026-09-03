@@ -8,6 +8,11 @@ variable "s3_bucket_force_destroy" {
   type        = bool
 }
 
+variable "s3_bucket_versioning_enabled" {
+  description = "(Required) Whether to enable versioning on the S3 bucket that stores the website content."
+  type        = bool
+}
+
 variable "domain_name" {
   description = "(Required) Primary domain of the website (e.g. \"trattoriadamario.it\")."
   type        = string

@@ -27,6 +27,7 @@ existing one via `route53_zone_id`.
 | --- | --- | --- |
 | `name_prefix` | Prefix applied to the name of every resource created by the module. | Yes |
 | `s3_bucket_force_destroy` | Whether to force deletion of the S3 bucket content during a `terraform destroy`. | Yes |
+| `s3_bucket_versioning_enabled` | Whether to enable versioning on the S3 bucket that stores the website content. | Yes |
 | `domain_name` | Primary domain of the site (e.g. `trattoriadamario.it`). | Yes |
 | `route53_zone_id` | ID of an existing Route 53 hosted zone for `domain_name`. | Yes |
 | `price_class` | CloudFront price class. Default `PriceClass_100`. | No |
@@ -62,10 +63,11 @@ existing one via `route53_zone_id`.
       aws.us_east_1  = aws.us_east_1
     }
 
-    name_prefix             = "example"
-    s3_bucket_force_destroy = false
-    domain_name              = "example.it"
-    route53_zone_id          = "Z0123456789ABCDEFGHIJ"
+    name_prefix                  = "example"
+    s3_bucket_force_destroy      = false
+    s3_bucket_versioning_enabled = true
+    domain_name                  = "example.it"
+    route53_zone_id              = "Z0123456789ABCDEFGHIJ"
   }
   ```
 
