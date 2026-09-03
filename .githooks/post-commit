@@ -42,10 +42,16 @@ fi
 if echo "$patch" | git -C "$repo_root" apply --3way -; then
   git -C "$repo_root" stash drop -q
 else
+  # A failed --3way apply doesn't leave the file untouched: it writes
+  # conflict markers directly into the working tree and marks the path
+  # unmerged, like a real merge conflict. "git stash pop" will refuse to
+  # run against an already-unmerged path ("needs merge"), so that is not
+  # a usable recovery step here — resolve the markers in place instead.
   echo "⚠ Could not automatically restore your unstaged changes (formatting" >&2
-  echo "  touched lines right next to them). They are safe in the stash:" >&2
+  echo "  touched lines right next to them): conflict markers were left in" >&2
+  echo "  the affected file(s). Resolve them, 'git add' the file, then run" >&2
+  echo "  'git stash drop' to discard the now-redundant stash:" >&2
   git -C "$repo_root" stash list | head -1 >&2
-  echo "  Resolve manually with 'git stash pop'." >&2
 fi
 
 exit 0

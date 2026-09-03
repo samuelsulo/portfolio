@@ -40,17 +40,15 @@ module it belongs to.
 ## Adding a module
 
 ```
-make catalog-modules                        # list the modules available in the catalog
-make catalog-versions MODULE=<name>         # list the available versions of a module
-make vendor-module REF=<name>/<tag>         # copy that version into modules/vendor/<name>/
+kitsu terraform catalog list                # list the modules available in the catalog
+kitsu terraform catalog versions <name>     # list the available versions of a module
+kitsu terraform catalog vendor <name> <tag> # copy that version into modules/vendor/<name>/
 ```
 
-`vendor-module` derives the module name directly from `REF` (the tag is
-always in the form `<name>/<tag>`), clones `terraform-aws-catalog` at the
-given tag, copies `modules/<name>/` from the catalog into
-`modules/vendor/<name>/` and writes `modules/vendor/<name>/VENDORED.md`
-with the provenance. `CATALOG_REPO` must be set once in
-[`../../Makefile`](../../Makefile) (or passed inline to each of these
-commands). After copying, wire the module into
+`catalog vendor` clones `terraform-aws-catalog` at the given tag, copies
+`modules/<name>/` from the catalog into `modules/vendor/<name>/` and
+writes `modules/vendor/<name>/VENDORED.md` with the provenance. See the
+[kitsu README](https://github.com/samuelsulo/kitsu) for how the catalog
+repository is configured. After copying, wire the module into
 [`../../live/main.tf`](../../live/main.tf) and add a row to the table
 above.

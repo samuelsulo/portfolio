@@ -21,7 +21,6 @@ with permanent credentials in my possession.
 client-project/
 ├── infrastructure/   # AWS infrastructure in Terraform
 ├── docs/             # project documentation
-├── scripts/          # automation
 ├── .githooks/        # versioned git hooks (commit-msg, pre-commit)
 ├── README.md         # project README
 └── CLAUDE.md         # project guardrails
@@ -32,14 +31,19 @@ client-project/
 See the README of each subfolder for details:
  - [`docs/`](./docs)
  - [`infrastructure/`](./infrastructure)
- - [`scripts/`](./scripts)
  - [`website/`](./website)
+
+Terraform workflow, module vendoring, environment scaffolding, git hooks
+installation and website deployment are handled by
+[kitsu](https://github.com/samuelsulo/kitsu), installed via `mise` (see
+[`mise.toml`](./mise.toml)): see its README for the full command
+reference.
 
 After cloning, install once the hook that checks commits and formats
 Terraform before every commit:
 
 ```
-./scripts/install-hooks.sh
+kitsu hooks install
 ```
 
 ## Technology stack

@@ -13,8 +13,9 @@ The AWS infrastructure template for my client projects, managed with
 Terraform: typically a small local client (restaurant, bar, shop, service
 business) who needs an online presence or basic AWS infrastructure,
 regardless of what runs on top of that infrastructure. This repository
-contains, by default, Terraform infrastructure, support scripts and
-documentation: any client application code (website, app, other) must be
+contains, by default, Terraform infrastructure and documentation, with
+automation handled by the [kitsu](https://github.com/samuelsulo/kitsu)
+CLI: any client application code (website, app, other) must be
 added based on the client's project type. The project is **single-delivery**:
 at the end, the client receives complete infrastructure and documentation
 and becomes autonomous. It is not a SaaS platform, has no multi-tenancy, no
@@ -67,28 +68,30 @@ client-project/
 │   │   ├── vendor/           # 1:1 copies from terraform-aws-catalog, never modified
 │   │   └── local/            # modules written for this project
 │   ├── live/                 # root module: composes the modules
-│   ├── environments/
-│   │   ├── sandbox/          # backend + variables for the development environment
-│   │   └── production/       # backend + variables for the production environment
-│   └── Makefile              # Terraform workflow (init/plan/apply/...), wraps
-│                               live/ + environments/
+│   └── environments/
+│       ├── sandbox/          # backend + variables for the development environment
+│       └── production/       # backend + variables for the production environment
 ├── docs/
 │   ├── architecture/         # diagrams and architectural decisions
 │   └── functional/           # functional documentation
 │   └── technical/            # technical documentation
-├── scripts/                  # automation (e.g. bootstrap terraform backend)
 ├── .githooks/                # versioned git hooks (commit-msg, pre-commit)
 ├── README.md                 # project README
 └── CLAUDE.md                 # directives for claude
-└── mise.toml                 # mise manages the project's tools
+└── mise.toml                 # mise manages the project's tools, including kitsu
 ├── website/                  # Vue.js/TypeScript/Vite source
 ├── tests/
 │   ├── unit/
 │   └── e2e/
 ```
 
-Do not move or rename these top-level folders: the scripts, documentation
-and infrastructure assume this structure.
+Do not move or rename these top-level folders: the documentation and
+infrastructure assume this structure. The Terraform workflow, module
+vendoring, environment scaffolding, git hooks installation and website
+deployment that used to live in `scripts/` and `infrastructure/Makefile`
+are handled by [kitsu](https://github.com/samuelsulo/kitsu), a personal
+CLI tool installed via `mise` (see `mise.toml`): see its README for the
+full command reference.
 
 ## 5. Terraform rules
 
@@ -111,13 +114,12 @@ and infrastructure assume this structure.
   is tagged individually (`<module-name>/vX.Y.Z`, never a single tag for
   the whole repo), so a breaking change in one module doesn't bump the
   version of unrelated modules too. The catalog is explored and copied with
-  `make catalog-modules`, `make catalog-versions MODULE=<name>` and
-  `make vendor-module REF=<name>/<tag>` (see `infrastructure/Makefile`);
-  the latter derives the module name directly from `REF`, without
-  requiring it as a separate parameter, and also generates `VENDORED.md`
-  next to the module's files with source, module name, tag, commit and
-  copy date: provenance lives there, never in a comment inside the
-  module's code. If a catalog module doesn't cover exactly the requested
+  `kitsu terraform catalog list`, `kitsu terraform catalog versions <name>`
+  and `kitsu terraform catalog vendor <name> <tag>` (see the
+  [kitsu README](https://github.com/samuelsulo/kitsu)), which also
+  generates `VENDORED.md` next to the module's files with source, module
+  name, tag, commit and copy date: provenance lives there, never in a
+  comment inside the module's code. If a catalog module doesn't cover exactly the requested
   scope, it must not be adapted in `modules/vendor/`: multiple catalog
   modules are combined in `live/`, or (if the scope is generic) a new
   module is added to the catalog itself; only if the need is truly
@@ -229,9 +231,9 @@ standard scope, and wait for explicit confirmation before implementing.
   [Conventional Commits](https://www.conventionalcommits.org/)
   (`feat(infrastructure): add contact form validation`, not `added stuff`),
   checked by a local git hook (`.githooks/commit-msg`). After every clone,
-  run `./scripts/install-hooks.sh` once, which also installs
+  run `kitsu hooks install` once, which also installs
   `.githooks/pre-commit` (formats only the Terraform files already staged,
-  via `make fmt-staged`, never the whole tree) and `.githooks/post-commit`
+  via `kitsu terraform fmt-staged`, never the whole tree) and `.githooks/post-commit`
   (restores any unstaged changes temporarily set aside during formatting),
   so a commit never goes in with unformatted Terraform.
 - File/folder names in kebab-case.
