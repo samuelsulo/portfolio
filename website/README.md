@@ -35,6 +35,15 @@ npm run format         # Prettier on src/
 
 All commands must be run through `mise exec --` (or in a shell where `mise` has already activated the versions from `mise.toml`).
 
+## Versioning and deploys
+
+- Every notable change is recorded in [`CHANGELOG.md`](./CHANGELOG.md), in [Keep a Changelog](https://keepachangelog.com/) format.
+- Production releases are tracked with `website/vX.Y.Z` git tags, not branches or a deploy log: [`../scripts/deploy-website.sh`](../scripts/deploy-website.sh) deploys the commit pointed at by the `website/vX.Y.Z` tag given explicitly as its second argument (never auto-selected) to production, and whatever commit is currently checked out (its short SHA as version) to every other environment.
+- The resolved version is injected into the build as the `VITE_APP_VERSION` env var and shown in the footer by `src/components/ui/SiteVersion.vue`.
+- To release to production: update `CHANGELOG.md`, commit, tag the release commit `website/vX.Y.Z`, push the tag, then run `../scripts/deploy-website.sh production website/vX.Y.Z`. Deploying the same tag twice is a no-op: the script checks a marker recorded in S3 and skips with a warning instead of redeploying.
+- The currently live release is also recorded in S3, at `_deploy-versions/current` (its content is the deployed tag name). Deploying a tag older than that one is refused: it would silently downgrade production, so the script errors out unless it's a deliberate rollback (see below).
+- Two situations require `--force` as a third argument: redeploying a tag that already has its marker (`../scripts/deploy-website.sh production website/vX.Y.Z --force`), or deploying an older tag than the currently live one, i.e. a rollback. Either way, `--force` only skips that specific check; everything else (build, tests, sync, invalidation) runs as normal, and `_deploy-versions/current` is updated to the tag just deployed.
+
 ## Project structure
 
 ```text
