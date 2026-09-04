@@ -3,6 +3,20 @@
 All notable changes to this project are documented in this file, in
 [Keep a Changelog](https://keepachangelog.com/) format.
 
+## [1.0.2] - 2026-09-04
+
+### Added
+
+- New project in the Projects section: Pulse Project Management, a
+  project operations and team management workspace with projects, tasks,
+  a team directory, analytics and an activity feed (Vue.js, Vuetify,
+  TypeScript, Pinia, ApexCharts, AWS, Terraform).
+
+### Removed
+
+- Placeholder "Infrastructure CI/CD Pipeline" entry, replaced by the
+  Pulse project above.
+
 ## [1.0.1] - 2026-09-03
 
 ### Added
