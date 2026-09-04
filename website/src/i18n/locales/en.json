@@ -60,15 +60,15 @@
         "description": "E-commerce web application for next-generation gaming peripherals engineered for competitive performance.",
         "imageAlt": "Project preview: Nexus E-commerce Webapp"
       },
+      "samuelsulo-pulse": {
+        "title": "Pulse Project Management",
+        "description": "PULSE is a project operations and team management workspace: a dashboard/SaaS with projects, tasks, a team directory, analytics and an activity feed.",
+        "imageAlt": "Project preview: Pulse Project Management"
+      },
       "marinasicher-locationlagomaggiore": {
         "title": "Lake Maggiore Venue Showcase Site",
         "description": "High-performance static site distributed via S3 and CloudFront, with automatically managed domain and SSL certificates.",
         "imageAlt": "Project preview: Lake Maggiore Venue Showcase Site"
-      },
-      "projectThree": {
-        "title": "Infrastructure CI/CD Pipeline",
-        "description": "End-to-end automation of Terraform validate, plan and apply integrated into the development workflow.",
-        "imageAlt": "Project preview: infrastructure CI/CD pipeline"
       }
     }
   },

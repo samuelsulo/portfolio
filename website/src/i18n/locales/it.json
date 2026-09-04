@@ -60,15 +60,15 @@
         "description": "Applicazione web e-commerce per periferiche gaming di nuova generazione progettate per prestazioni competitive.",
         "imageAlt": "Anteprima del progetto: Nexus E-commerce Webapp"
       },
+      "samuelsulo-pulse": {
+        "title": "Pulse Project Management",
+        "description": "PULSE è uno spazio di lavoro per la gestione operativa dei progetti e dei team: una dashboard/SaaS con progetti, attività, rubrica del team, analisi e un feed delle attività.",
+        "imageAlt": "Anteprima del progetto: Pulse Project Management"
+      },
       "marinasicher-locationlagomaggiore": {
         "title": "Sito Vetrina Location Lago Maggiore",
         "description": "Sito statico ad alte prestazioni distribuito su S3 e CloudFront, con dominio e certificati SSL gestiti automaticamente.",
         "imageAlt": "Anteprima del progetto: Sito Vetrina Location Lago Maggiore"
-      },
-      "projectThree": {
-        "title": "Pipeline CI/CD per Infrastruttura",
-        "description": "Automazione end-to-end di validazione, plan e apply Terraform integrata nel flusso di sviluppo.",
-        "imageAlt": "Anteprima del progetto: pipeline CI/CD per infrastruttura"
       }
     }
   },
