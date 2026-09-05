@@ -1,5 +1,9 @@
 import { reactive, ref } from 'vue'
-import { validateContactForm, type ContactFormErrors, type ContactFormValues } from '@/utils/validation'
+import {
+  validateContactForm,
+  type ContactFormErrors,
+  type ContactFormValues,
+} from '@/utils/validation'
 import { submitContactForm } from '@/services/contactService'
 
 export type ContactFormStatus = 'idle' | 'loading' | 'success' | 'error'

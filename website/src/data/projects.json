@@ -3,13 +3,7 @@
     "id": "samuelsulo-nexus",
     "image": "/images/projects/samuelsulo-nexus.png",
     "imageAlt": "projects.items.samuelsulo-nexus.imageAlt",
-    "technologies": [
-      "Vue.js",
-      "TypeScript",
-      "Pinia",
-      "AWS",
-      "Terraform"
-    ],
+    "technologies": ["Vue.js", "TypeScript", "Pinia", "AWS", "Terraform"],
     "url": "https://nexus.samuelsulo.it",
     "translationKey": "projects.items.samuelsulo-nexus"
   },
@@ -34,13 +28,7 @@
     "id": "marinasicher-locationlagomaggiore",
     "image": "/images/projects/marinasicher-locationlagomaggiore.png",
     "imageAlt": "projects.items.projectTwo.imageAlt",
-    "technologies": [
-      "Vue.js",
-      "AWS",
-      "S3",
-      "CloudFront",
-      "Terraform"
-    ],
+    "technologies": ["Vue.js", "AWS", "S3", "CloudFront", "Terraform"],
     "url": "https://locationlagomaggiore.com/",
     "translationKey": "projects.items.marinasicher-locationlagomaggiore"
   }
