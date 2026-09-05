@@ -71,7 +71,7 @@ existing one via `route53_zone_id`.
   }
   ```
 
-- The mandatory tags (`Project`, `Owner`, `Environment`, `ManagedBy`) come
+- The mandatory tags (`Project`, `Environment`, `ManagedBy`) come
   automatically from the `default_tags` of the provider in the project
   that consumes the module: the module doesn't declare its own `tags`
   variable.

@@ -31,6 +31,6 @@ Apply to modules in both subfolders:
   from the `aws.us_east_1` alias required by `website` for ACM/CloudFront):
   that's `live/`'s responsibility, so the same module works unchanged in
   every environment.
-- Tags (`Project`, `Owner`, `Environment`, `ManagedBy`) are applied once
+- Tags (`Project`, `Environment`, `ManagedBy`) are applied once
   via `default_tags` on the provider in `live/providers.tf`, not repeated
   in every module.

@@ -1,7 +1,6 @@
 locals {
   default_tags = {
     Project     = var.project
-    Owner       = var.owner
     Environment = var.environment
     ManagedBy   = "terraform"
   }

@@ -28,7 +28,7 @@ configuration and differ only in the values provided by
   conditioned on `aws_role_enabled` (`true` by default, i.e. production:
   cross-account role in the client's account; set to `false` in sandbox,
   where my active account's credentials are used directly).
-- Applies the mandatory tags (`Project`, `Owner`, `Environment`,
+- Applies the mandatory tags (`Project`, `Environment`,
   `ManagedBy = "terraform"`) to every resource via `default_tags`.
 - Instantiates the modules from [`../modules/`](../modules), as the client
   project requires them (no module present yet: see CLAUDE.md §5 for the
@@ -69,7 +69,6 @@ environment of the project.
 
 | Name | Description | Required |
 |---|---|---|
-| `owner` | Name of the project's owner, applied as the `Owner` tag. | yes |
 | `project` | Project name, applied as the `Project` tag. | yes |
 | `project_code` | Project code used in the resource naming prefix. | yes |
 | `environment` | `sandbox` or `production`. | yes |
