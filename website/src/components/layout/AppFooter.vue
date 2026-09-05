@@ -1,12 +1,28 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import SignatureFox from '@/components/ui/SignatureFox.vue'
 import SiteVersion from '@/components/ui/SiteVersion.vue'
+import LegalPolicyView from '@/components/cookies/LegalPolicyView.vue'
 import siteConfig from '@/data/site-config.json'
 
 const { t } = useI18n()
 const year = new Date().getFullYear()
+
+type LegalDocumentKey = 'cookiePolicy' | 'privacyPolicy'
+
+const isLegalOpen = ref(false)
+const activeLegalDocument = ref<LegalDocumentKey>('cookiePolicy')
+
+function openLegal(documentKey: LegalDocumentKey) {
+  activeLegalDocument.value = documentKey
+  isLegalOpen.value = true
+}
+
+function closeLegal() {
+  isLegalOpen.value = false
+}
 </script>
 
 <template>
@@ -56,6 +72,16 @@ const year = new Date().getFullYear()
       <p class="footer__rights">
         &copy; {{ year }} Samuel Sulo. {{ t('footer.rights') }} <SiteVersion />
       </p>
+
+      <nav class="footer__legal" aria-label="Legal">
+        <button type="button" class="footer__legal-link" @click="openLegal('privacyPolicy')">
+          {{ t('legal.privacyPolicy.title') }}
+        </button>
+        <button type="button" class="footer__legal-link" @click="openLegal('cookiePolicy')">
+          {{ t('legal.cookiePolicy.title') }}
+        </button>
+      </nav>
+
       <SignatureFox
         :size="24"
         color-light="var(--color-neon-primary-strong)"
@@ -67,6 +93,8 @@ const year = new Date().getFullYear()
         class="footer__signature"
       />
     </div>
+
+    <LegalPolicyView :open="isLegalOpen" :document-key="activeLegalDocument" @close="closeLegal" />
   </footer>
 </template>
 
@@ -154,9 +182,10 @@ const year = new Date().getFullYear()
 
 .footer__bottom {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-sm);
+  gap: var(--space-sm) var(--space-md);
   padding-block: var(--space-md);
   border-top: 1px solid var(--color-border);
 }
@@ -164,6 +193,26 @@ const year = new Date().getFullYear()
 .footer__rights {
   font-size: var(--fs-small);
   color: var(--color-text-dim);
+}
+
+.footer__legal {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.footer__legal-link {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: var(--fs-small);
+  color: var(--color-text-dim);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.footer__legal-link:hover {
+  color: var(--color-neon-primary);
 }
 
 .footer__signature {

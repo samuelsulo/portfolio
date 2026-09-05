@@ -53,6 +53,7 @@ website/
 │   ├── components/
 │   │   ├── layout/          # NavBar, AppFooter
 │   │   ├── sections/        # Hero/About, Services, Projects, Contact
+│   │   ├── cookies/          # LegalPolicyView (Cookie Policy / Privacy Policy modal)
 │   │   └── ui/               # reusable components (cards, buttons, icons, etc.)
 │   ├── composables/          # reusable logic (scroll spy, contact form, etc.)
 │   ├── data/                 # data-driven content (services.json, projects.json, site-config.json)
@@ -81,6 +82,18 @@ The contact form is wired to the `contact_api` module (API Gateway + SES) descri
 In sandbox/production this variable is injected automatically by `kitsu website deploy`, which reads it from `infrastructure/live`'s Terraform state instead of having it hardcoded. For local development (`npm run dev`) against an already-applied environment, copy `.env.example` to `.env.local` and set it by hand; `.env.local` must never be committed.
 
 If `VITE_CONTACT_API_URL` isn't set (e.g. the `contact_api` module hasn't been applied yet in that environment), `src/services/contactService.ts` returns an explicit error (`ContactApiNotConfiguredError`) and the form correctly shows the error state instead of a false success.
+
+## Cookies and legal pages
+
+This site sets no analytics, marketing or profiling cookies, and embeds no third-party content: the only browser storage in use is the technical, strictly necessary `samuelsulo-portfolio:locale` local storage entry that remembers the chosen language (see `src/i18n/index.ts`). Because there is nothing non-essential to consent to, no cookie banner is shown; the Cookie Policy states this explicitly.
+
+The Cookie Policy and Privacy Policy are both rendered by the single `src/components/cookies/LegalPolicyView.vue` component (`documentKey: 'cookiePolicy' | 'privacyPolicy'`), opened as a modal from the footer's legal links since this single-page site has no router. Their prose lives in the `legal.*` namespace of `src/i18n/locales/{it,en}.json`, following the same content rule as the rest of the site; the handful of values the Privacy Policy needs that are identical in every language (the privacy contact email, the business details, the AWS processing region, the last-updated date) instead live in `src/data/site-config.json` under `legal`, typed as `SiteLegalConfig` in `src/types/content.ts`, and are interpolated into the `legal.privacyPolicy.content` message as named params (`{privacyContactEmail}`, `{businessDetails}`, `{dataProcessingRegion}`, `{privacyPolicyLastUpdated}`) by `LegalPolicyView.vue`.
+
+The contact-form retention period is the one exception: `legal.contactFormRetentionMonths` in `site-config.json` is a plain number, kept language-neutral on purpose (never a sentence, and never `null`: the real figure is determined by auditing how the backend actually works, not left undecided). `LegalPolicyView.vue` turns it into the actual sentence by calling the translated `legal.privacyPolicy.retentionPeriodKnown` message (`{months}` interpolated) when it's greater than zero, or `retentionPeriodNone` when it's `0`, so the wording itself stays correctly localized in each locale file instead of being duplicated as one shared string.
+
+All `legal.*` fields in `site-config.json` are filled in with real, confirmed values for this site: `dataProcessingRegion` is `AWS eu-south-1 (Milan, Italy)` (confirmed from `infrastructure/live/project.auto.tfvars`); `contactFormRetentionMonths` is `0`, because the contact form's backend (`infrastructure/modules/vendor/contact-api`) has API Gateway call Amazon SES directly, with no Lambda or database in between, so no submission is ever stored by the site itself; `businessDetails` is an empty string, since the controller is an individual with no registered business/VAT/address to disclose (the message template is written so an empty value degrades to a clean sentence, not a dangling placeholder); `privacyPolicyLastUpdated` is an ISO date (`2026-09-05`), kept unambiguous and locale-neutral on purpose (never a worded date like "5 September 2026", which would carry an English month name into the Italian text verbatim).
+
+If this site ever adds analytics, a Maps/YouTube embed, or any other non-essential tracker, it must be gated behind a proper consent banner (accept/reject/customize, equal prominence, granular per category) before it loads, not added silently under this current "necessary only" setup — see the `vue-webapp-standard` skill's cookie-consent reference for the full mechanism to add at that point.
 
 ## Accessibility and responsiveness
 
