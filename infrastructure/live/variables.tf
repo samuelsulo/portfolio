@@ -1,8 +1,3 @@
-variable "owner" {
-  description = "(Required) Owner name used for the 'Owner' tag applied to all resources."
-  type        = string
-}
-
 variable "project" {
   description = "(Required) Project name used for the 'Project' tag applied to all resources."
   type        = string

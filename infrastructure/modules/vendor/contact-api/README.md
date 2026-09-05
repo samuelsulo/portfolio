@@ -332,7 +332,7 @@ with no stage prefix.
 - The module doesn't configure an `aws` provider: whoever consumes it
   passes their own default provider, with no need for extra aliases
   (unlike `website-hosting`, which requires `aws.us_east_1`).
-- The mandatory tags (`Project`, `Owner`, `Environment`, `ManagedBy`) come
+- The mandatory tags (`Project`, `Environment`, `ManagedBy`) come
   automatically from the `default_tags` of the provider in the project
   that consumes the module: the module doesn't declare its own `tags`
   variable (none of the SES/API Gateway/ACM resources created here

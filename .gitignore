@@ -3,10 +3,6 @@
 **/.terraform.lock.hcl
 *.tfstate
 *.tfstate.*
-!*.tfvars
-!*.tfvars.example
-!project.auto.tfvars
-backend.hcl
 tfplan
 crash.log
 crash.*.log

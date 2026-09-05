@@ -134,8 +134,8 @@ full command reference.
   project (e.g. S3 backend in my account for sandbox, S3 backend in the
   client's account for production) and never left local in a delivered
   repo.
-- Every resource must have at least the tags: `Project`, `Owner`,
-  `Environment`, `ManagedBy = "terraform"`.
+- Every resource must have at least the tags: `Project`, `Environment`, 
+  `ManagedBy = "terraform"`.
 - AWS Budgets is mandatory in every production environment, with an alert
   threshold agreed with the client.
 - Before every `apply` in production, there must have been a `plan`
