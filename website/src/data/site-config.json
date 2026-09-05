@@ -6,5 +6,12 @@
     "github": "https://github.com/samuelsulo",
     "linkedin": "https://www.linkedin.com/in/work-samuelsulo"
   },
-  "availableForWork": true
+  "availableForWork": true,
+  "legal": {
+    "privacyContactEmail": "work.samuelsulo@gmail.com",
+    "businessDetails": "",
+    "dataProcessingRegion": "AWS eu-south-1 (Milan, Italy)",
+    "contactFormRetentionMonths": 0,
+    "privacyPolicyLastUpdated": "2026-09-05"
+  }
 }

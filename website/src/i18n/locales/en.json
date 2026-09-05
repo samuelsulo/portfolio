@@ -109,5 +109,18 @@
     "linkedinAriaLabel": "Samuel Sulo's LinkedIn profile",
     "emailAriaLabel": "Send Samuel Sulo an email",
     "backToTop": "Back to top"
+  },
+  "legal": {
+    "close": "Close",
+    "cookiePolicy": {
+      "title": "Cookie Policy",
+      "content": "<p>This site does not use profiling, analytics or marketing cookies, and does not embed third-party content (maps, videos, ad pixels) that could set tracking cookies.</p><h3>What this site stores</h3><ul><li>A single, technical and strictly necessary <em>local storage</em> entry (<code>samuelsulo-portfolio:locale</code>), used only to remember your chosen language (Italian/English) across visits. It is never shared with third parties and has no session-based expiry: it stays on your device until you clear it via your browser settings.</li></ul><p>Submitting the contact form sends your message directly, over HTTPS, to the site's own backend infrastructure: no cookie is set in the process. For how the personal data submitted through the form is handled, see the <strong>Privacy Policy</strong>.</p><p>Because no non-essential cookies are used, this site does not show a consent banner. If analytics, maps or other third-party services are introduced in the future, a prior consent mechanism will be put in place before any such tool loads, and this page will be updated accordingly.</p><p>You can manage or clear local storage data at any time from your browser settings.</p>"
+    },
+    "privacyPolicy": {
+      "title": "Privacy Policy",
+      "content": "<p>This notice describes how personal data is handled for visitors of this site and users of the contact form, under Regulation (EU) 2016/679 (GDPR).</p><h3>Data controller</h3><p>Samuel Sulo, reachable at {privacyContactEmail}. {businessDetails}</p><h3>Data collected and purpose</h3><p>This site collects personal data only if you voluntarily submit it through the contact form (name, email, optional phone number, message). This data is processed solely to respond to your inquiry, based on the consent given by submitting the form (Art. 6(1)(a) GDPR) and/or pre-contractual measures requested by you (Art. 6(1)(b) GDPR). The site does not perform profiling or automated decision-making.</p><h3>Recipients and data transfer</h3><p>The message submitted through the contact form is delivered using Amazon Web Services (API Gateway and Amazon SES) acting as data processors, with data processed in the {dataProcessingRegion} region, solely for technical transmission purposes.</p><h3>Retention period</h3>{retentionPeriodParagraph}<h3>Your rights</h3><p>You may exercise your rights of access, rectification, erasure, restriction, portability and objection under Articles 15-22 GDPR at any time by writing to the email address above. You also have the right to lodge a complaint with the Garante per la protezione dei dati personali (www.garanteprivacy.it).</p><h3>Cookies and similar technologies</h3><p>For details on cookies and local storage used by this site, see the <strong>Cookie Policy</strong>.</p><p>Last updated: {privacyPolicyLastUpdated}</p>",
+      "retentionPeriodKnown": "<p>Messages received through the contact form are retained for {months} months from the date they are sent, after which they are deleted, unless a legal obligation requires otherwise.</p>",
+      "retentionPeriodNone": "<p>Messages received through the contact form are not stored in any database or archive by this site: the request is forwarded directly to the email delivery service (Amazon SES) via Amazon API Gateway, without being retained by the site itself.</p>"
+    }
   }
 }
