@@ -70,13 +70,17 @@
   /* --- Elevation / glow --- */
   --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.45);
-  --glow-primary: 0 0 0 1px rgba(var(--color-neon-primary-rgb), 0.4),
+  --glow-primary:
+    0 0 0 1px rgba(var(--color-neon-primary-rgb), 0.4),
     0 0 20px rgba(var(--color-neon-primary-rgb), 0.25);
-  --glow-primary-strong: 0 0 0 1px rgba(var(--color-neon-primary-rgb), 0.6),
+  --glow-primary-strong:
+    0 0 0 1px rgba(var(--color-neon-primary-rgb), 0.6),
     0 0 32px rgba(var(--color-neon-primary-rgb), 0.4);
-  --glow-secondary: 0 0 0 1px rgba(var(--color-neon-secondary-rgb), 0.4),
+  --glow-secondary:
+    0 0 0 1px rgba(var(--color-neon-secondary-rgb), 0.4),
     0 0 20px rgba(var(--color-neon-secondary-rgb), 0.22);
-  --glow-danger: 0 0 0 1px rgba(var(--color-neon-danger-rgb), 0.5),
+  --glow-danger:
+    0 0 0 1px rgba(var(--color-neon-danger-rgb), 0.5),
     0 0 16px rgba(var(--color-neon-danger-rgb), 0.25);
 
   /* --- Motion --- */

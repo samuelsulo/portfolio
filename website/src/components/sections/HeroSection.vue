@@ -14,7 +14,9 @@ const { t } = useI18n()
         <p class="hero__intro">{{ t('hero.intro') }}</p>
         <div class="hero__actions">
           <a class="hero__cta hero__cta--primary" href="#contact">{{ t('hero.ctaPrimary') }}</a>
-          <a class="hero__cta hero__cta--secondary" href="#projects">{{ t('hero.ctaSecondary') }}</a>
+          <a class="hero__cta hero__cta--secondary" href="#projects">{{
+            t('hero.ctaSecondary')
+          }}</a>
         </div>
       </div>
 
@@ -146,11 +148,7 @@ const { t } = useI18n()
   aspect-ratio: 1;
   border-radius: var(--radius-lg);
   padding: 4px;
-  background: linear-gradient(
-    135deg,
-    var(--color-neon-primary),
-    var(--color-neon-secondary)
-  );
+  background: linear-gradient(135deg, var(--color-neon-primary), var(--color-neon-secondary));
   box-shadow: var(--glow-primary);
 }
 

@@ -77,12 +77,7 @@ function handleKeydown(event: KeyboardEvent) {
     </div>
 
     <Transition name="mobile-nav">
-      <nav
-        v-if="isMenuOpen"
-        id="mobile-nav"
-        class="navbar__mobile"
-        aria-label="Mobile"
-      >
+      <nav v-if="isMenuOpen" id="mobile-nav" class="navbar__mobile" aria-label="Mobile">
         <a
           v-for="link in links"
           :key="link.id"

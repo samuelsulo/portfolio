@@ -22,16 +22,14 @@ const { t } = useI18n()
     <div class="project-card__body">
       <h3 class="project-card__title">{{ title }}</h3>
       <p class="project-card__description">{{ description }}</p>
-      <ul v-if="technologies.length" class="project-card__tech" :aria-label="technologies.join(', ')">
+      <ul
+        v-if="technologies.length"
+        class="project-card__tech"
+        :aria-label="technologies.join(', ')"
+      >
         <li v-for="tech in technologies" :key="tech" class="project-card__badge">{{ tech }}</li>
       </ul>
-      <a
-        v-if="url"
-        :href="url"
-        class="project-card__cta"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a v-if="url" :href="url" class="project-card__cta" target="_blank" rel="noopener noreferrer">
         {{ t('projects.viewProject') }}
         <AppIcon name="external-link" :size="16" />
       </a>
