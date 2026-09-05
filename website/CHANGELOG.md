@@ -3,6 +3,27 @@
 All notable changes to this project are documented in this file, in
 [Keep a Changelog](https://keepachangelog.com/) format.
 
+## [1.1.0] - 2026-09-05
+
+### Added
+
+- Cookie Policy and Privacy Policy, rendered as a footer-accessible modal
+  (`LegalPolicyView.vue`, no router on this single-page site). The site
+  sets no analytics, marketing or profiling cookies and embeds no
+  third-party content, so no consent banner is shown; the Cookie Policy
+  states this explicitly. The Privacy Policy's non-translatable data
+  (privacy contact email, business details, AWS data processing region,
+  last-updated date) is data-driven from `site-config.json`'s new `legal`
+  section, interpolated into the `it`/`en` policy text. The contact-form
+  retention period is instead a plain, language-neutral number
+  (`legal.contactFormRetentionMonths`), turned into the actual sentence by
+  a translated message per locale (`retentionPeriodKnown`/`retentionPeriodNone`)
+  so the wording stays correctly localized. All `legal.*` fields are
+  populated with real, confirmed values: no contact-form submission is
+  stored in any database (API Gateway calls Amazon SES directly, no
+  Lambda in between), data is processed in AWS eu-south-1 (Milan), and
+  there is no registered business entity to disclose.
+
 ## [1.0.2] - 2026-09-04
 
 ### Added
