@@ -55,6 +55,11 @@
     "comingSoon": "Details coming soon",
     "viewProject": "View project",
     "items": {
+      "samuelsulo-noir27": {
+        "title": "Noir 27 Cocktail Bar",
+        "description": "Website for NOIR 27, a fictional premium cocktail bar in Milan. This project includes: venue, menu, events and reservation flow.",
+        "imageAlt": "Project preview: Noir 27 Cocktail Bar"
+      },
       "samuelsulo-nexus": {
         "title": "Nexus E-commerce Webapp",
         "description": "E-commerce web application for next-generation gaming peripherals engineered for competitive performance.",
@@ -64,11 +69,6 @@
         "title": "Pulse Project Management",
         "description": "PULSE is a project operations and team management workspace: a dashboard/SaaS with projects, tasks, a team directory, analytics and an activity feed.",
         "imageAlt": "Project preview: Pulse Project Management"
-      },
-      "marinasicher-locationlagomaggiore": {
-        "title": "Lake Maggiore Venue Showcase Site",
-        "description": "High-performance static site distributed via S3 and CloudFront, with automatically managed domain and SSL certificates.",
-        "imageAlt": "Project preview: Lake Maggiore Venue Showcase Site"
       }
     }
   },
