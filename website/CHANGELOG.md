@@ -3,6 +3,19 @@
 All notable changes to this project are documented in this file, in
 [Keep a Changelog](https://keepachangelog.com/) format.
 
+## [1.1.1] - 2026-09-06
+
+### Added
+
+- New project in the Projects section: Noir 27 Cocktail Bar, a fictional
+  premium cocktail bar in Milan, with venue, menu, events and reservation
+  flow (Vue.js, AWS, S3, CloudFront, Route53, Terraform).
+
+### Removed
+
+- Lake Maggiore Venue Showcase Site project (client project, no longer
+  featured on the portfolio).
+
 ## [1.1.0] - 2026-09-05
 
 ### Added
