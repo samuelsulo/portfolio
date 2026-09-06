@@ -3,6 +3,14 @@
 All notable changes to this project are documented in this file, in
 [Keep a Changelog](https://keepachangelog.com/) format.
 
+## [1.1.2] - 2026-09-06
+
+### Fixed
+
+- Mobile navbar now hides on scroll down and reappears on scroll up,
+  instead of staying permanently fixed, to maximize screen space on small
+  screens.
+
 ## [1.1.1] - 2026-09-06
 
 ### Added
