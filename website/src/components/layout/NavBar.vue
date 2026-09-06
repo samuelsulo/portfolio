@@ -6,6 +6,7 @@ import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue'
 import { useScrollSpy } from '@/composables/useScrollSpy'
 import { useBodyScrollLock } from '@/composables/useBodyScrollLock'
 import { useClickOutside } from '@/composables/useClickOutside'
+import { useHideOnScroll } from '@/composables/useHideOnScroll'
 
 const { t } = useI18n()
 
@@ -16,6 +17,15 @@ const links = computed(() => sections.map((id) => ({ id, label: t(`nav.${id}`) }
 
 const isMenuOpen = ref(false)
 useBodyScrollLock(isMenuOpen)
+
+// Same 900px breakpoint as the rest of this file's desktop styles: above it
+// the layout has room for a static header, so hide-on-scroll only kicks in
+// where the mobile navbar itself is shown.
+const { isVisible: isBarVisibleOnScroll } = useHideOnScroll({ maxWidth: 900 })
+// Never hide the bar while the mobile menu is open: it anchors
+// .navbar__mobile (position: absolute; top: 100%), so translating it away
+// would drag the open menu off-screen with it.
+const isBarVisible = computed(() => isMenuOpen.value || isBarVisibleOnScroll.value)
 
 const navbarRef = ref<HTMLElement | null>(null)
 
@@ -39,7 +49,12 @@ function handleKeydown(event: KeyboardEvent) {
 </script>
 
 <template>
-  <header ref="navbarRef" class="navbar glass-surface" @keydown="handleKeydown">
+  <header
+    ref="navbarRef"
+    class="navbar glass-surface"
+    :class="{ 'navbar--hidden': !isBarVisible }"
+    @keydown="handleKeydown"
+  >
     <a class="navbar__skip skip-link" href="#main-content">{{ t('nav.skipToContent') }}</a>
 
     <div class="navbar__inner container">
@@ -106,6 +121,14 @@ function handleKeydown(event: KeyboardEvent) {
   top: 0;
   z-index: var(--z-navbar);
   border-bottom: 1px solid var(--color-border);
+  /* transform only, never height/display: see .navbar--hidden below. */
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+@media (max-width: 900px) {
+  .navbar--hidden {
+    transform: translateY(-100%);
+  }
 }
 
 .navbar__skip {
