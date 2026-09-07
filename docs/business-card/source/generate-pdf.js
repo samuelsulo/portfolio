@@ -135,15 +135,8 @@ function drawFront(doc) {
     0.28,
   );
 
-  doc
-    .font('Mono-Medium')
-    .fontSize(mm(3.4))
-    .fillColor(CMYK.cyan)
-    .text('SS', mm(markCX - markR), mm(markCY) - mm(3.4) * 0.36, {
-      width: mm(markR * 2),
-      align: 'center',
-      lineBreak: false,
-    });
+  const markFoxSizeMm = 7.4; // matches front.html's .front__mark svg
+  drawFox(doc, markCX - markFoxSizeMm / 2, markCY - markFoxSizeMm / 2, markFoxSizeMm, 1, { badge: false });
 
   // Identity block, bottom-anchored within the safe area.
   const paddingBottom = 1.5;
@@ -334,21 +327,22 @@ function drawBack(doc, qr) {
       characterSpacing: mm(captionMm) * 0.14,
       lineBreak: false,
     });
-
-  // ---- signature fox mark, bottom-left of the safe area ----
-  drawFox(doc, safeX + 0.5, safeY + safeH - 5.8);
 }
 
-function drawFox(doc, x, y) {
+function drawFox(doc, x, y, sizeMm = 5.3, opacity = 0.92, { badge = true } = {}) {
   // Same low-poly facets as SignatureFox.vue, translated to CMYK and
-  // scaled to a ~5.3mm mark (viewBox 100x100 -> 5.3mm).
-  const s = 5.3 / 100;
+  // scaled to sizeMm (viewBox 100x100 -> sizeMm). `badge: false` skips the
+  // circular backdrop, for use inside a badge that already draws its own
+  // (glowing) ring, e.g. the front's top-left mark.
+  const s = sizeMm / 100;
   const P = (px, py) => [mm(x + px * s), mm(y + py * s)];
   doc.save();
-  doc.opacity(0.92);
+  doc.opacity(opacity);
 
-  doc.circle(...P(50, 52), mm(44 * s)).fillColor(CMYK.bg).fill();
-  doc.circle(...P(50, 52), mm(44 * s)).lineWidth(mm(0.14)).strokeColor(CMYK.cyan).strokeOpacity(0.35).stroke();
+  if (badge) {
+    doc.circle(...P(50, 52), mm(44 * s)).fillColor(CMYK.bg).fill();
+    doc.circle(...P(50, 52), mm(44 * s)).lineWidth(mm(0.14)).strokeColor(CMYK.cyan).strokeOpacity(0.35).stroke();
+  }
 
   const poly = (pts, color) => {
     doc.moveTo(...P(pts[0][0], pts[0][1]));

@@ -3,9 +3,10 @@
 Print-ready business card design, built directly on the portfolio's own
 design tokens (`website/src/styles/tokens.css`): the same near-black
 surfaces, cyan/purple neon accents, Space Grotesk and JetBrains Mono
-pairing, glow treatment and the navbar's circular "SS" mark. The goal is
-that the card reads as the portfolio translated into a physical object,
-not a generic developer business card.
+pairing, glow treatment, and the site footer's low-poly SignatureFox mark,
+here promoted to the front's badge. The goal is that the card reads as the
+portfolio translated into a physical object, not a generic developer
+business card.
 
 ## What is here
 
