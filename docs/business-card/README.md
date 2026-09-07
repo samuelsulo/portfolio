@@ -8,6 +8,8 @@ here promoted to the front's badge. The goal is that the card reads as the
 portfolio translated into a physical object, not a generic developer
 business card.
 
+See [CHANGELOG.md](./CHANGELOG.md) for the version history.
+
 ## What is here
 
 ```
