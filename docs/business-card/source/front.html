@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Business card - front</title>
+<link rel="stylesheet" href="shared.css" />
+<style>
+  .front__mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 11mm;
+    height: 11mm;
+    border-radius: var(--radius-full);
+    border: 0.28mm solid var(--color-neon-primary);
+    box-shadow: var(--glow-primary);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 3.4mm;
+    letter-spacing: 0.02em;
+    color: var(--color-neon-primary);
+    background: rgba(var(--color-neon-primary-rgb), 0.06);
+  }
+
+  .front__content {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .front__identity {
+    display: flex;
+    flex-direction: column;
+    gap: 2mm;
+    padding-bottom: 1.5mm;
+  }
+
+  .front__name {
+    font-size: 6.4mm;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+    color: var(--color-text);
+  }
+
+  .front__role {
+    display: flex;
+    align-items: center;
+    gap: 2.2mm;
+  }
+
+  .front__role-bar {
+    width: 0.7mm;
+    height: 3.6mm;
+    border-radius: var(--radius-full);
+    background: var(--color-neon-primary);
+    box-shadow: 0 0 2.4mm rgba(var(--color-neon-primary-rgb), 0.75);
+    flex-shrink: 0;
+  }
+
+  .front__role-text {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 3mm;
+    color: var(--color-text-muted);
+  }
+
+  .front__watermark {
+    position: absolute;
+    bottom: 1.5mm;
+    right: 0;
+    font-family: var(--font-mono);
+    font-size: 1.85mm;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+  }
+</style>
+</head>
+<body>
+  <div class="card front" id="card">
+    <div class="card__grid"></div>
+    <div class="card__glow card__glow--front"></div>
+
+    <div class="card__content front__content">
+      <span class="front__mark" aria-hidden="true">SS</span>
+
+      <div class="front__identity">
+        <h1 class="front__name">Samuel&nbsp;Sulo</h1>
+        <div class="front__role">
+          <span class="front__role-bar"></span>
+          <span class="front__role-text">Web Developer &amp; Cloud Engineer</span>
+        </div>
+      </div>
+
+      <span class="front__watermark">samuelsulo.it</span>
+    </div>
+
+    <div class="guide guide--trim" id="guide-trim" hidden></div>
+    <div class="guide guide--safe" id="guide-safe" hidden></div>
+  </div>
+</body>
+</html>
