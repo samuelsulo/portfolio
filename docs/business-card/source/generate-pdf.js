@@ -1,6 +1,7 @@
 // Print-ready CMYK PDF generator for Samuel Sulo's business card.
 // Pure vector output (PDFKit), true CMYK colorspace, exact mm sizing:
-// 91 x 61 mm artboard = 85 x 55 mm finished size + 3mm bleed/edge.
+// 89 x 59 mm artboard = 85 x 55 mm finished size + 2mm bleed/edge
+// (Pixartprinting's exact template spec for this product).
 const fs = require('fs');
 const path = require('path');
 const PDFDocument = require('pdfkit');
@@ -39,9 +40,9 @@ const CMYK = {
   border: [8, 5, 0, 12],
 };
 
-const CARD_W = 91;
-const CARD_H = 61;
-const SAFE = 7.5; // = 3mm bleed + 4.5mm safe margin from trim
+const CARD_W = 89;
+const CARD_H = 59;
+const SAFE = 6.5; // = 2mm bleed + 4.5mm safe margin from trim
 const safeX = SAFE;
 const safeY = SAFE;
 const safeW = CARD_W - SAFE * 2;
@@ -216,23 +217,44 @@ function drawIconGlyph(doc, name, cx, cy, size) {
       .bezierCurveTo(...P(0.25, 0.72), ...P(0.25, 0.28), ...P(0.5, 0.03))
       .stroke();
   } else if (name === 'mail') {
-    doc.roundedRect(...P(0, 0.14), s * 0.94, s * 0.7, s * 0.08).stroke();
-    doc.moveTo(...P(0.05, 0.2)).lineTo(...P(0.47, 0.55)).lineTo(...P(0.89, 0.2)).stroke();
-  } else if (name === 'instagram') {
-    doc.roundedRect(...P(0, 0), s, s, s * 0.24).stroke();
-    doc.circle(cx, cy, s * 0.17).stroke();
-    doc.circle(...P(0.72, 0.24), s * 0.03).fillColor(CMYK.cyan).fill();
-  } else if (name === 'linkedin') {
-    doc.roundedRect(...P(0, 0), s, s, s * 0.1).stroke();
-    doc.moveTo(...P(0.18, 0.42)).lineTo(...P(0.18, 0.83)).stroke();
-    doc.circle(...P(0.18, 0.28), s * 0.045).fillColor(CMYK.cyan).fill();
+    // Rect inset symmetrically (0.03 margin each side) so the envelope
+    // sits centered in the box instead of flush against its left edge.
+    doc.roundedRect(...P(0.03, 0.15), s * 0.94, s * 0.7, s * 0.08).stroke();
+    doc.moveTo(...P(0.08, 0.2)).lineTo(...P(0.5, 0.55)).lineTo(...P(0.92, 0.2)).stroke();
+  } else if (name === 'phone') {
+    // Same handset outline as the HTML/PNG side (back.template.html), a
+    // 24x24 viewBox path recentered/scaled into this icon's box via the
+    // transform stack rather than hand-porting each coordinate. The path
+    // itself isn't centered in its nominal 24x24 viewBox (its true bbox
+    // is roughly x:[4.5,18.3] y:[4.2,18]), so the translate below uses
+    // that actual bbox center, not the viewBox's nominal center, to land
+    // the glyph in the middle of the circle like the other icons.
+    const bboxCenterX = 11.4;
+    const bboxCenterY = 11.1;
+    doc.save();
+    doc.translate(cx - bboxCenterX * (s / 24), cy - bboxCenterY * (s / 24));
+    doc.scale(s / 24);
+    doc.lineWidth((s * 0.09) / (s / 24)); // = 2.16, cancels out to s*0.09 after the scale above
     doc
-      .moveTo(...P(0.42, 0.83))
-      .lineTo(...P(0.42, 0.5))
-      .bezierCurveTo(...P(0.42, 0.36), ...P(0.66, 0.36), ...P(0.66, 0.5))
-      .lineTo(...P(0.66, 0.83))
+      .path(
+        'M14.5 17.5c-1.5 0-4.4-1.5-6.4-3.5s-3.6-5-3.6-6.4c0-.8.3-1.4.9-2l1.1-1.1a1 1 0 0 1 1.5.1l1.7 2.2a1 1 0 0 1-.1 1.3l-.8.8c.4 1 1.2 2 2 2.8s1.8 1.6 2.8 2l.8-.8a1 1 0 0 1 1.3-.1l2.2 1.7a1 1 0 0 1 .1 1.5l-1.1 1.1c-.6.6-1.2.9-2 .9z',
+      )
       .stroke();
-    doc.moveTo(...P(0.42, 0.42)).lineTo(...P(0.42, 0.83)).stroke();
+    doc.restore();
+  } else if (name === 'linkedin') {
+    // "in" letters shifted +0.08 on x / -0.03 on y from their first draft
+    // so the combined letter shape is centered in the frame instead of
+    // sitting left-and-low within it.
+    doc.roundedRect(...P(0, 0), s, s, s * 0.1).stroke();
+    doc.moveTo(...P(0.26, 0.39)).lineTo(...P(0.26, 0.8)).stroke();
+    doc.circle(...P(0.26, 0.25), s * 0.045).fillColor(CMYK.cyan).fill();
+    doc
+      .moveTo(...P(0.5, 0.8))
+      .lineTo(...P(0.5, 0.47))
+      .bezierCurveTo(...P(0.5, 0.33), ...P(0.74, 0.33), ...P(0.74, 0.47))
+      .lineTo(...P(0.74, 0.8))
+      .stroke();
+    doc.moveTo(...P(0.5, 0.39)).lineTo(...P(0.5, 0.8)).stroke();
   }
   doc.restore();
 }
@@ -250,7 +272,7 @@ function drawBack(doc, qr) {
   const rows = [
     { icon: 'globe', text: 'samuelsulo.it', primary: true },
     { icon: 'mail', text: 'work.samuelsulo@gmail.com' },
-    { icon: 'instagram', text: '@samuelsulo' },
+    { icon: 'phone', text: '+39 345 955 1342' },
     { icon: 'linkedin', text: '/in/work-samuelsulo' },
   ];
   const stackH = eyebrowMm * 1.3 + 1 + rows.length * rowD + (rows.length - 1) * rowGap;
@@ -423,7 +445,7 @@ function newDoc() {
     info: {
       Title: 'Samuel Sulo - Business Card',
       Author: 'Samuel Sulo',
-      Subject: 'Business card, print-ready (91x61mm bleed / 85x55mm trim)',
+      Subject: 'Business card, print-ready (89x59mm bleed / 85x55mm trim)',
     },
   });
   // PDF/X-ish intent: explicit CMYK color throughout, no ICC profile

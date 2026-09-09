@@ -1,5 +1,5 @@
 // Renders front.html / back.html to high-res PNG previews via headless
-// Chromium, at true 300 DPI for the 91x61mm artboard.
+// Chromium, at true 300 DPI for the 89x59mm artboard.
 const path = require('path');
 const { chromium } = require('playwright');
 
@@ -8,8 +8,8 @@ const CSS_PX_PER_IN = 96;
 const TARGET_DPI = 300;
 const SCALE = TARGET_DPI / CSS_PX_PER_IN; // deviceScaleFactor
 
-const WIDTH_MM = 91;
-const HEIGHT_MM = 61;
+const WIDTH_MM = 89;
+const HEIGHT_MM = 59;
 const cssW = Math.round((WIDTH_MM / MM_PER_IN) * CSS_PX_PER_IN);
 const cssH = Math.round((HEIGHT_MM / MM_PER_IN) * CSS_PX_PER_IN);
 
