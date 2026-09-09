@@ -3,6 +3,14 @@
 All notable changes to this project are documented in this file, in
 [Keep a Changelog](https://keepachangelog.com/) format.
 
+## [1.2.0] - 2026-09-09
+
+### Changed
+
+- Replaced the "SS" initials mark in the navbar brand with the
+  `SignatureFox` mark, shown larger than its footer instance so it reads
+  as the actual portfolio/brand logo.
+
 ## [1.1.2] - 2026-09-06
 
 ### Fixed
