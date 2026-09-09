@@ -21,7 +21,7 @@ docs/business-card/
 ### source/
 
 - `front.html`, `back.html`: the actual card designs, plain HTML/CSS at
-  true physical size (`91mm x 61mm`, CSS mm units). Open either directly
+  true physical size (`89mm x 59mm`, CSS mm units). Open either directly
   in a browser to view or edit them; no build step is required for basic
   edits (text, colors, spacing).
 - `back.template.html`: same as `back.html` but with a `__QR_SVG__`
@@ -59,12 +59,13 @@ docs/business-card/
 ## Print specification
 
 - Finished (trim) size: **85 x 55 mm**.
-- Bleed: **3 mm** on every edge, so the artboard is **91 x 61 mm**. All
-  background art (the near-black fill, grid texture, glow) extends to the
-  full artboard edge.
+- Bleed: **2 mm** on every edge, so the artboard is **89 x 59 mm** (matches
+  Pixartprinting's exact template for this product). All background art
+  (the near-black fill, grid texture, glow) extends to the full artboard
+  edge.
 - Safe area: all text, the monogram, the QR code and the icons sit at
-  least **4.5 mm inside the trim line** (7.5 mm from the artboard edge),
-  comfortably inside the requested 4-5mm margin.
+  least **4.5 mm inside the trim line** (6.5 mm from the artboard edge),
+  comfortably inside Pixartprinting's required 3 mm minimum.
 - Color: the PDFs in `export/` use true `DeviceCMYK` fills throughout, not
   RGB converted at export time. The near-black background uses a
   hand-tuned "rich black" recipe (C60 M45 Y35 K100) rather than a flat
@@ -78,7 +79,7 @@ docs/business-card/
   use a specific paper/profile combination.
 - Resolution: the PDFs are vector (fonts and shapes, not a raster image),
   so they are resolution-independent. The PNG previews are rasterized at
-  a true 300 DPI for the full 91 x 61 mm artboard (1075 x 720 px).
+  a true 300 DPI for the full 89 x 59 mm artboard (1050 x 697 px).
 
 ## QR code
 
@@ -97,9 +98,8 @@ available:
 
 - Website: `samuelsulo.it` (real)
 - Email: `work.samuelsulo@gmail.com` (real, from site config)
+- Phone: `+39 345 955 1342` (real)
 - LinkedIn: `/in/work-samuelsulo` (real, from site config)
-- Instagram: `@samuelsulo` **(placeholder, not verified: update before
-  printing)**
 
 ## Regenerating the deliverables
 

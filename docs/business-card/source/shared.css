@@ -90,11 +90,12 @@ body {
 }
 
 /* ---- Card shell -------------------------------------------------- */
-/* 91 x 61 mm = 85 x 55 mm finished size + 3mm bleed on every edge. */
+/* 89 x 59 mm = 85 x 55 mm finished size + 2mm bleed on every edge
+   (Pixartprinting's exact template spec for this product). */
 .card {
   position: relative;
-  width: 91mm;
-  height: 61mm;
+  width: 89mm;
+  height: 59mm;
   overflow: hidden;
   background: var(--color-bg);
   color: var(--color-text);
@@ -136,11 +137,12 @@ body {
   background: radial-gradient(circle, rgba(var(--color-neon-primary-rgb), 0.28), transparent 65%);
 }
 
-/* Safe content area: 7.5mm inset from the artboard edge = 3mm bleed +
-   4.5mm safe margin from the trim line. */
+/* Safe content area: 6.5mm inset from the artboard edge = 2mm bleed +
+   4.5mm safe margin from the trim line (Pixartprinting requires at least
+   3mm; 4.5mm stays comfortably inside that). */
 .card__content {
   position: absolute;
-  inset: 7.5mm;
+  inset: 6.5mm;
   display: flex;
 }
 
@@ -150,10 +152,10 @@ body {
   pointer-events: none;
 }
 .guide--trim {
-  inset: 3mm;
+  inset: 2mm;
   outline: 0.15mm dashed rgba(255, 255, 255, 0.5);
 }
 .guide--safe {
-  inset: 7.5mm;
+  inset: 6.5mm;
   outline: 0.15mm dashed rgba(53, 230, 255, 0.6);
 }

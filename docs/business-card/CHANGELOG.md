@@ -3,6 +3,32 @@
 All notable changes to the business card design are documented in this
 file. Versions are tagged in the repository as `business-card/vX.Y.Z`.
 
+## [1.2.0] - 2026-09-09
+
+### Changed
+
+- Back: replaced the Instagram row with a phone number. Instagram was
+  only ever a placeholder handle, unverified and not part of the
+  professional contact set; a phone number is a more useful, confirmed
+  channel for the card's actual audience of local business clients.
+- Front and back: reduced bleed from 3mm to 2mm (artboard 91x61mm ->
+  89x59mm) to match Pixartprinting's exact template spec for "Biglietti
+  da visita classici" (85x55mm finished), confirmed from their official
+  margin/bleed documentation. The 4.5mm safe margin from the trim line is
+  unchanged and stays comfortably inside their required 3mm minimum; the
+  safe content area ends up the same 76x46mm as before, so nothing inside
+  it had to be repositioned.
+
+### Fixed
+
+- Back: the mail, phone and LinkedIn icons were not properly centered in
+  their circular badges (a flush-left envelope rect and off-center
+  LinkedIn lettering in the print PDF's independent PDFKit renderer, plus
+  a phone glyph whose own outline isn't centered in its nominal 24x24
+  viewBox on both the HTML/PNG and PDF sides). Recentered all three so
+  every icon reads as centered in its circle like the globe icon already
+  did.
+
 ## [1.1.0] - 2026-09-07
 
 ### Changed
