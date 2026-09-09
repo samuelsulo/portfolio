@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue'
+import SignatureFox from '@/components/ui/SignatureFox.vue'
 import { useScrollSpy } from '@/composables/useScrollSpy'
 import { useBodyScrollLock } from '@/composables/useBodyScrollLock'
 import { useClickOutside } from '@/composables/useClickOutside'
@@ -59,7 +60,17 @@ function handleKeydown(event: KeyboardEvent) {
 
     <div class="navbar__inner container">
       <a href="#about" class="navbar__brand" aria-label="Samuel Sulo">
-        <span class="navbar__mark" aria-hidden="true">SS</span>
+        <SignatureFox
+          :size="44"
+          :rest-opacity="1"
+          color-light="var(--color-neon-primary-strong)"
+          color-mid="var(--color-neon-primary)"
+          color-dark="var(--color-neon-secondary)"
+          color-accent="var(--color-neon-success)"
+          badge-fill="rgba(var(--color-neon-primary-rgb), 0.1)"
+          badge-border="rgba(var(--color-neon-primary-rgb), 0.35)"
+          class="navbar__mark"
+        />
         <span class="navbar__brand-text">Samuel&nbsp;Sulo</span>
       </a>
 
@@ -150,17 +161,7 @@ function handleKeydown(event: KeyboardEvent) {
 }
 
 .navbar__mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  border-radius: var(--radius-full);
-  font-family: var(--font-mono);
-  font-size: var(--fs-small);
-  color: var(--color-neon-primary);
-  border: 1px solid var(--color-neon-primary);
-  box-shadow: var(--glow-primary);
+  flex-shrink: 0;
 }
 
 .navbar__brand-text {
