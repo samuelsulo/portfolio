@@ -5,6 +5,7 @@ import AppIcon from '@/components/ui/AppIcon.vue'
 import Kitsune from '@/components/ui/Kitsune.vue'
 import SiteVersion from '@/components/ui/SiteVersion.vue'
 import LegalPolicyView from '@/components/cookies/LegalPolicyView.vue'
+import LogoDesignModal from '@/components/ui/LogoDesignModal.vue'
 import siteConfig from '@/data/site-config.json'
 
 const { t } = useI18n()
@@ -23,6 +24,8 @@ function openLegal(documentKey: LegalDocumentKey) {
 function closeLegal() {
   isLegalOpen.value = false
 }
+
+const isLogoDesignOpen = ref(false)
 </script>
 
 <template>
@@ -82,19 +85,25 @@ function closeLegal() {
         </button>
       </nav>
 
-      <Kitsune
-        :size="24"
-        color-light="var(--color-neon-primary-strong)"
-        color-mid="var(--color-neon-primary)"
-        color-dark="var(--color-neon-secondary)"
-        color-accent="var(--color-neon-success)"
-        badge-fill="rgba(var(--color-neon-primary-rgb), 0.1)"
-        badge-border="rgba(var(--color-neon-primary-rgb), 0.35)"
-        class="footer__signature"
-      />
+      <div class="footer__brand">
+        <button type="button" class="footer__legal-link" @click="isLogoDesignOpen = true">
+          {{ t('footer.logoDesignLink') }}
+        </button>
+        <Kitsune
+          :size="24"
+          color-light="var(--color-neon-primary-strong)"
+          color-mid="var(--color-neon-primary)"
+          color-dark="var(--color-neon-secondary)"
+          color-accent="var(--color-neon-success)"
+          badge-fill="rgba(var(--color-neon-primary-rgb), 0.1)"
+          badge-border="rgba(var(--color-neon-primary-rgb), 0.35)"
+          class="footer__signature"
+        />
+      </div>
     </div>
 
     <LegalPolicyView :open="isLegalOpen" :document-key="activeLegalDocument" @close="closeLegal" />
+    <LogoDesignModal :open="isLogoDesignOpen" @close="isLogoDesignOpen = false" />
   </footer>
 </template>
 
@@ -213,6 +222,12 @@ function closeLegal() {
 
 .footer__legal-link:hover {
   color: var(--color-neon-primary);
+}
+
+.footer__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
 }
 
 .footer__signature {

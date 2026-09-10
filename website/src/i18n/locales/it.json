@@ -111,7 +111,11 @@
     "githubAriaLabel": "Profilo GitHub di Samuel Sulo",
     "linkedinAriaLabel": "Profilo LinkedIn di Samuel Sulo",
     "emailAriaLabel": "Invia un'email a Samuel Sulo",
-    "backToTop": "Torna all'inizio"
+    "backToTop": "Torna all'inizio",
+    "logoDesignLink": "Design del logo",
+    "logoDesignModalTitle": "Kitsune - design del logo",
+    "logoDesignOpenNewTabAriaLabel": "Apri il PDF del design del logo in una nuova scheda",
+    "logoDesignCaption": "Se l'anteprima non si carica, usa il pulsante qui sopra per aprire il PDF in una nuova scheda."
   },
   "legal": {
     "cookiePolicy": {
