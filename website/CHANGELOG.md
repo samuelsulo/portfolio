@@ -3,6 +3,17 @@
 All notable changes to this project are documented in this file, in
 [Keep a Changelog](https://keepachangelog.com/) format.
 
+## [1.4.1] - 2026-09-10
+
+### Changed
+
+- Renamed the footer's "Logo design" link to "Brand guidelines" (and the
+  underlying file from `kitsune-logo-design.pdf` to
+  `kitsune-brand-guidelines.pdf`, see `docs/logo/`): the document is
+  predominantly a design/usage reference, not a rights or licensing
+  notice, so "brand guidelines" describes its contents more accurately
+  than either "logo design" or "logo rights" would.
+
 ## [1.4.0] - 2026-09-10
 
 ### Changed
