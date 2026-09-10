@@ -3,6 +3,15 @@
 All notable changes to this project are documented in this file, in
 [Keep a Changelog](https://keepachangelog.com/) format.
 
+## [1.4.0] - 2026-09-10
+
+### Changed
+
+- The footer's "Logo design" link now opens the Kitsune design-reference
+  PDF directly in a new browser tab instead of an in-page modal preview:
+  simpler to reason about, and easier to read at full size in the
+  browser's own PDF viewer than in a cramped in-page frame.
+
 ## [1.3.0] - 2026-09-10
 
 ### Added
