@@ -21,10 +21,20 @@ const props = withDefaults(
     maxWidth?: string
     /** CSS max-height of the dialog card. */
     maxHeight?: string
+    /**
+     * Make the card always take `maxHeight` instead of hugging its content.
+     * The legal policy text naturally grows tall enough to reach maxHeight
+     * on its own (and looks fine hugging shorter content too), but a body
+     * with no intrinsic height of its own (an iframe) needs an ancestor
+     * with a *definite* height for its own `flex: 1` to have anything to
+     * fill; without this, it collapses to its default ~150px.
+     */
+    fillHeight?: boolean
   }>(),
   {
     maxWidth: '640px',
     maxHeight: 'min(85vh, 720px)',
+    fillHeight: false,
   },
 )
 
@@ -72,6 +82,7 @@ function handleKeydown(event: KeyboardEvent) {
     <div v-if="open" class="app-modal__overlay" @click.self="close" @keydown="handleKeydown">
       <div
         class="app-modal glass-surface"
+        :class="{ 'app-modal--fill-height': fillHeight }"
         role="dialog"
         aria-modal="true"
         :aria-labelledby="titleId"
@@ -126,6 +137,10 @@ function handleKeydown(event: KeyboardEvent) {
   border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
+}
+
+.app-modal--fill-height {
+  height: var(--app-modal-max-height);
 }
 
 .app-modal__header {

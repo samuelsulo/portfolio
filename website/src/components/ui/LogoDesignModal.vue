@@ -27,7 +27,7 @@ function close() {
 </script>
 
 <template>
-  <AppModal :open="open" max-width="960px" max-height="92vh" @close="close">
+  <AppModal :open="open" max-width="960px" fill-height @close="close">
     <template #title>{{ t('footer.logoDesignModalTitle') }}</template>
     <template #header-actions>
       <a
