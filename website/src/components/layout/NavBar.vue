@@ -3,7 +3,7 @@ import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue'
-import SignatureFox from '@/components/ui/SignatureFox.vue'
+import Kitsune from '@/components/ui/Kitsune.vue'
 import { useScrollSpy } from '@/composables/useScrollSpy'
 import { useBodyScrollLock } from '@/composables/useBodyScrollLock'
 import { useClickOutside } from '@/composables/useClickOutside'
@@ -60,7 +60,7 @@ function handleKeydown(event: KeyboardEvent) {
 
     <div class="navbar__inner container">
       <a href="#about" class="navbar__brand" aria-label="Samuel Sulo">
-        <SignatureFox
+        <Kitsune
           :size="44"
           :rest-opacity="1"
           color-light="var(--color-neon-primary-strong)"

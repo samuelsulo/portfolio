@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import AppIcon from '@/components/ui/AppIcon.vue'
-import SignatureFox from '@/components/ui/SignatureFox.vue'
+import Kitsune from '@/components/ui/Kitsune.vue'
 import SiteVersion from '@/components/ui/SiteVersion.vue'
 import LegalPolicyView from '@/components/cookies/LegalPolicyView.vue'
 import siteConfig from '@/data/site-config.json'
@@ -82,7 +82,7 @@ function closeLegal() {
         </button>
       </nav>
 
-      <SignatureFox
+      <Kitsune
         :size="24"
         color-light="var(--color-neon-primary-strong)"
         color-mid="var(--color-neon-primary)"

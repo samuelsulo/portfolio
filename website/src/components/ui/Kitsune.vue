@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * SignatureFox
+ * Kitsune
  *
  * A small stylized low-poly fox mark used as a company "signature" on
  * sites and apps built by the author. Purely decorative (no link, no
@@ -48,16 +48,16 @@ const props = withDefaults(
 
 <template>
   <span
-    class="signature-fox"
+    class="kitsune"
     role="img"
     :aria-label="props.label"
     :title="props.label"
     :style="{
-      '--signature-fox-size': `${props.size}px`,
-      '--signature-fox-rest-opacity': props.restOpacity,
+      '--kitsune-size': `${props.size}px`,
+      '--kitsune-rest-opacity': props.restOpacity,
     }"
   >
-    <svg viewBox="0 0 100 100" class="signature-fox__svg" aria-hidden="true">
+    <svg viewBox="0 0 100 100" class="kitsune__svg" aria-hidden="true">
       <circle
         v-if="props.badgeFill !== 'none'"
         cx="50"
@@ -89,13 +89,13 @@ const props = withDefaults(
 </template>
 
 <style scoped>
-.signature-fox {
+.kitsune {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--signature-fox-size);
-  height: var(--signature-fox-size);
-  opacity: var(--signature-fox-rest-opacity);
+  width: var(--kitsune-size);
+  height: var(--kitsune-size);
+  opacity: var(--kitsune-rest-opacity);
   cursor: default;
   transition:
     opacity var(--duration-fast, 150ms) var(--ease-out, ease),
@@ -103,14 +103,14 @@ const props = withDefaults(
     filter var(--duration-fast, 150ms) var(--ease-out, ease);
 }
 
-.signature-fox:hover,
-.signature-fox:focus-visible {
+.kitsune:hover,
+.kitsune:focus-visible {
   opacity: 1;
   transform: scale(1.08);
   filter: drop-shadow(0 0 6px rgba(var(--color-neon-primary-rgb), 0.55));
 }
 
-.signature-fox__svg {
+.kitsune__svg {
   width: 100%;
   height: 100%;
   display: block;
