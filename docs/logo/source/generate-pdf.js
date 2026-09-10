@@ -12,6 +12,12 @@ const { VIEWBOX, BADGE, FACETS, COLORWAYS, CURRENT_COLOR } = require('./palette'
 const OUT = path.resolve(__dirname, '..');
 const OUT_FILE = path.join(OUT, 'logo-design.pdf');
 
+// Also published as a static site asset, so the website's footer can open
+// it in an in-page modal (see website/src/components/ui/LogoDesignModal.vue
+// and AppFooter.vue). Copied straight from OUT_FILE below rather than
+// generated twice, so the two can never drift apart.
+const SITE_COPY = path.resolve(__dirname, '../../../website/public/brand/kitsune-logo-design.pdf');
+
 const PAGE = { size: 'A4', margin: 50 };
 const PAGE_W = 595.28;
 const PAGE_H = 841.89;
@@ -178,7 +184,8 @@ function main() {
       Keywords: 'Kitsune, personal logo, brand mark, design reference',
     },
   });
-  doc.pipe(fs.createWriteStream(OUT_FILE));
+  const writeStream = fs.createWriteStream(OUT_FILE);
+  doc.pipe(writeStream);
 
   const ref = byId('reference');
   const darkPf = byId('dark-portfolio');
@@ -453,7 +460,12 @@ function main() {
     });
 
   doc.end();
-  console.log('PDF written to', OUT_FILE);
+  writeStream.on('finish', () => {
+    console.log('PDF written to', OUT_FILE);
+    fs.mkdirSync(path.dirname(SITE_COPY), { recursive: true });
+    fs.copyFileSync(OUT_FILE, SITE_COPY);
+    console.log('Copied to', SITE_COPY);
+  });
 }
 
 function eyebrowCentered(doc, text, y) {

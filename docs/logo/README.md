@@ -36,6 +36,15 @@ graphic changed with the rename.
 - Anywhere else a quiet mark of authorship is wanted, in a light, dark, or
   custom-themed context, per the coloring model below.
 
+This document (`logo-design.pdf`) is itself linked from the portfolio: a
+"Logo design" link next to the footer signature opens it in an in-page
+preview (`website/src/components/ui/LogoDesignModal.vue`), the same modal
+pattern used for the Cookie/Privacy Policy. The PDF is published as a static
+site asset at `website/public/brand/kitsune-logo-design.pdf`, a byte-for-byte
+copy of this folder's `logo-design.pdf` kept in sync by
+`source/generate-pdf.js` (see "Regenerating the assets" below); it is not a
+separate, hand-maintained copy.
+
 ## Graphic structure
 
 The mark is a low-poly fox head, drawn as seven flat-shaded polygons
@@ -220,6 +229,11 @@ cd docs/logo/source
 npm install
 npm run build   # runs build-svgs.js then generate-pdf.js
 ```
+
+`generate-pdf.js` also copies the finished PDF to
+`website/public/brand/kitsune-logo-design.pdf` once writing finishes, so the
+in-site preview always matches this folder's copy; there is nothing to sync
+by hand.
 
 Regenerate after editing `palette.js` (e.g. to record a newly-verified
 colorway) rather than hand-editing the SVGs or the PDF. If the component's
