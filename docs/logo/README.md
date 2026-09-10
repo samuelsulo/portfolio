@@ -36,21 +36,21 @@ graphic changed with the rename.
 - Anywhere else a quiet mark of authorship is wanted, in a light, dark, or
   custom-themed context, per the coloring model below.
 
-This document (`logo-design.pdf`) is itself linked from the portfolio: a
-"Logo design" link next to the footer signature opens it directly, in a new
-browser tab. The PDF is published as a static site asset at
-`website/public/brand/kitsune-logo-design.pdf`, a byte-for-byte copy of this
-folder's `logo-design.pdf` kept in sync by `source/generate-pdf.js` (see
-"Regenerating the assets" below); it is not a
-separate, hand-maintained copy.
+This document (`brand-guidelines.pdf`) is itself linked from the portfolio: a
+"Brand guidelines" link next to the footer signature opens it directly, in a
+new browser tab. The PDF is published as a static site asset at
+`website/public/brand/kitsune-brand-guidelines.pdf`, a byte-for-byte copy of
+this folder's `brand-guidelines.pdf` kept in sync by `source/generate-pdf.js`
+(see "Regenerating the assets" below); it is not a separate, hand-maintained
+copy.
 
 ## Graphic structure
 
 The mark is a low-poly fox head, drawn as seven flat-shaded polygons
 (facets) inside a square SVG `viewBox="0 0 100 100"`, optionally framed by a
 circular badge. See [assets/logo.svg](assets/logo.svg) for the reference
-rendering and [logo-design.pdf](logo-design.pdf) (page 3) for an annotated
-grid.
+rendering and [brand-guidelines.pdf](brand-guidelines.pdf) (page 3) for an
+annotated grid.
 
 | Element | Geometry | Color role |
 |---|---|---|
@@ -186,8 +186,8 @@ needs it.
 
 ```
 docs/logo/
-├── README.md                    this file
-├── logo-design.pdf              design presentation (7 pages: cover,
+├── README.md                     this file
+├── brand-guidelines.pdf          design presentation (7 pages: cover,
 │                                 overview, geometry, colorways, light/dynamic
 │                                 variants, usage rules, copyright)
 ├── component/
@@ -203,7 +203,7 @@ docs/logo/
 ├── source/
 │   ├── palette.js                single source of truth: geometry + colorways
 │   ├── build-svgs.js             regenerates assets/*.svg from palette.js
-│   ├── generate-pdf.js           regenerates logo-design.pdf from palette.js
+│   ├── generate-pdf.js           regenerates brand-guidelines.pdf from palette.js
 │   └── package.json              `npm install && npm run build`
 └── versions/
     └── README.md                naming/adoption history, from git log
@@ -230,9 +230,9 @@ npm run build   # runs build-svgs.js then generate-pdf.js
 ```
 
 `generate-pdf.js` also copies the finished PDF to
-`website/public/brand/kitsune-logo-design.pdf` once writing finishes, so the
-in-site preview always matches this folder's copy; there is nothing to sync
-by hand.
+`website/public/brand/kitsune-brand-guidelines.pdf` once writing finishes, so
+the footer's "Brand guidelines" link always points at a file that matches
+this folder's copy; there is nothing to sync by hand.
 
 Regenerate after editing `palette.js` (e.g. to record a newly-verified
 colorway) rather than hand-editing the SVGs or the PDF. If the component's

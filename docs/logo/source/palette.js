@@ -1,6 +1,6 @@
 // Single source of truth for the Kitsune mark's geometry and documented
 // colorways, shared by build-svgs.js and generate-pdf.js so the two outputs
-// (assets/*.svg and logo-design.pdf) can never drift apart.
+// (assets/*.svg and brand-guidelines.pdf) can never drift apart.
 //
 // Geometry is copied verbatim from the component's <template> (see
 // ../component/Kitsune.vue / website/src/components/ui/Kitsune.vue):

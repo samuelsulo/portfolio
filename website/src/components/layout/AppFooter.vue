@@ -9,7 +9,7 @@ import siteConfig from '@/data/site-config.json'
 
 // Root-relative, matching how every other public/ asset is referenced in
 // this codebase (see e.g. src/data/projects.json, HeroSection.vue).
-const LOGO_DESIGN_PDF_URL = '/brand/kitsune-logo-design.pdf'
+const BRAND_GUIDELINES_PDF_URL = '/brand/kitsune-brand-guidelines.pdf'
 
 const { t } = useI18n()
 const year = new Date().getFullYear()
@@ -88,12 +88,12 @@ function closeLegal() {
 
       <div class="footer__brand">
         <a
-          :href="LOGO_DESIGN_PDF_URL"
+          :href="BRAND_GUIDELINES_PDF_URL"
           class="footer__legal-link"
           target="_blank"
           rel="noopener noreferrer"
         >
-          {{ t('footer.logoDesignLink') }}
+          {{ t('footer.brandGuidelinesLink') }}
         </a>
         <Kitsune
           :size="24"

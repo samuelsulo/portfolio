@@ -1,4 +1,4 @@
-// Design-reference PDF for the Kitsune personal brand mark.
+// Brand guidelines PDF for the Kitsune personal brand mark.
 // Pure vector output (PDFKit), built directly from the same geometry and
 // colorway data as build-svgs.js (see palette.js), so the PDF documents the
 // mark exactly as implemented, not a redrawn interpretation.
@@ -10,13 +10,13 @@ const PDFDocument = require('pdfkit');
 const { VIEWBOX, BADGE, FACETS, COLORWAYS, CURRENT_COLOR } = require('./palette');
 
 const OUT = path.resolve(__dirname, '..');
-const OUT_FILE = path.join(OUT, 'logo-design.pdf');
+const OUT_FILE = path.join(OUT, 'brand-guidelines.pdf');
 
-// Also published as a static site asset, so the website's footer can open
-// it in an in-page modal (see website/src/components/ui/LogoDesignModal.vue
-// and AppFooter.vue). Copied straight from OUT_FILE below rather than
-// generated twice, so the two can never drift apart.
-const SITE_COPY = path.resolve(__dirname, '../../../website/public/brand/kitsune-logo-design.pdf');
+// Also published as a static site asset, linked directly (opened in a new
+// tab) from the footer's "Brand guidelines" link (see AppFooter.vue).
+// Copied straight from OUT_FILE below rather than generated twice, so the
+// two can never drift apart.
+const SITE_COPY = path.resolve(__dirname, '../../../website/public/brand/kitsune-brand-guidelines.pdf');
 
 const PAGE = { size: 'A4', margin: 50 };
 const PAGE_W = 595.28;
@@ -138,7 +138,7 @@ function footer(doc, pageLabel) {
     .font('Helvetica')
     .fontSize(8)
     .fillColor(INK.textMuted)
-    .text(`Kitsune - personal brand mark design reference   ·   © 2026 Samuel Sulo   ·   ${pageLabel}`, PAGE.margin, PAGE_H - 36, {
+    .text(`Kitsune - brand guidelines   ·   © 2026 Samuel Sulo   ·   ${pageLabel}`, PAGE.margin, PAGE_H - 36, {
       width: PAGE_W - PAGE.margin * 2,
       align: 'center',
       lineBreak: false,
@@ -178,10 +178,10 @@ function main() {
     margins: { top: 60, left: PAGE.margin, right: PAGE.margin, bottom: 26 },
     bufferPages: true,
     info: {
-      Title: 'Kitsune - Personal Brand Mark, Design Reference',
+      Title: 'Kitsune - Brand Guidelines',
       Author: 'Samuel Sulo',
-      Subject: 'Design reference for the Kitsune personal brand mark: geometry, proportions and documented color variants',
-      Keywords: 'Kitsune, personal logo, brand mark, design reference',
+      Subject: 'Brand guidelines for the Kitsune personal brand mark: geometry, proportions and documented color variants',
+      Keywords: 'Kitsune, personal logo, brand mark, brand guidelines',
     },
   });
   const writeStream = fs.createWriteStream(OUT_FILE);
@@ -206,7 +206,7 @@ function main() {
     .font('Helvetica')
     .fontSize(13)
     .fillColor('#a3a9bd')
-    .text('Personal brand mark - design reference', 0, 462, { width: PAGE_W, align: 'center' });
+    .text('Personal logo - brand guidelines', 0, 462, { width: PAGE_W, align: 'center' });
 
   doc
     .font('Helvetica')
@@ -220,7 +220,7 @@ function main() {
     .font('Helvetica')
     .fontSize(8)
     .fillColor('#4a4f5c')
-    .text('This document is a design reference, not a trademark registration or legal certification.', 0, PAGE_H - 74, {
+    .text('This document is a set of brand guidelines, not a trademark registration or legal certification.', 0, PAGE_H - 74, {
       width: PAGE_W,
       align: 'center',
     });
