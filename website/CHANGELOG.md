@@ -3,6 +3,26 @@
 All notable changes to this project are documented in this file, in
 [Keep a Changelog](https://keepachangelog.com/) format.
 
+## [1.3.0] - 2026-09-10
+
+### Added
+
+- A "Logo design" link next to the footer's Kitsune signature, opening the
+  mark's design-reference PDF (see `docs/logo/`) in an in-page preview
+  instead of linking away to a downloaded file, using the same modal
+  pattern as the Cookie/Privacy Policy.
+
+### Changed
+
+- Renamed the `SignatureFox` mark component to `Kitsune`
+  (`website/src/components/ui/Kitsune.vue`), matching the name already
+  given to it via its `label` prop. The graphic itself, its colors and its
+  behavior are unchanged.
+- Extracted the modal dialog shell (overlay, focus handling,
+  Escape/click-outside-to-close, scroll lock) shared by the Cookie/Privacy
+  Policy and the new logo design preview into a single `AppModal`
+  component.
+
 ## [1.2.0] - 2026-09-09
 
 ### Changed
