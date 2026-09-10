@@ -17,5 +17,5 @@ Documents related to the requirements and functional specifications.
 ## Personal brand mark ([logo/](logo/))
 
 Design documentation for the Kitsune personal brand mark: graphic
-structure, documented color variants, SVG assets and a design-reference
+structure, documented color variants, SVG assets and a brand guidelines
 PDF.
