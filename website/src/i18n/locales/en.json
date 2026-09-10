@@ -112,10 +112,7 @@
     "linkedinAriaLabel": "Samuel Sulo's LinkedIn profile",
     "emailAriaLabel": "Send Samuel Sulo an email",
     "backToTop": "Back to top",
-    "logoDesignLink": "Logo design",
-    "logoDesignModalTitle": "Kitsune - logo design",
-    "logoDesignOpenNewTabAriaLabel": "Open the logo design PDF in a new tab",
-    "logoDesignCaption": "If the preview doesn't load, use the button above to open the PDF in a new tab."
+    "logoDesignLink": "Logo design"
   },
   "legal": {
     "cookiePolicy": {

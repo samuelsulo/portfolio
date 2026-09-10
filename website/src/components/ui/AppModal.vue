@@ -1,13 +1,11 @@
 <script setup lang="ts">
 /**
  * Generic dismissible dialog shell: overlay, glass-surface card, header
- * (title + optional extra actions + close button), focus management
- * (focuses the close button on open, restores the previously focused
- * element on close), Escape-to-close, click-outside-to-close, and page
- * scroll lock while open. Owns none of the body content: callers supply
- * the title via the `title` slot and the body via the default slot, so the
- * same shell serves both the legal policy text (LegalPolicyView) and the
- * logo design PDF preview (LogoDesignModal).
+ * (title + close button), focus management (focuses the close button on
+ * open, restores the previously focused element on close), Escape-to-close,
+ * click-outside-to-close, and page scroll lock while open. Owns none of the
+ * body content: callers supply the title via the `title` slot and the body
+ * via the default slot (see LegalPolicyView, its only current consumer).
  */
 import { nextTick, ref, useId, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -21,20 +19,10 @@ const props = withDefaults(
     maxWidth?: string
     /** CSS max-height of the dialog card. */
     maxHeight?: string
-    /**
-     * Make the card always take `maxHeight` instead of hugging its content.
-     * The legal policy text naturally grows tall enough to reach maxHeight
-     * on its own (and looks fine hugging shorter content too), but a body
-     * with no intrinsic height of its own (an iframe) needs an ancestor
-     * with a *definite* height for its own `flex: 1` to have anything to
-     * fill; without this, it collapses to its default ~150px.
-     */
-    fillHeight?: boolean
   }>(),
   {
     maxWidth: '640px',
     maxHeight: 'min(85vh, 720px)',
-    fillHeight: false,
   },
 )
 
@@ -82,7 +70,6 @@ function handleKeydown(event: KeyboardEvent) {
     <div v-if="open" class="app-modal__overlay" @click.self="close" @keydown="handleKeydown">
       <div
         class="app-modal glass-surface"
-        :class="{ 'app-modal--fill-height': fillHeight }"
         role="dialog"
         aria-modal="true"
         :aria-labelledby="titleId"
@@ -92,18 +79,15 @@ function handleKeydown(event: KeyboardEvent) {
           <h2 :id="titleId" class="app-modal__title">
             <slot name="title" />
           </h2>
-          <div class="app-modal__header-actions">
-            <slot name="header-actions" />
-            <button
-              ref="closeButtonRef"
-              type="button"
-              class="app-modal__close"
-              :aria-label="t('common.close')"
-              @click="close"
-            >
-              <AppIcon name="close" :size="20" />
-            </button>
-          </div>
+          <button
+            ref="closeButtonRef"
+            type="button"
+            class="app-modal__close"
+            :aria-label="t('common.close')"
+            @click="close"
+          >
+            <AppIcon name="close" :size="20" />
+          </button>
         </div>
         <div class="app-modal__body">
           <slot />
@@ -139,10 +123,6 @@ function handleKeydown(event: KeyboardEvent) {
   box-shadow: var(--shadow-md);
 }
 
-.app-modal--fill-height {
-  height: var(--app-modal-max-height);
-}
-
 .app-modal__header {
   display: flex;
   align-items: flex-start;
@@ -152,13 +132,6 @@ function handleKeydown(event: KeyboardEvent) {
 
 .app-modal__title {
   font-size: var(--fs-h3);
-}
-
-.app-modal__header-actions {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2xs);
-  flex-shrink: 0;
 }
 
 .app-modal__close {

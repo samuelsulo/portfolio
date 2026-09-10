@@ -37,12 +37,11 @@ graphic changed with the rename.
   custom-themed context, per the coloring model below.
 
 This document (`logo-design.pdf`) is itself linked from the portfolio: a
-"Logo design" link next to the footer signature opens it in an in-page
-preview (`website/src/components/ui/LogoDesignModal.vue`), the same modal
-pattern used for the Cookie/Privacy Policy. The PDF is published as a static
-site asset at `website/public/brand/kitsune-logo-design.pdf`, a byte-for-byte
-copy of this folder's `logo-design.pdf` kept in sync by
-`source/generate-pdf.js` (see "Regenerating the assets" below); it is not a
+"Logo design" link next to the footer signature opens it directly, in a new
+browser tab. The PDF is published as a static site asset at
+`website/public/brand/kitsune-logo-design.pdf`, a byte-for-byte copy of this
+folder's `logo-design.pdf` kept in sync by `source/generate-pdf.js` (see
+"Regenerating the assets" below); it is not a
 separate, hand-maintained copy.
 
 ## Graphic structure
