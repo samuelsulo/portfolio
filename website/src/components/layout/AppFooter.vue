@@ -5,8 +5,11 @@ import AppIcon from '@/components/ui/AppIcon.vue'
 import Kitsune from '@/components/ui/Kitsune.vue'
 import SiteVersion from '@/components/ui/SiteVersion.vue'
 import LegalPolicyView from '@/components/cookies/LegalPolicyView.vue'
-import LogoDesignModal from '@/components/ui/LogoDesignModal.vue'
 import siteConfig from '@/data/site-config.json'
+
+// Root-relative, matching how every other public/ asset is referenced in
+// this codebase (see e.g. src/data/projects.json, HeroSection.vue).
+const LOGO_DESIGN_PDF_URL = '/brand/kitsune-logo-design.pdf'
 
 const { t } = useI18n()
 const year = new Date().getFullYear()
@@ -24,8 +27,6 @@ function openLegal(documentKey: LegalDocumentKey) {
 function closeLegal() {
   isLegalOpen.value = false
 }
-
-const isLogoDesignOpen = ref(false)
 </script>
 
 <template>
@@ -86,9 +87,14 @@ const isLogoDesignOpen = ref(false)
       </nav>
 
       <div class="footer__brand">
-        <button type="button" class="footer__legal-link" @click="isLogoDesignOpen = true">
+        <a
+          :href="LOGO_DESIGN_PDF_URL"
+          class="footer__legal-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {{ t('footer.logoDesignLink') }}
-        </button>
+        </a>
         <Kitsune
           :size="24"
           color-light="var(--color-neon-primary-strong)"
@@ -103,7 +109,6 @@ const isLogoDesignOpen = ref(false)
     </div>
 
     <LegalPolicyView :open="isLegalOpen" :document-key="activeLegalDocument" @close="closeLegal" />
-    <LogoDesignModal :open="isLogoDesignOpen" @close="isLogoDesignOpen = false" />
   </footer>
 </template>
 
