@@ -3,7 +3,8 @@
 Print-ready business card design, built directly on the portfolio's own
 design tokens (`website/src/styles/tokens.css`): the same near-black
 surfaces, cyan/purple neon accents, Space Grotesk and JetBrains Mono
-pairing, glow treatment, and the site footer's low-poly SignatureFox mark,
+pairing, glow treatment, and the site footer's low-poly Kitsune mark
+(formerly named `SignatureFox` in code, see [docs/logo](../logo/README.md)),
 here promoted to the front's badge. The goal is that the card reads as the
 portfolio translated into a physical object, not a generic developer
 business card.

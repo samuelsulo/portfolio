@@ -1,0 +1,24 @@
+<!--
+  Kitsune - reference colorway (main asset)
+  Creator: Samuel Sulo
+  Copyright: © 2026 Samuel Sulo
+  Asset: Personal Logo (docs/logo)
+  Source geometry: website/src/components/ui/Kitsune.vue
+-->
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 100 100"
+  role="img"
+>
+  <title>Kitsune - reference colorway (main asset)</title>
+  <desc>Implemented (component defaults). Default prop values in Kitsune.vue, unchanged since the component was introduced.</desc>
+  <metadata>Creator: Samuel Sulo; Copyright: © 2026 Samuel Sulo; Asset: Personal Logo</metadata>
+      <circle cx="50" cy="52" r="44" fill="rgba(163, 116, 255, 0.12)" stroke="rgba(163, 116, 255, 0.35)" stroke-width="1.5" />
+      <polygon points="22,22 27,46 41,40" fill="#cdb8ff" />
+      <polygon points="78,22 73,46 59,40" fill="#7952d1" />
+      <polygon points="41,40 50,30 59,40 50,55" fill="#a374ff" />
+      <polygon points="27,46 41,40 50,55 38,78 24,60" fill="#a374ff" />
+      <polygon points="73,46 59,40 50,55 62,78 76,60" fill="#7952d1" />
+      <polygon points="50,55 38,78 50,86 62,78" fill="#cdb8ff" />
+      <polygon points="46,80 54,80 50,88" fill="#5be3d9" />
+</svg>
