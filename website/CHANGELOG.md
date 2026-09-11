@@ -3,6 +3,18 @@
 All notable changes to this project are documented in this file, in
 [Keep a Changelog](https://keepachangelog.com/) format.
 
+## [1.4.2] - 2026-09-11
+
+### Changed
+
+- Replaced the generic favicon with the Kitsune fox mark, retinted to the
+  site's own neon palette, and minified the SVG (grouped by fill color,
+  no comments or indentation) to keep its file size down.
+- Added a dedicated apple-touch-icon (180x180 PNG, opaque, square, no
+  pre-rounded corners): iOS does not support SVG favicons and applies its
+  own icon mask on top, so a plain rounded SVG would render incorrectly
+  on the home screen.
+
 ## [1.4.1] - 2026-09-10
 
 ### Changed
