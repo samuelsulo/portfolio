@@ -3,6 +3,27 @@ commit-msg:
     conventional-commit:
       run: cog verify --file {1}
 
+pre-commit:
+  commands:
+    terraform-fmt:
+      glob: "infrastructure/**/*.{tf,tfvars,hcl}"
+      run: kitsu terraform fmt-staged {staged_files}
+      stage_fixed: true
+    application-lint:
+      root: "application/"
+      glob: "application/**/*.{ts,vue,js,cjs,mjs}"
+      run: npx eslint --fix {staged_files}
+      stage_fixed: true
+    application-format:
+      root: "application/"
+      glob: "application/**/*.{ts,vue,css,json}"
+      run: npx prettier --write {staged_files}
+      stage_fixed: true
+    application-type-check:
+      root: "application/"
+      glob: "application/**/*.{ts,vue}"
+      run: npm run type-check
+
 pre-push:
   commands:
     conventional-commits:
