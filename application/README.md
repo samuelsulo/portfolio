@@ -65,11 +65,14 @@ application/
 │   ├── styles/                # shared design tokens and reset
 │   ├── types/                  # shared TypeScript types
 │   └── utils/                  # pure functions (form validation, etc.)
+├── tests/
+│   ├── unit/                 # Vitest specs
+│   └── e2e/                  # Playwright specs (not yet populated)
 └── vite.config.ts / vitest.config.ts / tsconfig*.json
 ```
 
-Unit tests live in the `tests/unit/` folder at the repository root; 
-`vitest.config.ts` is configured to discover them there.
+Unit tests live in the `tests/unit/` folder; `vitest.config.ts` is
+configured to discover them there.
 
 ## Content: how to edit it
 
@@ -107,5 +110,5 @@ If this site ever adds analytics, a Maps/YouTube embed, or any other non-essenti
 
 ## Next steps (out of scope for this iteration)
 
-- E2E test suite (Playwright) in `tests/e2e/`.
+- E2E test suite (Playwright) in `tests/e2e/`, currently empty.
 - Replacement of the placeholder content (bio, projects, images, real contacts).

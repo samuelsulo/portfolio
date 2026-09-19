@@ -3,7 +3,7 @@ import {
   ContactApiNotConfiguredError,
   ContactApiRequestError,
   submitContactForm,
-} from '../../website/src/services/contactService'
+} from '../../src/services/contactService'
 
 const sampleValues = {
   name: 'Ada Lovelace',

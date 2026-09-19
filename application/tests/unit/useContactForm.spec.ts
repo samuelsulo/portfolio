@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { useContactForm } from '../../website/src/composables/useContactForm'
+import { useContactForm } from '../../src/composables/useContactForm'
 
 describe('useContactForm', () => {
   afterEach(() => {
