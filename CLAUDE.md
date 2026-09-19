@@ -21,12 +21,15 @@ refers to it instead of repeating it.
 ## 1. Repository Structure
 
 Top-level folders are fixed and must never be renamed or moved:
-`infrastructure/`, `application/`, `docs/`, `.github/`.
+`infrastructure/`, `application/`, `brand/`, `docs/`, `.github/`.
 The tooling and documentation across the repository assume this
 structure. The internal structure of `docs/` (its subfolders) is
 likewise fixed: add content inside the existing subfolders, do not
 introduce new top-level documentation categories without flagging it
 first.
+
+`brand/` holds the client's brand assets (logo, business card, ...);
+it is not documentation, which is why it lives outside `docs/`.
 
 Issue templates in `.github/ISSUE_TEMPLATE/` are standard across every
 client project and must not be modified.
@@ -46,9 +49,11 @@ Regardless of which cloud provider or application stack a project uses:
 
 ## 3. Component Versioning
 
-`application/` and `infrastructure/` are versioned independently from
-each other, each with its own git tags in the form `application/vX.Y.Z`
-and `infrastructure/vX.Y.Z` (the same tagging pattern used by the
+`application/`, `infrastructure/`, and each asset folder under
+`brand/` (`logo/`, `business-card/`) are versioned independently from
+one another, each with its own git tags in the form
+`application/vX.Y.Z`, `infrastructure/vX.Y.Z`, `logo/vX.Y.Z` and
+`business-card/vX.Y.Z` (the same tagging pattern used by the
 infrastructure catalog for its own modules). These tags, the changelog
 and commit message validation are managed with
 [cocogitto](https://docs.cocogitto.io) (see [`cog.toml`](./cog.toml)

@@ -28,7 +28,3 @@ project once it is live.
 
 The project closure document: what was delivered, where access and
 credentials live, known issues, and remaining work.
-
-## Brand ([brand/](brand/))
-
-The client's brand assets: logo and business card.
