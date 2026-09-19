@@ -1,4 +1,4 @@
-# Portfolio Website
+# Portfolio
 
 Single-page showcase site for the professional presentation of Samuel Sulo as Cloud Engineer & Web Developer: About, Services, Projects and Contact sections, with a dark cyberpunk/neon visual identity and bilingual Italian/English support.
 
@@ -20,6 +20,8 @@ Tool versions are managed via `mise` (see `mise.toml` at the repository root). F
 mise exec -- npm install
 ```
 
+Deploying additionally requires `kitsu`, the AWS CLI and `jq` on `PATH`, plus AWS credentials for the target environment active in the terminal (see [`scripts/deploy.sh`](./scripts/deploy.sh)).
+
 ## Available scripts
 
 ```bash
@@ -38,16 +40,17 @@ All commands must be run through `mise exec --` (or in a shell where `mise` has 
 ## Versioning and deploys
 
 - Every notable change is recorded in [`CHANGELOG.md`](./CHANGELOG.md), in [Keep a Changelog](https://keepachangelog.com/) format.
-- Production releases are tracked with `website/vX.Y.Z` git tags, not branches or a deploy log: [kitsu](https://github.com/samuelsulo/kitsu) (`kitsu website deploy`) deploys the commit pointed at by the `website/vX.Y.Z` tag given explicitly via `--tag` (never auto-selected) to production, and whatever commit is currently checked out (its short SHA as version) to every other environment.
+- Production releases are tracked with `application/vX.Y.Z` git tags, created with `cog bump --package application --version X.Y.Z` (see the root [`README.md`](../README.md) for cocogitto conventions), not branches or a deploy log.
+- Deploys are run from the terminal with [`scripts/deploy.sh`](./scripts/deploy.sh) (`npm run deploy --`), never from CI: build, tests, S3 sync and CloudFront invalidation all happen locally, against the AWS credentials active in that terminal. Bucket name, CloudFront distribution ID and the contact API's URL are read from `infrastructure/live`'s Terraform state via `kitsu terraform output-json`, never guessed or hardcoded.
+- In production, only an explicit `application/vX.Y.Z` tag can be deployed, passed with `--version` (never the currently checked-out commit): `npm run deploy -- --env production --version application/vX.Y.Z`. Every other environment deploys whatever commit is currently checked out, versioned by its short SHA, and does not accept `--version`.
 - The resolved version is injected into the build as the `VITE_APP_VERSION` env var and shown in the footer by `src/components/ui/SiteVersion.vue`.
-- To release to production: update `CHANGELOG.md`, commit, tag the release commit `website/vX.Y.Z`, push the tag, then run `kitsu website deploy --env production --tag website/vX.Y.Z`. Deploying the same tag twice is a no-op: the command checks a marker recorded in S3 and skips with a warning instead of redeploying.
-- The currently live release is also recorded in S3, at `_deploy-versions/current` (its content is the deployed tag name). Deploying a tag older than that one is refused: it would silently downgrade production, so the command errors out unless it's a deliberate rollback (see below).
-- Two situations require the `--force` flag: redeploying a tag that already has its marker (`kitsu website deploy --env production --tag website/vX.Y.Z --force`), or deploying an older tag than the currently live one, i.e. a rollback. Either way, `--force` only skips that specific check; everything else (build, tests, sync, invalidation) runs as normal, and `_deploy-versions/current` is updated to the tag just deployed.
+- To release to production: `cog bump --package application --version X.Y.Z` (updates `CHANGELOG.md`, commits, tags `application/vX.Y.Z`, pushes, creates the GitHub Release), then `npm run deploy -- --env production --version application/vX.Y.Z`.
+- The currently live version is recorded as the plain-text content of a single `_version` object in the bucket (readable with `aws s3 cp s3://<bucket>/_version -`). It is only a snapshot of what is live now, not a deploy history: history lives in GitHub Releases instead.
 
 ## Project structure
 
 ```text
-website/
+application/
 ├── public/                  # static assets served as-is (favicon, placeholder images)
 ├── src/
 │   ├── components/
@@ -65,7 +68,8 @@ website/
 └── vite.config.ts / vitest.config.ts / tsconfig*.json
 ```
 
-Unit tests live in the `tests/unit/` folder at the repository root (not inside `website/`), per the standard project structure described in `CLAUDE.md`; `vitest.config.ts` is configured to discover them there.
+Unit tests live in the `tests/unit/` folder at the repository root; 
+`vitest.config.ts` is configured to discover them there.
 
 ## Content: how to edit it
 
@@ -79,7 +83,7 @@ The content currently in place (bio, service list, projects, email, social links
 
 The contact form is wired to the `contact_api` module (API Gateway + SES) described in [`../infrastructure/`](../infrastructure). The frontend calls `POST {VITE_CONTACT_API_URL}/email`, where `VITE_CONTACT_API_URL` is the module's custom domain (e.g. `https://contact.samuelsulo.it`).
 
-In sandbox/production this variable is injected automatically by `kitsu website deploy`, which reads it from `infrastructure/live`'s Terraform state instead of having it hardcoded. For local development (`npm run dev`) against an already-applied environment, copy `.env.example` to `.env.local` and set it by hand; `.env.local` must never be committed.
+In sandbox/production this variable is injected automatically by [`scripts/deploy.sh`](./scripts/deploy.sh), which reads it from `infrastructure/live`'s Terraform state instead of having it hardcoded. For local development (`npm run dev`) against an already-applied environment, copy `.env.example` to `.env.local` and set it by hand; `.env.local` must never be committed.
 
 If `VITE_CONTACT_API_URL` isn't set (e.g. the `contact_api` module hasn't been applied yet in that environment), `src/services/contactService.ts` returns an explicit error (`ContactApiNotConfiguredError`) and the form correctly shows the error state instead of a false success.
 

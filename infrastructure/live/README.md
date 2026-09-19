@@ -65,7 +65,4 @@ every environment of the project.
 
 ## Outputs
 
-No outputs defined yet: they will be added to
-[`outputs.tf`](./outputs.tf) as the modules composed in
-[`main.tf`](./main.tf) expose useful ones (e.g. site URL, resource ARNs
-to reference in the handover documentation).
+Each output is documented with a `description` in [`outputs.tf`](./outputs.tf).
