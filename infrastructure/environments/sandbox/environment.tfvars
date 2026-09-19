@@ -1,9 +1,3 @@
 environment             = "sandbox"
-environment_code        = "sbx"
 aws_account_id          = "000000000000"
-aws_role_enabled        = false
-aws_role_arn            = "arn:aws:iam::000000000000:role/SamuelSuloAdminRole"
-aws_role_external_id    = "e7173316-2830-4fcd-9000-e6482907cc64"
-s3_bucket_force_destroy = true
-domain_name             = "sbx.samuelsulo.it"
-route53_zone_id         = "Z056385545KJLOV8R9W3"
+aws_assume_role_enabled = false

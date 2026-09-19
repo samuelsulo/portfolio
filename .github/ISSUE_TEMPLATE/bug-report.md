@@ -7,9 +7,9 @@ labels: ["bug"]
 assignees: []
 ---
 
-## 🐛 Problem description
+## 🐛 Problem Description
 
-[Clearly describe what isn't working.]
+[Clearly describe what is not working.]
 
 **Steps to reproduce:**
 1. 
@@ -19,7 +19,7 @@ assignees: []
 **Expected behavior:**  
 [Describe what should happen.]
 
-**Actual behavior:**  
+**Current behavior:**  
 [Describe what actually happens.]
 
 **Screenshots or logs (if available):**  
@@ -35,7 +35,7 @@ assignees: []
 
 ---
 
-## ✅ Closing criteria
+## ✅ Closure Criteria
 
 * [ ] The bug is reproducible and confirmed  
 * [ ] The fix is implemented and validated  

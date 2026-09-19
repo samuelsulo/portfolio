@@ -1,58 +1,63 @@
 # Portfolio for Samuel Sulo
 
-This repository manages the AWS infrastructure and the showcase website of Samuel Sulo. The binding rules for whoever works on a project born
-from this template (structure, stack, security, delivery flow) are
-defined in [`CLAUDE.md`](./CLAUDE.md) and apply to every client.
+This repository manages the AWS infrastructure and the portfolio of Samuel Sulo.
 
-## Model
-
-```
-client -> project -> development -> delivery -> closure
-```
-
-Development and testing happen in a sandbox environment isolated in my AWS
-account, deletable after delivery. Production lives exclusively in the
-client's AWS account, reached only via cross-account `AssumeRole`, never
-with permanent credentials in my possession.
-
-## Structure
+## Project Structure
 
 ```
 client-project/
-├── infrastructure/   # AWS infrastructure in Terraform
+├── infrastructure/   # Infrastructure
+├── application/      # client application code (website, webapp, e-commerce,
+│                     # mobile app, ...), per the client's project type
 ├── docs/             # project documentation
-├── .githooks/        # versioned git hooks (commit-msg, pre-commit)
+├── .github/          # issue templates and CI workflows
 ├── README.md         # project README
-└── CLAUDE.md         # project guardrails
-├── website/          # Vue.js/TypeScript/Vite source of the site
-├── tests/            # unit tests (Vitest) and e2e tests (Playwright)
+├── CLAUDE.md         # project guardrails
+├── cog.toml          # cocogitto configuration (commit checks, changelog, version tags)
+├── lefthook.yml      # git hooks configuration
+└── mise.toml         # tools required by the project, including kitsu
 ```
 
-See the README of each subfolder for details:
- - [`docs/`](./docs)
- - [`infrastructure/`](./infrastructure)
- - [`website/`](./website)
+See each subfolder's README for details:
+- [`infrastructure/`](./infrastructure)
+- [`application/`](./application)
+- [`docs/`](./docs)
 
-Terraform workflow, module vendoring, environment scaffolding, git hooks
-installation and website deployment are handled by
-[kitsu](https://github.com/samuelsulo/kitsu), installed via `mise` (see
-[`mise.toml`](./mise.toml)): see its README for the full command
-reference.
+## Getting Started
 
-After cloning, install once the hook that checks commits and formats
-Terraform before every commit:
+Tools are managed by [`mise`](https://mise.jdx.dev) (see
+[`mise.toml`](./mise.toml)), including
+[`kitsu`](https://github.com/samuelsulo/kitsu), which provides the
+Terraform workflow and repository automations,
+[`lefthook`](https://lefthook.dev), which manages git hooks,
+[`cocogitto`](https://docs.cocogitto.io), which enforces Conventional
+Commits and manages the changelog and version tags of `application/`
+and `infrastructure/`, and the [GitHub CLI](https://cli.github.com)
+(`gh`), used to publish GitHub releases on bump. There is no local
+`scripts/` folder or Makefile.
+
+After cloning, install once the git hooks defined in
+[`lefthook.yml`](./lefthook.yml):
 
 ```
-kitsu hooks install
+lefthook install
 ```
 
-## Technology stack
+To release a new version of `application/` or `infrastructure/` once
+it contains code, from the repository root:
 
-- **Infrastructure**: Terraform and the official AWS provider.
+```
+cog bump --package application --auto
+cog bump --package infrastructure --auto
+```
 
-## Documentation
+This updates the `CHANGELOG.md` inside the corresponding folder
+(`application/CHANGELOG.md` or `infrastructure/CHANGELOG.md`), creates
+the bump commit and tags it `application/vX.Y.Z` or
+`infrastructure/vX.Y.Z`, per the versioning convention in
+[`CLAUDE.md`](./CLAUDE.md). It then pushes the commit and the tag, and
+creates the corresponding GitHub release with the [`gh`
+CLI](https://cli.github.com) (must be authenticated beforehand with
+`gh auth login`), using that version's changelog entry as the release
+notes.
 
-The documentation of every client project lives in `docs/` and must be kept
-up to date on every relevant change to the code or infrastructure.
-The complete rules on what it must contain are in
-[`CLAUDE.md`](./CLAUDE.md#8-mandatory-documentation).

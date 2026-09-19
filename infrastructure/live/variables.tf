@@ -1,11 +1,10 @@
-variable "project" {
-  description = "(Required) Project name used for the 'Project' tag applied to all resources."
+variable "project_slug" {
+  description = "(Required) Project slug used for the 'ProjectSlug' tag applied to all resources."
   type        = string
 }
 
-variable "project_code" {
-  description = "(Required) Project code used in the name prefix applied to all resources."
-  type        = string
+variable "project_short" {
+  description = "(Required) A short project descriptor used for resource naming."
 }
 
 variable "environment" {
@@ -15,16 +14,6 @@ variable "environment" {
   validation {
     condition     = contains(["sandbox", "production"], var.environment)
     error_message = "environment must be either \"sandbox\" or \"production\"."
-  }
-}
-
-variable "environment_code" {
-  description = "(Required) Code of the environment: 'sbx' (developer account) or 'prd' (client account)."
-  type        = string
-
-  validation {
-    condition     = contains(["sbx", "prd"], var.environment_code)
-    error_message = "environment must be either \"sbx\" or \"prd\"."
   }
 }
 
@@ -38,33 +27,16 @@ variable "aws_region" {
   type        = string
 }
 
-variable "aws_role_enabled" {
-  description = "(Optional) Whether Terraform assumes aws_role_arn to apply the configuration. Defaults to true (production: cross-account role into the client's AWS account). Set to false in sandbox to use the active credentials of my own AWS account directly, with no AssumeRole involved."
+variable "aws_assume_role_enabled" {
+  description = "(Optional) Whether Terraform assumes the `aws_role_name` role to apply the configuration. Defaults to true (production: cross-account role into the client's AWS account). Set to false in sandbox to use the active credentials of my own AWS account directly, with no AssumeRole involved."
   type        = bool
   default     = true
 }
 
-variable "aws_role_arn" {
-  description = "(Optional) ARN of the AWS IAM role assumed by Terraform to apply the configuration. Required when aws_role_enabled is true; ignored otherwise."
+variable "aws_role_name" {
+  description = "(Optional) The name of the aws role to assume."
   type        = string
-  default     = null
-
-  validation {
-    condition     = !var.aws_role_enabled || var.aws_role_arn != null
-    error_message = "aws_role_arn is required when aws_role_enabled is true."
-  }
-}
-
-variable "aws_role_external_id" {
-  description = "(Optional) External ID required by the trust policy of aws_role_arn, if the cross-account role enforces one. Required when aws_role_enabled is true, to mitigate the confused deputy problem; ignored otherwise."
-  type        = string
-  default     = null
-  sensitive   = true
-
-  validation {
-    condition     = !var.aws_role_enabled || var.aws_role_external_id != null
-    error_message = "aws_role_external_id is required when aws_role_enabled is true."
-  }
+  default     = "SamuelSuloAdminRole"
 }
 
 variable "s3_bucket_force_destroy" {

@@ -1,0 +1,11 @@
+tag_prefix = "v"
+monorepo_version_separator = "/"
+generate_mono_repository_global_tag = false
+scopes = ["infrastructure", "application", "docs", "repo", "version"]
+post_package_bump_hooks = [
+  "git push origin HEAD && git push origin {{package}}/v{{version}} && gh release create {{package}}/v{{version}} --title \"{{package}} v{{version}}\" --notes \"$(awk '/^## {{package}}\\/v{{version}}/{f=1;next}/^- - -/{if(f)exit}f' CHANGELOG.md)\"",
+]
+
+[packages]
+application = { path = "application" }
+infrastructure = { path = "infrastructure" }

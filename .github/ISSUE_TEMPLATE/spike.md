@@ -7,7 +7,7 @@ labels: ["spike"]
 assignees: []
 ---
 
-## 🔍 Goal
+## 🔍 Objective
 
 [Define the question the research must answer.]
 
@@ -19,7 +19,7 @@ assignees: []
 
 [Specify what will be explored: technologies, tools, proofs of concept, benchmarks, etc.]
 
-## 📈 Deliverables
+## 📈 Deliverable
 
 * [ ] Summary document with conclusions  
 * [ ] Prototype or PoC (if planned)  

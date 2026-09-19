@@ -1,4 +1,5 @@
 [tools]
-terraform = "1"
-"github:samuelsulo/kitsu" = "1"
-node = "24"
+"github:samuelsulo/kitsu" = "2"
+lefthook = "1"
+cocogitto = "6"
+gh = "2"

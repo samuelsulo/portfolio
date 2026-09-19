@@ -1,51 +1,49 @@
 # Environments
 
-Environment-specific Terraform input, consumed by [`../live/`](../live/),
+Environment-specific Terraform inputs, consumed by [`../live/`](../live/),
 which instead stays identical across environments. Each environment is a
-subfolder here containing exactly two files:
+subfolder here that contains exactly two files:
 
 | File | Purpose |
 |---|---|
-| `backend.hcl` | S3 backend configuration for this environment's Terraform state (`bucket`, `key`, `region`, `use_lockfile`, `encrypt`). Passed via `terraform init -backend-config=...`. |
-| `environment.tfvars` | Environment-specific variable values (account ID, role ARN, domain, budget thresholds, ...). Passed via `terraform plan/apply -var-file=...`. |
+| `backend.hcl` | S3 backend configuration for this environment's Terraform state |
+| `environment.tfvars` | Environment-specific variable values |
 
-Values shared by every environment of a project (e.g. `project`,
+The values shared by every environment of a project (e.g. `project`,
 `aws_region`) instead live in
 [`../live/project.auto.tfvars`](../live/project.auto.tfvars), loaded
 automatically by Terraform.
 
 ## `sandbox`
 
-Development/test environment, in my AWS account, deletable per project.
-`bucket_force_destroy = true` so `terraform destroy` doesn't get blocked
-on bucket contents left over from previous tests. `aws_role_enabled =
-false`: Terraform uses my active credentials directly, no `AssumeRole`
-involved.
+Development/test environment, in my AWS account, disposable per project.
+`aws_assume_role_enabled = false`: Terraform uses my active credentials 
+directly, no `AssumeRole` involved.
 
 ## `production`
 
 The AWS account owned by the client. Created only once the client's
-cross-account role exists (`aws_role_enabled` stays at its `true`
-default, so `aws_role_arn` and `aws_role_external_id` are required).
-Terraform assumes the role natively on every `init`/`plan`/`apply` via
-the provider's `assume_role` block. Never applied without a manually
-reviewed `plan` first. Not present until the project reaches that stage.
+cross-account role exists (`aws_assume_role_enabled` stays at its default `true`
+). Terraform assumes the role natively on every `init`/`plan`/`apply` through
+the provider's `assume_role` block. Never applied without a manually reviewed
+`plan` first.
 
-## Adding an environment
+Its `backend.hcl` additionally carries its own static `assume_role` block
+(the role that can read/write the state bucket in the client's account):
+unlike the provider's, this one cannot be conditioned on a variable, since
+backend configuration is loaded before variables exist, see
+[`../live/README.md#backend`](../live/README.md#backend).
+
+## Adding an Environment
 
 ```
-kitsu terraform scaffold environment --env <sandbox|production> --account-id=<12-digit-account-id>
+kitsu terraform scaffold environment --env <environment> --account-id <12-digit-account-id>
 ```
 
-Generates `environment.tfvars` and `backend.hcl` for the given AWS account,
-reading `project`/`aws_region` from `../live/project.auto.tfvars`.
+Generates `environment.tfvars` and `backend.hcl` for the given AWS
+account, reading `project`/`aws_region` from `../live/project.auto.tfvars`.
 
 ## Usage
 
-Selected via the `--env` flag on every
-[kitsu](https://github.com/samuelsulo/kitsu) terraform command (default
-`sandbox`):
-
-```
-kitsu terraform plan --env production
-```
+Selected via the `--env` flag on every `kitsu terraform` command (default
+`sandbox`).

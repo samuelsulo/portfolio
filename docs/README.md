@@ -1,21 +1,34 @@
 # Documentation
 
-This folder collects all the project documentation.
+This folder collects all project documentation.
 
-## Technical documentation ([technical/](technical/))
+## Technical Documentation ([technical/](technical/))
 
-Documents related to the technical side of the project.
+Documents related to the technical part of the project.
 
-## Architectural documents ([architecture/](architecture/))
+## Architectural Documents ([architecture/](architecture/))
 
 Documents related to the project's architectural decisions.
 
-## Functional documents ([functional/](functional/))
+## Functional Documents ([functional/](functional/))
 
 Documents related to the requirements and functional specifications.
 
-## Personal brand mark ([logo/](logo/))
+## Deployment Guide ([deployment/](deployment/))
 
-Design documentation for the Kitsune personal brand mark: graphic
-structure, documented color variants, SVG assets and a brand guidelines
-PDF.
+Documents describing how to build, configure and deploy the
+infrastructure and the application into an environment.
+
+## Operations Guide ([operations/](operations/))
+
+Documents describing how to monitor, maintain and troubleshoot the
+project once it is live.
+
+## Handover Documentation ([handover/](handover/))
+
+The project closure document: what was delivered, where access and
+credentials live, known issues, and remaining work.
+
+## Brand ([brand/](brand/))
+
+The client's brand assets: logo and business card.

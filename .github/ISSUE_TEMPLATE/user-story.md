@@ -17,7 +17,7 @@ assignees: []
 
 ## 🧾 Description / Context
 
-[Describe the context, problem or goal that motivates this user story.]
+[Describe the context, problem or objective that motivates this user story.]
 
 ---
 
@@ -32,5 +32,5 @@ assignees: []
 ## 📋 Definition of Done
 
 * [ ] Code completed, tested and documented  
-* [ ] Pull request approved and merged  
-* [ ] Demo or validation performed
+* [ ] Pull request approved and merge completed  
+* [ ] Demo or validation carried out

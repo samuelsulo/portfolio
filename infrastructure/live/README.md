@@ -1,87 +1,71 @@
 # Live
 
-The root Terraform module actually applied by every environment. The files
-here are shared: `sandbox` and `production` run exactly the same
-configuration and differ only in the values provided by
+The root Terraform module actually applied by every environment. The
+files here are shared: each environment runs exactly the same
+configuration and differs only in the values supplied by
 [`../environments/`](../environments).
 
 ## Files
 
 - [`versions.tf`](./versions.tf): minimum Terraform and provider versions
   required.
-- [`backend.tf`](./backend.tf): the `backend "s3"` block, left without
-  values.
+- [`backend.tf`](./backend.tf): `backend "s3"` block, left without values.
 - [`providers.tf`](./providers.tf): default tags and AWS provider
   configuration.
 - [`main.tf`](./main.tf): shared locals and composition of the modules
   from [`../modules/`](../modules).
-- [`variables.tf`](./variables.tf) / [`outputs.tf`](./outputs.tf): input
-  and output of the root module.
+- [`variables.tf`](./variables.tf) / [`outputs.tf`](./outputs.tf): inputs
+  and outputs of the root module.
 
-## What it does
+## What It Does
 
 - Configures two AWS providers: the default one (region = `var.aws_region`)
-  and a `us_east_1` alias, needed because the ACM certificates used by
-  CloudFront must exist in `us-east-1` regardless of the stack's region.
+  and a `us_east_1` needed for specific resources like ACM certificates for 
+  CloudFront.
 - Both providers set `allowed_account_ids = [var.aws_account_id]` as a
-  guard against applying to the wrong account, and an `assume_role` block
-  conditioned on `aws_role_enabled` (`true` by default, i.e. production:
+  guard against an apply on the wrong account, and an `assume_role` block
+  conditioned on `aws_assume_role_enabled` (`true` by default, i.e. production:
   cross-account role in the client's account; set to `false` in sandbox,
-  where my active account's credentials are used directly).
-- Applies the mandatory tags (`Project`, `Environment`,
-  `ManagedBy = "terraform"`) to every resource via `default_tags`.
+  where my own account's active credentials are used directly).
+- Applies the mandatory tags to every resource via `default_tags`.
 - Instantiates the modules from [`../modules/`](../modules), as the client
-  project requires them (no module present yet: see CLAUDE.md §5 for the
-  rules on module provenance and usage).
+  project requires them.
 
 ## Backend
 
 The `backend "s3"` block is intentionally left empty: the real values
-(bucket, key, region, `use_lockfile`, `encrypt`) come from each
-environment's `backend.hcl` at init time, so `sandbox` and `production`
-share this file but write their state to different buckets.
+(bucket, key, region, `use_lockfile`, `encrypt`, and, in production, an
+`assume_role` block for state access) come from each environment's
+`backend.hcl` at init time, so `sandbox` and `production` share this file
+but write state to different buckets. Backend configuration cannot
+reference variables, locals, or `dynamic` blocks (it is loaded before the
+rest of the configuration), so this `assume_role` is separate from, and
+must be kept in sync with, the one in [`providers.tf`](./providers.tf),
+which uses the actual `var.aws_role_name` and only governs access to
+resources, not to the state file itself.
 
 ```
-terraform init -backend-config=../environments/<env>/backend.hcl
+kitsu terraform init --env <environment>
 ```
-
-[kitsu](https://github.com/samuelsulo/kitsu) wraps this:
-`kitsu terraform init --env <sandbox|production>`.
 
 ## Usage
 
-Always go through kitsu, never run `terraform` directly in this folder:
-it's the one that takes care of `-backend-config` and `-var-file` per
-environment:
+Always go through `kitsu terraform` (see [`../README.md`](../README.md)),
+never run `terraform` directly in this folder: it is the one that takes
+care of `-backend-config` and `-var-file` per environment:
 
-```
-kitsu terraform init --env sandbox
-kitsu terraform plan --env sandbox
-kitsu terraform apply --env sandbox
-```
+## Inputs
 
-## Input
+Each variable is documented with a `description` in
+[`variables.tf`](./variables.tf), the source of truth for inputs. Values
+are supplied per environment via
+`../environments/<env>/environment.tfvars`, plus
+[`project.auto.tfvars`](./project.auto.tfvars) for the values shared by
+every environment of the project.
 
-Full definitions in [`variables.tf`](./variables.tf); values are provided
-per environment via `../environments/<env>/environment.tfvars`, plus
-[`project.auto.tfvars`](./project.auto.tfvars) for values shared by every
-environment of the project.
+## Outputs
 
-| Name | Description | Required |
-|---|---|---|
-| `project` | Project name, applied as the `Project` tag. | yes |
-| `project_code` | Project code used in the resource naming prefix. | yes |
-| `environment` | `sandbox` or `production`. | yes |
-| `environment_code` | `sbx` or `prd`, used in the resource naming prefix. | yes |
-| `aws_account_id` | ID of the target AWS account (guard against applying to the wrong account). | yes |
-| `aws_region` | Target AWS region. | yes |
-| `aws_role_enabled` | Whether to assume `aws_role_arn`. Default `true` (production); set to `false` in sandbox. | no (default `true`) |
-| `aws_role_arn` | ARN of the cross-account role to assume. Required when `aws_role_enabled = true`, ignored otherwise. | yes if `aws_role_enabled = true` |
-| `aws_role_external_id` | External ID required by `aws_role_arn`'s trust policy. Required when `aws_role_enabled = true`, ignored otherwise. | yes if `aws_role_enabled = true` |
-
-## Output
-
-No output defined yet: they will be added in
+No outputs defined yet: they will be added to
 [`outputs.tf`](./outputs.tf) as the modules composed in
-[`main.tf`](./main.tf) expose useful ones (e.g. site URL, ARNs of
-resources to reference in the handover documentation).
+[`main.tf`](./main.tf) expose useful ones (e.g. site URL, resource ARNs
+to reference in the handover documentation).
