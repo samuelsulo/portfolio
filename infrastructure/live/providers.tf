@@ -1,8 +1,16 @@
 locals {
+  # project_slug is "<client_slug>-<business_slug>-<project_type>", with
+  # business_slug optional ("<client_slug>-<project_type>").
+  project_slug_parts = split("-", var.project_slug)
+  client_slug        = local.project_slug_parts[0]
+  business_slug      = length(local.project_slug_parts) > 2 ? local.project_slug_parts[1] : "N/A"
+
   default_tags = {
-    Project     = var.project
-    Environment = var.environment
-    ManagedBy   = "terraform"
+    ClientSlug   = local.client_slug
+    BusinessSlug = local.business_slug
+    ProjectSlug  = var.project_slug
+    Environment  = var.environment
+    ManagedBy    = "terraform"
   }
 }
 
@@ -15,11 +23,10 @@ provider "aws" {
   allowed_account_ids = [var.aws_account_id]
 
   dynamic "assume_role" {
-    for_each = var.aws_role_enabled ? [var.aws_role_arn] : []
+    for_each = var.aws_assume_role_enabled ? [var.aws_role_name] : []
 
     content {
-      role_arn    = assume_role.value
-      external_id = var.aws_role_external_id
+      role_arn = "arn:aws:iam::${var.aws_account_id}:role/${assume_role.value}"
     }
   }
 
@@ -30,10 +37,8 @@ provider "aws" {
   }
 }
 
-# Secondary provider pinned to us-east-1: required by AWS exclusively for
-# ACM certificates attached to CloudFront, regardless of which region
-# var.aws_region uses for the rest of the stack. Same account, same
-# AssumeRole (if any) as the main provider.
+# Secondary provider pinned to us-east-1: required by specific AWS services. 
+# Same account, same AssumeRole (if any) as the main provider.
 provider "aws" {
   alias  = "us_east_1"
   region = "us-east-1"
@@ -41,11 +46,10 @@ provider "aws" {
   allowed_account_ids = [var.aws_account_id]
 
   dynamic "assume_role" {
-    for_each = var.aws_role_enabled ? [var.aws_role_arn] : []
+    for_each = var.aws_assume_role_enabled ? [var.aws_role_name] : []
 
     content {
-      role_arn    = assume_role.value
-      external_id = var.aws_role_external_id
+      role_arn = "arn:aws:iam::${var.aws_account_id}:role/${assume_role.value}"
     }
   }
 

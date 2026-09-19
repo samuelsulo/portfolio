@@ -1,7 +1,7 @@
 ---
 name: ⚙️ Technical Story
 type: Technical Story
-about: Describes a feature from a technical CE / CD point of view.
+about: Describes a feature from a technical point of view, CE / CD side.
 title: "[Technical Story] "
 labels: ["technical-story"]
 assignees: []
@@ -10,7 +10,7 @@ assignees: []
 ## ⚙️ Technical Story
 
 **As a**: [Role or persona]  
-**I want to**: [Technical or functional goal]  
+**I want to**: [Technical or functional objective]  
 **So that**: [Reason or business/technical value]
 
 ---
@@ -18,11 +18,11 @@ assignees: []
 ## 🧾 Description / Context
 
 **Background or problem statement:**  
-[Describe the context, motivation, or technical problem that justifies this story.  
-Explain *why* it's needed and *what* it solves in the project's lifecycle.]
+[Describe the context, motivation or technical problem that justifies this story.  
+Explain *why* it is needed and *what* it solves in the project's lifecycle.]
 
 **Technical motivation or dependencies:**  
-* [List any dependencies on other stories or activities]  
+* [List any dependencies on other stories or tasks]  
 * [Specify whether this story is an "enabler" or a prerequisite for other implementations]  
 
 **Related features or systems affected:**  
@@ -46,7 +46,7 @@ This story will be completed by implementing the following technical steps:
 
 ## ✅ Acceptance Criteria
 
-* [ ] [Criterion 1, verifiable outcome or measurable condition]  
+* [ ] [Criterion 1, verifiable result or measurable condition]  
 * [ ] [Criterion 2, test, output or expected behavior]  
 * [ ] [Criterion 3, any documentation or validation completed]
 
@@ -57,12 +57,12 @@ This story will be completed by implementing the following technical steps:
 * [ ] All associated tasks are completed and merged into `develop` or the main branch.  
 * [ ] The code is validated, tested and compliant with the defined standards (lint/test/build).  
 * [ ] The technical documentation is updated (`README.md`, Wiki or code comments).  
-* [ ] Security, performance and compliance checks have been performed where applicable.  
+* [ ] Security, performance and compliance checks have been carried out where applicable.  
 
 ---
 
 ### 🔗 References (optional)
 
 * [Supporting technical documents or diagrams]  
-* [Links to architecture, repos, company standards or API reference]  
+* [Links to architectures, repos, company standards or API references]  
 * [Any design notes or links to relevant pull requests]

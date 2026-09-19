@@ -1,39 +1,24 @@
 # Workflows
 
-GitHub Actions workflows for automated checks on the Terraform
-infrastructure. This folder currently contains no workflow yet: the checks
-described in [`CLAUDE.md` §5](../../CLAUDE.md#5-terraform-rules)
-(`terraform validate` and a clean `plan` before every `apply`) are today
-run manually via [kitsu](https://github.com/samuelsulo/kitsu)
-(`kitsu terraform validate`, `kitsu terraform fmt-check`,
-`kitsu terraform plan`, ...).
+GitHub Actions workflows for this project's CI.
 
-## Allowed scope
+Most workflows here are stack- and provider-specific: they are added
+project by project as `application/` and `infrastructure/` are
+scaffolded (build/test/deploy pipeline for the chosen application
+stack, Terraform plan/apply for the chosen cloud provider).
 
-A workflow introduced in this folder may:
+## Available Workflows
 
-- Run `kitsu terraform fmt-check` and `kitsu terraform validate --env sandbox`
-  on every pull request, as a pre-merge check.
-- Run `kitsu terraform plan --env sandbox` to show the planned execution,
-  without applying it.
+| Workflow | File | Runs on | Purpose |
+|---|---|---|---|
 
-A workflow must **never**:
+## Conventions
 
-- Run `kitsu terraform apply` (or `apply-auto`) on `environments/production`:
-  every `apply` in production requires a manually reviewed plan, not just by
-  the AI assistant (see [`CLAUDE.md` §5](../../CLAUDE.md#5-terraform-rules)
-  and [§9](../../CLAUDE.md#9-changes-that-require-manual-review)).
-- Contain AWS credentials in plain text in the workflow file: credentials
-  must be read from secrets configured on GitHub, never committed.
-
-Introducing a workflow that automates `apply` on `production`, even behind
-manual approval within the workflow itself, is a change to the deployment
-flow and must be flagged and agreed upon before being implemented (see
-[`CLAUDE.md` §9](../../CLAUDE.md#9-changes-that-require-manual-review)).
-
-## Adding a workflow
-
-A new `.yaml` file in this folder is picked up automatically by
-GitHub Actions, with no further configuration. When adding one, update
-this README with the workflow's name, trigger (e.g. `pull_request`) and
-what it checks.
+- List every workflow in the table above as soon as it is added: do
+  not leave a workflow undocumented.
+- Commit conventions (Conventional Commits, allowed scopes) are
+  enforced locally via [`lefthook`](../../lefthook.yml) and
+  [`cocogitto`](../../cog.toml) (see the root
+  [`README.md`](../../README.md)). Since local hooks can be bypassed,
+  add a workflow that runs `cog check` on pull requests to enforce the
+  same rule in CI.

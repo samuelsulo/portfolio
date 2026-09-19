@@ -13,16 +13,16 @@ assignees: []
 
 ---
 
-## 🎯 Goal
+## 🎯 Objective
 
-[Describe the main goal of this Epic. What is the business value or the problem it solves?]
+[Describe the main objective of this Epic. What is the business value or the problem it solves?]
 
 ---
 
 ## 🧾 Description / Context
 
 **Background:**  
-[Provide the context needed to understand this Epic. Why does it matter? What is the current situation?]
+[Provide the context needed to understand this Epic. Why is it important? What is the current situation?]
 
 **Target users:**  
 * [User type 1]
@@ -47,7 +47,7 @@ assignees: []
 
 ## 🧩 Breakdown (Story / Task / Spike)
 
-*List the User Story, Technical Task or Spike items that make up this Epic:*
+*List the User Story, Technical Task or Spike items that compose this Epic:*
 
 | Type | Title | Issue |
 |------|--------|-------|
@@ -69,7 +69,7 @@ assignees: []
 ## 📊 Definition of Done (Epic Level)
 
 * [ ] All associated User Story and Task items are completed
-* [ ] Feature validated in staging/test environment
+* [ ] Feature validated in the staging/test environment
 * [ ] Documentation updated
 * [ ] Stakeholders have approved the final result
 

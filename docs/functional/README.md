@@ -1,4 +1,4 @@
-# Functional documentation
+# Functional Documentation
 
 This folder contains the project's functional documentation.
 

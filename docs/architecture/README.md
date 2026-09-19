@@ -1,4 +1,4 @@
-## Architectural documentation
+## Architectural Documentation
 
 This folder contains the project's architectural documentation.
 
