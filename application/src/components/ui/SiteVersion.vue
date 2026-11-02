@@ -3,7 +3,7 @@
  * SiteVersion
  *
  * Displays the deployed version of the site, injected at build time via the
- * VITE_APP_VERSION environment variable (see scripts/deploy-website.sh): a
+ * VITE_APP_VERSION environment variable (see scripts/deploy.sh): a
  * release tag in production, the deployed commit's short SHA in every other
  * environment. Falls back to "dev" when unset, i.e. a local dev server run
  * where no version is injected.

@@ -5,8 +5,8 @@ import type { ContactFormValues } from '@/utils/validation'
  *
  * Backed by the `contact_api` module (API Gateway + SES), whose custom
  * domain is injected at build time as `VITE_CONTACT_API_URL` (see
- * `scripts/deploy-website.sh`, which reads it from the Terraform state of
- * `infrastructure/live` rather than hardcoding it). The module exposes a
+ * `scripts/deploy.sh`, which reads it from the outputs of the website stack
+ * in `infrastructure/live` rather than hardcoding it). The module exposes a
  * single operation, `POST /email`, so it's appended here rather than baked
  * into the configured base URL.
  *
