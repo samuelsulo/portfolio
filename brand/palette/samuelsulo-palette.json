@@ -175,6 +175,28 @@
         70
       ],
       "use": "Text on light."
+    },
+    "ink-soft": {
+      "name": "Ink, soft",
+      "hex": "#3D4760",
+      "cmyk": [
+        75,
+        60,
+        35,
+        40
+      ],
+      "use": "Body text on light surfaces."
+    },
+    "ink-faint": {
+      "name": "Ink, faint",
+      "hex": "#536078",
+      "cmyk": [
+        70,
+        55,
+        35,
+        30
+      ],
+      "use": "Captions and secondary text on light surfaces."
     }
   }
 }

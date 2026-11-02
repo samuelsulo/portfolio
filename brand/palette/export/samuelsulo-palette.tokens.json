@@ -259,6 +259,40 @@
           "cmykIsRecipe": true
         }
       }
+    },
+    "ink-soft": {
+      "$value": "#3D4760",
+      "$type": "color",
+      "$description": "Body text on light surfaces.",
+      "$extensions": {
+        "brand-kit": {
+          "name": "Ink, soft",
+          "cmyk": [
+            75,
+            60,
+            35,
+            40
+          ],
+          "cmykIsRecipe": true
+        }
+      }
+    },
+    "ink-faint": {
+      "$value": "#536078",
+      "$type": "color",
+      "$description": "Captions and secondary text on light surfaces.",
+      "$extensions": {
+        "brand-kit": {
+          "name": "Ink, faint",
+          "cmyk": [
+            70,
+            55,
+            35,
+            30
+          ],
+          "cmykIsRecipe": true
+        }
+      }
     }
   },
   "role": {

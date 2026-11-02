@@ -15,6 +15,8 @@
   --slate: #A3A9BD;
   --graphite: #7B8197;
   --ink: #0B1220;
+  --ink-soft: #3D4760;
+  --ink-faint: #536078;
 
   --brand-primary: var(--deep-cyan);
   --brand-dark: var(--void);

@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1270" viewBox="0 0 1200 1270">
-<rect width="1200" height="1270" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1630" viewBox="0 0 1200 1630">
+<rect width="1200" height="1630" fill="#ffffff"/>
 <text x="56" y="78" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="34" font-weight="700" fill="#16181d">Samuel Sulo</text>
 <text x="56" y="112" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16" fill="#5a6070">Palette 1.0.0</text>
 <rect x="56" y="150" width="201.6" height="340" rx="12" fill="#f4f5f7" stroke="#dfe2e8"/>
@@ -138,4 +138,21 @@
 <text x="958.4" y="1106" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">CMYK 90 · 75 · 50 · 70</text>
 <text x="958.4" y="1132" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8a90a0">ink</text>
 <text x="958.4" y="1158" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">Text on light.</text>
+<rect x="56" y="1230" width="201.6" height="340" rx="12" fill="#f4f5f7" stroke="#dfe2e8"/>
+<path d="M56 1242a12 12 0 0 1 12-12h177.6a12 12 0 0 1 12 12v138H56z" fill="#3D4760"/>
+<text x="72" y="1360" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">Ink, soft</text>
+<text x="72" y="1420" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#16181d">#3D4760</text>
+<text x="72" y="1444" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">RGB 61 · 71 · 96</text>
+<text x="72" y="1466" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">CMYK 75 · 60 · 35 · 40</text>
+<text x="72" y="1492" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8a90a0">ink-soft</text>
+<text x="72" y="1518" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">Body text on light surfaces.</text>
+<rect x="277.6" y="1230" width="201.6" height="340" rx="12" fill="#f4f5f7" stroke="#dfe2e8"/>
+<path d="M277.6 1242a12 12 0 0 1 12-12h177.6a12 12 0 0 1 12 12v138H277.6z" fill="#536078"/>
+<text x="293.6" y="1360" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">Ink, faint</text>
+<text x="293.6" y="1420" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#16181d">#536078</text>
+<text x="293.6" y="1444" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">RGB 83 · 96 · 120</text>
+<text x="293.6" y="1466" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">CMYK 70 · 55 · 35 · 30</text>
+<text x="293.6" y="1492" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8a90a0">ink-faint</text>
+<text x="293.6" y="1518" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">Captions and secondary text</text>
+<text x="293.6" y="1534" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">on light surfaces.</text>
 </svg>
