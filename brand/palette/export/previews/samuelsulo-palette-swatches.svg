@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1630" viewBox="0 0 1200 1630">
+<rect width="1200" height="1630" fill="#ffffff"/>
+<text x="56" y="78" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="34" font-weight="700" fill="#16181d">Samuel Sulo</text>
+<text x="56" y="112" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16" fill="#5a6070">Palette 1.0.0</text>
+<rect x="56" y="150" width="201.6" height="340" rx="12" fill="#f4f5f7" stroke="#dfe2e8"/>
+<path d="M56 162a12 12 0 0 1 12-12h177.6a12 12 0 0 1 12 12v138H56z" fill="#006D85"/>
+<text x="72" y="280" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">Deep cyan</text>
+<text x="72" y="340" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#16181d">#006D85</text>
+<text x="72" y="364" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">RGB 0 · 109 · 133</text>
+<text x="72" y="386" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">CMYK 100 · 35 · 25 · 35</text>
+<text x="72" y="412" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8a90a0">primary · deep-cyan</text>
+<text x="72" y="438" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">Primary colour. The mark and</text>
+<text x="72" y="454" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">text accents on light</text>
+<text x="72" y="470" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">surfaces (light theme).</text>
+<rect x="277.6" y="150" width="201.6" height="340" rx="12" fill="#f4f5f7" stroke="#dfe2e8"/>
+<path d="M277.6 162a12 12 0 0 1 12-12h177.6a12 12 0 0 1 12 12v138H277.6z" fill="#05060A"/>
+<text x="293.6" y="280" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">Void</text>
+<text x="293.6" y="340" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#16181d">#05060A</text>
+<text x="293.6" y="364" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">RGB 5 · 6 · 10</text>
+<text x="293.6" y="386" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">CMYK 60 · 45 · 35 · 100</text>
+<text x="293.6" y="412" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8a90a0">dark · void</text>
+<text x="293.6" y="438" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">Dark background of the site,</text>
+<text x="293.6" y="454" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">the card and the negative</text>
+<text x="293.6" y="470" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">logo.</text>
+<rect x="499.2" y="150" width="201.6" height="340" rx="12" fill="#f4f5f7" stroke="#dfe2e8"/>
+<path d="M499.2 162a12 12 0 0 1 12-12h177.6a12 12 0 0 1 12 12v138H499.2z" fill="#35E6FF"/>
+<text x="515.2" y="280" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#16181d">Neon cyan</text>
+<text x="515.2" y="340" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#16181d">#35E6FF</text>
+<text x="515.2" y="364" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">RGB 53 · 230 · 255</text>
+<text x="515.2" y="386" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">CMYK 70 · 0 · 8 · 0</text>
+<text x="515.2" y="412" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8a90a0">accent · neon-cyan</text>
+<text x="515.2" y="438" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">The accent on dark: links,</text>
+<text x="515.2" y="454" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">glows and the mid tone of</text>
+<text x="515.2" y="470" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">the mark. Never on light</text>
+<rect x="720.8" y="150" width="201.6" height="340" rx="12" fill="#f4f5f7" stroke="#dfe2e8"/>
+<path d="M720.8 162a12 12 0 0 1 12-12h177.6a12 12 0 0 1 12 12v138H720.8z" fill="#E6EBF3"/>
+<text x="736.8" y="280" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#16181d">Mist</text>
+<text x="736.8" y="340" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#16181d">#E6EBF3</text>
+<text x="736.8" y="364" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">RGB 230 · 235 · 243</text>
+<text x="736.8" y="386" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">CMYK 8 · 4 · 2 · 0</text>
+<text x="736.8" y="412" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8a90a0">light · mist</text>
+<text x="736.8" y="438" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">Default light background</text>
+<text x="736.8" y="454" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">(never pure white).</text>
+<rect x="942.4" y="150" width="201.6" height="340" rx="12" fill="#f4f5f7" stroke="#dfe2e8"/>
+<path d="M942.4 162a12 12 0 0 1 12-12h177.6a12 12 0 0 1 12 12v138H942.4z" fill="#B24BF3"/>
+<text x="958.4" y="280" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">Neon violet</text>
+<text x="958.4" y="340" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#16181d">#B24BF3</text>
+<text x="958.4" y="364" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">RGB 178 · 75 · 243</text>
+<text x="958.4" y="386" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">CMYK 60 · 75 · 0 · 0</text>
+<text x="958.4" y="412" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8a90a0">muted · neon-violet</text>
+<text x="958.4" y="438" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">Second brand color: the</text>
+<text x="958.4" y="454" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">shaded side of the mark and</text>
+<text x="958.4" y="470" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">secondary highlights on</text>
+<rect x="56" y="510" width="201.6" height="340" rx="12" fill="#f4f5f7" stroke="#dfe2e8"/>
+<path d="M56 522a12 12 0 0 1 12-12h177.6a12 12 0 0 1 12 12v138H56z" fill="#7DF3FF"/>
+<text x="72" y="640" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#16181d">Light cyan</text>
+<text x="72" y="700" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#16181d">#7DF3FF</text>
+<text x="72" y="724" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">RGB 125 · 243 · 255</text>
+<text x="72" y="746" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">CMYK 45 · 0 · 5 · 0</text>
+<text x="72" y="772" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8a90a0">neon-cyan-light</text>
+<text x="72" y="798" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">The light tone of the mark</text>
+<text x="72" y="814" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">on dark surfaces.</text>
+<rect x="277.6" y="510" width="201.6" height="340" rx="12" fill="#f4f5f7" stroke="#dfe2e8"/>
+<path d="M277.6 522a12 12 0 0 1 12-12h177.6a12 12 0 0 1 12 12v138H277.6z" fill="#45F0A6"/>
+<text x="293.6" y="640" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#16181d">Neon green</text>
+<text x="293.6" y="700" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#16181d">#45F0A6</text>
+<text x="293.6" y="724" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">RGB 69 · 240 · 166</text>
+<text x="293.6" y="746" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">CMYK 60 · 0 · 55 · 0</text>
+<text x="293.6" y="772" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8a90a0">neon-green</text>
+<text x="293.6" y="798" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">The nose of the mark and</text>
+<text x="293.6" y="814" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">success states on dark.</text>
+<rect x="499.2" y="510" width="201.6" height="340" rx="12" fill="#f4f5f7" stroke="#dfe2e8"/>
+<path d="M499.2 522a12 12 0 0 1 12-12h177.6a12 12 0 0 1 12 12v138H499.2z" fill="#005568"/>
+<text x="515.2" y="640" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">Deep cyan, strong</text>
+<text x="515.2" y="700" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#16181d">#005568</text>
+<text x="515.2" y="724" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">RGB 0 · 85 · 104</text>
+<text x="515.2" y="746" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">CMYK 100 · 40 · 30 · 50</text>
+<text x="515.2" y="772" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8a90a0">deep-cyan-strong</text>
+<text x="515.2" y="798" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">The light tone of the mark</text>
+<text x="515.2" y="814" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">on light surfaces.</text>
+<rect x="720.8" y="510" width="201.6" height="340" rx="12" fill="#f4f5f7" stroke="#dfe2e8"/>
+<path d="M720.8 522a12 12 0 0 1 12-12h177.6a12 12 0 0 1 12 12v138H720.8z" fill="#7A2BC0"/>
+<text x="736.8" y="640" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">Deep violet</text>
+<text x="736.8" y="700" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#16181d">#7A2BC0</text>
+<text x="736.8" y="724" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">RGB 122 · 43 · 192</text>
+<text x="736.8" y="746" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">CMYK 75 · 90 · 0 · 0</text>
+<text x="736.8" y="772" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8a90a0">deep-violet</text>
+<text x="736.8" y="798" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">The shaded tone of the mark</text>
+<text x="736.8" y="814" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">on light surfaces.</text>
+<rect x="942.4" y="510" width="201.6" height="340" rx="12" fill="#f4f5f7" stroke="#dfe2e8"/>
+<path d="M942.4 522a12 12 0 0 1 12-12h177.6a12 12 0 0 1 12 12v138H942.4z" fill="#067650"/>
+<text x="958.4" y="640" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">Deep green</text>
+<text x="958.4" y="700" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#16181d">#067650</text>
+<text x="958.4" y="724" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">RGB 6 · 118 · 80</text>
+<text x="958.4" y="746" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">CMYK 85 · 20 · 75 · 25</text>
+<text x="958.4" y="772" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8a90a0">deep-green</text>
+<text x="958.4" y="798" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">The nose of the mark on</text>
+<text x="958.4" y="814" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">light surfaces.</text>
+<rect x="56" y="870" width="201.6" height="340" rx="12" fill="#f4f5f7" stroke="#dfe2e8"/>
+<path d="M56 882a12 12 0 0 1 12-12h177.6a12 12 0 0 1 12 12v138H56z" fill="#10131C"/>
+<text x="72" y="1000" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">Surface</text>
+<text x="72" y="1060" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#16181d">#10131C</text>
+<text x="72" y="1084" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">RGB 16 · 19 · 28</text>
+<text x="72" y="1106" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">CMYK 62 · 48 · 38 · 94</text>
+<text x="72" y="1132" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8a90a0">surface</text>
+<text x="72" y="1158" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">Panels and the QR plate on</text>
+<text x="72" y="1174" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">dark.</text>
+<rect x="277.6" y="870" width="201.6" height="340" rx="12" fill="#f4f5f7" stroke="#dfe2e8"/>
+<path d="M277.6 882a12 12 0 0 1 12-12h177.6a12 12 0 0 1 12 12v138H277.6z" fill="#E9EBF3"/>
+<text x="293.6" y="1000" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#16181d">Snow</text>
+<text x="293.6" y="1060" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#16181d">#E9EBF3</text>
+<text x="293.6" y="1084" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">RGB 233 · 235 · 243</text>
+<text x="293.6" y="1106" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">CMYK 8 · 5 · 3 · 0</text>
+<text x="293.6" y="1132" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8a90a0">snow</text>
+<text x="293.6" y="1158" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">Text on dark.</text>
+<rect x="499.2" y="870" width="201.6" height="340" rx="12" fill="#f4f5f7" stroke="#dfe2e8"/>
+<path d="M499.2 882a12 12 0 0 1 12-12h177.6a12 12 0 0 1 12 12v138H499.2z" fill="#A3A9BD"/>
+<text x="515.2" y="1000" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#16181d">Slate</text>
+<text x="515.2" y="1060" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#16181d">#A3A9BD</text>
+<text x="515.2" y="1084" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">RGB 163 · 169 · 189</text>
+<text x="515.2" y="1106" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">CMYK 40 · 28 · 15 · 5</text>
+<text x="515.2" y="1132" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8a90a0">slate</text>
+<text x="515.2" y="1158" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">Secondary text on dark.</text>
+<rect x="720.8" y="870" width="201.6" height="340" rx="12" fill="#f4f5f7" stroke="#dfe2e8"/>
+<path d="M720.8 882a12 12 0 0 1 12-12h177.6a12 12 0 0 1 12 12v138H720.8z" fill="#7B8197"/>
+<text x="736.8" y="1000" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">Graphite</text>
+<text x="736.8" y="1060" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#16181d">#7B8197</text>
+<text x="736.8" y="1084" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">RGB 123 · 129 · 151</text>
+<text x="736.8" y="1106" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">CMYK 50 · 38 · 25 · 15</text>
+<text x="736.8" y="1132" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8a90a0">graphite</text>
+<text x="736.8" y="1158" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">Tertiary text and captions</text>
+<text x="736.8" y="1174" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">on dark.</text>
+<rect x="942.4" y="870" width="201.6" height="340" rx="12" fill="#f4f5f7" stroke="#dfe2e8"/>
+<path d="M942.4 882a12 12 0 0 1 12-12h177.6a12 12 0 0 1 12 12v138H942.4z" fill="#0B1220"/>
+<text x="958.4" y="1000" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">Ink</text>
+<text x="958.4" y="1060" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#16181d">#0B1220</text>
+<text x="958.4" y="1084" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">RGB 11 · 18 · 32</text>
+<text x="958.4" y="1106" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">CMYK 90 · 75 · 50 · 70</text>
+<text x="958.4" y="1132" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8a90a0">ink</text>
+<text x="958.4" y="1158" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">Text on light.</text>
+<rect x="56" y="1230" width="201.6" height="340" rx="12" fill="#f4f5f7" stroke="#dfe2e8"/>
+<path d="M56 1242a12 12 0 0 1 12-12h177.6a12 12 0 0 1 12 12v138H56z" fill="#3D4760"/>
+<text x="72" y="1360" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">Ink, soft</text>
+<text x="72" y="1420" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#16181d">#3D4760</text>
+<text x="72" y="1444" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">RGB 61 · 71 · 96</text>
+<text x="72" y="1466" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">CMYK 75 · 60 · 35 · 40</text>
+<text x="72" y="1492" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8a90a0">ink-soft</text>
+<text x="72" y="1518" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">Body text on light surfaces.</text>
+<rect x="277.6" y="1230" width="201.6" height="340" rx="12" fill="#f4f5f7" stroke="#dfe2e8"/>
+<path d="M277.6 1242a12 12 0 0 1 12-12h177.6a12 12 0 0 1 12 12v138H277.6z" fill="#536078"/>
+<text x="293.6" y="1360" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">Ink, faint</text>
+<text x="293.6" y="1420" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#16181d">#536078</text>
+<text x="293.6" y="1444" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">RGB 83 · 96 · 120</text>
+<text x="293.6" y="1466" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#5a6070">CMYK 70 · 55 · 35 · 30</text>
+<text x="293.6" y="1492" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8a90a0">ink-faint</text>
+<text x="293.6" y="1518" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">Captions and secondary text</text>
+<text x="293.6" y="1534" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#5a6070">on light surfaces.</text>
+</svg>

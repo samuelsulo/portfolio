@@ -1,0 +1,472 @@
+{
+  "checks": [
+    {
+      "status": "pass",
+      "id": "print-ready.pdf:pages",
+      "message": "2 page(s)."
+    },
+    {
+      "status": "pass",
+      "id": "print-ready.pdf p.1:size",
+      "message": "89.00 x 59.00 mm = 85 x 55 trim + 2 mm bleed."
+    },
+    {
+      "status": "pass",
+      "id": "print-ready.pdf p.1:boxes",
+      "message": "TrimBox 85 x 55 mm, bleed 2 mm."
+    },
+    {
+      "status": "pass",
+      "id": "print-ready.pdf p.1:fonts",
+      "message": "3 font(s) embedded: JetBrainsMono-Regular, SpaceGrotesk-Medium, SpaceGrotesk-Bold."
+    },
+    {
+      "status": "pass",
+      "id": "print-ready.pdf p.1:color",
+      "message": "CMYK only (15 CMYK operators, 1 gray, no RGB)."
+    },
+    {
+      "status": "pass",
+      "id": "print-ready.pdf p.1:ink",
+      "message": "total ink within 300%."
+    },
+    {
+      "status": "pass",
+      "id": "print-ready.pdf p.2:size",
+      "message": "89.00 x 59.00 mm = 85 x 55 trim + 2 mm bleed."
+    },
+    {
+      "status": "pass",
+      "id": "print-ready.pdf p.2:boxes",
+      "message": "TrimBox 85 x 55 mm, bleed 2 mm."
+    },
+    {
+      "status": "pass",
+      "id": "print-ready.pdf p.2:fonts",
+      "message": "2 font(s) embedded: JetBrainsMono-Medium, JetBrainsMono-Regular."
+    },
+    {
+      "status": "pass",
+      "id": "print-ready.pdf p.2:color",
+      "message": "CMYK only (20 CMYK operators, 1 gray, no RGB)."
+    },
+    {
+      "status": "pass",
+      "id": "print-ready.pdf p.2:ink",
+      "message": "total ink within 300%."
+    },
+    {
+      "status": "pass",
+      "id": "front.pdf:pages",
+      "message": "1 page(s)."
+    },
+    {
+      "status": "pass",
+      "id": "front.pdf p.1:size",
+      "message": "89.00 x 59.00 mm = 85 x 55 trim + 2 mm bleed."
+    },
+    {
+      "status": "pass",
+      "id": "front.pdf p.1:boxes",
+      "message": "TrimBox 85 x 55 mm, bleed 2 mm."
+    },
+    {
+      "status": "pass",
+      "id": "front.pdf p.1:fonts",
+      "message": "3 font(s) embedded: JetBrainsMono-Regular, SpaceGrotesk-Medium, SpaceGrotesk-Bold."
+    },
+    {
+      "status": "pass",
+      "id": "front.pdf p.1:color",
+      "message": "CMYK only (15 CMYK operators, 1 gray, no RGB)."
+    },
+    {
+      "status": "pass",
+      "id": "front.pdf p.1:ink",
+      "message": "total ink within 300%."
+    },
+    {
+      "status": "pass",
+      "id": "back.pdf:pages",
+      "message": "1 page(s)."
+    },
+    {
+      "status": "pass",
+      "id": "back.pdf p.1:size",
+      "message": "89.00 x 59.00 mm = 85 x 55 trim + 2 mm bleed."
+    },
+    {
+      "status": "pass",
+      "id": "back.pdf p.1:boxes",
+      "message": "TrimBox 85 x 55 mm, bleed 2 mm."
+    },
+    {
+      "status": "pass",
+      "id": "back.pdf p.1:fonts",
+      "message": "2 font(s) embedded: JetBrainsMono-Medium, JetBrainsMono-Regular."
+    },
+    {
+      "status": "pass",
+      "id": "back.pdf p.1:color",
+      "message": "CMYK only (20 CMYK operators, 1 gray, no RGB)."
+    },
+    {
+      "status": "pass",
+      "id": "back.pdf p.1:ink",
+      "message": "total ink within 300%."
+    },
+    {
+      "status": "pass",
+      "id": "safe-area",
+      "message": "all text sits inside the safe area."
+    },
+    {
+      "status": "pass",
+      "id": "layout",
+      "message": "no text overflow, no unusable raster images."
+    },
+    {
+      "status": "pass",
+      "id": "front (pdf):bleed",
+      "message": "artwork continues into the bleed on all four edges."
+    },
+    {
+      "status": "pass",
+      "id": "back (pdf):bleed",
+      "message": "artwork continues into the bleed on all four edges."
+    },
+    {
+      "status": "pass",
+      "id": "back (pdf):qr-site",
+      "message": "decoded from the PDF raster: https://samuelsulo.it"
+    },
+    {
+      "status": "pass",
+      "id": "front:preview-size",
+      "message": "1051 x 696 px (300 dpi)."
+    },
+    {
+      "status": "pass",
+      "id": "back:preview-size",
+      "message": "1051 x 696 px (300 dpi)."
+    },
+    {
+      "status": "pass",
+      "id": "back (png):qr-site",
+      "message": "decoded from the 300 dpi preview: https://samuelsulo.it"
+    }
+  ],
+  "colors": [
+    {
+      "token": "deep-cyan",
+      "hex": "#006d85",
+      "cmyk": [
+        100,
+        35,
+        25,
+        35
+      ],
+      "source": "explicit",
+      "converter": [
+        89,
+        46,
+        36,
+        9
+      ]
+    },
+    {
+      "token": "void",
+      "hex": "#05060a",
+      "cmyk": [
+        60,
+        45,
+        35,
+        100
+      ],
+      "source": "explicit",
+      "converter": [
+        73,
+        69,
+        65,
+        86
+      ]
+    },
+    {
+      "token": "neon-cyan",
+      "hex": "#35e6ff",
+      "cmyk": [
+        70,
+        0,
+        8,
+        0
+      ],
+      "source": "explicit",
+      "converter": [
+        52,
+        0,
+        6,
+        0
+      ]
+    },
+    {
+      "token": "mist",
+      "hex": "#e6ebf3",
+      "cmyk": [
+        8,
+        4,
+        2,
+        0
+      ],
+      "source": "explicit",
+      "converter": [
+        8,
+        5,
+        2,
+        0
+      ]
+    },
+    {
+      "token": "neon-violet",
+      "hex": "#b24bf3",
+      "cmyk": [
+        60,
+        75,
+        0,
+        0
+      ],
+      "source": "explicit",
+      "converter": [
+        50,
+        75,
+        0,
+        0
+      ]
+    },
+    {
+      "token": "neon-cyan-light",
+      "hex": "#7df3ff",
+      "cmyk": [
+        45,
+        0,
+        5,
+        0
+      ],
+      "source": "explicit",
+      "converter": [
+        38,
+        0,
+        6,
+        0
+      ]
+    },
+    {
+      "token": "neon-green",
+      "hex": "#45f0a6",
+      "cmyk": [
+        60,
+        0,
+        55,
+        0
+      ],
+      "source": "explicit",
+      "converter": [
+        55,
+        0,
+        54,
+        0
+      ]
+    },
+    {
+      "token": "deep-cyan-strong",
+      "hex": "#005568",
+      "cmyk": [
+        100,
+        40,
+        30,
+        50
+      ],
+      "source": "explicit",
+      "converter": [
+        93,
+        56,
+        44,
+        24
+      ]
+    },
+    {
+      "token": "deep-violet",
+      "hex": "#7a2bc0",
+      "cmyk": [
+        75,
+        90,
+        0,
+        0
+      ],
+      "source": "explicit",
+      "converter": [
+        66,
+        86,
+        0,
+        0
+      ]
+    },
+    {
+      "token": "deep-green",
+      "hex": "#067650",
+      "cmyk": [
+        85,
+        20,
+        75,
+        25
+      ],
+      "source": "explicit",
+      "converter": [
+        87,
+        30,
+        82,
+        17
+      ]
+    },
+    {
+      "token": "surface",
+      "hex": "#10131c",
+      "cmyk": [
+        62,
+        48,
+        38,
+        94
+      ],
+      "source": "explicit",
+      "converter": [
+        77,
+        71,
+        60,
+        78
+      ]
+    },
+    {
+      "token": "snow",
+      "hex": "#e9ebf3",
+      "cmyk": [
+        8,
+        5,
+        3,
+        0
+      ],
+      "source": "explicit",
+      "converter": [
+        6,
+        5,
+        1,
+        0
+      ]
+    },
+    {
+      "token": "slate",
+      "hex": "#a3a9bd",
+      "cmyk": [
+        40,
+        28,
+        15,
+        5
+      ],
+      "source": "explicit",
+      "converter": [
+        37,
+        29,
+        16,
+        0
+      ]
+    },
+    {
+      "token": "graphite",
+      "hex": "#7b8197",
+      "cmyk": [
+        50,
+        38,
+        25,
+        15
+      ],
+      "source": "explicit",
+      "converter": [
+        55,
+        46,
+        29,
+        2
+      ]
+    },
+    {
+      "token": "ink",
+      "hex": "#0b1220",
+      "cmyk": [
+        90,
+        75,
+        50,
+        70
+      ],
+      "source": "explicit",
+      "converter": [
+        82,
+        75,
+        57,
+        75
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "level": "warn",
+      "code": "ink-coverage",
+      "message": "token \"ink\" cmyk total 285% is above 280% for a non-black color.",
+      "where": "theme.colors.ink"
+    },
+    {
+      "level": "info",
+      "code": "text-small",
+      "message": "6.0 pt is under the recommended 7 pt.",
+      "where": "front: text \"samuelsulo.it\""
+    },
+    {
+      "level": "info",
+      "code": "text-small",
+      "message": "6.0 pt is under the recommended 7 pt.",
+      "where": "back: text \"Get in touch\""
+    },
+    {
+      "level": "info",
+      "code": "text-small",
+      "message": "6.7 pt is under the recommended 7 pt.",
+      "where": "back: text \"https://samuelsulo.it\""
+    },
+    {
+      "level": "info",
+      "code": "text-small",
+      "message": "6.7 pt is under the recommended 7 pt.",
+      "where": "back: text \"work.samuelsulo@gmail.com\""
+    },
+    {
+      "level": "info",
+      "code": "text-small",
+      "message": "6.7 pt is under the recommended 7 pt.",
+      "where": "back: text \"+39 345 955 1342\""
+    },
+    {
+      "level": "info",
+      "code": "text-small",
+      "message": "6.7 pt is under the recommended 7 pt.",
+      "where": "back: text \"/in/work-samuelsulo\""
+    },
+    {
+      "level": "info",
+      "code": "text-small",
+      "message": "6.0 pt is under the recommended 7 pt.",
+      "where": "back: text \"Scan > portfolio\""
+    },
+    {
+      "level": "info",
+      "code": "qr-inverted",
+      "message": "light-on-dark code (contrast 15.6:1). Verified by decoding, but keep a dark-on-light alternative if the audience uses old scanners.",
+      "where": "back: qr #site"
+    }
+  ]
+}

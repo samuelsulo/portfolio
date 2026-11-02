@@ -1,0 +1,320 @@
+{
+  "color": {
+    "deep-cyan": {
+      "$value": "#006D85",
+      "$type": "color",
+      "$description": "Primary colour. The mark and text accents on light surfaces (light theme).",
+      "$extensions": {
+        "brand-kit": {
+          "name": "Deep cyan",
+          "role": "primary",
+          "cmyk": [
+            100,
+            35,
+            25,
+            35
+          ],
+          "cmykIsRecipe": true
+        }
+      }
+    },
+    "void": {
+      "$value": "#05060A",
+      "$type": "color",
+      "$description": "Dark background of the site, the card and the negative logo.",
+      "$extensions": {
+        "brand-kit": {
+          "name": "Void",
+          "role": "dark",
+          "cmyk": [
+            60,
+            45,
+            35,
+            100
+          ],
+          "cmykIsRecipe": true
+        }
+      }
+    },
+    "neon-cyan": {
+      "$value": "#35E6FF",
+      "$type": "color",
+      "$description": "The accent on dark: links, glows and the mid tone of the mark. Never on light backgrounds.",
+      "$extensions": {
+        "brand-kit": {
+          "name": "Neon cyan",
+          "role": "accent",
+          "cmyk": [
+            70,
+            0,
+            8,
+            0
+          ],
+          "cmykIsRecipe": true
+        }
+      }
+    },
+    "mist": {
+      "$value": "#E6EBF3",
+      "$type": "color",
+      "$description": "Default light background (never pure white).",
+      "$extensions": {
+        "brand-kit": {
+          "name": "Mist",
+          "role": "light",
+          "cmyk": [
+            8,
+            4,
+            2,
+            0
+          ],
+          "cmykIsRecipe": true
+        }
+      }
+    },
+    "neon-violet": {
+      "$value": "#B24BF3",
+      "$type": "color",
+      "$description": "Second brand color: the shaded side of the mark and secondary highlights on dark.",
+      "$extensions": {
+        "brand-kit": {
+          "name": "Neon violet",
+          "role": "muted",
+          "cmyk": [
+            60,
+            75,
+            0,
+            0
+          ],
+          "cmykIsRecipe": true
+        }
+      }
+    },
+    "neon-cyan-light": {
+      "$value": "#7DF3FF",
+      "$type": "color",
+      "$description": "The light tone of the mark on dark surfaces.",
+      "$extensions": {
+        "brand-kit": {
+          "name": "Light cyan",
+          "cmyk": [
+            45,
+            0,
+            5,
+            0
+          ],
+          "cmykIsRecipe": true
+        }
+      }
+    },
+    "neon-green": {
+      "$value": "#45F0A6",
+      "$type": "color",
+      "$description": "The nose of the mark and success states on dark.",
+      "$extensions": {
+        "brand-kit": {
+          "name": "Neon green",
+          "cmyk": [
+            60,
+            0,
+            55,
+            0
+          ],
+          "cmykIsRecipe": true
+        }
+      }
+    },
+    "deep-cyan-strong": {
+      "$value": "#005568",
+      "$type": "color",
+      "$description": "The light tone of the mark on light surfaces.",
+      "$extensions": {
+        "brand-kit": {
+          "name": "Deep cyan, strong",
+          "cmyk": [
+            100,
+            40,
+            30,
+            50
+          ],
+          "cmykIsRecipe": true
+        }
+      }
+    },
+    "deep-violet": {
+      "$value": "#7A2BC0",
+      "$type": "color",
+      "$description": "The shaded tone of the mark on light surfaces.",
+      "$extensions": {
+        "brand-kit": {
+          "name": "Deep violet",
+          "cmyk": [
+            75,
+            90,
+            0,
+            0
+          ],
+          "cmykIsRecipe": true
+        }
+      }
+    },
+    "deep-green": {
+      "$value": "#067650",
+      "$type": "color",
+      "$description": "The nose of the mark on light surfaces.",
+      "$extensions": {
+        "brand-kit": {
+          "name": "Deep green",
+          "cmyk": [
+            85,
+            20,
+            75,
+            25
+          ],
+          "cmykIsRecipe": true
+        }
+      }
+    },
+    "surface": {
+      "$value": "#10131C",
+      "$type": "color",
+      "$description": "Panels and the QR plate on dark.",
+      "$extensions": {
+        "brand-kit": {
+          "name": "Surface",
+          "cmyk": [
+            62,
+            48,
+            38,
+            94
+          ],
+          "cmykIsRecipe": true
+        }
+      }
+    },
+    "snow": {
+      "$value": "#E9EBF3",
+      "$type": "color",
+      "$description": "Text on dark.",
+      "$extensions": {
+        "brand-kit": {
+          "name": "Snow",
+          "cmyk": [
+            8,
+            5,
+            3,
+            0
+          ],
+          "cmykIsRecipe": true
+        }
+      }
+    },
+    "slate": {
+      "$value": "#A3A9BD",
+      "$type": "color",
+      "$description": "Secondary text on dark.",
+      "$extensions": {
+        "brand-kit": {
+          "name": "Slate",
+          "cmyk": [
+            40,
+            28,
+            15,
+            5
+          ],
+          "cmykIsRecipe": true
+        }
+      }
+    },
+    "graphite": {
+      "$value": "#7B8197",
+      "$type": "color",
+      "$description": "Tertiary text and captions on dark.",
+      "$extensions": {
+        "brand-kit": {
+          "name": "Graphite",
+          "cmyk": [
+            50,
+            38,
+            25,
+            15
+          ],
+          "cmykIsRecipe": true
+        }
+      }
+    },
+    "ink": {
+      "$value": "#0B1220",
+      "$type": "color",
+      "$description": "Text on light.",
+      "$extensions": {
+        "brand-kit": {
+          "name": "Ink",
+          "cmyk": [
+            90,
+            75,
+            50,
+            70
+          ],
+          "cmykIsRecipe": true
+        }
+      }
+    },
+    "ink-soft": {
+      "$value": "#3D4760",
+      "$type": "color",
+      "$description": "Body text on light surfaces.",
+      "$extensions": {
+        "brand-kit": {
+          "name": "Ink, soft",
+          "cmyk": [
+            75,
+            60,
+            35,
+            40
+          ],
+          "cmykIsRecipe": true
+        }
+      }
+    },
+    "ink-faint": {
+      "$value": "#536078",
+      "$type": "color",
+      "$description": "Captions and secondary text on light surfaces.",
+      "$extensions": {
+        "brand-kit": {
+          "name": "Ink, faint",
+          "cmyk": [
+            70,
+            55,
+            35,
+            30
+          ],
+          "cmykIsRecipe": true
+        }
+      }
+    }
+  },
+  "role": {
+    "primary": {
+      "$value": "{color.deep-cyan}",
+      "$type": "color"
+    },
+    "dark": {
+      "$value": "{color.void}",
+      "$type": "color"
+    },
+    "accent": {
+      "$value": "{color.neon-cyan}",
+      "$type": "color"
+    },
+    "light": {
+      "$value": "{color.mist}",
+      "$type": "color"
+    },
+    "muted": {
+      "$value": "{color.neon-violet}",
+      "$type": "color"
+    }
+  }
+}

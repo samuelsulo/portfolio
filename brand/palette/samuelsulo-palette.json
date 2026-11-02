@@ -1,0 +1,202 @@
+{
+  "meta": {
+    "name": "Samuel Sulo",
+    "slug": "samuelsulo",
+    "version": "1.0.0",
+    "date": "November 2026"
+  },
+  "colors": {
+    "deep-cyan": {
+      "role": "primary",
+      "name": "Deep cyan",
+      "hex": "#006D85",
+      "cmyk": [
+        100,
+        35,
+        25,
+        35
+      ],
+      "use": "Primary colour. The mark and text accents on light surfaces (light theme)."
+    },
+    "void": {
+      "role": "dark",
+      "name": "Void",
+      "hex": "#05060A",
+      "cmyk": [
+        60,
+        45,
+        35,
+        100
+      ],
+      "use": "Dark background of the site, the card and the negative logo."
+    },
+    "neon-cyan": {
+      "role": "accent",
+      "name": "Neon cyan",
+      "hex": "#35E6FF",
+      "cmyk": [
+        70,
+        0,
+        8,
+        0
+      ],
+      "use": "The accent on dark: links, glows and the mid tone of the mark. Never on light backgrounds."
+    },
+    "mist": {
+      "role": "light",
+      "name": "Mist",
+      "hex": "#E6EBF3",
+      "cmyk": [
+        8,
+        4,
+        2,
+        0
+      ],
+      "use": "Default light background (never pure white)."
+    },
+    "neon-violet": {
+      "role": "muted",
+      "name": "Neon violet",
+      "hex": "#B24BF3",
+      "cmyk": [
+        60,
+        75,
+        0,
+        0
+      ],
+      "use": "Second brand color: the shaded side of the mark and secondary highlights on dark."
+    },
+    "neon-cyan-light": {
+      "name": "Light cyan",
+      "hex": "#7DF3FF",
+      "cmyk": [
+        45,
+        0,
+        5,
+        0
+      ],
+      "use": "The light tone of the mark on dark surfaces."
+    },
+    "neon-green": {
+      "name": "Neon green",
+      "hex": "#45F0A6",
+      "cmyk": [
+        60,
+        0,
+        55,
+        0
+      ],
+      "use": "The nose of the mark and success states on dark."
+    },
+    "deep-cyan-strong": {
+      "name": "Deep cyan, strong",
+      "hex": "#005568",
+      "cmyk": [
+        100,
+        40,
+        30,
+        50
+      ],
+      "use": "The light tone of the mark on light surfaces."
+    },
+    "deep-violet": {
+      "name": "Deep violet",
+      "hex": "#7A2BC0",
+      "cmyk": [
+        75,
+        90,
+        0,
+        0
+      ],
+      "use": "The shaded tone of the mark on light surfaces."
+    },
+    "deep-green": {
+      "name": "Deep green",
+      "hex": "#067650",
+      "cmyk": [
+        85,
+        20,
+        75,
+        25
+      ],
+      "use": "The nose of the mark on light surfaces."
+    },
+    "surface": {
+      "name": "Surface",
+      "hex": "#10131C",
+      "cmyk": [
+        62,
+        48,
+        38,
+        94
+      ],
+      "use": "Panels and the QR plate on dark."
+    },
+    "snow": {
+      "name": "Snow",
+      "hex": "#E9EBF3",
+      "cmyk": [
+        8,
+        5,
+        3,
+        0
+      ],
+      "use": "Text on dark."
+    },
+    "slate": {
+      "name": "Slate",
+      "hex": "#A3A9BD",
+      "cmyk": [
+        40,
+        28,
+        15,
+        5
+      ],
+      "use": "Secondary text on dark."
+    },
+    "graphite": {
+      "name": "Graphite",
+      "hex": "#7B8197",
+      "cmyk": [
+        50,
+        38,
+        25,
+        15
+      ],
+      "use": "Tertiary text and captions on dark."
+    },
+    "ink": {
+      "name": "Ink",
+      "hex": "#0B1220",
+      "cmyk": [
+        90,
+        75,
+        50,
+        70
+      ],
+      "use": "Text on light."
+    },
+    "ink-soft": {
+      "name": "Ink, soft",
+      "hex": "#3D4760",
+      "cmyk": [
+        75,
+        60,
+        35,
+        40
+      ],
+      "use": "Body text on light surfaces."
+    },
+    "ink-faint": {
+      "name": "Ink, faint",
+      "hex": "#536078",
+      "cmyk": [
+        70,
+        55,
+        35,
+        30
+      ],
+      "use": "Captions and secondary text on light surfaces."
+    }
+  }
+}

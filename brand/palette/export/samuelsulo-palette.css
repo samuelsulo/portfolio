@@ -1,0 +1,26 @@
+/* Samuel Sulo: palette samuelsulo. Generated from the palette spec, change the spec and rebuild. */
+:root {
+  --deep-cyan: #006D85;
+  --void: #05060A;
+  --neon-cyan: #35E6FF;
+  --mist: #E6EBF3;
+  --neon-violet: #B24BF3;
+  --neon-cyan-light: #7DF3FF;
+  --neon-green: #45F0A6;
+  --deep-cyan-strong: #005568;
+  --deep-violet: #7A2BC0;
+  --deep-green: #067650;
+  --surface: #10131C;
+  --snow: #E9EBF3;
+  --slate: #A3A9BD;
+  --graphite: #7B8197;
+  --ink: #0B1220;
+  --ink-soft: #3D4760;
+  --ink-faint: #536078;
+
+  --brand-primary: var(--deep-cyan);
+  --brand-dark: var(--void);
+  --brand-accent: var(--neon-cyan);
+  --brand-light: var(--mist);
+  --brand-muted: var(--neon-violet);
+}

@@ -24,3 +24,10 @@ playwright-report/
 .DS_Store
 .idea/
 *.log
+
+# Python
+__pycache__/
+*.pyc
+
+# Temporary folders of the curriculum build
+brand/curriculum/.build-*/

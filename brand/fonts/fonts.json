@@ -1,0 +1,20 @@
+{
+  "space-grotesk": {
+    "name": "Space Grotesk",
+    "files": {
+      "400": "Space-Grotesk-400.ttf",
+      "500": "Space-Grotesk-500.ttf",
+      "600": "Space-Grotesk-600.ttf",
+      "700": "Space-Grotesk-700.ttf"
+    }
+  },
+  "jetbrains-mono": {
+    "name": "Jetbrains Mono",
+    "files": {
+      "400": "Jetbrains-Mono-400.ttf",
+      "500": "Jetbrains-Mono-500.ttf",
+      "600": "Jetbrains-Mono-600.ttf",
+      "700": "Jetbrains-Mono-700.ttf"
+    }
+  }
+}

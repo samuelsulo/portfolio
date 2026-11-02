@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "name": "Samuel Sulo",
+    "slug": "samuelsulo",
+    "version": "1.0.0",
+    "date": "November 2026",
+    "description": "Web developer and cloud engineer. Kitsune is the personal mark: a low-poly fox that signs the work."
+  },
+  "brand": {
+    "wordmark": "SAMUEL SULO",
+    "tagline": "WEB DEVELOPER · CLOUD"
+  },
+  "palette": "../palette/samuelsulo-palette.json",
+  "mark": "assets/mark.py",
+  "mark_tones": {
+    "on_light": {
+      "light": "deep-cyan-strong",
+      "mid": "deep-cyan",
+      "dark": "deep-violet",
+      "accent": "deep-green"
+    },
+    "on_dark": {
+      "light": "neon-cyan-light",
+      "mid": "neon-cyan",
+      "dark": "neon-violet",
+      "accent": "neon-green"
+    }
+  },
+  "fonts": {
+    "dir": "../fonts",
+    "display": "space-grotesk",
+    "text": "jetbrains-mono",
+    "display_weight": 700,
+    "label_weight": 500,
+    "cap_height": 0.7,
+    "wordmark_tracking": 30,
+    "tagline_tracking": 260,
+    "display_name": "Space Grotesk",
+    "text_name": "JetBrains Mono"
+  },
+  "copy": {
+    "symbol_title": "The fox that signs the work",
+    "index_concept": "The signature, the facets, the colorways, the voice of the brand",
+    "lead": "Kitsune is a <b>signature</b>, not a logo for a company: a small fox that marks a piece of work as built by Samuel Sulo, the way a signature marks a page.",
+    "p1": "A kitsune is the fox of Japanese folklore, clever and quiet. The mark keeps that spirit: a head reduced to seven flat facets, with no outline, that reads at 16&nbsp;px in a navigation bar and on the front of a printed card alike.",
+    "p2": "The shape never changes, only the color does. On dark surfaces the facets glow in cyan and violet; on light surfaces the same tones deepen to keep their contrast.",
+    "values": [
+      [
+        "Craft",
+        "built with care, down to the last facet"
+      ],
+      [
+        "Clarity",
+        "simple shapes and plain language"
+      ],
+      [
+        "Reliability",
+        "systems that run quietly in production"
+      ],
+      [
+        "Signature",
+        "a quiet mark of authorship, never a banner"
+      ]
+    ],
+    "quote": "A good system is one<br>nobody has to think about.",
+    "spec": [
+      [
+        "Canvas",
+        "256 × 256 units"
+      ],
+      [
+        "Facets",
+        "seven flat polygons"
+      ],
+      [
+        "Tones",
+        "light, mid, dark, accent"
+      ],
+      [
+        "Aspect ratio",
+        "always 1:1"
+      ],
+      [
+        "Outline",
+        "none"
+      ]
+    ],
+    "negative_detail": "The facets keep their <b>tones</b>",
+    "mono_note": "In one color the facets are told apart by opacity only: keep the mark above 12&nbsp;mm in print so that the lighter facets do not disappear.",
+    "palette_caption": "Void and Neon cyan carry the brand on screen; Deep cyan takes over on light surfaces.",
+    "type_sample": "SHIP IT QUIETLY",
+    "type_sample_small": "WEB · CLOUD · INFRASTRUCTURE AS CODE",
+    "type_sample_body": "Websites and cloud infrastructure for small businesses, built to be fast, accessible and easy to hand over.",
+    "card_name": "Samuel Sulo",
+    "card_role": "Web Developer & Cloud Engineer",
+    "card_info": "work.samuelsulo@gmail.com<br>samuelsulo.it"
+  }
+}

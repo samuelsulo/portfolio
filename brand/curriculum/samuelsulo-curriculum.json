@@ -1,0 +1,351 @@
+{
+  "name": "Samuel Sulo",
+  "contact": {
+    "location": "Arona, Italy",
+    "email": "work.samuelsulo@gmail.com",
+    "web": "samuelsulo.it",
+    "linkedin": "linkedin.com/in/work-samuelsulo",
+    "github": "github.com/samuelsulo",
+    "locationIt": "Arona, Italia"
+  },
+  "en": {
+    "role": "Cloud Engineer & Web Developer",
+    "labels": {
+      "about": "About",
+      "experience": "Experience",
+      "education": "Education",
+      "skills": "Skills",
+      "languages": "Languages",
+      "certifications": "Certifications",
+      "contact": "Contact",
+      "present": "Present",
+      "projects": "Selected projects",
+      "basedIn": "Based in"
+    },
+    "about": "I design and build solid cloud infrastructure and modern web products. I work on AWS architecture, migrations and serverless platforms, and build web applications with Vue.js and TypeScript. I take projects from analysis and design to release and operations, and I enjoy solving problems end to end. I also build with AI tools such as Claude Code, using agentic workflows and custom skills.",
+    "skills": [
+      {
+        "title": "Cloud",
+        "items": [
+          "AWS (advanced)",
+          "AWS migrations and assessments",
+          "EC2 Image Builder",
+          "Microsoft Entra, Azure, Firebase (foundational)"
+        ]
+      },
+      {
+        "title": "Development",
+        "items": [
+          "JavaScript, TypeScript",
+          "Node.js, Vue.js, OCLIF",
+          "SQL and NoSQL databases",
+          "Python",
+          "Visual Basic, Go, Prolog, Lisp (basic)"
+        ]
+      },
+      {
+        "title": "DevOps",
+        "items": [
+          "Terraform, OpenTofu, Terragrunt",
+          "AWS CLI, Git, GitHub",
+          "AWS CodePipeline, GitHub Actions",
+          "Azure DevOps, Docker"
+        ]
+      },
+      {
+        "title": "AI",
+        "items": [
+          "Claude, Claude Code",
+          "Agentic coding",
+          "AI skills, Artifacts",
+          "AI-assisted software development"
+        ]
+      }
+    ],
+    "experience": [
+      {
+        "company": "Corley",
+        "title": "Cloud Engineer",
+        "location": "Turin, Italy",
+        "from": "06/2026",
+        "to": "present",
+        "intro": "",
+        "bullets": [
+          "Worked on an e-learning platform based on Moodle, owning the project end to end: customer management, analysis, design, implementation and testing.",
+          "Built the platform's infrastructure and its releases, including the golden AMI pipeline with EC2 Image Builder.",
+          "Ran AWS assessments and Migration Acceleration Program (MAP) engagements for several customers: discovery of their environments on other cloud providers or on premises, inventory and metrics collection, and migration proposals to AWS (lift and shift, replatform, optimized) with cost estimates and migration waves."
+        ]
+      },
+      {
+        "company": "S2E: Solutions to Enterprise",
+        "title": "Cloud Developer",
+        "location": "Milan, Italy",
+        "from": "02/2023",
+        "to": "06/2026",
+        "intro": "Software development in the Cloud Security Team, integrating cloud technologies and security practices. I independently managed:",
+        "bullets": [
+          "Refactoring of a welfare service after a data breach: data partitioning and isolation, application code, authorization policies, the migration from Amplify to Terraform and release automation with AWS CodePipeline.",
+          "A multi-tenant security assessment platform on AWS serverless services: a SaaS portal for clients, an admin portal for tenants and users, and the backend services for authentication, authorization and management.",
+          "A data synchronization solution on AWS serverless services that automates the synchronization of two asset inventories.",
+          "A training course on Amazon API Gateway for 15 to 20 participants, with slides, interactive demos and real-world use cases.",
+          "Sumo Logic parsers and log mapping for security monitoring, and Visual Basic scripts for identity management workflows on the One Identity platform."
+        ]
+      },
+      {
+        "company": "Storm Reply",
+        "title": "Cloud Developer",
+        "location": "Turin, Italy",
+        "from": "08/2021",
+        "to": "02/2023",
+        "intro": "Member of the cloud migration team.",
+        "bullets": [
+          "Led the design and implementation of a single sign-on platform for multiple applications, from the production release through its maintenance.",
+          "Developed an order management system: backend services and web applications for order processing and tracking.",
+          "Contributed to a satellite-based tolling system, implementing geofencing and toll calculation."
+        ]
+      }
+    ],
+    "education": [
+      {
+        "school": "University of Milan Bicocca",
+        "title": "Computer Science",
+        "location": "Milan, Italy",
+        "from": "2020",
+        "to": "2023",
+        "bullets": [
+          "Operating systems, networking, software engineering, imperative and declarative programming.",
+          "Projects: an Android app for subscription management, a JSON parser library in Prolog and Common Lisp, a backend service with a custom Redis implementation in Java, and a relational database in MySQL."
+        ]
+      },
+      {
+        "school": "Leonardo da Vinci High School",
+        "title": "Information Technology and Telecommunication",
+        "location": "Borgomanero, Italy",
+        "from": "2015",
+        "to": "2020",
+        "bullets": []
+      }
+    ],
+    "languages": [
+      [
+        "Italian",
+        "Native"
+      ],
+      [
+        "English",
+        "Excellent"
+      ],
+      [
+        "Albanian",
+        "Excellent"
+      ]
+    ],
+    "certifications": [
+      {
+        "name": "AWS Certified Solutions Architect - Associate",
+        "url": "credly.com/badges/b7b6a4ec-487e-4831-9bb3-6bdbd4a1ef1f"
+      },
+      {
+        "name": "AWS Certified Cloud Practitioner",
+        "url": "credly.com/badges/4f64f45a-7fce-4891-abb5-54d58d6058f4"
+      }
+    ],
+    "projects": [
+      {
+        "name": "Bar I.D.E.A.",
+        "tag": "Client",
+        "url": "ideagelateria.com",
+        "text": "Visual identity, printed materials, website and AWS infrastructure for a cafe, gelato and pastry shop. Production runs in the client's own AWS account, managed with OpenTofu and Terragrunt."
+      },
+      {
+        "name": "NOIR 27",
+        "tag": "Demo",
+        "url": "noir27.samuelsulo.it",
+        "text": "Website and brand of a fictional cocktail bar: logo, business card, review materials, menu, events, reviews and a reservation flow."
+      },
+      {
+        "name": "Nexus",
+        "tag": "Demo",
+        "url": "nexus.samuelsulo.it",
+        "text": "E-commerce web application for gaming peripherals, built with Vue.js, TypeScript and Pinia."
+      },
+      {
+        "name": "PULSE",
+        "tag": "Demo",
+        "url": "pulse.samuelsulo.it",
+        "text": "Project and team management workspace: a dashboard with projects, tasks, team directory, analytics and an activity feed."
+      }
+    ],
+    "title": "Curriculum"
+  },
+  "it": {
+    "role": "Cloud Engineer & Web Developer",
+    "labels": {
+      "about": "Profilo",
+      "experience": "Esperienza",
+      "education": "Formazione",
+      "skills": "Competenze",
+      "languages": "Lingue",
+      "certifications": "Certificazioni",
+      "contact": "Contatti",
+      "present": "Presente",
+      "projects": "Progetti selezionati",
+      "basedIn": "Sede"
+    },
+    "about": "Progetto e realizzo infrastrutture cloud solide e prodotti web moderni. Lavoro su architetture AWS, migrazioni e piattaforme serverless, e sviluppo applicazioni web con Vue.js e TypeScript. Seguo i progetti dall'analisi e dal design fino al rilascio e alla gestione, e mi piace risolvere i problemi dall'inizio alla fine. Lavoro anche con strumenti AI come Claude Code, con flussi agentici e skill personalizzate.",
+    "skills": [
+      {
+        "title": "Cloud",
+        "items": [
+          "AWS (avanzato)",
+          "Assessment e migrazioni su AWS",
+          "EC2 Image Builder",
+          "Microsoft Entra, Azure, Firebase (base)"
+        ]
+      },
+      {
+        "title": "Sviluppo",
+        "items": [
+          "JavaScript, TypeScript",
+          "Node.js, Vue.js, OCLIF",
+          "Database SQL e NoSQL",
+          "Python",
+          "Visual Basic, Go, Prolog, Lisp (base)"
+        ]
+      },
+      {
+        "title": "DevOps",
+        "items": [
+          "Terraform, OpenTofu, Terragrunt",
+          "AWS CLI, Git, GitHub",
+          "AWS CodePipeline, GitHub Actions",
+          "Azure DevOps, Docker"
+        ]
+      },
+      {
+        "title": "AI",
+        "items": [
+          "Claude, Claude Code",
+          "Agentic coding",
+          "AI skills, Artifacts",
+          "Sviluppo software assistito dall'AI"
+        ]
+      }
+    ],
+    "experience": [
+      {
+        "company": "Corley",
+        "title": "Cloud Engineer",
+        "location": "Torino, Italia",
+        "from": "06/2026",
+        "to": "presente",
+        "intro": "",
+        "bullets": [
+          "Sviluppo di una piattaforma di e-learning basata su Moodle, seguita dall'inizio alla fine: gestione del cliente, analisi, design, implementazione e test.",
+          "Realizzazione dell'infrastruttura della piattaforma e dei suoi rilasci, compresa la pipeline della golden AMI con EC2 Image Builder.",
+          "AWS assessment e progetti Migration Acceleration Program (MAP) per diversi clienti: discovery dei loro ambienti su altri cloud provider o on premises, raccolta di inventario e metriche, e proposte di migrazione su AWS (lift and shift, replatform, optimized) con stime di costo e wave di migrazione."
+        ]
+      },
+      {
+        "company": "S2E: Solutions to Enterprise",
+        "title": "Cloud Developer",
+        "location": "Milano, Italia",
+        "from": "02/2023",
+        "to": "06/2026",
+        "intro": "Sviluppo software nel Cloud Security Team, integrando tecnologie cloud e pratiche di sicurezza. Ho gestito in autonomia:",
+        "bullets": [
+          "Il refactoring di un servizio di welfare dopo un data breach: partizionamento e isolamento dei dati, codice applicativo, policy di autorizzazione, migrazione da Amplify a Terraform e automazione dei rilasci con AWS CodePipeline.",
+          "Una piattaforma multi-tenant per security assessment su servizi serverless AWS: un portale SaaS per i clienti, un portale di amministrazione per tenant e utenti, e i servizi backend di autenticazione, autorizzazione e gestione.",
+          "Una soluzione di sincronizzazione dati su servizi serverless AWS che automatizza la sincronizzazione tra due inventari di asset.",
+          "Un corso di formazione su Amazon API Gateway per 15 o 20 partecipanti, con slide, demo interattive e casi d'uso reali.",
+          "Parser Sumo Logic e mapping dei log per il monitoraggio della sicurezza, e script Visual Basic per i flussi di identity management sulla piattaforma One Identity."
+        ]
+      },
+      {
+        "company": "Storm Reply",
+        "title": "Cloud Developer",
+        "location": "Torino, Italia",
+        "from": "08/2021",
+        "to": "02/2023",
+        "intro": "Membro del team di cloud migration.",
+        "bullets": [
+          "Guida della progettazione e dell'implementazione di una piattaforma di single sign-on per più applicazioni, dal rilascio in produzione alla manutenzione.",
+          "Sviluppo di un sistema di gestione ordini: servizi backend e applicazioni web per l'elaborazione e il tracciamento degli ordini.",
+          "Contributo a un sistema di pedaggio satellitare, con geofencing e calcolo del pedaggio."
+        ]
+      }
+    ],
+    "education": [
+      {
+        "school": "Università di Milano-Bicocca",
+        "title": "Informatica",
+        "location": "Milano, Italia",
+        "from": "2020",
+        "to": "2023",
+        "bullets": [
+          "Sistemi operativi, reti, ingegneria del software, programmazione imperativa e dichiarativa.",
+          "Progetti: un'app Android per la gestione degli abbonamenti, una libreria parser JSON in Prolog e Common Lisp, un servizio backend con un'implementazione Redis personalizzata in Java e un database relazionale in MySQL."
+        ]
+      },
+      {
+        "school": "Istituto Leonardo da Vinci",
+        "title": "Informatica e Telecomunicazioni",
+        "location": "Borgomanero, Italia",
+        "from": "2015",
+        "to": "2020",
+        "bullets": []
+      }
+    ],
+    "languages": [
+      [
+        "Italiano",
+        "Madrelingua"
+      ],
+      [
+        "Inglese",
+        "Eccellente"
+      ],
+      [
+        "Albanese",
+        "Eccellente"
+      ]
+    ],
+    "certifications": [
+      {
+        "name": "AWS Certified Solutions Architect - Associate",
+        "url": "credly.com/badges/b7b6a4ec-487e-4831-9bb3-6bdbd4a1ef1f"
+      },
+      {
+        "name": "AWS Certified Cloud Practitioner",
+        "url": "credly.com/badges/4f64f45a-7fce-4891-abb5-54d58d6058f4"
+      }
+    ],
+    "projects": [
+      {
+        "name": "Bar I.D.E.A.",
+        "tag": "Cliente",
+        "url": "ideagelateria.com",
+        "text": "Identità visiva, materiali di stampa, sito web e infrastruttura AWS per un bar, gelateria e pasticceria. La produzione gira nell'account AWS del cliente, gestita con OpenTofu e Terragrunt."
+      },
+      {
+        "name": "NOIR 27",
+        "tag": "Demo",
+        "url": "noir27.samuelsulo.it",
+        "text": "Sito e brand di un cocktail bar fittizio: logo, biglietto da visita, materiali per le recensioni, menu, eventi, recensioni e un flusso di prenotazione."
+      },
+      {
+        "name": "Nexus",
+        "tag": "Demo",
+        "url": "nexus.samuelsulo.it",
+        "text": "Applicazione web e-commerce per periferiche gaming, con Vue.js, TypeScript e Pinia."
+      },
+      {
+        "name": "PULSE",
+        "tag": "Demo",
+        "url": "pulse.samuelsulo.it",
+        "text": "Spazio di lavoro per progetti e team: una dashboard con progetti, attività, rubrica del team, analisi e feed delle attività."
+      }
+    ],
+    "title": "Curriculum"
+  }
+}
