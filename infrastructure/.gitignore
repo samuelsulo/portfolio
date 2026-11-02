@@ -1,7 +1,16 @@
-# --- Terraform ---
+# Terragrunt
+.terragrunt-cache
+.terragrunt-stack
+
+# OpenTofu/Terraform
 **/.terraform/
 *.tfstate
 *.tfstate.*
 tfplan
+.plans
 crash.log
 crash.*.log
+
+# OS X
+.history
+.DS_Store

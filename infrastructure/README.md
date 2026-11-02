@@ -1,66 +1,71 @@
 # Infrastructure
 
-AWS infrastructure managed entirely with Terraform.
+AWS infrastructure managed with Terragrunt and OpenTofu.
 
 ## Structure
 
 ```
-infrastructure/
-├── modules/          # reusable modules
-├── live/             # root module: composes the modules
-└── environments/     # backend configuration + variables per environment
+.
+├── live/         # environments, regions and stacks: what gets deployed where
+├── units/        # reusable Terragrunt units wrapping the modules
+├── modules/      # reusable OpenTofu modules
+├── templates/    # starting points to copy when adding environments, regions, stacks, units
+├── scripts/      # helpers behind the mise tasks (catalog vendoring, state bucket)
+├── mise.toml     # pinned tool versions and tasks
+└── CLAUDE.md     # guardrails for whoever works on this folder
 ```
 
-The Terraform workflow (init/plan/apply/...) is provided by
-[`kitsu`](https://github.com/samuelsulo/kitsu) (`kitsu terraform ...`),
-which wraps `live/` + `environments/`: see its README for the full command
-reference.
-
 See each subfolder's README for details:
-- [`modules/`](./modules)
 - [`live/`](./live)
-- [`environments/`](./environments).
+- [`units/`](./units)
+- [`modules/`](./modules)
+- [`templates/`](./templates)
+- [`scripts/`](./scripts)
 
 ## Environments
 
-- **sandbox**: development/test environment, in my AWS account, disposable
-  per project.
-- **production**: the AWS account owned by the client, reachable only via
-  cross-account `AssumeRole`. Created when the client project reaches that
-  stage.
+Each environment lives in its own AWS account and has a top-level folder
+under [`live/`](./live). Only one exists in this project:
+
+- **production**: the AWS account owned by the client.
 
 ## Prerequisites
 
-- Terraform >= 1.10 (required by the S3 backend's native `use_lockfile`
-  locking, no DynamoDB table involved)
-- [`kitsu`](https://github.com/samuelsulo/kitsu)
-- AWS CLI configured with my developer account's credentials. The
-  `AssumeRole` into the client's account in production is handled natively
-  by Terraform (`aws_assume_role_enabled`).
+- [`mise`](https://mise.jdx.dev), which installs the pinned `opentofu` and
+  `terragrunt` versions (`mise install`).
+- AWS CLI profile for the target environment, named in that environment's
+  `account.hcl`: the account's own credentials directly, or a profile
+  with `role_arn` (+ `source_profile`) or SSO into the client's
+  cross-account role. Terragrunt itself never assumes the role.
+- The state bucket of the target account, created once with
+  `mise run state:create-bucket <aws-profile>` (see
+  [`live/`](./live#state-bucket)).
 
 ## Quickstart
 
 ```
-kitsu terraform init --env sandbox   # terraform init with the environment's backend
-kitsu terraform plan --env sandbox   # terraform plan, saved to environments/sandbox/tfplan
-kitsu terraform apply --env sandbox  # apply the saved plan
+cd live/<environment>/<region>/<stack>
+terragrunt stack run plan
+terragrunt stack run apply
 ```
 
-Run `kitsu terraform --help` for the full list of commands (validate, fmt,
-destroy, state management, docs, ...). `--env` defaults to `sandbox`; pass
-`--env production` explicitly, and only after a manually reviewed plan.
+Apply to production only after a manually reviewed plan. See
+[`live/`](./live#usage) for details.
 
 ## Scaffolding
 
-New modules and environments are generated with `kitsu terraform scaffold...`; 
-see [`modules/local/`](./modules/local#adding-a-module) and
-[`environments/`](./environments#adding-an-environment) for the commands.
+New environments, regions, stacks and units are created by copying the
+matching file from [`templates/`](./templates).
 
 ## Catalog
 
-Modules from `terraform-aws-catalog` (a separate repo with Terraform
-modules reused across all client projects) are copied 1:1 into
-`modules/vendor/` and never modified afterwards; see
-[`modules/vendor/`](./modules/vendor#adding-a-module) for the commands and
-rules.
+Catalog modules are copied 1:1 into `modules/vendor/` and never
+modified afterwards. Units are written per project, in `units/`:
 
+```
+mise run catalog:list
+mise run catalog:vendor <name>/<tag>
+```
+
+See [`scripts/`](./scripts) for what the tasks do and
+[`modules/vendor/`](./modules/vendor) for the rules on vendored code.

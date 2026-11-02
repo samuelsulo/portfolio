@@ -1,0 +1,61 @@
+%{ if has_redirect ~}
+// Redirects every alias other than the primary domain to the primary domain
+// with a 301, preserving path and query string.
+%{ endif ~}
+%{ if rewrite_html_pages ~}
+// Rewrites the URI of prerendered pages to their .html file: "/contatti" and
+// "/contatti/" become "/contatti.html". "/" is left to the default root
+// object, and so is any path whose last segment contains a dot (assets).
+%{ endif ~}
+// Note: this is an OpenTofu template, so JS template literals escape the
+// placeholders as "$${...}"; "${domain_name}" is the only one OpenTofu fills in.
+%{ if has_redirect ~}
+const PRIMARY_DOMAIN = "${domain_name}";
+%{ endif ~}
+%{ if rewrite_html_pages ~}
+
+function rewrite(request) {
+  const uri = request.uri;
+
+  if (uri === "/") {
+    return request;
+  }
+  if (uri.endsWith("/")) {
+    request.uri = `$${uri.slice(0, -1)}.html`;
+  } else if (!uri.split("/").pop().includes(".")) {
+    request.uri = `$${uri}.html`;
+  }
+  return request;
+}
+%{ endif ~}
+
+function handler(event) {
+  const request = event.request;
+%{ if has_redirect ~}
+  const host = request.headers.host.value.toLowerCase();
+
+  if (host === PRIMARY_DOMAIN) {
+    return ${rewrite_html_pages ? "rewrite(request)" : "request"};
+  }
+
+  const query = Object.keys(request.querystring)
+    .map((key) => {
+      const entry = request.querystring[key];
+      const values = entry.multiValue ? entry.multiValue.map((item) => item.value) : [entry.value];
+      return values.map((value) => `$${key}=$${value}`).join("&");
+    })
+    .join("&");
+  const search = query ? `?$${query}` : "";
+
+  return {
+    statusCode: 301,
+    statusDescription: "Moved Permanently",
+    headers: {
+      location: { value: `https://$${PRIMARY_DOMAIN}$${request.uri}$${search}` },
+    },
+  };
+%{ else ~}
+
+  return rewrite(request);
+%{ endif ~}
+}

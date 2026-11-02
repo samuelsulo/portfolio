@@ -124,7 +124,7 @@ directions with velocity templates, inside
 these templates are not inlined in `openapi.yaml`: they live as their own
 files under [`templates/`](./templates), spliced into the OAS body with
 `indent()` (so their indentation matches the YAML block they land in).
-Most of them take no Terraform variable at all, and are read with a plain
+Most of them take no OpenTofu variable at all, and are read with a plain
 `file()`; the one exception is the request template below, read with
 `templatefile()` instead:
 
@@ -265,8 +265,7 @@ inline styles, no external resources.
 The API has a single deployment stage, always named `default`: there is
 no `stage_name`/`stage_version` variable. A breaking change to the API's
 contract is already tracked by bumping this module's own major version (a
-new `contact-api/vX.0.0` tag, see
-[CLAUDE.md §3](../../CLAUDE.md#3-versioning)): tying the stage name to
+new `contact-api/vX.0.0` tag): tying the stage name to
 that version too would be redundant, and would change the API's URL on
 every major release for no benefit, since a major bump means redeploying
 this module, not running two stages side by side within the same
@@ -299,40 +298,12 @@ domain onto the stage with an empty base path, so each operation's public
 URL matches its OAS path directly (e.g. `https://<domain_name>/email`),
 with no stage prefix.
 
-## Input
-
-| Name | Description | Required |
-| --- | --- | --- |
-| `name_prefix` | Prefix applied to the name of every resource created by the module. | Yes |
-| `contact_via_email_source` | Verified SES sending identity used as the Source of every ContactViaEmail notification. | Yes |
-| `contact_via_email_to_addresses` | Mailbox(es) that receive every ContactViaEmail submission, comma-separated. | Yes |
-| `contact_via_email_subject` | Subject line of the notification email. Supports `{{name}}`. Default `New message from the website - {{name}}`. | No |
-| `contact_via_email_html_template` | HTML body of the notification email, as a string (typically from `file(...)` in the consumer project). | Yes |
-| `contact_via_email_text_template` | Text body of the notification email, as a string (typically from `file(...)` in the consumer project). | Yes |
-| `domain_name` | Custom domain of the API. | Yes |
-| `route53_zone_id` | ID of an existing Route 53 hosted zone for `domain_name`. | Yes |
-| `cors_allowed_origin` | Value of `Access-Control-Allow-Origin`. Default `*`. | No |
-| `throttling_rate_limit` | Requests-per-second limit on the whole API. Default `5`. | No |
-| `throttling_burst_limit` | Burst limit on the whole API. Default `10`. | No |
-
-## Output
-
-| Name | Description |
-| --- | --- |
-| `rest_api_id` | ID of the REST API. |
-| `execution_arn` | Execution ARN of the REST API. |
-| `invoke_url` | Default (`execute-api.amazonaws.com`) invoke URL of the stage. |
-| `custom_domain_name` | Custom domain configured for the API. |
-| `contact_email_url` | Public URL of the ContactViaEmail operation (`POST /email`). |
-| `ses_template_name` | Name of the SES template used for the notification. |
-| `ses_identity_arn` | ARN of the verified SES email identity (`contact_via_email_source`). |
-
 ## Notes
 
 - The module doesn't configure an `aws` provider: whoever consumes it
   passes their own default provider, with no need for extra aliases
   (unlike `website-hosting`, which requires `aws.us_east_1`).
-- The mandatory tags (`Project`, `Environment`, `ManagedBy`) come
+- The mandatory tags (`Project`, `Owner`, `Environment`, `ManagedBy`) come
   automatically from the `default_tags` of the provider in the project
   that consumes the module: the module doesn't declare its own `tags`
   variable (none of the SES/API Gateway/ACM resources created here
@@ -343,3 +314,51 @@ with no stage prefix.
   must be a verified SES identity too until production access is
   requested; only `contact_via_email_source` is verified by the module
   itself.
+
+## Reference
+
+<!-- BEGIN_TF_DOCS -->
+### Requirements
+
+| Name | Version |
+| ---- | ------- |
+| terraform | >= 1.9.0 |
+| aws | ~> 6.0 |
+
+### Providers
+
+| Name | Version |
+| ---- | ------- |
+| aws | 6.68.0 |
+
+### Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| api_gateway_name | Name of the API Gateway REST API (also used as the title of the OAS document). | `string` | n/a | yes |
+| contact_via_email_html_template | Content of the HTML body of the ContactViaEmail notification email, as a string. This module never bakes in a fixed template: the content varies per client, so it's passed in, typically via a `file(...)` call in the project that consumes this module (e.g. `file("${path.module}/templates/contact.html")`, pointing at a template file that lives in the consumer project, not in this module). Supports the SES replacement tags {{name}}, {{email}}, {{phone}}, {{message}}. | `string` | n/a | yes |
+| contact_via_email_source | Verified SES sending identity used as the Source of every ContactViaEmail notification. AWS sends a confirmation link to this address; the identity stays unverified until it's opened. | `string` | n/a | yes |
+| contact_via_email_text_template | Content of the plain-text body of the ContactViaEmail notification email, as a string, passed in the same way as contact_via_email_html_template (typically via a `file(...)` call in the consumer project). Supports the same replacement tags. | `string` | n/a | yes |
+| contact_via_email_to_addresses | Mailbox(es) that receive every ContactViaEmail submission, as a single string with addresses separated by a comma, no spaces (e.g. "a@example.com,b@example.com"). | `string` | n/a | yes |
+| domain_name | Custom domain of the API (e.g. "contact.trattoriadamario.it"). | `string` | n/a | yes |
+| route53_zone_id | ID of an existing Route 53 hosted zone for domain_name, used to validate the ACM certificate and to create the DNS alias record pointing to the API. This module never creates a hosted zone: pass in one that already exists. | `string` | n/a | yes |
+| ses_integration_role_name | Name of the IAM role assumed by API Gateway to call SES. | `string` | n/a | yes |
+| ses_integration_role_policy_name | Name of the inline IAM policy attached to the SES integration role. | `string` | n/a | yes |
+| ses_template_name | Name of the SES template rendered for every ContactViaEmail notification. | `string` | n/a | yes |
+| contact_via_email_subject | Subject line of the notification email. Supports the same {{name}}/{{email}}/{{phone}}/{{message}} replacement tags as the template body. | `string` | `"New message from the website - {{name}}"` | no |
+| cors_allowed_origin | Value of the Access-Control-Allow-Origin header returned by the API, including its CORS preflight response. Set it to the exact website origin (e.g. "https://trattoriadamario.it") once known; the wildcard default only unblocks local development. | `string` | `"*"` | no |
+| throttling_burst_limit | Burst request limit (concurrent requests) applied to the whole API. | `number` | `10` | no |
+| throttling_rate_limit | Steady-state request rate limit (requests per second) applied to the whole API, to protect the SES sending reputation of contact_via_email_source and the AWS bill from this unauthenticated public endpoint. | `number` | `5` | no |
+
+### Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| contact_email_url | Public URL of the ContactViaEmail operation (POST /email). |
+| custom_domain_name | Custom domain configured for the API. |
+| execution_arn | Execution ARN of the REST API, needed to grant other AWS services permission to invoke it. |
+| invoke_url | Default execute-api.amazonaws.com invoke URL of the deployed stage (always available, independent of the custom domain). |
+| rest_api_id | ID of the API Gateway REST API. |
+| ses_identity_arn | ARN of the verified SES email identity (contact_via_email_source), used as the Source of every notification. |
+| ses_template_name | Name of the SES template used to render the ContactViaEmail notification. |
+<!-- END_TF_DOCS -->

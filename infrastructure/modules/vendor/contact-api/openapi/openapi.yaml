@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: ${name_prefix}-contact-api
+  title: ${api_gateway_name}
   version: "1.0.0"
 paths:
   /email:
