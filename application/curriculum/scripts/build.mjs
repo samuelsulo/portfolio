@@ -1,21 +1,23 @@
-// Builds the curriculum PDFs (one per language) from samuelsulo-curriculum.json.
-// Colors come from ../palette/samuelsulo-palette.json and fonts from ../fonts, so the curriculum
-// follows the brand: change the palette or the content and rebuild.
+// Builds the curriculum PDFs (one per language) from samuelsulo-curriculum.json into public/curriculum.
+// Colors come from brand/palette, fonts from brand/fonts and the Kitsune mark from brand/logo, so the
+// curriculum follows the brand: change the palette or the content and rebuild.
 //
-//   npm ci --prefix brand/curriculum
-//   node brand/curriculum/scripts/build.mjs
+//   npm run curriculum        (from application/)
 //
 // Set CHROME_PATH to an installed Chrome binary to skip the Chromium download, and
 // CHROME_NO_SANDBOX=1 in containers.
 import fs from 'node:fs'
+import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const brand = path.resolve(root, '..')
+const brand = path.resolve(root, '..', '..', 'brand')
 const data = JSON.parse(fs.readFileSync(path.join(root, 'samuelsulo-curriculum.json'), 'utf8'))
-const palette = JSON.parse(fs.readFileSync(path.join(brand, 'palette', 'samuelsulo-palette.json'), 'utf8')).colors
+const palette = JSON.parse(
+  fs.readFileSync(path.join(brand, 'palette', 'samuelsulo-palette.json'), 'utf8'),
+).colors
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
 const dataUri = (file, mime) => `data:${mime};base64,${fs.readFileSync(file).toString('base64')}`
@@ -33,12 +35,17 @@ const rgba = (token, alpha) => {
 // Chrome rasterize it into the PDF, which triples its size.
 const solid = (token, alpha) => {
   const h = hex(token).slice(1)
-  const mixed = [0, 2, 4].map((i) => Math.round(255 + (parseInt(h.slice(i, i + 2), 16) - 255) * alpha))
+  const mixed = [0, 2, 4].map((i) =>
+    Math.round(255 + (parseInt(h.slice(i, i + 2), 16) - 255) * alpha),
+  )
   return '#' + mixed.map((v) => v.toString(16).padStart(2, '0')).join('')
 }
 
 const photo = dataUri(path.join(root, 'assets', 'photo.jpg'), 'image/jpeg')
-const mark = dataUri(path.join(root, 'assets', 'samuelsulo-symbol-negative.svg'), 'image/svg+xml')
+const mark = dataUri(
+  path.join(brand, 'logo', 'export', 'svg', 'samuelsulo-symbol-negative.svg'),
+  'image/svg+xml',
+)
 const font = (family, weight, file) =>
   `@font-face{font-family:'${family}';font-weight:${weight};src:url('${dataUri(path.join(brand, 'fonts', file), 'font/ttf')}') format('truetype')}`
 
@@ -113,18 +120,31 @@ function render(lang) {
   const link = (u) => `<a href="https://${u}">${esc(u)}</a>`
   const to = (v) => (v === 'present' || v === 'presente' ? l.present : v)
   const skills = t.skills
-    .map((g) => `<div class="sk"><h4>${esc(g.title)}</h4><ul>${g.items.map((i) => `<li>${esc(i)}</li>`).join('')}</ul></div>`)
+    .map(
+      (g) =>
+        `<div class="sk"><h4>${esc(g.title)}</h4><ul>${g.items.map((i) => `<li>${esc(i)}</li>`).join('')}</ul></div>`,
+    )
     .join('')
-  const job = (j) => `<div class="job"><div class="job-top"><h3>${esc(j.title)}</h3><span class="when">${esc(j.from)} - ${esc(to(j.to))}</span></div>
+  const job = (
+    j,
+  ) => `<div class="job"><div class="job-top"><h3>${esc(j.title)}</h3><span class="when">${esc(j.from)} - ${esc(to(j.to))}</span></div>
     <div class="sub"><b>${esc(j.company)}</b>${j.location ? ' · ' + esc(j.location) : ''}</div>
     ${j.intro ? `<p class="intro">${esc(j.intro)}</p>` : ''}<ul>${j.bullets.map((b) => `<li>${esc(b)}</li>`).join('')}</ul></div>`
-  const edu = (e) => `<div class="job"><div class="job-top"><h3>${esc(e.title)}</h3><span class="when">${esc(e.from)} - ${esc(to(e.to))}</span></div>
+  const edu = (
+    e,
+  ) => `<div class="job"><div class="job-top"><h3>${esc(e.title)}</h3><span class="when">${esc(e.from)} - ${esc(to(e.to))}</span></div>
     <div class="sub"><b>${esc(e.school)}</b> · ${esc(e.location)}</div>${e.bullets.length ? `<ul>${e.bullets.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>` : ''}</div>`
   const projects = t.projects
-    .map((x) => `<div class="pc"><h3>${esc(x.name)}<em>${esc(x.tag)}</em></h3><a href="https://${x.url}">${esc(x.url)}</a><p>${esc(x.text)}</p></div>`)
+    .map(
+      (x) =>
+        `<div class="pc"><h3>${esc(x.name)}<em>${esc(x.tag)}</em></h3><a href="https://${x.url}">${esc(x.url)}</a><p>${esc(x.text)}</p></div>`,
+    )
     .join('')
   const certs = t.certifications
-    .map((x) => `<li><b>${esc(x.name)}</b><i><a href="https://www.${x.url}" style="color:inherit;text-decoration:none">${esc(x.url)}</a></i></li>`)
+    .map(
+      (x) =>
+        `<li><b>${esc(x.name)}</b><i><a href="https://www.${x.url}" style="color:inherit;text-decoration:none">${esc(x.url)}</a></i></li>`,
+    )
     .join('')
   const langs = t.languages.map(([a, b]) => `<li>${esc(a)}<span>${esc(b)}</span></li>`).join('')
   const location = lang === 'it' ? c.locationIt || c.location : c.location
@@ -160,22 +180,25 @@ function render(lang) {
   </section></body></html>`
 }
 
-const out = path.join(root, 'export')
+const out = path.resolve(root, '..', 'public', 'curriculum')
 fs.mkdirSync(out, { recursive: true })
 const browser = await chromium.launch({
   executablePath: process.env.CHROME_PATH || undefined,
   args: process.env.CHROME_NO_SANDBOX ? ['--no-sandbox'] : [],
 })
 for (const lang of Object.keys(data).filter((k) => data[k] && data[k].labels)) {
-  const tmp = path.join(fs.mkdtempSync(path.join(root, '.build-')), 'curriculum.html')
-  fs.writeFileSync(tmp, render(lang))
-  const page = await browser.newPage()
-  await page.goto('file://' + tmp)
-  await page.evaluate(() => document.fonts.ready)
-  const file = path.join(out, `samuelsulo-curriculum-${lang}.pdf`)
-  await page.pdf({ path: file, format: 'A4', printBackground: true, preferCSSPageSize: true })
-  await page.close()
-  fs.rmSync(path.dirname(tmp), { recursive: true, force: true })
-  console.log(`written ${path.relative(process.cwd(), file)}`)
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'curriculum-'))
+  try {
+    fs.writeFileSync(path.join(tmp, 'curriculum.html'), render(lang))
+    const page = await browser.newPage()
+    await page.goto('file://' + path.join(tmp, 'curriculum.html'))
+    await page.evaluate(() => document.fonts.ready)
+    const file = path.join(out, `samuelsulo-curriculum-${lang}.pdf`)
+    await page.pdf({ path: file, format: 'A4', printBackground: true, preferCSSPageSize: true })
+    await page.close()
+    console.log(`written ${path.relative(process.cwd(), file)}`)
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true })
+  }
 }
 await browser.close()
