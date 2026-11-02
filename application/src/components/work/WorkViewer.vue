@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import ArchitectureDiagram from '@/components/work/ArchitectureDiagram.vue'
@@ -20,6 +20,13 @@ const selected = computed(
 )
 
 const tabRefs = ref<HTMLElement[]>([])
+
+// On narrow screens the tabs scroll sideways: keep the selected one in view.
+watch(selectedId, async () => {
+  await nextTick()
+  const index = props.materials.findIndex((material) => material.id === selectedId.value)
+  tabRefs.value[index]?.scrollIntoView({ inline: 'nearest', block: 'nearest' })
+})
 
 function key(material: CaseMaterial, path: string): string {
   return `cases.items.${props.caseId}.materials.${material.id}.${path}`
@@ -147,6 +154,8 @@ function onKeydown(event: KeyboardEvent, index: number) {
 .viewer__tabs {
   display: flex;
   overflow-x: auto;
+  /* Fade the right edge so it is clear that the tabs scroll. */
+  mask-image: linear-gradient(90deg, #000 88%, transparent);
   border-bottom: 1px solid var(--color-border);
   background-color: var(--color-bg-alt);
 }
@@ -155,6 +164,7 @@ function onKeydown(event: KeyboardEvent, index: number) {
   .viewer__tabs {
     flex-direction: column;
     overflow: visible;
+    mask-image: none;
     border-right: 1px solid var(--color-border);
     border-bottom: 0;
   }

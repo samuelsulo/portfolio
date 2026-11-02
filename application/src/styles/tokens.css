@@ -20,7 +20,7 @@
   /* --- Color: text --- */
   --color-text: #e9ebf3;
   --color-text-muted: #a3a9bd;
-  --color-text-dim: #6b7186;
+  --color-text-dim: #7f859a;
 
   /* --- Color: derived from theme (used by components instead of literals) --- */
   --color-on-neon: #04121a;
@@ -131,7 +131,7 @@
     /* --- Color: text --- */
     --color-text: #0b1220;
     --color-text-muted: #3d4760;
-    --color-text-dim: #5b657e;
+    --color-text-dim: #536078;
 
     /* --- Color: derived from theme --- */
     --color-on-neon: #ffffff;
@@ -140,13 +140,13 @@
     --grid-alpha: 0.12;
 
     /* --- Color: accents, darker so they keep AA contrast on light surfaces --- */
-    --color-neon-primary: #007a94;
-    --color-neon-primary-strong: #005f75;
-    --color-neon-primary-rgb: 0, 122, 148;
+    --color-neon-primary: #006d85;
+    --color-neon-primary-strong: #005568;
+    --color-neon-primary-rgb: 0, 109, 133;
     --color-neon-secondary: #7a2bc0;
     --color-neon-secondary-rgb: 122, 43, 192;
-    --color-neon-success: #0a8f62;
-    --color-neon-success-rgb: 10, 143, 98;
+    --color-neon-success: #067650;
+    --color-neon-success-rgb: 6, 118, 80;
     --color-neon-danger: #c4283f;
     --color-neon-danger-rgb: 196, 40, 63;
 
@@ -185,7 +185,7 @@
   /* --- Color: text --- */
   --color-text: #0b1220;
   --color-text-muted: #3d4760;
-  --color-text-dim: #5b657e;
+  --color-text-dim: #536078;
 
   /* --- Color: derived from theme --- */
   --color-on-neon: #ffffff;
@@ -194,13 +194,13 @@
   --grid-alpha: 0.12;
 
   /* --- Color: accents, darker so they keep AA contrast on light surfaces --- */
-  --color-neon-primary: #007a94;
-  --color-neon-primary-strong: #005f75;
-  --color-neon-primary-rgb: 0, 122, 148;
+  --color-neon-primary: #006d85;
+  --color-neon-primary-strong: #005568;
+  --color-neon-primary-rgb: 0, 109, 133;
   --color-neon-secondary: #7a2bc0;
   --color-neon-secondary-rgb: 122, 43, 192;
-  --color-neon-success: #0a8f62;
-  --color-neon-success-rgb: 10, 143, 98;
+  --color-neon-success: #067650;
+  --color-neon-success-rgb: 6, 118, 80;
   --color-neon-danger: #c4283f;
   --color-neon-danger-rgb: 196, 40, 63;
 

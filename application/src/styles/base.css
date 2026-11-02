@@ -155,3 +155,8 @@ img {
   opacity: 1;
   transform: none;
 }
+
+/* Programmatic focus target after a page change: no ring, it is not a control. */
+main:focus {
+  outline: none;
+}
