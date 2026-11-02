@@ -4,8 +4,9 @@ import { useI18n } from 'vue-i18n'
 import NavBar from '@/components/layout/NavBar.vue'
 import AppFooter from '@/components/layout/AppFooter.vue'
 import HeroSection from '@/components/sections/HeroSection.vue'
-import ServicesSection from '@/components/sections/ServicesSection.vue'
+import AboutSection from '@/components/sections/AboutSection.vue'
 import ProjectsSection from '@/components/sections/ProjectsSection.vue'
+import StackSection from '@/components/sections/StackSection.vue'
 import ContactSection from '@/components/sections/ContactSection.vue'
 
 const { t, locale } = useI18n()
@@ -23,8 +24,9 @@ watchEffect(() => {
   <NavBar />
   <main id="main-content">
     <HeroSection />
-    <ServicesSection />
+    <AboutSection />
     <ProjectsSection />
+    <StackSection />
     <ContactSection />
   </main>
   <AppFooter />

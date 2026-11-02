@@ -6,6 +6,21 @@
     "github": "https://github.com/samuelsulo",
     "linkedin": "https://www.linkedin.com/in/work-samuelsulo"
   },
+  "cvUrl": null,
+  "hud": [
+    {
+      "id": "region",
+      "value": "eu-south-1"
+    },
+    {
+      "id": "infrastructure",
+      "value": "OpenTofu · Terragrunt"
+    },
+    {
+      "id": "applications",
+      "value": "Vue 3 · TypeScript"
+    }
+  ],
   "availableForWork": true,
   "legal": {
     "privacyContactEmail": "work.samuelsulo@gmail.com",

@@ -12,8 +12,9 @@ import { useHideOnScroll } from '@/composables/useHideOnScroll'
 
 const { t } = useI18n()
 
-const sections = ['about', 'services', 'projects', 'contact'] as const
-const { activeId } = useScrollSpy([...sections])
+const sections = ['about', 'projects', 'stack', 'contact'] as const
+// The hero is observed too, so that no link is highlighted while it is on screen.
+const { activeId } = useScrollSpy(['hero', ...sections])
 
 const links = computed(() => sections.map((id) => ({ id, label: t(`nav.${id}`) })))
 
@@ -60,7 +61,7 @@ function handleKeydown(event: KeyboardEvent) {
     <a class="navbar__skip skip-link" href="#main-content">{{ t('nav.skipToContent') }}</a>
 
     <div class="navbar__inner container">
-      <a href="#about" class="navbar__brand" aria-label="Samuel Sulo">
+      <a href="#hero" class="navbar__brand" aria-label="Samuel Sulo">
         <Kitsune
           :size="44"
           :rest-opacity="1"

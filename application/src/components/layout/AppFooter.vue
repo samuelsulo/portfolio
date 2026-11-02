@@ -66,7 +66,7 @@ function closeLegal() {
         </a>
       </div>
 
-      <a href="#about" class="footer__back-to-top">
+      <a href="#hero" class="footer__back-to-top">
         {{ t('footer.backToTop') }}
         <AppIcon name="arrow-up" :size="16" />
       </a>

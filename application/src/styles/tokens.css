@@ -28,6 +28,13 @@
   --color-scrim: rgba(5, 6, 10, 0.72);
   --grid-alpha: 0.05;
 
+  /* --- Color: ink panels (terminal, contact): dark in both themes --- */
+  --color-ink: #0a0d16;
+  --color-ink-line: rgba(230, 232, 240, 0.14);
+  --color-ink-text: #e9ebf3;
+  --color-ink-dim: #8c93a8;
+  --color-ink-accent: #35e6ff;
+
   /* --- Color: neon accents --- */
   --color-neon-primary: #35e6ff;
   --color-neon-primary-strong: #7df3ff;
