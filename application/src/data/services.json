@@ -2,7 +2,7 @@
   {
     "id": "cloud-architecture",
     "icon": "cloud",
-    "technologies": ["AWS", "Terraform", "CI/CD"],
+    "technologies": ["AWS", "OpenTofu", "CI/CD"],
     "translationKey": "services.items.cloudArchitecture"
   },
   {
@@ -14,7 +14,7 @@
   {
     "id": "infrastructure-as-code",
     "icon": "infrastructure",
-    "technologies": ["Terraform", "CI/CD", "GitHub"],
+    "technologies": ["OpenTofu", "CI/CD", "GitHub"],
     "translationKey": "services.items.infrastructureAsCode"
   },
   {
