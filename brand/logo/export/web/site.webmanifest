@@ -1,0 +1,27 @@
+{
+  "name": "Samuel Sulo",
+  "short_name": "SAMUEL SULO",
+  "description": "Web developer and cloud engineer. Kitsune is the personal mark: a low-poly fox that signs the work.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#05060A",
+  "theme_color": "#05060A",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
