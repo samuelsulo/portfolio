@@ -1,0 +1,452 @@
+{
+  "specHash": "8036b81691d682525ce6f3b929040098abf8cee1",
+  "items": [
+    {
+      "side": "front",
+      "kind": "logo",
+      "id": null,
+      "safeOff": false,
+      "label": "samuelsulo-symbol-negative.svg",
+      "rect": {
+        "x": 6.296256510416666,
+        "y": 6.296256510416666,
+        "w": 7.3959309895833325,
+        "h": 7.3959309895833325
+      }
+    },
+    {
+      "side": "front",
+      "kind": "text",
+      "id": null,
+      "safeOff": false,
+      "label": "Samuel Sulo",
+      "rect": {
+        "x": 4.497916666666666,
+        "y": 38.02972005208333,
+        "w": 36.66546223958333,
+        "h": 6.717936197916666
+      },
+      "fontPt": 18.142,
+      "weight": 700,
+      "fitted": null,
+      "origPt": null,
+      "fit": null,
+      "color": [
+        233,
+        235,
+        243
+      ],
+      "alpha": 1,
+      "fontFamily": "Space Grotesk",
+      "lineCount": 1
+    },
+    {
+      "side": "front",
+      "kind": "text",
+      "id": null,
+      "safeOff": false,
+      "label": "Web Developer & Cloud Engineer",
+      "rect": {
+        "x": 7.3959309895833325,
+        "y": 46.744433593749996,
+        "w": 46.624544270833326,
+        "h": 3.704166666666666
+      },
+      "fontPt": 8.504,
+      "weight": 500,
+      "fitted": null,
+      "origPt": null,
+      "fit": null,
+      "color": [
+        163,
+        169,
+        189
+      ],
+      "alpha": 1,
+      "fontFamily": "Space Grotesk",
+      "lineCount": 1
+    },
+    {
+      "side": "front",
+      "kind": "text",
+      "id": null,
+      "safeOff": false,
+      "label": "samuelsulo.it",
+      "rect": {
+        "x": 59.580859374999996,
+        "y": 46.3482408841451,
+        "w": 20.91448567708333,
+        "h": 2.645833333333333
+      },
+      "fontPt": 6,
+      "weight": 400,
+      "fitted": null,
+      "origPt": null,
+      "fit": null,
+      "color": [
+        123,
+        129,
+        151
+      ],
+      "alpha": 1,
+      "fontFamily": "JetBrains Mono",
+      "lineCount": 1
+    },
+    {
+      "side": "back",
+      "kind": "text",
+      "id": null,
+      "safeOff": false,
+      "label": "Get in touch",
+      "rect": {
+        "x": 4.497916666666666,
+        "y": 10.182324218749999,
+        "w": 19.306315104166664,
+        "h": 2.645833333333333
+      },
+      "fontPt": 6,
+      "weight": 400,
+      "fitted": null,
+      "origPt": null,
+      "fit": null,
+      "color": [
+        53,
+        230,
+        255
+      ],
+      "alpha": 1,
+      "fontFamily": "JetBrains Mono",
+      "lineCount": 1
+    },
+    {
+      "side": "back",
+      "kind": "icon",
+      "id": null,
+      "safeOff": false,
+      "label": null,
+      "rect": {
+        "x": 4.497916666666666,
+        "y": 15.225944010416665,
+        "w": 5.5975911458333325,
+        "h": 5.5975911458333325
+      },
+      "color": [
+        53,
+        230,
+        255
+      ],
+      "alpha": 1,
+      "strokeMm": 0.2,
+      "glyphRect": {
+        "x": 5.8456380208333325,
+        "y": 16.57366536458333,
+        "w": 2.898014322916666,
+        "h": 2.898014322916666
+      },
+      "group": "6"
+    },
+    {
+      "side": "back",
+      "kind": "text",
+      "id": null,
+      "safeOff": false,
+      "label": "https://samuelsulo.it",
+      "rect": {
+        "x": 12.294856770833333,
+        "y": 16.486848958333333,
+        "w": 18.413346354166666,
+        "h": 2.9104166666666664
+      },
+      "fontPt": 6.7,
+      "weight": 500,
+      "fitted": null,
+      "origPt": null,
+      "fit": null,
+      "color": [
+        233,
+        235,
+        243
+      ],
+      "alpha": 1,
+      "fontFamily": "JetBrains Mono",
+      "lineCount": 1,
+      "group": "6"
+    },
+    {
+      "side": "back",
+      "kind": "icon",
+      "id": null,
+      "safeOff": false,
+      "label": null,
+      "rect": {
+        "x": 4.497916666666666,
+        "y": 23.22132161458333,
+        "w": 5.5975911458333325,
+        "h": 5.5975911458333325
+      },
+      "color": [
+        53,
+        230,
+        255
+      ],
+      "alpha": 1,
+      "strokeMm": 0.2,
+      "glyphRect": {
+        "x": 5.8456380208333325,
+        "y": 24.569042968749997,
+        "w": 2.898014322916666,
+        "h": 2.898014322916666
+      },
+      "group": "6"
+    },
+    {
+      "side": "back",
+      "kind": "text",
+      "id": null,
+      "safeOff": false,
+      "label": "work.samuelsulo@gmail.com",
+      "rect": {
+        "x": 12.294856770833333,
+        "y": 24.482226562499996,
+        "w": 35.40869140624999,
+        "h": 2.9104166666666664
+      },
+      "fontPt": 6.7,
+      "weight": 400,
+      "fitted": null,
+      "origPt": null,
+      "fit": null,
+      "color": [
+        163,
+        169,
+        189
+      ],
+      "alpha": 1,
+      "fontFamily": "JetBrains Mono",
+      "lineCount": 1,
+      "group": "6"
+    },
+    {
+      "side": "back",
+      "kind": "icon",
+      "id": null,
+      "safeOff": false,
+      "label": null,
+      "rect": {
+        "x": 4.497916666666666,
+        "y": 31.216699218749998,
+        "w": 5.5975911458333325,
+        "h": 5.5975911458333325
+      },
+      "color": [
+        53,
+        230,
+        255
+      ],
+      "alpha": 1,
+      "strokeMm": 0.2,
+      "glyphRect": {
+        "x": 5.8456380208333325,
+        "y": 32.56442057291666,
+        "w": 2.898014322916666,
+        "h": 2.898014322916666
+      },
+      "group": "6"
+    },
+    {
+      "side": "back",
+      "kind": "text",
+      "id": null,
+      "safeOff": false,
+      "label": "+39 345 955 1342",
+      "rect": {
+        "x": 12.294856770833333,
+        "y": 32.477604166666666,
+        "w": 22.66321614583333,
+        "h": 2.9104166666666664
+      },
+      "fontPt": 6.7,
+      "weight": 400,
+      "fitted": null,
+      "origPt": null,
+      "fit": null,
+      "color": [
+        163,
+        169,
+        189
+      ],
+      "alpha": 1,
+      "fontFamily": "JetBrains Mono",
+      "lineCount": 1,
+      "group": "6"
+    },
+    {
+      "side": "back",
+      "kind": "icon",
+      "id": null,
+      "safeOff": false,
+      "label": null,
+      "rect": {
+        "x": 4.497916666666666,
+        "y": 39.212076822916664,
+        "w": 5.5975911458333325,
+        "h": 5.5975911458333325
+      },
+      "color": [
+        53,
+        230,
+        255
+      ],
+      "alpha": 1,
+      "strokeMm": 0.2,
+      "glyphRect": {
+        "x": 5.8456380208333325,
+        "y": 40.55979817708333,
+        "w": 2.898014322916666,
+        "h": 2.898014322916666
+      },
+      "group": "6"
+    },
+    {
+      "side": "back",
+      "kind": "text",
+      "id": null,
+      "safeOff": false,
+      "label": "/in/work-samuelsulo",
+      "rect": {
+        "x": 12.294856770833333,
+        "y": 40.47298177083333,
+        "w": 26.913085937499996,
+        "h": 2.9104166666666664
+      },
+      "fontPt": 6.7,
+      "weight": 400,
+      "fitted": null,
+      "origPt": null,
+      "fit": null,
+      "color": [
+        163,
+        169,
+        189
+      ],
+      "alpha": 1,
+      "fontFamily": "JetBrains Mono",
+      "lineCount": 1,
+      "group": "6"
+    },
+    {
+      "side": "back",
+      "kind": "qr",
+      "id": null,
+      "safeOff": false,
+      "label": null,
+      "rect": {
+        "x": 50.498209635416664,
+        "y": 10.227799479166666,
+        "w": 29.997135416666662,
+        "h": 29.997135416666662
+      },
+      "qrid": "site"
+    },
+    {
+      "side": "back",
+      "kind": "text",
+      "id": null,
+      "safeOff": false,
+      "label": "Scan > portfolio",
+      "rect": {
+        "x": 53.110970052083324,
+        "y": 42.221712239583326,
+        "w": 25.065136718749997,
+        "h": 2.3812499999999996
+      },
+      "fontPt": 6,
+      "weight": 400,
+      "fitted": null,
+      "origPt": null,
+      "fit": null,
+      "color": [
+        53,
+        230,
+        255
+      ],
+      "alpha": 1,
+      "fontFamily": "JetBrains Mono",
+      "lineCount": 1
+    }
+  ],
+  "qrs": [
+    {
+      "id": "site",
+      "side": "back",
+      "payload": "https://samuelsulo.it",
+      "ecc": "M",
+      "size": 30,
+      "moduleMm": 0.909,
+      "modules": 25,
+      "quiet": 4,
+      "fg": [
+        233,
+        235,
+        243
+      ],
+      "bg": [
+        16,
+        19,
+        28
+      ],
+      "bgAlpha": 1,
+      "where": "back.elements[0].children[1]"
+    }
+  ],
+  "issues": [
+    {
+      "level": "info",
+      "code": "text-small",
+      "message": "6.0 pt is under the recommended 7 pt.",
+      "where": "front: text \"samuelsulo.it\""
+    },
+    {
+      "level": "info",
+      "code": "text-small",
+      "message": "6.0 pt is under the recommended 7 pt.",
+      "where": "back: text \"Get in touch\""
+    },
+    {
+      "level": "info",
+      "code": "text-small",
+      "message": "6.7 pt is under the recommended 7 pt.",
+      "where": "back: text \"https://samuelsulo.it\""
+    },
+    {
+      "level": "info",
+      "code": "text-small",
+      "message": "6.7 pt is under the recommended 7 pt.",
+      "where": "back: text \"work.samuelsulo@gmail.com\""
+    },
+    {
+      "level": "info",
+      "code": "text-small",
+      "message": "6.7 pt is under the recommended 7 pt.",
+      "where": "back: text \"+39 345 955 1342\""
+    },
+    {
+      "level": "info",
+      "code": "text-small",
+      "message": "6.7 pt is under the recommended 7 pt.",
+      "where": "back: text \"/in/work-samuelsulo\""
+    },
+    {
+      "level": "info",
+      "code": "text-small",
+      "message": "6.0 pt is under the recommended 7 pt.",
+      "where": "back: text \"Scan > portfolio\""
+    },
+    {
+      "level": "info",
+      "code": "qr-inverted",
+      "message": "light-on-dark code (contrast 15.6:1). Verified by decoding, but keep a dark-on-light alternative if the audience uses old scanners.",
+      "where": "back: qr #site"
+    }
+  ]
+}
