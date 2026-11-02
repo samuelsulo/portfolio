@@ -1,0 +1,295 @@
+{
+  "status": "pass",
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "\"neon-cyan\" (accent) on \"mist\" (light) is 1.26:1: use the accent for surfaces, icons and details there, never for text."
+  ],
+  "colors": [
+    {
+      "token": "deep-cyan",
+      "role": "primary",
+      "name": "Deep cyan",
+      "hex": "#006D85",
+      "cmyk": [
+        100,
+        35,
+        25,
+        35
+      ],
+      "cmykExplicit": true,
+      "use": "Primary colour. The mark and text accents on light surfaces (light theme).",
+      "rgb": [
+        0,
+        109,
+        133
+      ]
+    },
+    {
+      "token": "void",
+      "role": "dark",
+      "name": "Void",
+      "hex": "#05060A",
+      "cmyk": [
+        60,
+        45,
+        35,
+        100
+      ],
+      "cmykExplicit": true,
+      "use": "Dark background of the site, the card and the negative logo.",
+      "rgb": [
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      "token": "neon-cyan",
+      "role": "accent",
+      "name": "Neon cyan",
+      "hex": "#35E6FF",
+      "cmyk": [
+        70,
+        0,
+        8,
+        0
+      ],
+      "cmykExplicit": true,
+      "use": "The accent on dark: links, glows and the mid tone of the mark. Never on light backgrounds.",
+      "rgb": [
+        53,
+        230,
+        255
+      ]
+    },
+    {
+      "token": "mist",
+      "role": "light",
+      "name": "Mist",
+      "hex": "#E6EBF3",
+      "cmyk": [
+        8,
+        4,
+        2,
+        0
+      ],
+      "cmykExplicit": true,
+      "use": "Default light background (never pure white).",
+      "rgb": [
+        230,
+        235,
+        243
+      ]
+    },
+    {
+      "token": "neon-violet",
+      "role": "muted",
+      "name": "Neon violet",
+      "hex": "#B24BF3",
+      "cmyk": [
+        60,
+        75,
+        0,
+        0
+      ],
+      "cmykExplicit": true,
+      "use": "Second brand color: the shaded side of the mark and secondary highlights on dark.",
+      "rgb": [
+        178,
+        75,
+        243
+      ]
+    },
+    {
+      "token": "neon-cyan-light",
+      "role": null,
+      "name": "Light cyan",
+      "hex": "#7DF3FF",
+      "cmyk": [
+        45,
+        0,
+        5,
+        0
+      ],
+      "cmykExplicit": true,
+      "use": "The light tone of the mark on dark surfaces.",
+      "rgb": [
+        125,
+        243,
+        255
+      ]
+    },
+    {
+      "token": "neon-green",
+      "role": null,
+      "name": "Neon green",
+      "hex": "#45F0A6",
+      "cmyk": [
+        60,
+        0,
+        55,
+        0
+      ],
+      "cmykExplicit": true,
+      "use": "The nose of the mark and success states on dark.",
+      "rgb": [
+        69,
+        240,
+        166
+      ]
+    },
+    {
+      "token": "deep-cyan-strong",
+      "role": null,
+      "name": "Deep cyan, strong",
+      "hex": "#005568",
+      "cmyk": [
+        100,
+        40,
+        30,
+        50
+      ],
+      "cmykExplicit": true,
+      "use": "The light tone of the mark on light surfaces.",
+      "rgb": [
+        0,
+        85,
+        104
+      ]
+    },
+    {
+      "token": "deep-violet",
+      "role": null,
+      "name": "Deep violet",
+      "hex": "#7A2BC0",
+      "cmyk": [
+        75,
+        90,
+        0,
+        0
+      ],
+      "cmykExplicit": true,
+      "use": "The shaded tone of the mark on light surfaces.",
+      "rgb": [
+        122,
+        43,
+        192
+      ]
+    },
+    {
+      "token": "deep-green",
+      "role": null,
+      "name": "Deep green",
+      "hex": "#067650",
+      "cmyk": [
+        85,
+        20,
+        75,
+        25
+      ],
+      "cmykExplicit": true,
+      "use": "The nose of the mark on light surfaces.",
+      "rgb": [
+        6,
+        118,
+        80
+      ]
+    },
+    {
+      "token": "surface",
+      "role": null,
+      "name": "Surface",
+      "hex": "#10131C",
+      "cmyk": [
+        62,
+        48,
+        38,
+        94
+      ],
+      "cmykExplicit": true,
+      "use": "Panels and the QR plate on dark.",
+      "rgb": [
+        16,
+        19,
+        28
+      ]
+    },
+    {
+      "token": "snow",
+      "role": null,
+      "name": "Snow",
+      "hex": "#E9EBF3",
+      "cmyk": [
+        8,
+        5,
+        3,
+        0
+      ],
+      "cmykExplicit": true,
+      "use": "Text on dark.",
+      "rgb": [
+        233,
+        235,
+        243
+      ]
+    },
+    {
+      "token": "slate",
+      "role": null,
+      "name": "Slate",
+      "hex": "#A3A9BD",
+      "cmyk": [
+        40,
+        28,
+        15,
+        5
+      ],
+      "cmykExplicit": true,
+      "use": "Secondary text on dark.",
+      "rgb": [
+        163,
+        169,
+        189
+      ]
+    },
+    {
+      "token": "graphite",
+      "role": null,
+      "name": "Graphite",
+      "hex": "#7B8197",
+      "cmyk": [
+        50,
+        38,
+        25,
+        15
+      ],
+      "cmykExplicit": true,
+      "use": "Tertiary text and captions on dark.",
+      "rgb": [
+        123,
+        129,
+        151
+      ]
+    },
+    {
+      "token": "ink",
+      "role": null,
+      "name": "Ink",
+      "hex": "#0B1220",
+      "cmyk": [
+        90,
+        75,
+        50,
+        70
+      ],
+      "cmykExplicit": true,
+      "use": "Text on light.",
+      "rgb": [
+        11,
+        18,
+        32
+      ]
+    }
+  ]
+}
