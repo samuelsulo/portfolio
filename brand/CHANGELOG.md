@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## brand/v1.1.3 - 2026-11-02
+#### Bug Fixes
+- (**brand**) keep the social image above the footer in the manual - (ceb3fec) - Samuel Sulo
+
+- - -
+
+## brand/v1.1.2 - 2026-11-02
+#### Bug Fixes
+- (**brand**) keep the vertical lockup and the palette page inside the manual - (441c559) - Samuel Sulo
+- (**brand**) remove the temporary build folders from the curriculum - (1b71321) - Samuel Sulo
+
+- - -
+
 ## brand/v1.1.1 - 2026-11-02
 #### Bug Fixes
 - (**brand**) add the Corley location and lighten the curriculum PDFs - (1d84960) - Samuel Sulo
