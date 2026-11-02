@@ -5,9 +5,15 @@ commit-msg:
 
 pre-commit:
   commands:
-    terraform-fmt:
-      glob: "infrastructure/**/*.{tf,tfvars,hcl}"
-      run: kitsu terraform fmt-staged {staged_files}
+    infrastructure-fmt-tofu:
+      root: "infrastructure/"
+      glob: "infrastructure/**/*.{tf,tfvars}"
+      run: mise exec -- tofu fmt {staged_files}
+      stage_fixed: true
+    infrastructure-fmt-hcl:
+      root: "infrastructure/"
+      glob: "infrastructure/**/*.hcl"
+      run: mise exec -- terragrunt hcl fmt
       stage_fixed: true
     application-lint:
       root: "application/"

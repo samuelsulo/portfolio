@@ -5,7 +5,7 @@ GitHub Actions workflows for this project's CI.
 Most workflows here are stack- and provider-specific: they are added
 project by project as `application/` and `infrastructure/` are
 scaffolded (build/test/deploy pipeline for the chosen application
-stack, Terraform plan/apply for the chosen cloud provider).
+stack, Terragrunt plan/apply for the chosen cloud provider).
 
 ## Available Workflows
 
