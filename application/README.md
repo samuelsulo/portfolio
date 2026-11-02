@@ -20,7 +20,7 @@ Tool versions are managed via `mise` (see `mise.toml` at the repository root). F
 mise exec -- npm install
 ```
 
-Deploying additionally requires `kitsu`, the AWS CLI and `jq` on `PATH`, plus AWS credentials for the target environment active in the terminal (see [`scripts/deploy.sh`](./scripts/deploy.sh)).
+Deploying additionally requires the AWS CLI (installed by `mise`, like Node.js, OpenTofu and Terragrunt) and AWS credentials for the production account: the `AWS_PROFILE` active in the terminal, or the profile named in [`../infrastructure/live/production/account.hcl`](../infrastructure/live/production/account.hcl) (see [`scripts/deploy.sh`](./scripts/deploy.sh)).
 
 ## Available scripts
 
@@ -41,10 +41,10 @@ All commands must be run through `mise exec --` (or in a shell where `mise` has 
 
 - Every notable change is recorded in [`CHANGELOG.md`](./CHANGELOG.md), in [Keep a Changelog](https://keepachangelog.com/) format.
 - Production releases are tracked with `application/vX.Y.Z` git tags, created with `cog bump --package application --version X.Y.Z` (see the root [`README.md`](../README.md) for cocogitto conventions), not branches or a deploy log.
-- Deploys are run from the terminal with [`scripts/deploy.sh`](./scripts/deploy.sh) (`npm run deploy --`), never from CI: build, tests, S3 sync and CloudFront invalidation all happen locally, against the AWS credentials active in that terminal. Bucket name, CloudFront distribution ID and the contact API's URL are read from `infrastructure/live`'s Terraform state via `kitsu terraform output-json`, never guessed or hardcoded.
-- In production, only an explicit `application/vX.Y.Z` tag can be deployed, passed with `--version` (never the currently checked-out commit): `npm run deploy -- --env production --version application/vX.Y.Z`. Every other environment deploys whatever commit is currently checked out, versioned by its short SHA, and does not accept `--version`.
+- Deploys are run from the terminal with [`scripts/deploy.sh`](./scripts/deploy.sh) (`npm run deploy --`), never from CI: build, tests, S3 sync and CloudFront invalidation all happen locally, against the AWS credentials of that terminal. Bucket name, CloudFront distribution ID and the contact API's URL are read from the outputs of the website stack (`infrastructure/live/production/eu-south-1/website`) via `terragrunt stack output`, never guessed or hardcoded.
+- Production is the only environment: only an explicit `application/vX.Y.Z` tag can be deployed, passed with `--version` (never the currently checked-out commit): `npm run deploy -- --version application/vX.Y.Z`.
 - The resolved version is injected into the build as the `VITE_APP_VERSION` env var and shown in the footer by `src/components/ui/SiteVersion.vue`.
-- To release to production: `cog bump --package application --version X.Y.Z` (updates `CHANGELOG.md`, commits, tags `application/vX.Y.Z`, pushes, creates the GitHub Release), then `npm run deploy -- --env production --version application/vX.Y.Z`.
+- To release to production: `cog bump --package application --version X.Y.Z` (updates `CHANGELOG.md`, commits, tags `application/vX.Y.Z`, pushes, creates the GitHub Release), then `npm run deploy -- --version application/vX.Y.Z`.
 - The currently live version is recorded as the plain-text content of a single `_version` object in the bucket (readable with `aws s3 cp s3://<bucket>/_version -`). It is only a snapshot of what is live now, not a deploy history: history lives in GitHub Releases instead.
 
 ## Project structure
@@ -86,7 +86,7 @@ The content currently in place (bio, service list, projects, email, social links
 
 The contact form is wired to the `contact_api` module (API Gateway + SES) described in [`../infrastructure/`](../infrastructure). The frontend calls `POST {VITE_CONTACT_API_URL}/email`, where `VITE_CONTACT_API_URL` is the module's custom domain (e.g. `https://contact.samuelsulo.it`).
 
-In sandbox/production this variable is injected automatically by [`scripts/deploy.sh`](./scripts/deploy.sh), which reads it from `infrastructure/live`'s Terraform state instead of having it hardcoded. For local development (`npm run dev`) against an already-applied environment, copy `.env.example` to `.env.local` and set it by hand; `.env.local` must never be committed.
+In production this variable is injected automatically by [`scripts/deploy.sh`](./scripts/deploy.sh), which reads it from the outputs of the website stack in `infrastructure/live` instead of having it hardcoded. For local development (`npm run dev`) against an already-applied environment, copy `.env.example` to `.env.local` and set it by hand; `.env.local` must never be committed.
 
 If `VITE_CONTACT_API_URL` isn't set (e.g. the `contact_api` module hasn't been applied yet in that environment), `src/services/contactService.ts` returns an explicit error (`ContactApiNotConfiguredError`) and the form correctly shows the error state instead of a false success.
 
@@ -98,7 +98,7 @@ The Cookie Policy and Privacy Policy are both rendered by the single `src/compon
 
 The contact-form retention period is the one exception: `legal.contactFormRetentionMonths` in `site-config.json` is a plain number, kept language-neutral on purpose (never a sentence, and never `null`: the real figure is determined by auditing how the backend actually works, not left undecided). `LegalPolicyView.vue` turns it into the actual sentence by calling the translated `legal.privacyPolicy.retentionPeriodKnown` message (`{months}` interpolated) when it's greater than zero, or `retentionPeriodNone` when it's `0`, so the wording itself stays correctly localized in each locale file instead of being duplicated as one shared string.
 
-All `legal.*` fields in `site-config.json` are filled in with real, confirmed values for this site: `dataProcessingRegion` is `AWS eu-south-1 (Milan, Italy)` (confirmed from `infrastructure/live/project.auto.tfvars`); `contactFormRetentionMonths` is `0`, because the contact form's backend (`infrastructure/modules/vendor/contact-api`) has API Gateway call Amazon SES directly, with no Lambda or database in between, so no submission is ever stored by the site itself; `businessDetails` is an empty string, since the controller is an individual with no registered business/VAT/address to disclose (the message template is written so an empty value degrades to a clean sentence, not a dangling placeholder); `privacyPolicyLastUpdated` is an ISO date (`2026-09-05`), kept unambiguous and locale-neutral on purpose (never a worded date like "5 September 2026", which would carry an English month name into the Italian text verbatim).
+All `legal.*` fields in `site-config.json` are filled in with real, confirmed values for this site: `dataProcessingRegion` is `AWS eu-south-1 (Milan, Italy)` (confirmed from `infrastructure/live/production/eu-south-1/region.hcl`); `contactFormRetentionMonths` is `0`, because the contact form's backend (`infrastructure/modules/vendor/contact-api`) has API Gateway call Amazon SES directly, with no Lambda or database in between, so no submission is ever stored by the site itself; `businessDetails` is an empty string, since the controller is an individual with no registered business/VAT/address to disclose (the message template is written so an empty value degrades to a clean sentence, not a dangling placeholder); `privacyPolicyLastUpdated` is an ISO date (`2026-09-05`), kept unambiguous and locale-neutral on purpose (never a worded date like "5 September 2026", which would carry an English month name into the Italian text verbatim).
 
 If this site ever adds analytics, a Maps/YouTube embed, or any other non-essential tracker, it must be gated behind a proper consent banner (accept/reject/customize, equal prominence, granular per category) before it loads, not added silently under this current "necessary only" setup — see the `vue-webapp-standard` skill's cookie-consent reference for the full mechanism to add at that point.
 
