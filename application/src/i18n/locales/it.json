@@ -14,7 +14,13 @@
     "contact": "Contatti",
     "toggleMenu": "Apri/chiudi il menu di navigazione",
     "languageSwitcher": "Cambia lingua",
-    "brandAlt": "Logo di Samuel Sulo"
+    "brandAlt": "Logo di Samuel Sulo",
+    "theme": {
+      "label": "Tema",
+      "light": "Tema chiaro",
+      "system": "Tema del sistema",
+      "dark": "Tema scuro"
+    }
   },
   "hero": {
     "eyebrow": "Cloud Engineer & Web Developer",
@@ -117,7 +123,7 @@
   "legal": {
     "cookiePolicy": {
       "title": "Cookie Policy",
-      "content": "<p>Questo sito non utilizza cookie di profilazione, analytics o marketing, e non incorpora contenuti di terze parti (mappe, video, pixel pubblicitari) che possano impostare cookie di tracciamento.</p><h3>Cosa memorizza questo sito</h3><ul><li>Un'unica voce di <em>local storage</em> (<code>samuelsulo-portfolio:locale</code>), tecnica e strettamente necessaria, usata solo per ricordare la lingua scelta (italiano/inglese) tra una visita e l'altra. Non viene condivisa con terze parti e non ha una scadenza legata alla sessione: resta sul dispositivo finché non viene cancellata dall'utente tramite le impostazioni del browser.</li></ul><p>L'invio del modulo di contatto avviene direttamente, via HTTPS, verso l'infrastruttura di backend del sito: non viene impostato alcun cookie in questa fase. Per il trattamento dei dati personali inviati tramite il modulo, vedi la <strong>Privacy Policy</strong>.</p><p>Poiché non sono presenti cookie non tecnici, questo sito non mostra un banner di consenso. Se in futuro venissero introdotti strumenti di analisi, mappe o altri servizi di terze parti, verrà attivato un meccanismo di consenso preventivo prima che tali strumenti vengano caricati, e questa pagina sarà aggiornata di conseguenza.</p><p>Puoi gestire o cancellare i dati salvati nel local storage del browser in qualsiasi momento dalle impostazioni del tuo browser.</p>"
+      "content": "<p>Questo sito non utilizza cookie di profilazione, analytics o marketing, e non incorpora contenuti di terze parti (mappe, video, pixel pubblicitari) che possano impostare cookie di tracciamento.</p><h3>Cosa memorizza questo sito</h3><ul><li>Due voci di <em>local storage</em>, tecniche e strettamente necessarie, usate solo per ricordare le tue scelte tra una visita e l'altra: la lingua (<code>samuelsulo-portfolio:locale</code>, italiano o inglese) e il tema (<code>samuelsulo-portfolio:theme</code>, chiaro o scuro, salvato solo se scegli esplicitamente un tema). Non vengono condivise con terze parti e non hanno una scadenza legata alla sessione: restano sul dispositivo finché non viene cancellata dall'utente tramite le impostazioni del browser.</li></ul><p>L'invio del modulo di contatto avviene direttamente, via HTTPS, verso l'infrastruttura di backend del sito: non viene impostato alcun cookie in questa fase. Per il trattamento dei dati personali inviati tramite il modulo, vedi la <strong>Privacy Policy</strong>.</p><p>Poiché non sono presenti cookie non tecnici, questo sito non mostra un banner di consenso. Se in futuro venissero introdotti strumenti di analisi, mappe o altri servizi di terze parti, verrà attivato un meccanismo di consenso preventivo prima che tali strumenti vengano caricati, e questa pagina sarà aggiornata di conseguenza.</p><p>Puoi gestire o cancellare i dati salvati nel local storage del browser in qualsiasi momento dalle impostazioni del tuo browser.</p>"
     },
     "privacyPolicy": {
       "title": "Privacy Policy",

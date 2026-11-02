@@ -119,14 +119,18 @@ img {
    accent rather than a decorative overlay on every element. */
 .bg-grid {
   background-image:
-    linear-gradient(rgba(var(--color-neon-primary-rgb), 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(var(--color-neon-primary-rgb), 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(var(--color-neon-primary-rgb), var(--grid-alpha)) 1px, transparent 1px),
+    linear-gradient(
+      90deg,
+      rgba(var(--color-neon-primary-rgb), var(--grid-alpha)) 1px,
+      transparent 1px
+    );
   background-size: 48px 48px;
   background-position: center top;
 }
 
 .glass-surface {
-  background-color: rgba(16, 19, 28, 0.6);
+  background-color: var(--color-glass);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }

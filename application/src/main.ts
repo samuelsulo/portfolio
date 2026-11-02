@@ -6,5 +6,8 @@ import './styles/base.css'
 import App from './App.vue'
 import { i18n } from './i18n'
 import { vReveal } from './directives/reveal'
+import { initTheme } from './composables/useTheme'
+
+initTheme()
 
 createApp(App).use(i18n).directive('reveal', vReveal).mount('#app')

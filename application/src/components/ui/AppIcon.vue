@@ -24,6 +24,9 @@ export type IconName =
   | 'check-circle'
   | 'alert-circle'
   | 'loader'
+  | 'sun'
+  | 'monitor'
+  | 'moon'
 
 const props = withDefaults(
   defineProps<{
@@ -55,6 +58,10 @@ const paths: Record<IconName, string> = {
   close: '<path d="m6 6 12 12"/><path d="m18 6-12 12"/>',
   'check-circle': '<circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 5-5"/>',
   'alert-circle': '<circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16v.01"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>',
+  monitor:
+    '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8"/><path d="M12 16v4"/>',
+  moon: '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>',
   loader:
     '<path d="M12 3v3"/><path d="m16.95 7.05 2.12-2.12"/><path d="M21 12h-3"/><path d="m16.95 16.95 2.12 2.12"/><path d="M12 18v3"/><path d="m7.05 16.95-2.12 2.12"/><path d="M3 12h3"/><path d="m7.05 7.05-2.12-2.12"/>',
 }
