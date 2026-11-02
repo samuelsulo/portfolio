@@ -115,7 +115,7 @@ const { t } = useI18n()
 
 .hero__cta--primary {
   background-color: var(--color-neon-primary);
-  color: #04121a;
+  color: var(--color-on-neon);
   border: 1px solid var(--color-neon-primary);
 }
 

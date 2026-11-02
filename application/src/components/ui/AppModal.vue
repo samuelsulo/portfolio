@@ -106,7 +106,7 @@ function handleKeydown(event: KeyboardEvent) {
   align-items: center;
   justify-content: center;
   padding: var(--space-md);
-  background-color: rgba(5, 6, 10, 0.72);
+  background-color: var(--color-scrim);
 }
 
 .app-modal {

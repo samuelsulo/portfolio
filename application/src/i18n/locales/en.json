@@ -14,7 +14,13 @@
     "contact": "Contact",
     "toggleMenu": "Open/close navigation menu",
     "languageSwitcher": "Switch language",
-    "brandAlt": "Samuel Sulo logo"
+    "brandAlt": "Samuel Sulo logo",
+    "theme": {
+      "label": "Theme",
+      "light": "Light theme",
+      "system": "System theme",
+      "dark": "Dark theme"
+    }
   },
   "hero": {
     "eyebrow": "Cloud Engineer & Web Developer",
@@ -117,7 +123,7 @@
   "legal": {
     "cookiePolicy": {
       "title": "Cookie Policy",
-      "content": "<p>This site does not use profiling, analytics or marketing cookies, and does not embed third-party content (maps, videos, ad pixels) that could set tracking cookies.</p><h3>What this site stores</h3><ul><li>A single, technical and strictly necessary <em>local storage</em> entry (<code>samuelsulo-portfolio:locale</code>), used only to remember your chosen language (Italian/English) across visits. It is never shared with third parties and has no session-based expiry: it stays on your device until you clear it via your browser settings.</li></ul><p>Submitting the contact form sends your message directly, over HTTPS, to the site's own backend infrastructure: no cookie is set in the process. For how the personal data submitted through the form is handled, see the <strong>Privacy Policy</strong>.</p><p>Because no non-essential cookies are used, this site does not show a consent banner. If analytics, maps or other third-party services are introduced in the future, a prior consent mechanism will be put in place before any such tool loads, and this page will be updated accordingly.</p><p>You can manage or clear local storage data at any time from your browser settings.</p>"
+      "content": "<p>This site does not use profiling, analytics or marketing cookies, and does not embed third-party content (maps, videos, ad pixels) that could set tracking cookies.</p><h3>What this site stores</h3><ul><li>Two technical and strictly necessary <em>local storage</em> entries, used only to remember your choices across visits: the language (<code>samuelsulo-portfolio:locale</code>, Italian or English) and the theme (<code>samuelsulo-portfolio:theme</code>, light or dark, stored only if you explicitly pick one). They are never shared with third parties and have no session-based expiry: they stay on your device until you clear it via your browser settings.</li></ul><p>Submitting the contact form sends your message directly, over HTTPS, to the site's own backend infrastructure: no cookie is set in the process. For how the personal data submitted through the form is handled, see the <strong>Privacy Policy</strong>.</p><p>Because no non-essential cookies are used, this site does not show a consent banner. If analytics, maps or other third-party services are introduced in the future, a prior consent mechanism will be put in place before any such tool loads, and this page will be updated accordingly.</p><p>You can manage or clear local storage data at any time from your browser settings.</p>"
     },
     "privacyPolicy": {
       "title": "Privacy Policy",

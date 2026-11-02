@@ -58,7 +58,7 @@ function selectLocale(next: SupportedLocale) {
 }
 
 .language-switcher__option.is-active {
-  color: #04121a;
+  color: var(--color-on-neon);
   background-color: var(--color-neon-primary);
 }
 </style>

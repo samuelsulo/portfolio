@@ -65,7 +65,7 @@ const tag = computed(() => (isLink.value ? 'a' : 'button'))
 .base-button--primary {
   --_bg: var(--color-neon-primary);
   --_border: var(--color-neon-primary);
-  --_color: #04121a;
+  --_color: var(--color-on-neon);
   --_glow: var(--glow-primary-strong);
 }
 

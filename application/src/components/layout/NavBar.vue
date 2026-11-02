@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue'
+import ThemeToggle from '@/components/ui/ThemeToggle.vue'
 import Kitsune from '@/components/ui/Kitsune.vue'
 import { useScrollSpy } from '@/composables/useScrollSpy'
 import { useBodyScrollLock } from '@/composables/useBodyScrollLock'
@@ -88,6 +89,7 @@ function handleKeydown(event: KeyboardEvent) {
       </nav>
 
       <div class="navbar__actions">
+        <ThemeToggle class="navbar__lang--desktop" />
         <LanguageSwitcher class="navbar__lang navbar__lang--desktop" />
         <button
           type="button"
@@ -114,7 +116,10 @@ function handleKeydown(event: KeyboardEvent) {
         >
           {{ link.label }}
         </a>
-        <LanguageSwitcher class="navbar__lang" />
+        <div class="navbar__mobile-tools">
+          <ThemeToggle />
+          <LanguageSwitcher class="navbar__lang" />
+        </div>
       </nav>
     </Transition>
   </header>
@@ -252,6 +257,13 @@ function handleKeydown(event: KeyboardEvent) {
   .navbar__toggle {
     display: none;
   }
+}
+
+.navbar__mobile-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
 }
 
 .navbar__mobile {
