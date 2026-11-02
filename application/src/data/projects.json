@@ -1,24 +1,47 @@
 [
   {
+    "id": "idea-bar",
+    "kind": "client",
+    "image": "/images/projects/idea-business-card.webp",
+    "imageAlt": "projects.items.idea-bar.imageAlt",
+    "materials": [
+      "logo",
+      "businessCard",
+      "reviewSign",
+      "website",
+      "onlinePresence",
+      "architecture"
+    ],
+    "technologies": ["Vue.js", "TypeScript", "AWS", "S3", "CloudFront", "Route53", "OpenTofu"],
+    "url": "https://ideagelateria.com",
+    "translationKey": "projects.items.idea-bar"
+  },
+  {
     "id": "samuelsulo-noir27",
-    "image": "/images/projects/samuelsulo-noir27.png",
+    "kind": "demo",
+    "image": "/images/projects/samuelsulo-noir27.webp",
     "imageAlt": "projects.items.samuelsulo-noir27.imageAlt",
+    "materials": ["website", "design", "architecture"],
     "technologies": ["Vue.js", "AWS", "S3", "CloudFront", "Route53", "OpenTofu"],
     "url": "https://noir27.samuelsulo.it",
     "translationKey": "projects.items.samuelsulo-noir27"
   },
   {
     "id": "samuelsulo-nexus",
-    "image": "/images/projects/samuelsulo-nexus.png",
+    "kind": "demo",
+    "image": "/images/projects/samuelsulo-nexus.webp",
     "imageAlt": "projects.items.samuelsulo-nexus.imageAlt",
+    "materials": ["ecommerce", "design", "architecture"],
     "technologies": ["Vue.js", "TypeScript", "Pinia", "AWS", "OpenTofu"],
     "url": "https://nexus.samuelsulo.it",
     "translationKey": "projects.items.samuelsulo-nexus"
   },
   {
     "id": "samuelsulo-pulse",
-    "image": "/images/projects/samuelsulo-pulse.png",
+    "kind": "demo",
+    "image": "/images/projects/samuelsulo-pulse.webp",
     "imageAlt": "projects.items.samuelsulo-pulse.imageAlt",
+    "materials": ["webapp", "design", "architecture"],
     "technologies": [
       "Vue.js",
       "Vuetify",

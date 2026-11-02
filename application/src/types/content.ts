@@ -7,22 +7,41 @@
  * `translationKey`, per the project's i18n content rule.
  */
 
-export interface ServiceItem {
-  id: string
-  icon: ServiceIconName
-  technologies: string[]
-  translationKey: string
-}
+/** Whether a work was made for a real client or is a demonstration project. */
+export type WorkKind = 'client' | 'demo'
 
-export type ServiceIconName = 'cloud' | 'code' | 'infrastructure' | 'security'
+/** The kinds of material a work can show, each labelled in `projects.materials.<id>`. */
+export type MaterialId =
+  | 'logo'
+  | 'businessCard'
+  | 'reviewSign'
+  | 'website'
+  | 'webapp'
+  | 'ecommerce'
+  | 'design'
+  | 'onlinePresence'
+  | 'architecture'
 
 export interface ProjectItem {
   id: string
+  kind: WorkKind
   image: string
   imageAlt: string
+  materials: MaterialId[]
   technologies: string[]
   url: string | null
   translationKey: string
+}
+
+export interface StackGroup {
+  id: string
+  items: string[]
+  translationKey: string
+}
+
+export interface HudRow {
+  id: 'region' | 'infrastructure' | 'applications'
+  value: string
 }
 
 export interface SiteConfig {
@@ -33,6 +52,10 @@ export interface SiteConfig {
     github: string
     linkedin: string
   }
+  /** Public link to the CV (for example on Google Drive); the CV button is hidden when null. */
+  cvUrl: string | null
+  /** Technical readouts shown next to the portrait in the hero; labels live in `hero.hud.<id>`. */
+  hud: HudRow[]
   availableForWork: boolean
   legal: SiteLegalConfig
 }

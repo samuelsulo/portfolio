@@ -24,11 +24,21 @@ defineProps<{
 }
 
 .section-heading__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
   font-family: var(--font-mono);
   font-size: var(--fs-mono);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-neon-primary);
+}
+
+.section-heading__eyebrow::before {
+  content: '';
+  width: 26px;
+  height: 2px;
+  background-color: var(--color-neon-primary);
 }
 
 .section-heading__title {

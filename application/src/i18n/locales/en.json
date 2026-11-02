@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Samuel Sulo | Cloud Engineer & Web Developer",
-    "description": "Samuel Sulo, Cloud Engineer & Web Developer. Portfolio, services and projects."
+    "description": "Samuel Sulo, Cloud Engineer & Web Developer. Portfolio and projects."
   },
   "common": {
     "close": "Close"
@@ -9,8 +9,7 @@
   "nav": {
     "skipToContent": "Skip to main content",
     "about": "About",
-    "services": "Services",
-    "projects": "Projects",
+    "projects": "Work",
     "contact": "Contact",
     "toggleMenu": "Open/close navigation menu",
     "languageSwitcher": "Switch language",
@@ -20,50 +19,73 @@
       "light": "Light theme",
       "system": "System theme",
       "dark": "Dark theme"
-    }
+    },
+    "stack": "Stack"
   },
   "hero": {
     "eyebrow": "Cloud Engineer & Web Developer",
     "name": "Samuel Sulo",
-    "role": "Building solid cloud infrastructure and modern web products",
+    "role": "I build solid cloud infrastructure and modern web products.",
     "intro": "I design scalable cloud architectures on AWS and build modern web applications with Vue.js and TypeScript, pairing infrastructure reliability with attention to detail in the user experience.",
-    "ctaPrimary": "Get in touch",
-    "ctaSecondary": "View projects",
-    "profileImageAlt": "Portrait of Samuel Sulo"
+    "status": "Open to new opportunities",
+    "ctaPrimary": "View my work",
+    "ctaCv": "Resume",
+    "profileImageAlt": "Portrait of Samuel Sulo",
+    "hud": {
+      "region": "Region",
+      "infrastructure": "Infrastructure",
+      "applications": "Applications",
+      "base": "Based in",
+      "baseValue": "Italy"
+    }
   },
-  "services": {
-    "eyebrow": "What I do",
-    "title": "Services",
-    "subtitle": "From cloud infrastructure to user interface, a single point of reference for your digital project.",
-    "items": {
-      "cloudArchitecture": {
-        "title": "Cloud Architecture",
-        "description": "Design and implementation of scalable, secure and cost-effective AWS infrastructure, fully managed as code."
-      },
-      "webDevelopment": {
-        "title": "Web Development",
-        "description": "Modern, performant and accessible web applications, built with Vue.js and TypeScript."
-      },
-      "infrastructureAsCode": {
-        "title": "Infrastructure as Code",
-        "description": "Infrastructure automation with OpenTofu and Terragrunt: reproducible, versioned and easily evolvable environments."
-      },
-      "securityBestPractices": {
-        "title": "Security & Best Practices",
-        "description": "Cloud configurations aligned with the principle of least privilege, HTTPS everywhere and cost monitoring."
-      }
+  "about": {
+    "eyebrow": "About",
+    "title": "Two sides of the same product",
+    "lead": "The infrastructure that hosts a product and the application people use.",
+    "body": "Every project I deliver is complete: code, infrastructure as code, documentation, versioned releases and, when needed, the visual identity and printed materials.",
+    "note": "This site is built the same way, with code, infrastructure as code and versioned releases.",
+    "terminalLabel": "Technical summary",
+    "terminal": {
+      "cloud": "AWS: S3, CloudFront, Route 53, ACM, API Gateway, SES",
+      "iac": "OpenTofu and Terragrunt, state on S3, production in the client's account",
+      "apps": "Vue 3, TypeScript, Vite, tested with Vitest, Italian and English",
+      "release": "versioned tags, changelog, command-line deploys"
     }
   },
   "projects": {
-    "eyebrow": "My work",
-    "title": "Projects",
-    "subtitle": "A selection of recent projects spanning web development and cloud infrastructure.",
-    "scrollHint": "Scroll to see more projects",
-    "prevAriaLabel": "Previous project",
-    "nextAriaLabel": "Next project",
-    "comingSoon": "Details coming soon",
-    "viewProject": "View project",
+    "eyebrow": "Work",
+    "title": "One real client and three demo projects",
+    "subtitle": "From brand to infrastructure, including the website and the printed materials.",
+    "filterLabel": "Filter the work",
+    "filters": {
+      "all": "All",
+      "client": "Real client",
+      "demo": "Demo"
+    },
+    "kind": {
+      "client": "Real client",
+      "demo": "Demo"
+    },
+    "materialsLabel": "Project materials",
+    "materials": {
+      "logo": "Logo",
+      "businessCard": "Business card",
+      "reviewSign": "Review sign",
+      "website": "Website",
+      "webapp": "Web app",
+      "ecommerce": "E-commerce",
+      "design": "Design",
+      "onlinePresence": "Online presence",
+      "architecture": "Architecture"
+    },
+    "viewProject": "Open the site",
     "items": {
+      "idea-bar": {
+        "title": "Bar I.D.E.A.",
+        "description": "Cafe, gelato and pastry shop in Oleggio Castello (Italy). Visual identity, printed materials, website and AWS infrastructure for a local business.",
+        "imageAlt": "Business card of Bar I.D.E.A., front and back"
+      },
       "samuelsulo-noir27": {
         "title": "Noir 27 Cocktail Bar",
         "description": "Website for NOIR 27, a fictional premium cocktail bar in Milan. This project includes: venue, menu, events and reservation flow.",
@@ -81,17 +103,37 @@
       }
     }
   },
+  "stack": {
+    "eyebrow": "Stack",
+    "title": "The tools I use every day",
+    "groups": {
+      "cloud": {
+        "title": "Cloud",
+        "tag": "AWS"
+      },
+      "infrastructure": {
+        "title": "Infrastructure and releases",
+        "tag": "IaC"
+      },
+      "applications": {
+        "title": "Applications",
+        "tag": "Web"
+      }
+    }
+  },
   "contact": {
-    "eyebrow": "Let's talk",
-    "title": "Get in touch",
-    "subtitle": "Have a project in mind? Write to me and let's find the best solution together.",
+    "eyebrow": "Contact",
+    "title": "Write to me",
+    "subtitle": "For opportunities, interviews or questions about the projects.",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copiedAnnouncement": "Email copied to the clipboard",
+    "formToggle": "Prefer a form?",
     "form": {
       "nameLabel": "Name",
       "namePlaceholder": "Your name",
       "emailLabel": "Email",
       "emailPlaceholder": "you{'@'}example.com",
-      "phoneLabel": "Phone (optional)",
-      "phonePlaceholder": "Your phone number",
       "messageLabel": "Message",
       "messagePlaceholder": "Tell me about your project",
       "submit": "Send message",

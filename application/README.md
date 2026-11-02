@@ -1,6 +1,6 @@
 # Portfolio
 
-Single-page showcase site for the professional presentation of Samuel Sulo as Cloud Engineer & Web Developer: About, Services, Projects and Contact sections, with a dark cyberpunk/neon visual identity and bilingual Italian/English support.
+Single-page showcase site for the professional presentation of Samuel Sulo as Cloud Engineer & Web Developer: About, Work, Stack and Contact sections, with a cyberpunk/neon visual identity in a dark and a light theme and bilingual Italian/English support.
 
 ## Technology stack
 
@@ -11,6 +11,10 @@ Single-page showcase site for the professional presentation of Samuel Sulo as Cl
 - Self-hosted fonts (`@fontsource-variable`), no calls to external services at runtime
 - Vitest + Vue Test Utils for unit tests
 - ESLint + Prettier for code quality
+
+## Themes
+
+The site has a dark theme (default) and a light theme, both defined as design tokens in `src/styles/tokens.css`: the dark palette on `:root`, the light one under `:root[data-theme='light']` and, when no explicit choice is stored, under `prefers-color-scheme: light`. Components only use the tokens, never literal colors. The toggle (`ThemeToggle.vue`, state in `src/composables/useTheme.ts`) offers light, system and dark; an explicit choice is stored in `localStorage` (`samuelsulo-portfolio:theme`), "system" stores nothing. `public/theme-init.js` applies the stored choice before the first paint to avoid a flash. The Cookie Policy lists this entry, keep it in sync if the storage changes.
 
 ## Requirements
 
@@ -55,11 +59,11 @@ application/
 ├── src/
 │   ├── components/
 │   │   ├── layout/          # NavBar, AppFooter
-│   │   ├── sections/        # Hero/About, Services, Projects, Contact
+│   │   ├── sections/        # Hero, About, Projects (work), Stack, Contact
 │   │   ├── cookies/          # LegalPolicyView (Cookie Policy / Privacy Policy modal)
 │   │   └── ui/               # reusable components (cards, buttons, icons, etc.)
 │   ├── composables/          # reusable logic (scroll spy, contact form, etc.)
-│   ├── data/                 # data-driven content (services.json, projects.json, site-config.json)
+│   ├── data/                 # data-driven content (projects.json, stack.json, site-config.json)
 │   ├── i18n/                 # vue-i18n configuration + it/en translation files
 │   ├── services/              # integration layer with external services (contact form API)
 │   ├── styles/                # shared design tokens and reset
@@ -76,9 +80,9 @@ configured to discover them there.
 
 ## Content: how to edit it
 
-- **Prose text (bio, services, projects, UI labels)**: lives in the translation files `src/i18n/locales/it.json` and `src/i18n/locales/en.json`. Every key must be updated in both files.
-- **Non-translatable data for Services and Projects** (icon, technologies, images, URLs): lives in `src/data/services.json` and `src/data/projects.json`. Each entry references a `translationKey` pointing to the corresponding block in the translation files.
-- **Contact/social data** (email, social links): `src/data/site-config.json`.
+- **Prose text (bio, projects, UI labels)**: lives in the translation files `src/i18n/locales/it.json` and `src/i18n/locales/en.json`. Every key must be updated in both files.
+- **Non-translatable data for Projects and Stack** (kind, materials, technologies, images, URLs): lives in `src/data/projects.json` and `src/data/stack.json`. Each entry references a `translationKey` pointing to the corresponding block in the translation files.
+- **Contact/social data** (email, social links, the public CV link `cvUrl`, the technical readouts next to the portrait): `src/data/site-config.json`. The CV button stays hidden while `cvUrl` is `null`.
 
 The content currently in place (bio, service list, projects, email, social links) is **placeholder** content meant to be replaced with real content without modifying any Vue component.
 
