@@ -8,6 +8,7 @@ portfolio: the Kitsune mark, its colors and the business card.
 - [`palette/`](./palette): the colors, the single source for every other part
 - [`logo/`](./logo): the Kitsune mark, the logo variants and the web icons
 - [`business-card/`](./business-card): business card, print-ready
+- [`curriculum/`](./curriculum): the curriculum in Italian and English, as PDFs
 - [`fonts/`](./fonts): Space Grotesk and JetBrains Mono, shared by every part
 - [`samuelsulo-brand-guidelines.pdf`](./samuelsulo-brand-guidelines.pdf): the brand manual
 
