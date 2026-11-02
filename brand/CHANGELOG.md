@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## brand/v1.1.1 - 2026-11-02
+#### Bug Fixes
+- (**brand**) add the Corley location and lighten the curriculum PDFs - (1d84960) - Samuel Sulo
+
+- - -
+
 ## brand/v1.1.0 - 2026-11-02
 #### Features
 - (**brand**) add the curriculum in Italian and English - (46a20c4) - Samuel Sulo
