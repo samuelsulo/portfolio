@@ -1,9 +1,8 @@
 <script setup lang="ts">
 /**
  * Renders one legal document (Cookie Policy or Privacy Policy) as a
- * dismissible dialog. The site has no router (single-page portfolio), so
- * both policies are surfaced as a modal rather than as routed pages, opened
- * from the footer's legal links (see AppFooter.vue). The dialog shell
+ * dismissible dialog. Both policies are surfaced as a modal rather than as routed
+ * pages, so they open from any page, from the footer's legal links (see AppFooter.vue). The dialog shell
  * itself (overlay, focus management, Escape/scroll lock) lives in the
  * shared AppModal component; this component only supplies the title and
  * the translated legal text.

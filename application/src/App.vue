@@ -1,21 +1,27 @@
 <script setup lang="ts">
-import { watchEffect } from 'vue'
+import { computed, watchEffect } from 'vue'
+import { RouterView, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import NavBar from '@/components/layout/NavBar.vue'
 import AppFooter from '@/components/layout/AppFooter.vue'
-import HeroSection from '@/components/sections/HeroSection.vue'
-import AboutSection from '@/components/sections/AboutSection.vue'
-import ProjectsSection from '@/components/sections/ProjectsSection.vue'
-import StackSection from '@/components/sections/StackSection.vue'
-import ContactSection from '@/components/sections/ContactSection.vue'
+import projectsData from '@/data/projects.json'
+import type { ProjectItem } from '@/types/content'
 
 const { t, locale } = useI18n()
+const route = useRoute()
+
+// The title of the work being viewed, if the current route is a work page.
+const workTitle = computed(() => {
+  if (route.name !== 'work') return null
+  const project = (projectsData as ProjectItem[]).find((item) => item.id === route.params.id)
+  return project ? t(`${project.translationKey}.title`) : null
+})
 
 // Keep <html lang>, the document title and its meta description in sync
-// with the active language for SEO and accessibility.
+// with the active language and page for SEO and accessibility.
 watchEffect(() => {
   document.documentElement.lang = locale.value
-  document.title = t('meta.title')
+  document.title = workTitle.value ? `${workTitle.value} | Samuel Sulo` : t('meta.title')
   document.querySelector('meta[name="description"]')?.setAttribute('content', t('meta.description'))
 })
 </script>
@@ -23,11 +29,7 @@ watchEffect(() => {
 <template>
   <NavBar />
   <main id="main-content">
-    <HeroSection />
-    <AboutSection />
-    <ProjectsSection />
-    <StackSection />
-    <ContactSection />
+    <RouterView />
   </main>
   <AppFooter />
 </template>

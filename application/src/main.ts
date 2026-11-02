@@ -7,7 +7,8 @@ import App from './App.vue'
 import { i18n } from './i18n'
 import { vReveal } from './directives/reveal'
 import { initTheme } from './composables/useTheme'
+import { router } from './router'
 
 initTheme()
 
-createApp(App).use(i18n).directive('reveal', vReveal).mount('#app')
+createApp(App).use(router).use(i18n).directive('reveal', vReveal).mount('#app')
