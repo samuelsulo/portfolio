@@ -2,6 +2,32 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## application/v1.1.0 - 2026-11-02
+#### Features
+- (**application**) offer the curriculum in the language of the visitor - (1c6a57c) - Samuel Sulo
+- (**application**) add the NOIR 27 brand materials and a design tab for I.D.E.A. - (c930747) - Samuel Sulo
+- (**application**) let a work material offer a document and a tone - (f56970d) - Samuel Sulo
+- (**application**) add a page for each work with a viewer of its materials - (c12fee2) - Samuel Sulo
+- (**application**) restructure the page into hero, about, work, stack and contact - (727018a) - Samuel Sulo
+- (**application**) add a light theme with a theme toggle - (282613a) - Samuel Sulo
+#### Bug Fixes
+- (**application**) publish the corrected brand manuals of Kitsune and NOIR 27 - (7ebfc9d) - Samuel Sulo
+- (**application**) publish the corrected brand guidelines - (c5102d5) - Samuel Sulo
+- (**application**) publish the updated and lighter curriculum PDFs - (71de0b1) - Samuel Sulo
+- (**application**) polish contrast, focus, previews and the mobile work page - (0f325c9) - Samuel Sulo
+- (**application**) replace Terraform with OpenTofu and Terragrunt in the content - (6a65c74) - Samuel Sulo
+#### Documentation
+- (**application**) update the brand guidelines PDF - (03ab66f) - Samuel Sulo
+#### Continuous Integration
+- (**application**) deploy production from the Terragrunt stack outputs - (8247340) - Samuel Sulo
+#### Refactoring
+- (**application**) move the curriculum from the brand folder into the application - (248c766) - Samuel Sulo
+- (**application**) serve the works under /work - (95d3991) - Samuel Sulo
+#### Miscellaneous Chores
+- (**repo**) merge main into redesign - (8b2fea2) - Samuel Sulo
+
+- - -
+
 ## application/v1.0.0 - 2026-09-19
 #### Continuous Integration
 - (**application**) add local deploy script - (1873661) - Samuel Sulo
