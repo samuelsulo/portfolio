@@ -4,9 +4,11 @@ import { useI18n } from 'vue-i18n'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import siteConfig from '@/data/site-config.json'
 import type { SiteConfig } from '@/types/content'
+import { resolveCvUrl } from '@/utils/cv'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const config = siteConfig as SiteConfig
+const cvUrl = computed(() => resolveCvUrl(config.cvUrl, locale.value))
 
 const hudRows = computed(() => [
   ...config.hud.map((row) => ({
@@ -33,9 +35,9 @@ const hudRows = computed(() => [
         <div class="hero__actions">
           <a class="hero__cta hero__cta--primary" href="#projects">{{ t('hero.ctaPrimary') }}</a>
           <a
-            v-if="config.cvUrl"
+            v-if="cvUrl"
             class="hero__cta hero__cta--secondary"
-            :href="config.cvUrl"
+            :href="cvUrl"
             target="_blank"
             rel="noopener noreferrer"
           >
