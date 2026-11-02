@@ -40,7 +40,7 @@
       },
       "infrastructureAsCode": {
         "title": "Infrastructure as Code",
-        "description": "Automazione dell'infrastruttura con Terraform: ambienti riproducibili, versionati e facilmente evolvibili."
+        "description": "Automazione dell'infrastruttura con OpenTofu e Terragrunt: ambienti riproducibili, versionati e facilmente evolvibili."
       },
       "securityBestPractices": {
         "title": "Sicurezza & Best Practice",

@@ -3,7 +3,7 @@
     "id": "samuelsulo-noir27",
     "image": "/images/projects/samuelsulo-noir27.png",
     "imageAlt": "projects.items.samuelsulo-noir27.imageAlt",
-    "technologies": ["Vue.js", "AWS", "S3", "CloudFront", "Route53", "Terraform"],
+    "technologies": ["Vue.js", "AWS", "S3", "CloudFront", "Route53", "OpenTofu"],
     "url": "https://noir27.samuelsulo.it",
     "translationKey": "projects.items.samuelsulo-noir27"
   },
@@ -11,7 +11,7 @@
     "id": "samuelsulo-nexus",
     "image": "/images/projects/samuelsulo-nexus.png",
     "imageAlt": "projects.items.samuelsulo-nexus.imageAlt",
-    "technologies": ["Vue.js", "TypeScript", "Pinia", "AWS", "Terraform"],
+    "technologies": ["Vue.js", "TypeScript", "Pinia", "AWS", "OpenTofu"],
     "url": "https://nexus.samuelsulo.it",
     "translationKey": "projects.items.samuelsulo-nexus"
   },
@@ -27,7 +27,7 @@
       "ApexCharts",
       "VueRouter",
       "AWS",
-      "Terraform"
+      "OpenTofu"
     ],
     "url": "https://pulse.samuelsulo.it",
     "translationKey": "projects.items.samuelsulo-pulse"
