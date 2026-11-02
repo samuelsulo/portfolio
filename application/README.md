@@ -1,6 +1,6 @@
 # Portfolio
 
-Showcase site for the professional presentation of Samuel Sulo as Cloud Engineer & Web Developer: a home page with About, Work, Stack and Contact sections plus a dedicated page for each work (`/lavori/<id>`), with a cyberpunk/neon visual identity in a dark and a light theme and bilingual Italian/English support.
+Showcase site for the professional presentation of Samuel Sulo as Cloud Engineer & Web Developer: a home page with About, Work, Stack and Contact sections plus a dedicated page for each work (`/work/<id>`), with a cyberpunk/neon visual identity in a dark and a light theme and bilingual Italian/English support.
 
 ## Technology stack
 
