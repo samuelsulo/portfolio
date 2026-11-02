@@ -29,7 +29,15 @@ const rgba = (token, alpha) => {
   return `rgba(${r},${g},${b},${alpha})`
 }
 
-const photo = dataUri(path.join(root, 'assets', 'photo.png'), 'image/png')
+// A color over the white page as an opaque color: a semi-transparent border or background on a rounded box makes
+// Chrome rasterize it into the PDF, which triples its size.
+const solid = (token, alpha) => {
+  const h = hex(token).slice(1)
+  const mixed = [0, 2, 4].map((i) => Math.round(255 + (parseInt(h.slice(i, i + 2), 16) - 255) * alpha))
+  return '#' + mixed.map((v) => v.toString(16).padStart(2, '0')).join('')
+}
+
+const photo = dataUri(path.join(root, 'assets', 'photo.jpg'), 'image/jpeg')
 const mark = dataUri(path.join(root, 'assets', 'samuelsulo-symbol-negative.svg'), 'image/svg+xml')
 const font = (family, weight, file) =>
   `@font-face{font-family:'${family}';font-weight:${weight};src:url('${dataUri(path.join(brand, 'fonts', file), 'font/ttf')}') format('truetype')}`
@@ -45,10 +53,10 @@ body { font-family: 'Space Grotesk', sans-serif; color: var(--ink); font-size: 8
 .page { position: relative; width: 210mm; height: 297mm; overflow: hidden; display: flex; background: #fff; page-break-after: always }
 .page:last-child { page-break-after: auto }
 .side { position: relative; width: 70mm; flex: none; background: var(--void); color: var(--snow); padding: 14mm 8mm 12mm; overflow: hidden }
-.side::before { content:''; position:absolute; inset:0; background-image: linear-gradient(${rgba('neon-cyan', 0.07)} .12mm, transparent .12mm), linear-gradient(90deg, ${rgba('neon-cyan', 0.07)} .12mm, transparent .12mm); background-size: 6mm 6mm; -webkit-mask-image: linear-gradient(160deg, transparent 10%, #000 80%); mask-image: linear-gradient(160deg, transparent 10%, #000 80%) }
+.side::before { content:''; position:absolute; inset:0; background-image: linear-gradient(160deg, var(--void) 10%, ${rgba('void', 0)} 80%), linear-gradient(${rgba('neon-cyan', 0.07)} .12mm, transparent .12mm), linear-gradient(90deg, ${rgba('neon-cyan', 0.07)} .12mm, transparent .12mm); background-size: 100% 100%, 6mm 6mm, 6mm 6mm }
 .side::after { content:''; position:absolute; width:90mm; height:90mm; right:-55mm; top:-40mm; border-radius:50%; background: radial-gradient(circle, ${rgba('neon-violet', 0.38)}, transparent 65%) }
 .side > * { position: relative; z-index: 1 }
-.photo { width: 46mm; height: 46mm; margin: 0 auto 9mm; border-radius: 50%; border: .5mm solid var(--cyan); box-shadow: 0 0 0 1mm ${rgba('neon-cyan', 0.18)}, 0 0 7mm ${rgba('neon-cyan', 0.35)}; background: radial-gradient(circle at 50% 30%, ${hex('surface')}, ${hex('void')}); overflow: hidden }
+.photo { width: 46mm; height: 46mm; margin: 0 auto 9mm; border-radius: 50%; border: .5mm solid var(--cyan); box-shadow: 0 0 0 1mm ${rgba('neon-cyan', 0.18)}, 0 0 7mm ${rgba('neon-cyan', 0.35)}; overflow: hidden }
 .photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 8%; display: block }
 .s-title { font-family: 'JetBrains Mono'; font-size: 6.8pt; letter-spacing: .18em; text-transform: uppercase; color: var(--cyan); margin: 7mm 0 2.6mm; display: flex; align-items: center; gap: 2mm }
 .s-title::after { content:''; flex: 1; height: .2mm; background: linear-gradient(90deg, ${rgba('neon-cyan', 0.5)}, transparent) }
@@ -70,7 +78,7 @@ body { font-family: 'Space Grotesk', sans-serif; color: var(--ink); font-size: 8
 .certs i { font-style: normal; font-family: 'JetBrains Mono'; font-size: 6.6pt; color: var(--slate); display: block; margin-top: .6mm; word-break: break-all }
 .ghost { position: absolute !important; left: 10mm; bottom: -12mm; width: 66mm; opacity: .14; z-index: 0 !important }
 .main { flex: 1; padding: 13mm 13mm 11mm 12mm; position: relative }
-.head { position: relative; padding-bottom: 5mm; border-bottom: .3mm solid ${rgba('ink-faint', 0.25)}; margin-bottom: 5mm }
+.head { position: relative; padding-bottom: 5mm; border-bottom: .3mm solid ${solid('ink-faint', 0.25)}; margin-bottom: 5mm }
 .head h1 { font-size: 30pt; line-height: 1; font-weight: 700; letter-spacing: -.01em; color: var(--void) }
 .role { display: flex; align-items: center; gap: 2.4mm; margin-top: 3mm; font-family: 'JetBrains Mono'; font-size: 8.4pt; letter-spacing: .12em; text-transform: uppercase; color: var(--deep); font-weight: 500 }
 .role::before { content:''; width: .8mm; height: 4mm; border-radius: 1mm; background: linear-gradient(var(--cyan), var(--violet)) }
@@ -79,7 +87,7 @@ body { font-family: 'Space Grotesk', sans-serif; color: var(--ink); font-size: 8
 .h2 { font-family: 'JetBrains Mono'; font-size: 7.4pt; letter-spacing: .18em; text-transform: uppercase; color: var(--deep); font-weight: 700; margin-bottom: 3mm; display: flex; align-items: center; gap: 2.4mm }
 .h2::after { content:''; flex: 1; height: .25mm; background: linear-gradient(90deg, var(--cyan), var(--violet), transparent) }
 .about { font-size: 9.2pt; color: var(--ink-s); line-height: 1.5 }
-.job { position: relative; padding-left: 5mm; margin-bottom: 4.6mm; border-left: .3mm solid ${rgba('ink-faint', 0.3)}; margin-left: 1mm }
+.job { position: relative; padding-left: 5mm; margin-bottom: 4.6mm; border-left: .3mm solid ${solid('ink-faint', 0.3)}; margin-left: 1mm }
 .job::before { content:''; position: absolute; left: -1.25mm; top: 1.1mm; width: 2.2mm; height: 2.2mm; border-radius: 50%; background: #fff; border: .5mm solid var(--deep); box-shadow: 0 0 0 .6mm ${rgba('neon-cyan', 0.25)} }
 .job-top { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm }
 .job h3 { font-size: 10.6pt; font-weight: 700; color: var(--void); line-height: 1.25 }
@@ -91,9 +99,9 @@ body { font-family: 'Space Grotesk', sans-serif; color: var(--ink); font-size: 8
 .job li { position: relative; padding-left: 3.6mm; margin-bottom: 1.25mm; font-size: 8.8pt; color: var(--ink-s) }
 .job li::before { content:''; position: absolute; left: .2mm; top: 1.65mm; width: 1.3mm; height: 1.3mm; background: var(--cyan); border-radius: .3mm; transform: rotate(45deg); box-shadow: 0 0 0 .3mm ${rgba('deep-cyan', 0.35)} }
 .proj { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm }
-.pc { border: .25mm solid ${rgba('ink-faint', 0.3)}; border-radius: 2mm; padding: 3mm 3.4mm; background: linear-gradient(160deg, #fff, ${rgba('mist', 0.6)}) }
+.pc { border: .25mm solid ${solid('ink-faint', 0.3)}; border-radius: 2mm; padding: 3mm 3.4mm; background: linear-gradient(160deg, #fff, ${solid('mist', 0.6)}) }
 .pc h3 { font-size: 9.6pt; font-weight: 700; color: var(--void); display: flex; align-items: center; gap: 2mm; line-height: 1.2 }
-.pc h3 em { font-style: normal; font-family: 'JetBrains Mono'; font-size: 5.8pt; letter-spacing: .12em; text-transform: uppercase; color: var(--deep-v); border: .2mm solid ${rgba('deep-violet', 0.45)}; border-radius: 1mm; padding: .2mm 1mm; font-weight: 500 }
+.pc h3 em { font-style: normal; font-family: 'JetBrains Mono'; font-size: 5.8pt; letter-spacing: .12em; text-transform: uppercase; color: var(--deep-v); border: .2mm solid ${solid('deep-violet', 0.45)}; border-radius: 1mm; padding: .2mm 1mm; font-weight: 500 }
 .pc a { display: block; font-family: 'JetBrains Mono'; font-size: 6.8pt; color: var(--deep); text-decoration: none; margin: .8mm 0 1.4mm }
 .pc p { font-size: 8.2pt; color: var(--ink-s); line-height: 1.4 }
 `

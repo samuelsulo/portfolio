@@ -31,6 +31,6 @@ of the visitor. After a rebuild, copy the files in `export/` there and release t
 | File | Description |
 |---|---|
 | `samuelsulo-curriculum.json` | The content, the single source of truth |
-| `assets/` | The portrait and the Kitsune mark (from `../logo/export/svg/`) |
+| `assets/` | The portrait (`photo.jpg`, the site portrait flattened on the dark backdrop of the photo circle, to keep the PDFs light) and the Kitsune mark (from `../logo/export/svg/`) |
 | `scripts/build.mjs` | Renders the PDFs |
 | `export/samuelsulo-curriculum-it.pdf`, `-en.pdf` | The curriculum, one per language |
