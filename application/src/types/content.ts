@@ -44,10 +44,16 @@ export interface CaseImage {
   alt: string
 }
 
+/** A file the viewer links to. `label` is an i18n key, never literal text. */
+export interface CaseDocument {
+  src: string
+  label: string
+}
+
 export type SwatchId = 'background' | 'surface' | 'text' | 'brand' | 'accent' | 'accentAlt'
 
 export type CaseBlock =
-  | { type: 'images'; images: CaseImage[]; tone?: 'warm' }
+  | { type: 'images'; images: CaseImage[]; tone?: 'warm' | 'dark' }
   | { type: 'devices'; desktop: CaseImage; tablet: CaseImage; phone: CaseImage; url: string }
   | {
       type: 'design'
@@ -65,12 +71,14 @@ export type CaseBlock =
  * One material of a case, shown as a tab of the viewer. Its label is
  * `cases.tabs.<id>`, its group label `cases.groups.<group>` and each fact is
  * `cases.items.<case>.materials.<id>.facts.<fact>` with a `label` and a `value`.
+ * An optional `document` adds a download button under the facts.
  */
 export type CaseMaterial = {
   id: string
   icon: IconName
   group: CaseGroupId
   facts: string[]
+  document?: CaseDocument
 } & CaseBlock
 
 export interface CaseData {

@@ -37,6 +37,7 @@ function imagesOf(material: CaseData['materials'][number]) {
 function keysOf(caseId: string, material: CaseData['materials'][number]): string[] {
   const base = `cases.items.${caseId}.materials.${material.id}`
   const keys = [`cases.tabs.${material.id}`, `cases.groups.${material.group}`]
+  if (material.document) keys.push(material.document.label)
   for (const fact of material.facts)
     keys.push(`${base}.facts.${fact}.label`, `${base}.facts.${fact}.value`)
   for (const image of imagesOf(material)) keys.push(image.alt)
@@ -75,6 +76,9 @@ describe('cases', () => {
         for (const image of imagesOf(material)) {
           if (!existsSync(resolve(publicDir, `.${image.src}`)))
             missing.push(`${caseId}: ${image.src}`)
+        }
+        if (material.document && !existsSync(resolve(publicDir, `.${material.document.src}`))) {
+          missing.push(`${caseId}: ${material.document.src}`)
         }
       }
     }
