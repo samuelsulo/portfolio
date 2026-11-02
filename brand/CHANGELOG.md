@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## brand/v1.1.0 - 2026-11-02
+#### Features
+- (**brand**) add the curriculum in Italian and English - (46a20c4) - Samuel Sulo
+- (**brand**) add the soft and faint ink tones to the palette - (3ca2b83) - Samuel Sulo
+
+- - -
+
 ## brand/v1.0.0 - 2026-11-02
 #### Features
 - (**brand**) add the palette and the shared fonts - (e7e6fdc) - Samuel Sulo
