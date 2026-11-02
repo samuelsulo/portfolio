@@ -11,7 +11,7 @@ export const router = createRouter({
   routes: [
     { path: '/', name: 'home', component: HomeView },
     {
-      path: '/lavori/:id',
+      path: '/work/:id',
       name: 'work',
       component: () => import('@/views/WorkView.vue'),
     },
