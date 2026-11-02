@@ -9,6 +9,7 @@
       "businessCard",
       "reviewSign",
       "website",
+      "design",
       "onlinePresence",
       "architecture"
     ],
@@ -21,7 +22,7 @@
     "kind": "demo",
     "image": "/images/projects/samuelsulo-noir27.webp",
     "imageAlt": "projects.items.samuelsulo-noir27.imageAlt",
-    "materials": ["website", "design", "architecture"],
+    "materials": ["logo", "businessCard", "reviewSign", "website", "design", "architecture"],
     "technologies": ["Vue.js", "AWS", "S3", "CloudFront", "Route53", "OpenTofu"],
     "url": "https://noir27.samuelsulo.it",
     "translationKey": "projects.items.samuelsulo-noir27"

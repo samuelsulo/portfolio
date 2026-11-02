@@ -88,7 +88,7 @@
       },
       "samuelsulo-noir27": {
         "title": "Noir 27 Cocktail Bar",
-        "description": "Website for NOIR 27, a fictional premium cocktail bar in Milan. This project includes: venue, menu, events and reservation flow.",
+        "description": "Website and brand for NOIR 27, a fictional premium cocktail bar in Milan: logo, business card, review materials, menu, events, reviews and a reservation flow.",
         "imageAlt": "Project preview: Noir 27 Cocktail Bar"
       },
       "samuelsulo-nexus": {
@@ -314,11 +314,14 @@
                 "value": "Everything lives in the client's account, with revocable access"
               }
             }
+          },
+          "design": {
+            "facts": {}
           }
         }
       },
       "samuelsulo-noir27": {
-        "lead": "Bilingual showcase website of a fictional cocktail bar in Milan: menu, experience, gallery, events and a simulated reservation. A demo project, not a real venue.",
+        "lead": "Bilingual website and brand identity of a fictional cocktail bar in Milan: logo, business card, review sign and sticker, plus menu, experience, gallery, events, reviews and a simulated reservation. A demo project, not a real venue.",
         "meta": {
           "type": {
             "label": "Type",
@@ -326,7 +329,7 @@
           },
           "role": {
             "label": "Role",
-            "value": "Design, development, infrastructure"
+            "value": "Brand, design, development, infrastructure"
           },
           "technologies": {
             "label": "Technologies",
@@ -338,6 +341,58 @@
           }
         },
         "materials": {
+          "logo": {
+            "alt": "NOIR 27 logo: a coupe glass with a crescent moon and a star, above the name in capitals",
+            "facts": {
+              "concept": {
+                "label": "Concept",
+                "value": "A coupe with a crescent moon and a star cut out of the bowl: the night, brought to the table"
+              },
+              "versions": {
+                "label": "Versions",
+                "value": "Positive, negative, monochrome, symbol and badges"
+              },
+              "delivery": {
+                "label": "Delivery",
+                "value": "SVG and PNG files, favicons and app icons, a social image and a 15-page PDF manual"
+              }
+            }
+          },
+          "businessCard": {
+            "alt": "NOIR 27 business card, front and back",
+            "facts": {
+              "content": {
+                "label": "Content",
+                "value": "Front with the logo on black, back with details and a QR code to the site"
+              },
+              "delivery": {
+                "label": "Delivery",
+                "value": "Print-ready CMYK PDF, previews and a verification report"
+              },
+              "note": {
+                "label": "Note",
+                "value": "The name and the contact details are placeholders"
+              }
+            }
+          },
+          "reviewSign": {
+            "alt1": "NOIR 27 A5 sign with a QR code for reviews",
+            "alt2": "NOIR 27 round sticker with a QR code for reviews",
+            "facts": {
+              "formats": {
+                "label": "Formats",
+                "value": "A5 sign and 80 mm round sticker"
+              },
+              "function": {
+                "label": "Purpose",
+                "value": "The QR code opens the reviews page of the demo site"
+              },
+              "delivery": {
+                "label": "Delivery",
+                "value": "Print-ready PDFs, die-cut layer and verification reports"
+              }
+            }
+          },
           "website": {
             "alt": {
               "desktop": "The NOIR 27 website on desktop",
@@ -554,6 +609,9 @@
           }
         }
       }
+    },
+    "document": {
+      "guidelines": "Brand guidelines (PDF)"
     }
   },
   "stack": {
@@ -576,7 +634,7 @@
   },
   "contact": {
     "eyebrow": "Contact",
-    "title": "Write to me",
+    "title": "Contact me",
     "subtitle": "For opportunities, interviews or questions about the projects.",
     "copy": "Copy",
     "copied": "Copied",

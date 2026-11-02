@@ -88,7 +88,7 @@
       },
       "samuelsulo-noir27": {
         "title": "Noir 27 Cocktail Bar",
-        "description": "Sito web per NOIR 27, un cocktail bar premium immaginario a Milano. Il progetto include: locale, menu, eventi e flusso di prenotazione.",
+        "description": "Sito e brand di NOIR 27, un cocktail bar premium fittizio a Milano: logo, biglietto da visita, materiali per le recensioni, menu, eventi, recensioni e un flusso di prenotazione.",
         "imageAlt": "Anteprima del progetto: Noir 27 Cocktail Bar"
       },
       "samuelsulo-nexus": {
@@ -314,11 +314,14 @@
                 "value": "Tutto vive nell'account del cliente, con accesso revocabile"
               }
             }
+          },
+          "design": {
+            "facts": {}
           }
         }
       },
       "samuelsulo-noir27": {
-        "lead": "Sito vetrina bilingue di un cocktail bar fittizio a Milano: menu, esperienza, galleria, eventi e una prenotazione simulata. Un progetto dimostrativo, non un locale reale.",
+        "lead": "Sito bilingue e identità visiva di un cocktail bar fittizio a Milano: logo, biglietto da visita, cartello e adesivo per le recensioni, più menu, esperienza, galleria, eventi, recensioni e una prenotazione simulata. Un progetto dimostrativo, non un locale reale.",
         "meta": {
           "type": {
             "label": "Tipo",
@@ -326,7 +329,7 @@
           },
           "role": {
             "label": "Ruolo",
-            "value": "Design, sviluppo, infrastruttura"
+            "value": "Brand, design, sviluppo, infrastruttura"
           },
           "technologies": {
             "label": "Tecnologie",
@@ -338,6 +341,58 @@
           }
         },
         "materials": {
+          "logo": {
+            "alt": "Logo NOIR 27: una coupe con una falce di luna e una stella, sopra il nome in maiuscolo",
+            "facts": {
+              "concept": {
+                "label": "Concept",
+                "value": "Una coupe con una falce di luna e una stella ritagliate nella coppa: la notte portata al tavolo"
+              },
+              "versions": {
+                "label": "Versioni",
+                "value": "Positivo, negativo, monocromatiche, simbolo e badge"
+              },
+              "delivery": {
+                "label": "Consegna",
+                "value": "File SVG e PNG, favicon e icone per le app, un'immagine social e un manuale PDF di 15 pagine"
+              }
+            }
+          },
+          "businessCard": {
+            "alt": "Biglietto da visita NOIR 27, fronte e retro",
+            "facts": {
+              "content": {
+                "label": "Contenuto",
+                "value": "Fronte con il logo su nero, retro con i recapiti e un QR verso il sito"
+              },
+              "delivery": {
+                "label": "Consegna",
+                "value": "PDF CMYK pronto per la stampa, anteprime e rapporto di verifica"
+              },
+              "note": {
+                "label": "Nota",
+                "value": "Il nome e i recapiti sono segnaposto"
+              }
+            }
+          },
+          "reviewSign": {
+            "alt1": "Cartello A5 NOIR 27 con QR per le recensioni",
+            "alt2": "Adesivo tondo NOIR 27 con QR per le recensioni",
+            "facts": {
+              "formats": {
+                "label": "Formati",
+                "value": "Cartello A5 e adesivo tondo da 80 mm"
+              },
+              "function": {
+                "label": "Funzione",
+                "value": "Il QR apre la pagina delle recensioni del sito demo"
+              },
+              "delivery": {
+                "label": "Consegna",
+                "value": "PDF pronti per la stampa, livello di fustella e rapporti di verifica"
+              }
+            }
+          },
           "website": {
             "alt": {
               "desktop": "Il sito NOIR 27 su desktop",
@@ -554,6 +609,9 @@
           }
         }
       }
+    },
+    "document": {
+      "guidelines": "Linee guida del brand (PDF)"
     }
   },
   "stack": {
@@ -576,7 +634,7 @@
   },
   "contact": {
     "eyebrow": "Contatti",
-    "title": "Scrivimi",
+    "title": "Contattami",
     "subtitle": "Per opportunità, colloqui o domande sui progetti.",
     "copy": "Copia",
     "copied": "Copiata",
