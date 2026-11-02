@@ -66,7 +66,7 @@
       {
         "company": "Corley",
         "title": "Cloud Engineer",
-        "location": "",
+        "location": "Turin, Italy",
         "from": "06/2026",
         "to": "present",
         "intro": "",
@@ -236,7 +236,7 @@
       {
         "company": "Corley",
         "title": "Cloud Engineer",
-        "location": "",
+        "location": "Torino, Italia",
         "from": "06/2026",
         "to": "presente",
         "intro": "",
@@ -249,7 +249,7 @@
       {
         "company": "S2E: Solutions to Enterprise",
         "title": "Cloud Developer",
-        "location": "Milano",
+        "location": "Milano, Italia",
         "from": "02/2023",
         "to": "06/2026",
         "intro": "Sviluppo software nel Cloud Security Team, integrando tecnologie cloud e pratiche di sicurezza. Ho gestito in autonomia:",
@@ -264,7 +264,7 @@
       {
         "company": "Storm Reply",
         "title": "Cloud Developer",
-        "location": "Torino",
+        "location": "Torino, Italia",
         "from": "08/2021",
         "to": "02/2023",
         "intro": "Membro del team di cloud migration.",
@@ -279,7 +279,7 @@
       {
         "school": "Università di Milano-Bicocca",
         "title": "Informatica",
-        "location": "Milano",
+        "location": "Milano, Italia",
         "from": "2020",
         "to": "2023",
         "bullets": [
@@ -290,7 +290,7 @@
       {
         "school": "Istituto Leonardo da Vinci",
         "title": "Informatica e Telecomunicazioni",
-        "location": "Borgomanero",
+        "location": "Borgomanero, Italia",
         "from": "2015",
         "to": "2020",
         "bullets": []
