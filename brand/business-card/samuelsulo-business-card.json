@@ -1,0 +1,274 @@
+{
+  "meta": {
+    "name": "Samuel Sulo",
+    "slug": "samuelsulo-business-card",
+    "title": "Samuel Sulo, business card",
+    "language": "en"
+  },
+  "format": {
+    "preset": "eu-iso",
+    "bleed": 2,
+    "safe": 4.5
+  },
+  "theme": {
+    "palette": "../palette/samuelsulo-palette.json",
+    "fonts": {
+      "sans": "Space Grotesk",
+      "mono": "JetBrains Mono"
+    }
+  },
+  "fonts": {
+    "Space Grotesk": {
+      "source": "local",
+      "files": {
+        "400": "../fonts/Space-Grotesk-400.ttf",
+        "500": "../fonts/Space-Grotesk-500.ttf",
+        "700": "../fonts/Space-Grotesk-700.ttf"
+      }
+    },
+    "JetBrains Mono": {
+      "source": "local",
+      "files": {
+        "400": "../fonts/Jetbrains-Mono-400.ttf",
+        "500": "../fonts/Jetbrains-Mono-500.ttf"
+      }
+    }
+  },
+  "front": {
+    "background": [
+      {
+        "type": "solid",
+        "color": "void"
+      },
+      {
+        "type": "pattern",
+        "kind": "grid",
+        "color": "neon-cyan@0.07",
+        "size": 6,
+        "weight": 0.12,
+        "fade": {
+          "angle": 135,
+          "start": 0.15,
+          "end": 0.7
+        }
+      }
+    ],
+    "decorations": [
+      {
+        "type": "glow",
+        "cx": 76,
+        "cy": 2,
+        "r": 44,
+        "color": "neon-violet",
+        "opacity": 0.5,
+        "steps": 20
+      }
+    ],
+    "elements": [
+      {
+        "type": "stack",
+        "w": "fill",
+        "h": "fill",
+        "justify": "between",
+        "children": [
+          {
+            "type": "stack",
+            "w": 11,
+            "h": 11,
+            "align": "center",
+            "justify": "center",
+            "radius": "full",
+            "stroke": "neon-cyan",
+            "stroke_w": 0.28,
+            "fill": "neon-cyan@0.06",
+            "children": [
+              {
+                "type": "logo",
+                "src": "assets/samuelsulo-symbol-negative.svg",
+                "h": 7.4,
+                "map": {
+                  "#35e6ff": "neon-cyan",
+                  "#7df3ff": "neon-cyan-light",
+                  "#b24bf3": "neon-violet",
+                  "#45f0a6": "neon-green"
+                }
+              }
+            ]
+          },
+          {
+            "type": "stack",
+            "gap": 2,
+            "children": [
+              {
+                "type": "text",
+                "text": "Samuel Sulo",
+                "font": "sans",
+                "weight": 700,
+                "size": "6.4mm",
+                "leading": 1.05,
+                "tracking": -0.01,
+                "color": "snow"
+              },
+              {
+                "type": "row",
+                "align": "center",
+                "gap": 2.2,
+                "children": [
+                  {
+                    "type": "shape",
+                    "shape": "rect",
+                    "w": 0.7,
+                    "h": 3.6,
+                    "radius": 0.35,
+                    "fill": "neon-cyan"
+                  },
+                  {
+                    "type": "text",
+                    "text": "Web Developer & Cloud Engineer",
+                    "font": "sans",
+                    "weight": 500,
+                    "size": "3mm",
+                    "color": "slate"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": "samuelsulo.it",
+        "anchor": "bottom-right",
+        "offset": [
+          0,
+          -1.5
+        ],
+        "font": "mono",
+        "size": 6,
+        "tracking": 0.16,
+        "transform": "uppercase",
+        "color": "graphite"
+      }
+    ]
+  },
+  "back": {
+    "background": [
+      {
+        "type": "solid",
+        "color": "void"
+      },
+      {
+        "type": "pattern",
+        "kind": "grid",
+        "color": "neon-cyan@0.07",
+        "size": 6,
+        "weight": 0.12,
+        "fade": {
+          "angle": 135,
+          "start": 0.15,
+          "end": 0.7
+        }
+      }
+    ],
+    "decorations": [
+      {
+        "type": "glow",
+        "cx": 8,
+        "cy": 56,
+        "r": 44,
+        "color": "neon-cyan",
+        "opacity": 0.4,
+        "steps": 20
+      }
+    ],
+    "elements": [
+      {
+        "type": "row",
+        "w": "fill",
+        "h": "fill",
+        "align": "center",
+        "justify": "between",
+        "children": [
+          {
+            "type": "stack",
+            "w": 43,
+            "gap": 2.4,
+            "children": [
+              {
+                "type": "text",
+                "text": "Get in touch",
+                "font": "mono",
+                "size": 6,
+                "tracking": 0.16,
+                "transform": "uppercase",
+                "color": "neon-cyan"
+              },
+              {
+                "type": "contact-list",
+                "font": "mono",
+                "size": "6.7pt",
+                "color": "slate",
+                "icon_color": "neon-cyan",
+                "icon_size": 2.9,
+                "icon_gap": 2.2,
+                "gap": 2.4,
+                "badge": {
+                  "shape": "circle",
+                  "size": 5.6,
+                  "fill": "neon-cyan@0.07",
+                  "stroke": "neon-cyan@0.35",
+                  "stroke_w": 0.2
+                },
+                "items": [
+                  {
+                    "kind": "web",
+                    "value": "https://samuelsulo.it",
+                    "color": "snow",
+                    "weight": 500
+                  },
+                  {
+                    "kind": "mail",
+                    "value": "work.samuelsulo@gmail.com"
+                  },
+                  {
+                    "kind": "phone",
+                    "value": "+39 345 955 1342"
+                  },
+                  {
+                    "kind": "social",
+                    "icon": "linkedin",
+                    "value": "/in/work-samuelsulo"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "qr",
+            "id": "site",
+            "url": "https://samuelsulo.it",
+            "ecc": "M",
+            "size": 30,
+            "fg": "snow",
+            "bg": "surface",
+            "frame": {
+              "radius": 2.6,
+              "stroke": "snow@0.16",
+              "stroke_w": 0.22
+            },
+            "caption": {
+              "text": "Scan > portfolio",
+              "font": "mono",
+              "size": 6,
+              "color": "neon-cyan",
+              "tracking": 0.14,
+              "transform": "uppercase",
+              "gap": 2
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
