@@ -25,25 +25,29 @@ Status: **PASS**
 | `slate` |  | Slate | `#A3A9BD` | 163 · 169 · 189 | 40 · 28 · 15 · 5 (recipe) | 88% |
 | `graphite` |  | Graphite | `#7B8197` | 123 · 129 · 151 | 50 · 38 · 25 · 15 (recipe) | 128% |
 | `ink` |  | Ink | `#0B1220` | 11 · 18 · 32 | 90 · 75 · 50 · 70 (recipe) | 285% |
+| `ink-soft` |  | Ink, soft | `#3D4760` | 61 · 71 · 96 | 75 · 60 · 35 · 40 (recipe) | 210% |
+| `ink-faint` |  | Ink, faint | `#536078` | 83 · 96 · 120 | 70 · 55 · 35 · 30 (recipe) | 190% |
 
 ## Contrast (WCAG 2.x)
 
 Each cell is the text color in the row on the background in the column.
 
-| text \ background | `deep-cyan` | `void` | `neon-cyan` | `mist` | `neon-violet` | `neon-cyan-light` | `neon-green` | `deep-cyan-strong` | `deep-violet` | `deep-green` | `surface` | `snow` | `slate` | `graphite` | `ink` |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| `deep-cyan` |  | 3.40 large text and graphics only | 3.95 large text and graphics only | 4.97 AA | 1.47 fail | 4.58 AA | 4.05 large text and graphics only | 1.41 fail | 1.20 fail | 1.05 fail | 3.12 large text and graphics only | 5.00 AA | 2.54 fail | 1.54 fail | 3.14 large text and graphics only |
-| `void` | 3.40 large text and graphics only |  | 13.42 AAA | 16.92 AAA | 5.01 AA | 15.56 AAA | 13.76 AAA | 2.41 fail | 2.83 fail | 3.58 large text and graphics only | 1.09 fail | 17.01 AAA | 8.65 AAA | 5.24 AA | 1.08 fail |
-| `neon-cyan` | 3.95 large text and graphics only | 13.42 AAA |  | 1.26 fail | 2.68 fail | 1.16 fail | 1.03 fail | 5.57 AA | 4.74 AA | 3.75 large text and graphics only | 12.29 AAA | 1.27 fail | 1.55 fail | 2.56 fail | 12.41 AAA |
-| `mist` | 4.97 AA | 16.92 AAA | 1.26 fail |  | 3.38 large text and graphics only | 1.09 fail | 1.23 fail | 7.02 AAA | 5.98 AA | 4.72 AA | 15.50 AAA | 1.01 fail | 1.96 fail | 3.23 large text and graphics only | 15.64 AAA |
-| `neon-violet` | 1.47 fail | 5.01 AA | 2.68 fail | 3.38 large text and graphics only |  | 3.11 large text and graphics only | 2.75 fail | 2.08 fail | 1.77 fail | 1.40 fail | 4.59 AA | 3.40 large text and graphics only | 1.73 fail | 1.05 fail | 4.63 AA |
-| `neon-cyan-light` | 4.58 AA | 15.56 AAA | 1.16 fail | 1.09 fail | 3.11 large text and graphics only |  | 1.13 fail | 6.46 AA | 5.50 AA | 4.34 large text and graphics only | 14.26 AAA | 1.09 fail | 1.80 fail | 2.97 fail | 14.39 AAA |
-| `neon-green` | 4.05 large text and graphics only | 13.76 AAA | 1.03 fail | 1.23 fail | 2.75 fail | 1.13 fail |  | 5.71 AA | 4.86 AA | 3.84 large text and graphics only | 12.60 AAA | 1.24 fail | 1.59 fail | 2.63 fail | 12.72 AAA |
-| `deep-cyan-strong` | 1.41 fail | 2.41 fail | 5.57 AA | 7.02 AAA | 2.08 fail | 6.46 AA | 5.71 AA |  | 1.17 fail | 1.49 fail | 2.21 fail | 7.06 AAA | 3.59 large text and graphics only | 2.17 fail | 2.23 fail |
-| `deep-violet` | 1.20 fail | 2.83 fail | 4.74 AA | 5.98 AA | 1.77 fail | 5.50 AA | 4.86 AA | 1.17 fail |  | 1.27 fail | 2.59 fail | 6.01 AA | 3.06 large text and graphics only | 1.85 fail | 2.62 fail |
-| `deep-green` | 1.05 fail | 3.58 large text and graphics only | 3.75 large text and graphics only | 4.72 AA | 1.40 fail | 4.34 large text and graphics only | 3.84 large text and graphics only | 1.49 fail | 1.27 fail |  | 3.28 large text and graphics only | 4.75 AA | 2.41 fail | 1.46 fail | 3.31 large text and graphics only |
-| `surface` | 3.12 large text and graphics only | 1.09 fail | 12.29 AAA | 15.50 AAA | 4.59 AA | 14.26 AAA | 12.60 AAA | 2.21 fail | 2.59 fail | 3.28 large text and graphics only |  | 15.59 AAA | 7.92 AAA | 4.80 AA | 1.01 fail |
-| `snow` | 5.00 AA | 17.01 AAA | 1.27 fail | 1.01 fail | 3.40 large text and graphics only | 1.09 fail | 1.24 fail | 7.06 AAA | 6.01 AA | 4.75 AA | 15.59 AAA |  | 1.97 fail | 3.25 large text and graphics only | 15.73 AAA |
-| `slate` | 2.54 fail | 8.65 AAA | 1.55 fail | 1.96 fail | 1.73 fail | 1.80 fail | 1.59 fail | 3.59 large text and graphics only | 3.06 large text and graphics only | 2.41 fail | 7.92 AAA | 1.97 fail |  | 1.65 fail | 8.00 AAA |
-| `graphite` | 1.54 fail | 5.24 AA | 2.56 fail | 3.23 large text and graphics only | 1.05 fail | 2.97 fail | 2.63 fail | 2.17 fail | 1.85 fail | 1.46 fail | 4.80 AA | 3.25 large text and graphics only | 1.65 fail |  | 4.84 AA |
-| `ink` | 3.14 large text and graphics only | 1.08 fail | 12.41 AAA | 15.64 AAA | 4.63 AA | 14.39 AAA | 12.72 AAA | 2.23 fail | 2.62 fail | 3.31 large text and graphics only | 1.01 fail | 15.73 AAA | 8.00 AAA | 4.84 AA |  |
+| text \ background | `deep-cyan` | `void` | `neon-cyan` | `mist` | `neon-violet` | `neon-cyan-light` | `neon-green` | `deep-cyan-strong` | `deep-violet` | `deep-green` | `surface` | `snow` | `slate` | `graphite` | `ink` | `ink-soft` | `ink-faint` |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| `deep-cyan` |  | 3.40 large text and graphics only | 3.95 large text and graphics only | 4.97 AA | 1.47 fail | 4.58 AA | 4.05 large text and graphics only | 1.41 fail | 1.20 fail | 1.05 fail | 3.12 large text and graphics only | 5.00 AA | 2.54 fail | 1.54 fail | 3.14 large text and graphics only | 1.55 fail | 1.06 fail |
+| `void` | 3.40 large text and graphics only |  | 13.42 AAA | 16.92 AAA | 5.01 AA | 15.56 AAA | 13.76 AAA | 2.41 fail | 2.83 fail | 3.58 large text and graphics only | 1.09 fail | 17.01 AAA | 8.65 AAA | 5.24 AA | 1.08 fail | 2.19 fail | 3.19 large text and graphics only |
+| `neon-cyan` | 3.95 large text and graphics only | 13.42 AAA |  | 1.26 fail | 2.68 fail | 1.16 fail | 1.03 fail | 5.57 AA | 4.74 AA | 3.75 large text and graphics only | 12.29 AAA | 1.27 fail | 1.55 fail | 2.56 fail | 12.41 AAA | 6.13 AA | 4.20 large text and graphics only |
+| `mist` | 4.97 AA | 16.92 AAA | 1.26 fail |  | 3.38 large text and graphics only | 1.09 fail | 1.23 fail | 7.02 AAA | 5.98 AA | 4.72 AA | 15.50 AAA | 1.01 fail | 1.96 fail | 3.23 large text and graphics only | 15.64 AAA | 7.73 AAA | 5.30 AA |
+| `neon-violet` | 1.47 fail | 5.01 AA | 2.68 fail | 3.38 large text and graphics only |  | 3.11 large text and graphics only | 2.75 fail | 2.08 fail | 1.77 fail | 1.40 fail | 4.59 AA | 3.40 large text and graphics only | 1.73 fail | 1.05 fail | 4.63 AA | 2.29 fail | 1.57 fail |
+| `neon-cyan-light` | 4.58 AA | 15.56 AAA | 1.16 fail | 1.09 fail | 3.11 large text and graphics only |  | 1.13 fail | 6.46 AA | 5.50 AA | 4.34 large text and graphics only | 14.26 AAA | 1.09 fail | 1.80 fail | 2.97 fail | 14.39 AAA | 7.11 AAA | 4.87 AA |
+| `neon-green` | 4.05 large text and graphics only | 13.76 AAA | 1.03 fail | 1.23 fail | 2.75 fail | 1.13 fail |  | 5.71 AA | 4.86 AA | 3.84 large text and graphics only | 12.60 AAA | 1.24 fail | 1.59 fail | 2.63 fail | 12.72 AAA | 6.29 AA | 4.31 large text and graphics only |
+| `deep-cyan-strong` | 1.41 fail | 2.41 fail | 5.57 AA | 7.02 AAA | 2.08 fail | 6.46 AA | 5.71 AA |  | 1.17 fail | 1.49 fail | 2.21 fail | 7.06 AAA | 3.59 large text and graphics only | 2.17 fail | 2.23 fail | 1.10 fail | 1.33 fail |
+| `deep-violet` | 1.20 fail | 2.83 fail | 4.74 AA | 5.98 AA | 1.77 fail | 5.50 AA | 4.86 AA | 1.17 fail |  | 1.27 fail | 2.59 fail | 6.01 AA | 3.06 large text and graphics only | 1.85 fail | 2.62 fail | 1.29 fail | 1.13 fail |
+| `deep-green` | 1.05 fail | 3.58 large text and graphics only | 3.75 large text and graphics only | 4.72 AA | 1.40 fail | 4.34 large text and graphics only | 3.84 large text and graphics only | 1.49 fail | 1.27 fail |  | 3.28 large text and graphics only | 4.75 AA | 2.41 fail | 1.46 fail | 3.31 large text and graphics only | 1.64 fail | 1.12 fail |
+| `surface` | 3.12 large text and graphics only | 1.09 fail | 12.29 AAA | 15.50 AAA | 4.59 AA | 14.26 AAA | 12.60 AAA | 2.21 fail | 2.59 fail | 3.28 large text and graphics only |  | 15.59 AAA | 7.92 AAA | 4.80 AA | 1.01 fail | 2.00 fail | 2.93 fail |
+| `snow` | 5.00 AA | 17.01 AAA | 1.27 fail | 1.01 fail | 3.40 large text and graphics only | 1.09 fail | 1.24 fail | 7.06 AAA | 6.01 AA | 4.75 AA | 15.59 AAA |  | 1.97 fail | 3.25 large text and graphics only | 15.73 AAA | 7.78 AAA | 5.33 AA |
+| `slate` | 2.54 fail | 8.65 AAA | 1.55 fail | 1.96 fail | 1.73 fail | 1.80 fail | 1.59 fail | 3.59 large text and graphics only | 3.06 large text and graphics only | 2.41 fail | 7.92 AAA | 1.97 fail |  | 1.65 fail | 8.00 AAA | 3.95 large text and graphics only | 2.71 fail |
+| `graphite` | 1.54 fail | 5.24 AA | 2.56 fail | 3.23 large text and graphics only | 1.05 fail | 2.97 fail | 2.63 fail | 2.17 fail | 1.85 fail | 1.46 fail | 4.80 AA | 3.25 large text and graphics only | 1.65 fail |  | 4.84 AA | 2.39 fail | 1.64 fail |
+| `ink` | 3.14 large text and graphics only | 1.08 fail | 12.41 AAA | 15.64 AAA | 4.63 AA | 14.39 AAA | 12.72 AAA | 2.23 fail | 2.62 fail | 3.31 large text and graphics only | 1.01 fail | 15.73 AAA | 8.00 AAA | 4.84 AA |  | 2.02 fail | 2.95 fail |
+| `ink-soft` | 1.55 fail | 2.19 fail | 6.13 AA | 7.73 AAA | 2.29 fail | 7.11 AAA | 6.29 AA | 1.10 fail | 1.29 fail | 1.64 fail | 2.00 fail | 7.78 AAA | 3.95 large text and graphics only | 2.39 fail | 2.02 fail |  | 1.46 fail |
+| `ink-faint` | 1.06 fail | 3.19 large text and graphics only | 4.20 large text and graphics only | 5.30 AA | 1.57 fail | 4.87 AA | 4.31 large text and graphics only | 1.33 fail | 1.13 fail | 1.12 fail | 2.93 fail | 5.33 AA | 2.71 fail | 1.64 fail | 2.95 fail | 1.46 fail |  |

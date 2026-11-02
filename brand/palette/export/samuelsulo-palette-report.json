@@ -290,6 +290,44 @@
         18,
         32
       ]
+    },
+    {
+      "token": "ink-soft",
+      "role": null,
+      "name": "Ink, soft",
+      "hex": "#3D4760",
+      "cmyk": [
+        75,
+        60,
+        35,
+        40
+      ],
+      "cmykExplicit": true,
+      "use": "Body text on light surfaces.",
+      "rgb": [
+        61,
+        71,
+        96
+      ]
+    },
+    {
+      "token": "ink-faint",
+      "role": null,
+      "name": "Ink, faint",
+      "hex": "#536078",
+      "cmyk": [
+        70,
+        55,
+        35,
+        30
+      ],
+      "cmykExplicit": true,
+      "use": "Captions and secondary text on light surfaces.",
+      "rgb": [
+        83,
+        96,
+        120
+      ]
     }
   ]
 }
