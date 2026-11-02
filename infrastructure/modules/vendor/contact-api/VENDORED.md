@@ -1,12 +1,12 @@
 # Vendored module
 
-Copied verbatim from `terraform-aws-catalog`. Do not modify: see
-[CLAUDE.md](../../../CLAUDE.md) §5 and [../README.md](../README.md).
+Copied verbatim from the catalog. Do not modify directly: re-run
+`scripts/catalog-vendor.sh` instead.
 
 | | |
 |---|---|
-| Source | git@github.com:samuelsulo/terraform-aws-catalog.git |
+| Source | https://github.com/samuelsulo/opentofu-aws-catalog.git |
 | Module | contact-api |
-| Ref | contact-api/v2.0.2 |
-| Commit | 87bf0a52429a14dc85a8c841a4902bf8ca8ec91b |
-| Vendored on | 2026-09-02 |
+| Ref | contact-api/v3.0.1 |
+| Commit | 9f596603e65dc92a88eb3330e9cbd4316ba1cfff |
+| Vendored on | 2026-11-02 |

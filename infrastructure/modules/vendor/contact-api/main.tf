@@ -1,12 +1,10 @@
 data "aws_region" "current" {}
 
 locals {
-  name = "${var.name_prefix}-contact"
-
   # Velocity templates for the ContactViaEmail integration, kept as their
   # own files under templates/ rather than inlined in the OAS document.
   # contact-via-email.req.vtl is the one exception to "plain file(), no
-  # Terraform variable": it embeds Source/Destination/Template directly
+  # OpenTofu variable": it embeds Source/Destination/Template directly
   # (via templatefile(), the same ${...} syntax as the rest of this OAS
   # document), rather than reading them from stage variables at request
   # time. Stage variables were tried first, but their values are
@@ -14,7 +12,7 @@ locals {
   # email address violates outright ("@" is mandatory, "+" from plus
   # addressing is common), forcing an unnecessary encode/decode
   # workaround; templatefile() has no such restriction; it's plain string
-  # substitution. The other templates below take no Terraform variable at
+  # substitution. The other templates below take no OpenTofu variable at
   # all, so a plain file() is enough for them.
   contact_via_email_request_template = templatefile("${path.module}/templates/contact-via-email.req.vtl", {
     contact_via_email_source       = var.contact_via_email_source
@@ -37,7 +35,7 @@ locals {
   # sibling paths (e.g. /phone) in this same document, each with its own
   # integration, next to this one.
   openapi_body = templatefile("${path.module}/openapi/openapi.yaml", {
-    name_prefix                                      = var.name_prefix
+    api_gateway_name                                 = var.api_gateway_name
     aws_region                                       = data.aws_region.current.region
     ses_role_arn                                     = aws_iam_role.ses_integration.arn
     cors_allowed_origin                              = var.cors_allowed_origin
@@ -66,7 +64,7 @@ resource "aws_ses_email_identity" "source" {
 # typically the result of a file() call on a copy of the template living
 # in the consumer project.
 resource "aws_ses_template" "contact" {
-  name    = local.name
+  name    = var.ses_template_name
   subject = var.contact_via_email_subject
   html    = var.contact_via_email_html_template
   text    = var.contact_via_email_text_template
@@ -77,7 +75,7 @@ resource "aws_ses_template" "contact" {
 # needs, with a condition tying it to contact_via_email_source so it
 # cannot be used to send as a different identity.
 resource "aws_iam_role" "ses_integration" {
-  name = "${local.name}-ses-integration"
+  name = var.ses_integration_role_name
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -90,7 +88,7 @@ resource "aws_iam_role" "ses_integration" {
 }
 
 resource "aws_iam_role_policy" "ses_integration" {
-  name = "${local.name}-ses-send-templated-email"
+  name = var.ses_integration_role_policy_name
   role = aws_iam_role.ses_integration.id
 
   policy = jsonencode({
@@ -109,7 +107,7 @@ resource "aws_iam_role_policy" "ses_integration" {
 }
 
 resource "aws_api_gateway_rest_api" "this" {
-  name = local.name
+  name = var.api_gateway_name
   body = local.openapi_body
 
   endpoint_configuration {
@@ -196,6 +194,7 @@ resource "aws_acm_certificate_validation" "this" {
 resource "aws_api_gateway_domain_name" "this" {
   domain_name              = var.domain_name
   regional_certificate_arn = aws_acm_certificate_validation.this.certificate_arn
+  security_policy          = "TLS_1_2"
 
   endpoint_configuration {
     types = ["REGIONAL"]
