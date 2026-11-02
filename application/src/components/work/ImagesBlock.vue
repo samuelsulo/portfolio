@@ -1,13 +1,16 @@
 <script setup lang="ts">
 defineProps<{
   images: { src: string; alt: string }[]
-  /** A warm paper background, for artwork designed on a light ground (logos). */
-  warm?: boolean
+  /** Ground for artwork designed on a light ('warm') or a dark ('dark') background. */
+  tone?: 'warm' | 'dark'
 }>()
 </script>
 
 <template>
-  <div class="images" :class="{ 'images--duo': images.length > 1, 'images--warm': warm }">
+  <div
+    class="images"
+    :class="[{ 'images--duo': images.length > 1 }, tone ? `images--${tone}` : '']"
+  >
     <img
       v-for="image in images"
       :key="image.src"
@@ -32,6 +35,10 @@ defineProps<{
 
 .images--warm {
   background-color: #fdfaf2;
+}
+
+.images--dark {
+  background-color: var(--color-ink);
 }
 
 .images--duo {

@@ -102,7 +102,7 @@ function onKeydown(event: KeyboardEvent, index: number) {
       <ImagesBlock
         v-if="selected.type === 'images'"
         :images="selected.images.map((source) => image(source))"
-        :warm="selected.tone === 'warm'"
+        :tone="selected.tone"
       />
       <DevicesBlock
         v-else-if="selected.type === 'devices'"
@@ -131,6 +131,17 @@ function onKeydown(event: KeyboardEvent, index: number) {
       />
 
       <FactsList :facts="facts" />
+
+      <a
+        v-if="selected.document"
+        class="viewer__document"
+        :href="selected.document.src"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ t(selected.document.label) }}
+        <AppIcon name="external-link" :size="16" />
+      </a>
     </div>
   </div>
 </template>
@@ -222,6 +233,23 @@ function onKeydown(event: KeyboardEvent, index: number) {
   .viewer__tab[aria-selected='true'] {
     border-left-color: var(--color-neon-primary);
   }
+}
+
+.viewer__document {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  width: fit-content;
+  padding: var(--space-xs) var(--space-md);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  font-weight: 500;
+}
+
+.viewer__document:hover {
+  border-color: var(--color-neon-primary);
 }
 
 .viewer__panel {
