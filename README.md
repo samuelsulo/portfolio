@@ -16,7 +16,7 @@ client-project/
 ├── CLAUDE.md         # project guardrails
 ├── cog.toml          # cocogitto configuration (commit checks, changelog, version tags)
 ├── lefthook.yml      # git hooks configuration
-└── mise.toml         # tools required by the project, including kitsu
+└── mise.toml         # tools required by the project
 ```
 
 See each subfolder's README for details:
@@ -29,15 +29,16 @@ See each subfolder's README for details:
 
 Tools are managed by [`mise`](https://mise.jdx.dev) (see
 [`mise.toml`](./mise.toml)), including
-[`kitsu`](https://github.com/samuelsulo/kitsu), which provides the
-Terraform workflow and repository automations,
 [`lefthook`](https://lefthook.dev), which manages git hooks,
 [`cocogitto`](https://docs.cocogitto.io), which enforces Conventional
 Commits and manages the changelog and version tags of `application/`,
 `infrastructure/`, `brand/logo/` and `brand/business-card/`, and the
 [GitHub CLI](https://cli.github.com)
-(`gh`), used to publish GitHub releases on bump. There is no local
-`scripts/` folder or Makefile.
+(`gh`), used to publish GitHub releases on bump, and the
+[AWS CLI](https://aws.amazon.com/cli/) (`aws`). The infrastructure
+tools (OpenTofu, Terragrunt) and tasks are pinned separately in
+[`infrastructure/mise.toml`](./infrastructure/mise.toml) (see
+[`infrastructure/README.md`](./infrastructure/README.md)).
 
 After cloning, install once the git hooks defined in
 [`lefthook.yml`](./lefthook.yml):

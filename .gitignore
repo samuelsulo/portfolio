@@ -1,11 +1,3 @@
-# --- Terraform ---
-**/.terraform/
-*.tfstate
-*.tfstate.*
-tfplan
-crash.log
-crash.*.log
-
 # --- Secrets / env ---
 .env
 .env.*
