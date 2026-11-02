@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import { onUnmounted, ref } from 'vue'
+import { computed, onUnmounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import { useContactForm } from '@/composables/useContactForm'
 import siteConfig from '@/data/site-config.json'
 import type { SiteConfig } from '@/types/content'
+import { resolveCvUrl } from '@/utils/cv'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const config = siteConfig as SiteConfig
+const cvUrl = computed(() => resolveCvUrl(config.cvUrl, locale.value))
 const { values, errors, status, handleSubmit, resetStatusIfNeeded } = useContactForm()
 
 // Honeypot: a field real visitors never see. Bots that fill it get a fake
@@ -71,9 +73,9 @@ onUnmounted(() => clearTimeout(copiedTimer))
 
         <div class="contact__links">
           <a
-            v-if="config.cvUrl"
+            v-if="cvUrl"
             class="contact__link"
-            :href="config.cvUrl"
+            :href="cvUrl"
             target="_blank"
             rel="noopener noreferrer"
           >

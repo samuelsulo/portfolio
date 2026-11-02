@@ -6,7 +6,10 @@
     "github": "https://github.com/samuelsulo",
     "linkedin": "https://www.linkedin.com/in/work-samuelsulo"
   },
-  "cvUrl": null,
+  "cvUrl": {
+    "it": "/curriculum/samuelsulo-curriculum-it.pdf",
+    "en": "/curriculum/samuelsulo-curriculum-en.pdf"
+  },
   "hud": [
     {
       "id": "region",

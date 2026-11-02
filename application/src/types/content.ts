@@ -106,8 +106,8 @@ export interface SiteConfig {
     github: string
     linkedin: string
   }
-  /** Public link to the CV (for example on Google Drive); the CV button is hidden when null. */
-  cvUrl: string | null
+  /** Curriculum PDFs published with the site, one per language; the CV button is hidden when null. */
+  cvUrl: { it: string; en: string } | null
   /** Technical readouts shown next to the portrait in the hero; labels live in `hero.hud.<id>`. */
   hud: HudRow[]
   availableForWork: boolean
