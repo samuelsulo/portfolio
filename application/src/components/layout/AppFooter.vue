@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import Kitsune from '@/components/ui/Kitsune.vue'
@@ -66,10 +67,10 @@ function closeLegal() {
         </a>
       </div>
 
-      <a href="#hero" class="footer__back-to-top">
+      <RouterLink :to="{ name: 'home', hash: '#hero' }" class="footer__back-to-top">
         {{ t('footer.backToTop') }}
         <AppIcon name="arrow-up" :size="16" />
-      </a>
+      </RouterLink>
     </div>
 
     <div class="footer__bottom container">

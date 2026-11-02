@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { RouterLink } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue'
@@ -61,7 +62,11 @@ function handleKeydown(event: KeyboardEvent) {
     <a class="navbar__skip skip-link" href="#main-content">{{ t('nav.skipToContent') }}</a>
 
     <div class="navbar__inner container">
-      <a href="#hero" class="navbar__brand" aria-label="Samuel Sulo">
+      <RouterLink
+        :to="{ name: 'home', hash: '#hero' }"
+        class="navbar__brand"
+        aria-label="Samuel Sulo"
+      >
         <Kitsune
           :size="44"
           :rest-opacity="1"
@@ -74,19 +79,19 @@ function handleKeydown(event: KeyboardEvent) {
           class="navbar__mark"
         />
         <span class="navbar__brand-text">Samuel&nbsp;Sulo</span>
-      </a>
+      </RouterLink>
 
       <nav class="navbar__links navbar__links--desktop" aria-label="Main">
-        <a
+        <RouterLink
           v-for="link in links"
           :key="link.id"
-          :href="`#${link.id}`"
+          :to="{ name: 'home', hash: `#${link.id}` }"
           class="navbar__link"
           :class="{ 'is-active': activeId === link.id }"
           :aria-current="activeId === link.id ? 'page' : undefined"
         >
           {{ link.label }}
-        </a>
+        </RouterLink>
       </nav>
 
       <div class="navbar__actions">
@@ -107,16 +112,16 @@ function handleKeydown(event: KeyboardEvent) {
 
     <Transition name="mobile-nav">
       <nav v-if="isMenuOpen" id="mobile-nav" class="navbar__mobile" aria-label="Mobile">
-        <a
+        <RouterLink
           v-for="link in links"
           :key="link.id"
-          :href="`#${link.id}`"
+          :to="{ name: 'home', hash: `#${link.id}` }"
           class="navbar__mobile-link"
           :class="{ 'is-active': activeId === link.id }"
           @click="closeMenu"
         >
           {{ link.label }}
-        </a>
+        </RouterLink>
         <div class="navbar__mobile-tools">
           <ThemeToggle />
           <LanguageSwitcher class="navbar__lang" />

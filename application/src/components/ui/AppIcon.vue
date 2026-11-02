@@ -27,6 +27,13 @@ export type IconName =
   | 'sun'
   | 'monitor'
   | 'moon'
+  | 'lightbulb'
+  | 'card'
+  | 'qr'
+  | 'browser'
+  | 'palette'
+  | 'map-pin'
+  | 'link'
 
 const props = withDefaults(
   defineProps<{
@@ -61,6 +68,17 @@ const paths: Record<IconName, string> = {
   sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>',
   monitor:
     '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8"/><path d="M12 16v4"/>',
+  lightbulb:
+    '<path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.7.6 1 1.3 1 2.1h5c0-.8.3-1.5 1-2.1A6 6 0 0 0 12 3z"/>',
+  card: '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 10h5"/><path d="M6 14h8"/>',
+  qr: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3z"/><path d="M20 14v.01"/><path d="M14 20h3"/><path d="M20 17v4"/>',
+  browser:
+    '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M7 6.5h.01"/><path d="M10 6.5h.01"/>',
+  palette:
+    '<path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.8 1.8-1.7 0-1-.8-1.4-.8-2.3 0-.9.7-1.5 1.6-1.5H17a4 4 0 0 0 4-4C21 6.9 17 3 12 3z"/><path d="M7.5 11.5h.01"/><path d="M10 7.5h.01"/><path d="M14.5 7.5h.01"/>',
+  'map-pin':
+    '<path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/>',
+  link: '<path d="M10 13a5 5 0 0 0 7.1 0l2.9-2.9a5 5 0 0 0-7.1-7.1l-1.2 1.2"/><path d="M14 11a5 5 0 0 0-7.1 0L4 13.9a5 5 0 0 0 7.1 7.1l1.2-1.2"/>',
   moon: '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>',
   loader:
     '<path d="M12 3v3"/><path d="m16.95 7.05 2.12-2.12"/><path d="M21 12h-3"/><path d="m16.95 16.95 2.12 2.12"/><path d="M12 18v3"/><path d="m7.05 16.95-2.12 2.12"/><path d="M3 12h3"/><path d="m7.05 7.05-2.12-2.12"/>',

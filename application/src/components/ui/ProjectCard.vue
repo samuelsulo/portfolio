@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RouterLink, type RouteLocationRaw } from 'vue-router'
 import AppIcon from './AppIcon.vue'
 
 defineProps<{
@@ -10,8 +11,12 @@ defineProps<{
   kindLabel: string
   materials: string[]
   materialsLabel: string
+  /** The work's own page. */
+  to: RouteLocationRaw
+  /** The live site, if any. */
   url: string | null
   ctaLabel: string
+  openCaseLabel: string
   /** Wide horizontal layout, used for real client work. */
   lead?: boolean
 }>()
@@ -29,16 +34,30 @@ defineProps<{
       <ul v-if="materials.length" class="project-card__materials" :aria-label="materialsLabel">
         <li v-for="material in materials" :key="material">{{ material }}</li>
       </ul>
-      <a v-if="url" :href="url" class="project-card__cta" target="_blank" rel="noopener noreferrer">
-        {{ ctaLabel }}
-        <AppIcon name="external-link" :size="16" />
-      </a>
+      <div class="project-card__actions">
+        <a
+          v-if="url"
+          :href="url"
+          class="project-card__cta"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ ctaLabel }}
+          <AppIcon name="external-link" :size="16" />
+        </a>
+        <!-- Stretched link: the whole card opens the work, this button makes that visible. -->
+        <RouterLink :to="to" class="project-card__open">
+          {{ openCaseLabel }}
+          <AppIcon name="arrow-right" :size="16" />
+        </RouterLink>
+      </div>
     </div>
   </article>
 </template>
 
 <style scoped>
 .project-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -131,7 +150,42 @@ defineProps<{
   letter-spacing: 0.04em;
 }
 
+.project-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xs);
+  margin-top: var(--space-2xs);
+}
+
+.project-card__open {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  margin-left: auto;
+  padding: var(--space-2xs) var(--space-sm);
+  border: 1px solid var(--color-neon-primary);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-neon-primary);
+  color: var(--color-on-neon);
+  font-size: var(--fs-small);
+  font-weight: 600;
+}
+
+.project-card__open::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.project-card__open:hover {
+  box-shadow: var(--glow-primary-strong);
+}
+
 .project-card__cta {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   gap: var(--space-2xs);

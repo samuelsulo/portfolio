@@ -1,3 +1,5 @@
+import type { IconName } from '@/components/ui/AppIcon.vue'
+
 /**
  * Shapes for the data-driven content loaded from `src/data/*.json`.
  *
@@ -10,7 +12,7 @@
 /** Whether a work was made for a real client or is a demonstration project. */
 export type WorkKind = 'client' | 'demo'
 
-/** The kinds of material a work can show, each labelled in `projects.materials.<id>`. */
+/** The kinds of material a work can show on its card, each labelled in `projects.materials.<id>`. */
 export type MaterialId =
   | 'logo'
   | 'businessCard'
@@ -31,6 +33,50 @@ export interface ProjectItem {
   technologies: string[]
   url: string | null
   translationKey: string
+}
+
+export type CaseGroupId =
+  'brand' | 'print' | 'application' | 'design' | 'quality' | 'infrastructure' | 'visibility'
+
+/** An image of a case. `alt` is an i18n key, never literal text. */
+export interface CaseImage {
+  src: string
+  alt: string
+}
+
+export type SwatchId = 'background' | 'surface' | 'text' | 'brand' | 'accent' | 'accentAlt'
+
+export type CaseBlock =
+  | { type: 'images'; images: CaseImage[]; tone?: 'warm' }
+  | { type: 'devices'; desktop: CaseImage; tablet: CaseImage; phone: CaseImage; url: string }
+  | {
+      type: 'design'
+      swatches: { id: SwatchId; color: string }[]
+      fonts: { role: 'headings' | 'body' | 'data'; family: string }[]
+    }
+  | { type: 'facts' }
+  | { type: 'diagram'; owner: 'client' | 'own' }
+  | {
+      type: 'cards'
+      cards: { id: string; icon: IconName; image: CaseImage | null }[]
+    }
+
+/**
+ * One material of a case, shown as a tab of the viewer. Its label is
+ * `cases.tabs.<id>`, its group label `cases.groups.<group>` and each fact is
+ * `cases.items.<case>.materials.<id>.facts.<fact>` with a `label` and a `value`.
+ */
+export type CaseMaterial = {
+  id: string
+  icon: IconName
+  group: CaseGroupId
+  facts: string[]
+} & CaseBlock
+
+export interface CaseData {
+  /** Header facts, each `cases.items.<case>.meta.<id>` with a `label` and a `value`. */
+  meta: string[]
+  materials: CaseMaterial[]
 }
 
 export interface StackGroup {

@@ -59,8 +59,10 @@ const items = computed(() =>
           :kind-label="item.kindLabel"
           :materials="item.materialLabels"
           :materials-label="t('projects.materialsLabel')"
+          :to="{ name: 'work', params: { id: item.id } }"
           :url="item.url"
           :cta-label="t('projects.viewProject')"
+          :open-case-label="t('projects.openCase')"
           :lead="item.kind === 'client'"
         />
       </div>

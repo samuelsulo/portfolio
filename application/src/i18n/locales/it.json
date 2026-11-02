@@ -55,7 +55,7 @@
   },
   "projects": {
     "eyebrow": "Lavori",
-    "title": "Un cliente reale e tre progetti dimostrativi",
+    "title": "Lavori selezionati",
     "subtitle": "Dal brand all'infrastruttura, passando per il sito e i materiali di stampa.",
     "filterLabel": "Filtra i lavori",
     "filters": {
@@ -100,6 +100,459 @@
         "title": "Pulse Project Management",
         "description": "PULSE è uno spazio di lavoro per la gestione operativa dei progetti e dei team: una dashboard/SaaS con progetti, attività, rubrica del team, analisi e un feed delle attività.",
         "imageAlt": "Anteprima del progetto: Pulse Project Management"
+      }
+    },
+    "openCase": "Vedi il lavoro"
+  },
+  "cases": {
+    "back": "Tutti i lavori",
+    "viewerLabel": "Materiali del progetto",
+    "openLive": "Apri online",
+    "notFoundTitle": "Lavoro non trovato",
+    "notFoundBody": "Questo lavoro non esiste o non è più disponibile.",
+    "groups": {
+      "brand": "Brand",
+      "print": "Stampa",
+      "application": "Applicazione",
+      "design": "Design",
+      "quality": "Qualità",
+      "infrastructure": "Infrastruttura",
+      "visibility": "Visibilità"
+    },
+    "tabs": {
+      "logo": "Logo",
+      "businessCard": "Biglietto da visita",
+      "reviewSign": "Review sign",
+      "website": "Sito web",
+      "webapp": "Webapp",
+      "ecommerce": "E-commerce",
+      "design": "Identità visiva",
+      "quality": "Qualità",
+      "architecture": "Architettura",
+      "onlinePresence": "Presenza online"
+    },
+    "devices": {
+      "desktop": "Desktop",
+      "tablet": "Tablet",
+      "phone": "Telefono"
+    },
+    "swatch": {
+      "background": "Sfondo",
+      "surface": "Superficie",
+      "text": "Testo",
+      "brand": "Marchio",
+      "accent": "Accento",
+      "accentAlt": "Accento secondario"
+    },
+    "typeRole": {
+      "headings": "Titoli",
+      "body": "Testo",
+      "data": "Dati"
+    },
+    "swatchesLabel": "Palette dei colori",
+    "fontsLabel": "Caratteri tipografici",
+    "diagram": {
+      "ariaLabel": "Schema semplificato: il visitatore raggiunge il sito tramite DNS, CDN e storage privato; lo sviluppatore pubblica con un deploy e con infrastruttura come codice",
+      "account": {
+        "client": "ACCOUNT AWS DEL CLIENTE",
+        "own": "ACCOUNT AWS"
+      },
+      "visitor": "Visitatore",
+      "visitorSub": "browser",
+      "dns": "DNS",
+      "dnsSub": "Route 53",
+      "cdn": "CDN",
+      "cdnSub": "CloudFront, HTTPS",
+      "storage": "Storage privato",
+      "storageSub": "S3",
+      "tls": "Certificato TLS",
+      "tlsSub": "ACM",
+      "developer": "Sviluppatore",
+      "developerSub": "repository",
+      "deploy": "Deploy",
+      "deploySub": "test, build, upload",
+      "infra": "Infrastruttura",
+      "infraSub": "OpenTofu, Terragrunt",
+      "state": "Stato",
+      "stateSub": "remoto, cifrato",
+      "origin": "origine",
+      "release": "rilascio",
+      "provisioning": "provisioning",
+      "note": "Vista pubblica semplificata: non mostra identificativi di account, nomi di risorse, policy né dettagli di configurazione."
+    },
+    "items": {
+      "idea-bar": {
+        "lead": "Un'attività locale con bisogni concreti: farsi riconoscere, farsi trovare e farsi raccomandare. Ho curato l'identità visiva, i materiali stampati, il sito e l'infrastruttura che lo ospita, tutto nell'account AWS del cliente.",
+        "meta": {
+          "place": {
+            "label": "Luogo",
+            "value": "Oleggio Castello (NO)"
+          },
+          "activity": {
+            "label": "Attività",
+            "value": "Bar, gelateria, pasticceria"
+          },
+          "role": {
+            "label": "Ruolo",
+            "value": "Brand, sviluppo web, infrastruttura"
+          },
+          "year": {
+            "label": "Anno",
+            "value": "2026"
+          }
+        },
+        "materials": {
+          "logo": {
+            "alt": "Logo del bar I.D.E.A.: una lampadina con la scritta idea",
+            "facts": {
+              "versions": {
+                "label": "Versioni",
+                "value": "Positivo, negativo, monocromatiche, icona"
+              },
+              "formats": {
+                "label": "Formati",
+                "value": "SVG vettoriale, PNG fino a 2048 px"
+              },
+              "delivery": {
+                "label": "Consegna",
+                "value": "Linee guida in PDF, set per il web"
+              }
+            }
+          },
+          "businessCard": {
+            "alt": "Biglietto da visita, fronte e retro",
+            "facts": {
+              "content": {
+                "label": "Contenuto",
+                "value": "Fronte con il marchio, retro con recapiti e QR verso il sito"
+              },
+              "delivery": {
+                "label": "Consegna",
+                "value": "PDF pronto per la stampa, anteprime e rapporto di verifica"
+              }
+            }
+          },
+          "reviewSign": {
+            "alt1": "Cartello A5 con QR per le recensioni",
+            "alt2": "Adesivo tondo con QR per le recensioni",
+            "facts": {
+              "formats": {
+                "label": "Formati",
+                "value": "Cartello A5 e adesivo"
+              },
+              "function": {
+                "label": "Funzione",
+                "value": "QR che apre la pagina delle recensioni del locale"
+              },
+              "delivery": {
+                "label": "Consegna",
+                "value": "PDF per la stampa e rapporto di verifica"
+              }
+            }
+          },
+          "website": {
+            "alt": {
+              "desktop": "Il sito del bar I.D.E.A. su desktop",
+              "tablet": "Il sito del bar I.D.E.A. su tablet",
+              "phone": "Il sito del bar I.D.E.A. su telefono"
+            },
+            "facts": {
+              "devices": {
+                "label": "Dispositivi",
+                "value": "Stesso sito su desktop, tablet e telefono"
+              },
+              "application": {
+                "label": "Applicazione",
+                "value": "Vue 3 e TypeScript, pagine pre-renderizzate"
+              },
+              "service": {
+                "label": "Servizio",
+                "value": "S3 privato dietro CloudFront, con certificato TLS e intestazioni di sicurezza"
+              }
+            }
+          },
+          "onlinePresence": {
+            "cards": {
+              "google": {
+                "title": "Google Business Profile",
+                "text": "Scheda del locale su Google configurata, con informazioni, orari e collegamenti al sito e ai profili social."
+              },
+              "reviews": {
+                "title": "Recensioni Google",
+                "text": "Il QR del cartello e dell'adesivo apre direttamente la pagina delle recensioni del locale.",
+                "alt": "Cartello con QR per le recensioni"
+              },
+              "social": {
+                "title": "Profili social",
+                "text": "Collegamenti a Instagram e Facebook configurati sul sito e sul profilo Google.",
+                "alt": "Collegamenti ai profili social nel footer del sito"
+              }
+            },
+            "facts": {
+              "configured": {
+                "label": "Cosa ho configurato",
+                "value": "Profilo Google, raccolta delle recensioni, collegamenti ai profili social"
+              },
+              "hidden": {
+                "label": "Cosa non mostro",
+                "value": "Dati di accesso e statistiche interne"
+              }
+            }
+          },
+          "architecture": {
+            "facts": {
+              "visitor": {
+                "label": "Flusso del visitatore",
+                "value": "DNS, CDN con HTTPS e storage privato, raggiungibile solo dalla CDN"
+              },
+              "release": {
+                "label": "Flusso di rilascio",
+                "value": "Deploy con test e build, infrastruttura come codice, stato remoto"
+              },
+              "ownership": {
+                "label": "Proprietà",
+                "value": "Tutto vive nell'account del cliente, con accesso revocabile"
+              }
+            }
+          }
+        }
+      },
+      "samuelsulo-noir27": {
+        "lead": "Sito vetrina bilingue di un cocktail bar fittizio a Milano: menu, esperienza, galleria, eventi e una prenotazione simulata. Un progetto dimostrativo, non un locale reale.",
+        "meta": {
+          "type": {
+            "label": "Tipo",
+            "value": "Sito vetrina"
+          },
+          "role": {
+            "label": "Ruolo",
+            "value": "Design, sviluppo, infrastruttura"
+          },
+          "technologies": {
+            "label": "Tecnologie",
+            "value": "Vue 3, TypeScript, Vite"
+          },
+          "year": {
+            "label": "Anno",
+            "value": "2026"
+          }
+        },
+        "materials": {
+          "website": {
+            "alt": {
+              "desktop": "Il sito NOIR 27 su desktop",
+              "tablet": "Il sito NOIR 27 su tablet",
+              "phone": "Il sito NOIR 27 su telefono"
+            },
+            "facts": {
+              "pages": {
+                "label": "Pagine",
+                "value": "Home, menu, esperienza, galleria, eventi, prenotazione"
+              },
+              "languages": {
+                "label": "Lingue",
+                "value": "Italiano e inglese"
+              },
+              "devices": {
+                "label": "Dispositivi",
+                "value": "Stesso sito su desktop, tablet e telefono"
+              }
+            }
+          },
+          "design": {
+            "facts": {}
+          },
+          "quality": {
+            "facts": {
+              "tests": {
+                "label": "Test",
+                "value": "Test automatici con Vitest"
+              },
+              "languages": {
+                "label": "Lingue",
+                "value": "Italiano e inglese"
+              },
+              "legal": {
+                "label": "Note legali",
+                "value": "Privacy Policy e Cookie Policy"
+              }
+            }
+          },
+          "architecture": {
+            "facts": {
+              "visitor": {
+                "label": "Flusso del visitatore",
+                "value": "DNS, CDN con HTTPS e storage privato, raggiungibile solo dalla CDN"
+              },
+              "release": {
+                "label": "Flusso di rilascio",
+                "value": "Deploy con test e build, infrastruttura come codice, stato remoto"
+              },
+              "ownership": {
+                "label": "Ambiente",
+                "value": "Ospitato in un account AWS dedicato, con produzione separata"
+              }
+            }
+          }
+        }
+      },
+      "samuelsulo-nexus": {
+        "lead": "E-commerce dimostrativo di hardware per gaming: catalogo con filtri, scheda prodotto, carrello e checkout simulati. Nessun pagamento reale.",
+        "meta": {
+          "type": {
+            "label": "Tipo",
+            "value": "E-commerce"
+          },
+          "role": {
+            "label": "Ruolo",
+            "value": "Design, sviluppo, infrastruttura"
+          },
+          "technologies": {
+            "label": "Tecnologie",
+            "value": "Vue 3, TypeScript, Pinia"
+          },
+          "year": {
+            "label": "Anno",
+            "value": "2026"
+          }
+        },
+        "materials": {
+          "ecommerce": {
+            "alt": {
+              "desktop": "L'e-commerce NEXUS su desktop",
+              "tablet": "L'e-commerce NEXUS su tablet",
+              "phone": "L'e-commerce NEXUS su telefono"
+            },
+            "facts": {
+              "flow": {
+                "label": "Percorso",
+                "value": "Catalogo, scheda prodotto, carrello, checkout, conferma"
+              },
+              "data": {
+                "label": "Dati",
+                "value": "Carrello salvato nel browser, nessun invio a server"
+              },
+              "devices": {
+                "label": "Dispositivi",
+                "value": "Stesso sito su desktop, tablet e telefono"
+              }
+            }
+          },
+          "design": {
+            "facts": {}
+          },
+          "quality": {
+            "facts": {
+              "tests": {
+                "label": "Test",
+                "value": "Test automatici con Vitest"
+              },
+              "languages": {
+                "label": "Lingue",
+                "value": "Italiano e inglese"
+              },
+              "legal": {
+                "label": "Note legali",
+                "value": "Privacy Policy e Cookie Policy"
+              }
+            }
+          },
+          "architecture": {
+            "facts": {
+              "visitor": {
+                "label": "Flusso del visitatore",
+                "value": "DNS, CDN con HTTPS e storage privato, raggiungibile solo dalla CDN"
+              },
+              "release": {
+                "label": "Flusso di rilascio",
+                "value": "Deploy con test e build, infrastruttura come codice, stato remoto"
+              },
+              "ownership": {
+                "label": "Ambiente",
+                "value": "Ospitato in un account AWS dedicato, con produzione separata"
+              }
+            }
+          }
+        }
+      },
+      "samuelsulo-pulse": {
+        "lead": "Webapp dimostrativa per la gestione di progetti: dashboard, analytics, team, attività e notifiche, con palette comandi e tema scuro o chiaro. I dati mostrati sono fittizi.",
+        "meta": {
+          "type": {
+            "label": "Tipo",
+            "value": "Webapp"
+          },
+          "role": {
+            "label": "Ruolo",
+            "value": "Design, sviluppo, infrastruttura"
+          },
+          "technologies": {
+            "label": "Tecnologie",
+            "value": "Vue 3, Vuetify, Pinia"
+          },
+          "year": {
+            "label": "Anno",
+            "value": "2026"
+          }
+        },
+        "materials": {
+          "webapp": {
+            "alt": {
+              "desktop": "La webapp PULSE su desktop",
+              "tablet": "La webapp PULSE su tablet",
+              "phone": "La webapp PULSE su telefono"
+            },
+            "facts": {
+              "sections": {
+                "label": "Sezioni",
+                "value": "Dashboard, progetti, team, analytics, attività, notifiche, impostazioni"
+              },
+              "data": {
+                "label": "Dati",
+                "value": "Tutti fittizi, nessun account"
+              },
+              "devices": {
+                "label": "Dispositivi",
+                "value": "Stesso sito su desktop, tablet e telefono"
+              }
+            }
+          },
+          "design": {
+            "facts": {}
+          },
+          "quality": {
+            "facts": {
+              "tests": {
+                "label": "Test",
+                "value": "Test automatici con Vitest"
+              },
+              "languages": {
+                "label": "Lingue",
+                "value": "Italiano e inglese"
+              },
+              "legal": {
+                "label": "Note legali",
+                "value": "Privacy Policy e Cookie Policy"
+              }
+            }
+          },
+          "architecture": {
+            "facts": {
+              "visitor": {
+                "label": "Flusso del visitatore",
+                "value": "DNS, CDN con HTTPS e storage privato, raggiungibile solo dalla CDN"
+              },
+              "release": {
+                "label": "Flusso di rilascio",
+                "value": "Deploy con test e build, infrastruttura come codice, stato remoto"
+              },
+              "ownership": {
+                "label": "Ambiente",
+                "value": "Ospitato in un account AWS dedicato, con produzione separata"
+              }
+            }
+          }
+        }
       }
     }
   },
