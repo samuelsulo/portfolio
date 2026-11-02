@@ -88,6 +88,12 @@ configured to discover them there.
 
 The content currently in place (bio, service list, projects, email, social links) is **placeholder** content meant to be replaced with real content without modifying any Vue component.
 
+## Curriculum
+
+The curriculum is published as two PDFs, one per language, under `/curriculum/`. The "Resume" links
+follow the active language. The PDFs are generated from `curriculum/samuelsulo-curriculum.json` with
+`npm run curriculum`, see [`curriculum/README.md`](./curriculum/README.md).
+
 ## Contact form: backend
 
 The contact form is wired to the `contact_api` module (API Gateway + SES) described in [`../infrastructure/`](../infrastructure). The frontend calls `POST {VITE_CONTACT_API_URL}/email`, where `VITE_CONTACT_API_URL` is the module's custom domain (e.g. `https://contact.samuelsulo.it`).

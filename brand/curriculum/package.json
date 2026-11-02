@@ -1,8 +1,0 @@
-{
-  "name": "samuelsulo-curriculum",
-  "private": true,
-  "type": "module",
-  "description": "Builds the curriculum PDFs from samuelsulo-curriculum.json",
-  "scripts": { "build": "node scripts/build.mjs" },
-  "devDependencies": { "playwright": "1.63.0" }
-}

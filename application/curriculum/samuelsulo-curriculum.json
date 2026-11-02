@@ -127,18 +127,9 @@
       }
     ],
     "languages": [
-      [
-        "Italian",
-        "Native"
-      ],
-      [
-        "English",
-        "Excellent"
-      ],
-      [
-        "Albanian",
-        "Excellent"
-      ]
+      ["Italian", "Native"],
+      ["English", "Excellent"],
+      ["Albanian", "Excellent"]
     ],
     "certifications": [
       {
@@ -297,18 +288,9 @@
       }
     ],
     "languages": [
-      [
-        "Italiano",
-        "Madrelingua"
-      ],
-      [
-        "Inglese",
-        "Eccellente"
-      ],
-      [
-        "Albanese",
-        "Eccellente"
-      ]
+      ["Italiano", "Madrelingua"],
+      ["Inglese", "Eccellente"],
+      ["Albanese", "Eccellente"]
     ],
     "certifications": [
       {
