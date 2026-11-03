@@ -10,6 +10,9 @@ const { t, locale } = useI18n()
 const route = useRoute()
 const main = ref<HTMLElement | null>(null)
 
+// The 3D view takes the whole screen: no navbar and no footer around it.
+const isExplore = computed(() => route.name === 'explore')
+
 // The title of the work being viewed, if the current route is a work page.
 const workTitle = computed(() => {
   if (route.name !== 'work') return null
@@ -40,9 +43,9 @@ watch(
 </script>
 
 <template>
-  <NavBar />
+  <NavBar v-if="!isExplore" />
   <main id="main-content" ref="main" tabindex="-1">
     <RouterView />
   </main>
-  <AppFooter />
+  <AppFooter v-if="!isExplore" />
 </template>

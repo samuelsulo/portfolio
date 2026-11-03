@@ -738,7 +738,7 @@
     "unsupportedBody": "Il browser non riesce a mostrare la grafica 3D, ma tutto è disponibile anche nella vista classica.",
     "backTo2d": "Vista classica",
     "prompt": "Apri {name}",
-    "helpPointer": "Frecce o WASD per camminare, Shift per correre, mouse per guardarti intorno (prima clicca sulla scena), E per interagire o entrare in un portale, B per ballare",
+    "helpPointer": "Frecce o WASD per camminare, Shift per correre, mouse per guardarti intorno (prima clicca sulla scena), E per interagire o entrare in un portale, B per ballare, M per il menu",
     "helpTouch": "Joystick per camminare, trascina per guardare, pizzica per lo zoom, tocca il suggerimento per usare un portale",
     "rooms": {
       "work": "Galleria dei lavori",
@@ -773,6 +773,12 @@
       }
     },
     "lookHint": "Clicca sulla scena, poi muovi il mouse per guardarti intorno (Esc per rilasciarlo)",
-    "openPage": "Apri come pagina"
+    "openPage": "Apri come pagina",
+    "menu": "Menu",
+    "menuTitle": "Menu",
+    "menuHint": "Premi M per aprire o chiudere questo menu",
+    "controls": "Comandi",
+    "rotateHint": "Ruota il dispositivo in orizzontale per una visione migliore",
+    "rotateDismiss": "Continua comunque"
   }
 }
