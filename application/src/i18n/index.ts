@@ -1,6 +1,4 @@
 import { createI18n } from 'vue-i18n'
-import it from './locales/it.json'
-import en from './locales/en.json'
 
 export type SupportedLocale = 'it' | 'en'
 
@@ -49,5 +47,6 @@ export const i18n = createI18n({
   legacy: false,
   locale: resolveInitialLocale(),
   fallbackLocale: DEFAULT_LOCALE,
-  messages: { it, en },
+  // The messages are fetched at startup, see src/content and main.ts.
+  messages: {},
 })

@@ -1,8 +1,8 @@
-// Builds the curriculum PDFs (one per language) from samuelsulo-curriculum.json into public/curriculum.
+// Builds the CV PDFs (one per language) from samuelsulo-cv.json into public/cv.
 // Colors come from brand/palette, fonts from brand/fonts and the Kitsune mark from brand/logo, so the
-// curriculum follows the brand: change the palette or the content and rebuild.
+// CV follows the brand: change the palette or the content and rebuild.
 //
-//   npm run curriculum        (from application/)
+//   npm run cv        (from application/)
 //
 // Set CHROME_PATH to an installed Chrome binary to skip the Chromium download, and
 // CHROME_NO_SANDBOX=1 in containers.
@@ -14,7 +14,7 @@ import { chromium } from 'playwright'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const brand = path.resolve(root, '..', '..', 'brand')
-const data = JSON.parse(fs.readFileSync(path.join(root, 'samuelsulo-curriculum.json'), 'utf8'))
+const data = JSON.parse(fs.readFileSync(path.join(root, 'samuelsulo-cv.json'), 'utf8'))
 const palette = JSON.parse(
   fs.readFileSync(path.join(brand, 'palette', 'samuelsulo-palette.json'), 'utf8'),
 ).colors
@@ -154,7 +154,7 @@ function render(lang) {
       <div class="photo"><img src="${photo}" alt=""></div>
       <div class="s-title">${esc(l.contact)}</div>
       <ul class="contact">
-        <li><span>Web</span>${link(c.web)}</li><li><span>Email</span><a href="mailto:${c.email}">${esc(c.email)}</a></li>
+        <li><span>Web</span>${link(c.web)}</li><li><span>${esc(l.phone)}</span><a href="tel:${c.phone.replace(/\s/g, '')}">${esc(c.phone)}</a></li><li><span>Email</span><a href="mailto:${c.email}">${esc(c.email)}</a></li>
         <li><span>LinkedIn</span>${link(c.linkedin)}</li><li><span>GitHub</span>${link(c.github)}</li><li><span>${esc(l.basedIn)}</span>${esc(location)}</li>
       </ul>
       <div class="s-title">${esc(l.skills)}</div>${skills}
@@ -180,20 +180,20 @@ function render(lang) {
   </section></body></html>`
 }
 
-const out = path.resolve(root, '..', 'public', 'curriculum')
+const out = path.resolve(root, '..', 'public', 'cv')
 fs.mkdirSync(out, { recursive: true })
 const browser = await chromium.launch({
   executablePath: process.env.CHROME_PATH || undefined,
   args: process.env.CHROME_NO_SANDBOX ? ['--no-sandbox'] : [],
 })
 for (const lang of Object.keys(data).filter((k) => data[k] && data[k].labels)) {
-  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'curriculum-'))
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'cv-'))
   try {
-    fs.writeFileSync(path.join(tmp, 'curriculum.html'), render(lang))
+    fs.writeFileSync(path.join(tmp, 'cv.html'), render(lang))
     const page = await browser.newPage()
-    await page.goto('file://' + path.join(tmp, 'curriculum.html'))
+    await page.goto('file://' + path.join(tmp, 'cv.html'))
     await page.evaluate(() => document.fonts.ready)
-    const file = path.join(out, `samuelsulo-curriculum-${lang}.pdf`)
+    const file = path.join(out, `samuelsulo-cv-${lang}.pdf`)
     await page.pdf({ path: file, format: 'A4', printBackground: true, preferCSSPageSize: true })
     await page.close()
     console.log(`written ${path.relative(process.cwd(), file)}`)

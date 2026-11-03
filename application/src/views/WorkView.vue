@@ -5,16 +5,14 @@ import { useI18n } from 'vue-i18n'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import WorkViewer from '@/components/work/WorkViewer.vue'
 import FactsList from '@/components/work/FactsList.vue'
-import projectsData from '@/data/projects.json'
-import casesData from '@/data/cases.json'
-import type { CaseData, ProjectItem } from '@/types/content'
+import { getContent } from '@/content'
 
 const { t } = useI18n()
 const route = useRoute()
 
 const id = computed(() => String(route.params.id))
-const project = computed(() => (projectsData as ProjectItem[]).find((item) => item.id === id.value))
-const work = computed(() => (casesData as unknown as Record<string, CaseData>)[id.value])
+const project = computed(() => getContent().projects.find((item) => item.id === id.value))
+const work = computed(() => getContent().cases[id.value])
 
 const meta = computed(() =>
   work.value

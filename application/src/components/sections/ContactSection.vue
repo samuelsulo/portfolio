@@ -4,12 +4,11 @@ import { useI18n } from 'vue-i18n'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import { useContactForm } from '@/composables/useContactForm'
-import siteConfig from '@/data/site-config.json'
-import type { SiteConfig } from '@/types/content'
+import { getContent } from '@/content'
 import { resolveCvUrl } from '@/utils/cv'
 
 const { t, locale } = useI18n()
-const config = siteConfig as SiteConfig
+const config = getContent().siteConfig
 const cvUrl = computed(() => resolveCvUrl(config.cvUrl, locale.value))
 const { values, errors, status, handleSubmit, resetStatusIfNeeded } = useContactForm()
 

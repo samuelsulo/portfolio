@@ -10,7 +10,7 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import AppModal from '@/components/ui/AppModal.vue'
-import siteConfig from '@/data/site-config.json'
+import { getContent } from '@/content'
 import type { SiteLegalConfig } from '@/types/content'
 
 defineProps<{
@@ -22,7 +22,7 @@ const emit = defineEmits<{ close: [] }>()
 
 const { t } = useI18n()
 
-const legal: SiteLegalConfig = siteConfig.legal
+const legal: SiteLegalConfig = getContent().siteConfig.legal
 
 // Non-translatable data referenced by legal.privacyPolicy.content (see
 // SiteLegalConfig), interpolated as named params, harmlessly ignored by

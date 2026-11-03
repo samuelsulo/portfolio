@@ -1,4 +1,5 @@
 {
+  "schemaVersion": 1,
   "email": "work.samuelsulo@gmail.com",
   "phone": null,
   "location": "Italy",
@@ -7,8 +8,8 @@
     "linkedin": "https://www.linkedin.com/in/work-samuelsulo"
   },
   "cvUrl": {
-    "it": "/curriculum/samuelsulo-curriculum-it.pdf",
-    "en": "/curriculum/samuelsulo-curriculum-en.pdf"
+    "it": "/cv/samuelsulo-cv-it.pdf",
+    "en": "/cv/samuelsulo-cv-en.pdf"
   },
   "hud": [
     {

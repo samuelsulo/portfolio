@@ -1,7 +1,7 @@
 import type { IconName } from '@/components/ui/AppIcon.vue'
 
 /**
- * Shapes for the data-driven content loaded from `src/data/*.json`.
+ * Shapes for the data-driven content loaded from `public/content/data/*.json`.
  *
  * These files intentionally hold only non-translatable data (ids, icon
  * names, technology tags, image paths, URLs). All prose meant to be read in
@@ -99,6 +99,8 @@ export interface HudRow {
 }
 
 export interface SiteConfig {
+  /** Version of the content shape, checked against `CONTENT_SCHEMA_VERSION` when the content is loaded. */
+  schemaVersion: number
   email: string
   phone: string | null
   location: string
@@ -106,7 +108,7 @@ export interface SiteConfig {
     github: string
     linkedin: string
   }
-  /** Curriculum PDFs published with the site, one per language; the CV button is hidden when null. */
+  /** CV PDFs published with the site, one per language; the CV button is hidden when null. */
   cvUrl: { it: string; en: string } | null
   /** Technical readouts shown next to the portrait in the hero; labels live in `hero.hud.<id>`. */
   hud: HudRow[]

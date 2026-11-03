@@ -18,6 +18,11 @@
 # AWS credentials: uses the AWS_PROFILE already set in the terminal, or the
 # aws_profile of infrastructure/live/production/account.hcl otherwise.
 #
+# Content (public/content, images, cv, documents, brand) is not deployed
+# here: it has its own, release-free deploy, see deploy-content.sh. This
+# script leaves those paths of the bucket untouched, so the content already
+# live is not reverted to the one the tag was cut with.
+#
 # Usage:
 #   ./scripts/deploy.sh --version application/vX.Y.Z
 set -euo pipefail
@@ -64,37 +69,9 @@ VERSION_MARKER_KEY="_version"
 # "X.Y.Z" or the footer would show a doubled "vv1.0.0".
 VERSION="${TAG#application/v}"
 
-STACK_DIR="$ROOT_DIR/infrastructure/live/production/eu-south-1/website"
-
-# The AWS CLI profile of the production account, the same one Terragrunt
-# uses (see infrastructure/live/production/account.hcl).
-if [[ -z "${AWS_PROFILE:-}" ]]; then
-  AWS_PROFILE=$(sed -n 's/^ *aws_profile *= *"\(.*\)"/\1/p' "$ROOT_DIR/infrastructure/live/production/account.hcl")
-  export AWS_PROFILE
-fi
-
-echo "==> Reading infrastructure endpoints from the website stack outputs (profile $AWS_PROFILE)"
-(cd "$STACK_DIR" && mise exec -- terragrunt stack generate >/dev/null)
-OUTPUTS_JSON=$(cd "$STACK_DIR" && mise exec -- terragrunt stack output -json 2>/dev/null)
-
-# Reads a string output of a unit of the stack: output_value <unit> <output>
-output_value() {
-  node -e '
-    const outputs = JSON.parse(require("fs").readFileSync(0, "utf8"))
-    const value = (outputs[process.argv[1]] ?? {})[process.argv[2]]
-    if (typeof value === "string") process.stdout.write(value)
-  ' "$1" "$2" <<<"$OUTPUTS_JSON"
-}
-
-BUCKET=$(output_value website_hosting s3_bucket_id)
-DISTRIBUTION_ID=$(output_value website_hosting cloudfront_distribution_id)
-CONTACT_API_DOMAIN=$(output_value contact_api custom_domain_name)
-
-if [[ -z "$BUCKET" || -z "$DISTRIBUTION_ID" ]]; then
-  echo "Could not read the S3 bucket / CloudFront distribution from the website stack outputs." >&2
-  echo "  Has 'terragrunt stack run apply' been run in infrastructure/live/production/eu-south-1/website?" >&2
-  exit 1
-fi
+# shellcheck source=lib/website-target.sh
+source "$ROOT_DIR/application/scripts/lib/website-target.sh"
+resolve_website_target
 
 CONTACT_API_URL=""
 if [[ -n "$CONTACT_API_DOMAIN" ]]; then
@@ -127,6 +104,14 @@ echo "==> Running unit tests"
 echo "==> Building production bundle (version $VERSION)"
 (cd "$APPLICATION_DIR" && VITE_APP_VERSION="$VERSION" VITE_CONTACT_API_URL="$CONTACT_API_URL" npm run build)
 
+# The content is managed by deploy-content.sh: refuse to ship an application
+# that would fetch content that is not there yet.
+if ! aws s3api head-object --bucket "$BUCKET" --key content/data/site-config.json >/dev/null 2>&1; then
+  echo "No content found in s3://$BUCKET/content/." >&2
+  echo "  Deploy it first with ./scripts/deploy-content.sh" >&2
+  exit 1
+fi
+
 echo "==> Syncing dist/ to s3://$BUCKET"
 # Hashed assets (JS/CSS/fonts): cached forever, safe because the filename
 # changes on every content change. index.html: never cached, so a deploy
@@ -136,7 +121,13 @@ echo "==> Syncing dist/ to s3://$BUCKET"
 aws s3 sync "$APPLICATION_DIR/dist/" "s3://$BUCKET/" --delete \
   --cache-control "public, max-age=31536000, immutable" \
   --exclude "index.html" \
-  --exclude "$VERSION_MARKER_KEY"
+  --exclude "$VERSION_MARKER_KEY" \
+  --exclude "_content_version" \
+  --exclude "content/*" \
+  --exclude "images/*" \
+  --exclude "cv/*" \
+  --exclude "documents/*" \
+  --exclude "brand/*"
 aws s3 cp "$APPLICATION_DIR/dist/index.html" "s3://$BUCKET/index.html" \
   --cache-control "public, max-age=0, must-revalidate"
 

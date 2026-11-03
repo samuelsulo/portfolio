@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import SectionHeading from '@/components/ui/SectionHeading.vue'
-import stackData from '@/data/stack.json'
-import type { StackGroup } from '@/types/content'
+import { getContent } from '@/content'
 
 const { t } = useI18n()
-const groups = stackData as StackGroup[]
+const groups = getContent().stack
 </script>
 
 <template>

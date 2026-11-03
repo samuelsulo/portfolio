@@ -4,8 +4,7 @@ import { RouterView, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import NavBar from '@/components/layout/NavBar.vue'
 import AppFooter from '@/components/layout/AppFooter.vue'
-import projectsData from '@/data/projects.json'
-import type { ProjectItem } from '@/types/content'
+import { getContent } from '@/content'
 
 const { t, locale } = useI18n()
 const route = useRoute()
@@ -14,7 +13,7 @@ const main = ref<HTMLElement | null>(null)
 // The title of the work being viewed, if the current route is a work page.
 const workTitle = computed(() => {
   if (route.name !== 'work') return null
-  const project = (projectsData as ProjectItem[]).find((item) => item.id === route.params.id)
+  const project = getContent().projects.find((item) => item.id === route.params.id)
   return project ? t(`${project.translationKey}.title`) : null
 })
 
