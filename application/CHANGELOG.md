@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## application/v1.3.0 - 2026-11-03
+#### Features
+- (**application**) add icons to the stack section (#9) - (4806c32) - Samuel Sulo
+
+- - -
+
 ## application/v1.2.0 - 2026-11-03
 #### Features
 - (**application**) rework the stack, add certifications, update the CV and the docs (#8) - (323dd89) - Samuel Sulo
