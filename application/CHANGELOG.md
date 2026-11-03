@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## application/v1.2.0 - 2026-11-03
+#### Features
+- (**application**) rework the stack, add certifications, update the CV and the docs (#8) - (323dd89) - Samuel Sulo
+- (**application**) load the content at runtime and rename the curriculum to CV - (dcf7132) - Samuel Sulo
+#### Tests
+- (**application**) add end-to-end tests for the scrolling (#7) - (277f4f0) - Samuel Sulo
+#### Miscellaneous Chores
+- (**application**) bump vue-router from 4.6.4 to 5.4.0 in /application (#4) - (57e031a) - dependabot[bot]
+- (**application**) bump vitest from 4.1.11 to 5.0.5 in /application (#2) - (d02817b) - dependabot[bot]
+- (**application**) bump the minor-and-patch group across 1 directory with 12 updates (#1) - (ce89e4d) - dependabot[bot]
+
+- - -
+
 ## application/v1.1.0 - 2026-11-02
 #### Features
 - (**application**) offer the curriculum in the language of the visitor - (1c6a57c) - Samuel Sulo
