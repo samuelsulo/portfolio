@@ -6,6 +6,12 @@ updates:
       interval: weekly
     commit-message:
       prefix: "chore(application)"
+    ignore:
+      # typescript-eslint supports TypeScript up to 6.0 (its tracking issue:
+      # typescript-eslint/typescript-eslint#10940). Drop this when it
+      # supports 7.x and lint:check passes with it.
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
     groups:
       minor-and-patch:
         update-types: [minor, patch]
