@@ -73,7 +73,7 @@ application/
 │   └── utils/                  # pure functions (form validation, etc.)
 ├── tests/
 │   ├── unit/                 # Vitest specs
-│   └── e2e/                  # Playwright specs (not yet populated)
+│   └── e2e/                  # Playwright specs (scrolling between sections and pages)
 └── vite.config.ts / vitest.config.ts / tsconfig*.json
 ```
 
@@ -127,5 +127,5 @@ If this site ever adds analytics, a Maps/YouTube embed, or any other non-essenti
 
 ## Next steps (out of scope for this iteration)
 
-- E2E test suite (Playwright) in `tests/e2e/`, currently empty.
+- E2E tests (Playwright) in `tests/e2e/`: only the scrolling between sections and pages is covered so far. Run them with `npm run test:e2e`; they build the site, serve it with `vite preview` and use the Google Chrome installed on the machine, so no browser download is needed.
 - Replacement of the placeholder content (bio, projects, images, real contacts).
