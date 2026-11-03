@@ -15,14 +15,14 @@ there is one owner and no client account.
 The page is a single scroll with a sticky navigation bar. The order is chosen to answer, in
 turn: who, what has been built, with which tools, what is certified, how to reach.
 
-| Section        | What the visitor gets                                                                                                                          |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| Hero           | Name, role, short intro, availability status, links to GitHub, LinkedIn and the CV, portrait with technical readouts                           |
-| About          | The profile in two sentences and a terminal-style summary (`stack --list`)                                                                     |
-| Work           | Cards for each project, filterable by kind (client or demo); each opens a dedicated page                                                       |
-| Stack          | "The tools I use every day", in groups: cloud, infrastructure and releases, web applications, backend and automation, AI, working environment  |
-| Certifications | One card per certification: badge, title, issuer, description, an Active or Expired label and a link to the public verification page on Credly |
-| Contact        | A form that sends the message to the owner's mailbox                                                                                           |
+| Section        | What the visitor gets                                                                                                                                                  |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Hero           | Name, role, short intro, availability status, links to GitHub, LinkedIn and the CV, portrait with technical readouts                                                   |
+| About          | The profile in two sentences and a terminal-style summary (`stack --list`)                                                                                             |
+| Work           | Cards for each project, filterable by kind (client or demo); each opens a dedicated page                                                                               |
+| Stack          | "The tools I use every day", in groups: cloud, infrastructure and releases, web applications, backend and automation, AI, working environment, each tool with its logo |
+| Certifications | One card per certification: badge, title, issuer, description, an Active or Expired label and a link to the public verification page on Credly                         |
+| Contact        | A form that sends the message to the owner's mailbox                                                                                                                   |
 
 ## Work pages
 
