@@ -15,6 +15,10 @@ pre-commit:
       glob: "infrastructure/**/*.hcl"
       run: mise exec -- terragrunt hcl fmt
       stage_fixed: true
+    infrastructure-lint:
+      root: "infrastructure/"
+      glob: "infrastructure/**/*.{tf,tfvars,hcl}"
+      run: mise run lint
     application-lint:
       root: "application/"
       glob: "application/**/*.{ts,vue,js,cjs,mjs}"
