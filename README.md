@@ -68,3 +68,9 @@ release with the [`gh` CLI](https://cli.github.com) (must be
 authenticated beforehand with `gh auth login`), using that version's
 changelog entry as the release notes.
 
+## License
+
+All rights reserved: this is a personal portfolio, public to be read and not
+to be reused. The code, content and brand may not be copied or reused without
+permission. See [`LICENSE`](./LICENSE) for the exceptions (fonts, clients'
+materials, dependencies).

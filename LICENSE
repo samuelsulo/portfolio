@@ -1,0 +1,26 @@
+Copyright (c) 2026 Samuel Sulo. All rights reserved.
+
+This repository is the personal portfolio of Samuel Sulo. It is published so
+that it can be read and evaluated, not so that it can be reused.
+
+You may view the repository and, on GitHub, fork it as the GitHub Terms of
+Service allow. Beyond that, no license is granted. In particular, without the
+prior written permission of the author you may not copy, modify, redistribute,
+publish, sublicense, sell or use, in whole or in part, for any purpose:
+
+- the source code (application, infrastructure, scripts and workflows);
+- the content (texts, translations, projects, case studies, CV);
+- the brand (name, logo, palette, business card, brand manuals);
+- the images, documents and any other file of this repository.
+
+Exceptions, which keep their own terms:
+
+- The fonts in brand/fonts are distributed under the SIL Open Font License 1.1
+  (see the license files in that folder).
+- The names, logos and materials of the clients shown in the case studies
+  (I.D.E.A. and NOIR 27) belong to their respective owners and are shown with
+  their consent; nothing in this repository grants any right on them.
+- The dependencies installed from package registries and the tools used to
+  build the project are covered by their own licenses.
+
+THE REPOSITORY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
