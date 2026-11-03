@@ -1,6 +1,6 @@
 # Portfolio
 
-Showcase site for the professional presentation of Samuel Sulo as Cloud Engineer & Web Developer: a home page with About, Work, Stack and Contact sections plus a dedicated page for each work (`/work/<id>`), with a cyberpunk/neon visual identity in a dark and a light theme and bilingual Italian/English support.
+Showcase site for the professional presentation of Samuel Sulo as Cloud Engineer & Web Developer: a home page with About, Work, Stack, Certifications and Contact sections plus a dedicated page for each work (`/work/<id>`), with a cyberpunk/neon visual identity in a dark and a light theme and bilingual Italian/English support.
 
 ## Technology stack
 
@@ -60,7 +60,7 @@ application/
 ├── src/
 │   ├── components/
 │   │   ├── layout/          # NavBar, AppFooter
-│   │   ├── sections/        # Hero, About, Projects (work), Stack, Contact
+│   │   ├── sections/        # Hero, About, Projects (work), Stack, Certifications, Contact
 │   ├── work/             # work page: tabbed viewer and its blocks (images, devices, design, diagram, cards)
 │   │   ├── cookies/          # LegalPolicyView (Cookie Policy / Privacy Policy modal)
 │   │   └── ui/               # reusable components (cards, buttons, icons, etc.)
@@ -88,7 +88,7 @@ If a change to the content files needs a change to the application (a new field,
 
 - **Prose text (bio, projects, UI labels)**: lives in the translation files `public/content/locales/it.json` and `public/content/locales/en.json`. Every key must be updated in both files.
 - **Works**: `projects.json` drives the cards on the home page, `cases.json` the materials of each work page (tabs and their blocks). Every case needs its prose under `cases.items.<id>` in both languages and its images under `public/images/cases/<id>/`; `tests/unit/cases.spec.ts` fails if a translation or an image is missing. Architecture diagrams are public, simplified drawings: never put account ids, resource names or configuration details in them.
-- **Non-translatable data for Projects and Stack** (kind, materials, technologies, images, URLs): lives in `public/content/data/projects.json` and `public/content/data/stack.json`. Each entry references a `translationKey` pointing to the corresponding block in the translation files.
+- **Non-translatable data for Projects, Stack and Certifications** (kind, materials, technologies, issuer, images, URLs): lives in `public/content/data/projects.json`, `public/content/data/stack.json` and `public/content/data/certifications.json` (badge images in `public/images/certifications/`, public verification link in `url`). Each entry references a `translationKey` pointing to the corresponding block in the translation files.
 - **Contact/social data** (email, social links, the public CV link `cvUrl`, the technical readouts next to the portrait): `public/content/data/site-config.json`. The CV button stays hidden while `cvUrl` is `null`.
 
 The content currently in place (bio, service list, projects, email, social links) is **placeholder** content meant to be replaced with real content without modifying any Vue component.

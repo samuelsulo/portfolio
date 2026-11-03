@@ -1,4 +1,10 @@
-import type { CaseData, ProjectItem, SiteConfig, StackGroup } from '@/types/content'
+import type {
+  CaseData,
+  CertificationItem,
+  ProjectItem,
+  SiteConfig,
+  StackGroup,
+} from '@/types/content'
 
 /**
  * The content of the site (data files and translations) is not bundled with
@@ -12,7 +18,7 @@ import type { CaseData, ProjectItem, SiteConfig, StackGroup } from '@/types/cont
  * `schemaVersion` in `public/content/data/site-config.json`, when a change to
  * the content files requires a matching application release.
  */
-export const CONTENT_SCHEMA_VERSION = 1
+export const CONTENT_SCHEMA_VERSION = 2
 
 const CONTENT_BASE = '/content'
 
@@ -23,6 +29,7 @@ export interface Content {
   projects: ProjectItem[]
   cases: Record<string, CaseData>
   stack: StackGroup[]
+  certifications: CertificationItem[]
   messages: { it: MessageTree; en: MessageTree }
 }
 
@@ -39,11 +46,12 @@ async function fetchJson<T>(path: string): Promise<T> {
 
 /** Fetches every content file and keeps the result for `getContent()`. */
 export async function loadContent(): Promise<Content> {
-  const [siteConfig, projects, cases, stack, it, en] = await Promise.all([
+  const [siteConfig, projects, cases, stack, certifications, it, en] = await Promise.all([
     fetchJson<SiteConfig>('data/site-config.json'),
     fetchJson<ProjectItem[]>('data/projects.json'),
     fetchJson<Record<string, CaseData>>('data/cases.json'),
     fetchJson<StackGroup[]>('data/stack.json'),
+    fetchJson<CertificationItem[]>('data/certifications.json'),
     fetchJson<MessageTree>('locales/it.json'),
     fetchJson<MessageTree>('locales/en.json'),
   ])
@@ -52,7 +60,7 @@ export async function loadContent(): Promise<Content> {
       `Unsupported content schema ${siteConfig.schemaVersion}, expected ${CONTENT_SCHEMA_VERSION}`,
     )
   }
-  loaded = { siteConfig, projects, cases, stack, messages: { it, en } }
+  loaded = { siteConfig, projects, cases, stack, certifications, messages: { it, en } }
   return loaded
 }
 

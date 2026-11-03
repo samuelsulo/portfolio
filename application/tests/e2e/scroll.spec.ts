@@ -48,7 +48,7 @@ async function openFirstWork(page: Page) {
 }
 
 test.describe('scrolling', () => {
-  for (const id of ['about', 'projects', 'stack', 'contact']) {
+  for (const id of ['about', 'projects', 'stack', 'certifications', 'contact']) {
     test(`the menu scrolls to #${id}`, async ({ page }) => {
       await page.goto('/')
       await page.locator(`header a[href$="#${id}"]`).first().click()

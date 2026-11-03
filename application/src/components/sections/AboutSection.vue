@@ -5,7 +5,7 @@ import SectionHeading from '@/components/ui/SectionHeading.vue'
 const { t } = useI18n()
 
 // Terminal rows: the labels are code-like and stay untranslated, the values are copy.
-const rows = ['cloud', 'iac', 'apps', 'release'] as const
+const rows = ['cloud', 'devops', 'apps', 'ai', 'tools'] as const
 </script>
 
 <template>
