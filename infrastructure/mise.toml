@@ -1,6 +1,8 @@
 [tools]
 opentofu = "1"
 terragrunt = "1"
+tflint = "latest"
+trivy = "latest"
 
 [env]
 CATALOG_REPO = "samuelsulo/opentofu-aws-catalog"
@@ -18,3 +20,7 @@ run = "scripts/catalog-vendor.sh \"$CATALOG_REPO\""
 [tasks."state:create-bucket"]
 description = "Create and configure the account-wide OpenTofu state bucket: <aws-profile> [region]"
 run = "scripts/state-create-bucket.sh"
+
+[tasks.lint]
+description = "Static checks: tflint and trivy"
+run = "scripts/lint.sh"

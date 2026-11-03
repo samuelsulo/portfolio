@@ -24,13 +24,27 @@ See each subfolder's README for details:
 
 ## Environments
 
-Each environment lives in its own AWS account and has a top-level folder
-under [`live/`](./live). Only one exists in this project:
+Each environment has a top-level folder under [`live/`](./live). Two exist
+in this project:
 
-- **production**: the AWS account owned by the client.
+- **production**: the live website, `samuelsulo.it`.
+- **sandbox**: a disposable copy of the same stack under `sandbox.samuelsulo.it`,
+  to try changes before they reach production. Unlike the scaffold's default
+  of one AWS account per environment, it runs in the **same account and
+  region** as production (this is my own portfolio, not a client account).
+  What keeps the two apart is the name prefix (`portfolio-sbx` vs
+  `portfolio-prd`), the state key (it contains the environment folder), the
+  domains and the SES identity (a `+sandbox` address, because identities are
+  unique per address in an account and region). It is defined but not applied:
+  run `plan` and `apply` from `live/sandbox/eu-south-1/website` when needed.
 
 ## Prerequisites
 
+- The AWS account ID is not kept in the repository. `live/*/account.hcl`
+  reads it from `PORTFOLIO_AWS_ACCOUNT_ID`, which you set in
+  `infrastructure/mise.local.toml` (git-ignored; copy
+  [`mise.local.example.toml`](./mise.local.example.toml) and run
+  `mise trust`). Terragrunt fails with a clear error while it is unset.
 - [`mise`](https://mise.jdx.dev), which installs the pinned `opentofu` and
   `terragrunt` versions (`mise install`).
 - AWS CLI profile for the target environment, named in that environment's
@@ -40,6 +54,11 @@ under [`live/`](./live). Only one exists in this project:
 - The state bucket of the target account, created once with
   `mise run state:create-bucket <aws-profile>` (see
   [`live/`](./live#state-bucket)).
+
+## Static checks
+
+`mise run lint` runs `tflint` and `trivy` (see [`scripts/`](./scripts)). It
+runs on commit through `lefthook` and on every pull request in CI.
 
 ## Quickstart
 

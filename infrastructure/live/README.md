@@ -11,7 +11,7 @@ hierarchy below.
 ```
 live/
 ├── root.hcl                             # shared provider + backend config, included by every stack
-└── <environment>/                       # production: one AWS account per environment
+└── <environment>/                       # production, sandbox
     ├── account.hcl                      # aws_account_id, aws_profile, environment(_short)
     ├── _global/                         # account-wide services (budgets, route53, ...)
     │   ├── region.hcl                   # fixed to us-east-1
@@ -31,9 +31,11 @@ canonical API region for these services. `find_in_parent_folders()`
 picks the closest `region.hcl`, so `root.hcl` needs no special case and
 the state key gets its own `_global` segment.
 
-Each environment lives in its own AWS account, so the top-level folder is
-named after the environment and `account.hcl` defines both the account
-and the environment. `account.hcl` and `region.hcl` each declare a single
+Each environment normally lives in its own AWS account, so the top-level
+folder is named after the environment and `account.hcl` defines both the
+account and the environment. `sandbox` is the exception: it reuses the
+account and region of `production`, kept apart by its name prefix and state
+key (see [`../README.md`](../README.md#environments)). `account.hcl` and `region.hcl` each declare a single
 `locals` block; `root.hcl` reads both via `find_in_parent_folders()`
 and exposes them (plus the values it derives from them, like the state
 bucket name and `default_tags`) to every unit instantiated below.
