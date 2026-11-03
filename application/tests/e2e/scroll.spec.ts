@@ -11,18 +11,22 @@ const SECTION_TOLERANCE = 24
 const sectionTop = (page: Page, id: string) =>
   page.evaluate((target) => document.getElementById(target)!.getBoundingClientRect().top, id)
 
-/** Waits for a smooth scroll to finish and returns the final position. */
+/**
+ * Waits for a smooth scroll to finish and returns the final position. A scroll
+ * can pause on a slow machine before it starts, so the position has to stay
+ * put for half a second, not just for two readings.
+ */
 async function settledScrollY(page: Page): Promise<number> {
-  let previous = -1
-  await expect
-    .poll(async () => {
-      const current = await page.evaluate(() => Math.round(window.scrollY))
-      const settled = current === previous
-      previous = current
-      return settled
-    })
-    .toBe(true)
-  return previous
+  let last = -1
+  let steady = 0
+  for (let i = 0; i < 150 && steady < 5; i++) {
+    await page.waitForTimeout(100)
+    const current = await page.evaluate(() => Math.round(window.scrollY))
+    steady = current === last ? steady + 1 : 0
+    last = current
+  }
+  expect(steady, 'the page keeps scrolling').toBeGreaterThanOrEqual(5)
+  return last
 }
 
 async function openFirstWork(page: Page) {
