@@ -65,6 +65,13 @@ test.describe('scrolling', () => {
     expect(Math.abs(await sectionTop(page, 'projects'))).toBeLessThanOrEqual(DIRECT_LOAD_TOLERANCE)
   })
 
+  test('opening /#hero keeps the portrait clear of the navbar', async ({ page }) => {
+    await page.goto('/#hero')
+    await page.locator('#hero').waitFor()
+    await settledScrollY(page)
+    expect(await page.evaluate(() => window.scrollY)).toBe(0)
+  })
+
   test('a work page opens at the top', async ({ page }) => {
     await page.goto('/#projects')
     await page.locator('#projects').waitFor()
