@@ -7,5 +7,6 @@ live, known issues, and remaining work. It refers to the other
 
 ## Index
 
-| Document | Description |
-|---|---|
+| Document                     | Description                                                      |
+| ---------------------------- | ---------------------------------------------------------------- |
+| [handover.md](./handover.md) | What exists, where access lives, known limits and remaining work |

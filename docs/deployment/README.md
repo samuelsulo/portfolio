@@ -6,5 +6,6 @@ into an environment, and how to roll back.
 
 ## Index
 
-| Document | Description |
-|---|---|
+| Document                       | Description                                                                                       |
+| ------------------------------ | ------------------------------------------------------------------------------------------------- |
+| [deploying.md](./deploying.md) | How to ship infrastructure, application and content, the release order, verification and rollback |
