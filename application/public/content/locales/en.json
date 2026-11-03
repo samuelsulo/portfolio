@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Samuel Sulo | Cloud Engineer & Web Developer",
-    "description": "Samuel Sulo, Cloud Engineer & Web Developer. Portfolio and projects."
+    "title": "Samuel Sulo | Cloud Engineer & Developer",
+    "description": "Samuel Sulo, Cloud Engineer & Developer. Portfolio and projects."
   },
   "common": {
     "close": "Close"
@@ -24,7 +24,7 @@
     "certifications": "Certifications"
   },
   "hero": {
-    "eyebrow": "Cloud Engineer & Web Developer",
+    "eyebrow": "Cloud Engineer & Developer",
     "name": "Samuel Sulo",
     "role": "I build solid cloud infrastructure and modern web products.",
     "intro": "I design scalable cloud architectures on AWS and build modern web applications with Vue.js and TypeScript, pairing infrastructure reliability with attention to detail in the user experience.",
@@ -705,7 +705,7 @@
     }
   },
   "footer": {
-    "tagline": "Cloud Engineer & Web Developer",
+    "tagline": "Cloud Engineer & Developer",
     "rights": "All rights reserved.",
     "version": "v{version}",
     "githubAriaLabel": "Samuel Sulo's GitHub profile",
