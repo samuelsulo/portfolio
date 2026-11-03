@@ -52,7 +52,16 @@ test.describe('scrolling', () => {
     // The content is fetched at startup: the section exists once the app is mounted.
     await page.locator('#projects').waitFor()
     await settledScrollY(page)
-    expect(Math.abs(await sectionTop(page, 'projects'))).toBeLessThanOrEqual(SECTION_TOLERANCE)
+    const info = await page.evaluate(() => ({
+      scrollY: Math.round(scrollY),
+      innerHeight,
+      scrollHeight: document.documentElement.scrollHeight,
+      top: document.getElementById('projects')!.getBoundingClientRect().top,
+      offsetTop: document.getElementById('projects')!.offsetTop,
+      fonts: [...document.fonts].map((f) => `${f.family}:${f.status}`),
+      hash: location.hash,
+    }))
+    expect(Math.abs(info.top), JSON.stringify(info)).toBeLessThanOrEqual(SECTION_TOLERANCE)
   })
 
   test('a work page opens at the top', async ({ page }) => {
