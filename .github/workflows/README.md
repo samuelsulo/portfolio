@@ -11,7 +11,7 @@ stack, Terragrunt plan/apply for the chosen cloud provider).
 
 | Workflow | File | Runs on | Purpose |
 |---|---|---|---|
-| Application CI | [`application-ci.yml`](./application-ci.yml) | Pull requests | Lint, format check, type check, unit tests and production build |
+| Application CI | [`application-ci.yml`](./application-ci.yml) | Pull requests | Lint, format check, type check, unit tests, production build and end-to-end tests |
 | Commits | [`commits.yml`](./commits.yml) | Pull requests | `cog check`: Conventional Commits and allowed scopes |
 | Infrastructure CI | [`infrastructure-ci.yml`](./infrastructure-ci.yml) | Pull requests | `tofu fmt` and `terragrunt hcl fmt` checks, then `tflint` and `trivy` (no plan or apply in CI) |
 | Secrets scan | [`secrets-scan.yml`](./secrets-scan.yml) | Pull requests and pushes to `main` | gitleaks over the full git history |
