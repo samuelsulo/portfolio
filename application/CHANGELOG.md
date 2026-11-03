@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## application/v1.4.0 - 2026-11-03
+#### Features
+- (**application**) add the 3D portfolio view and load the content on demand (#11) - (51455b1) - Samuel Sulo
+
+- - -
+
 ## application/v1.3.0 - 2026-11-03
 #### Features
 - (**application**) add icons to the stack section (#9) - (4806c32) - Samuel Sulo
