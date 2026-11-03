@@ -19,5 +19,5 @@ jobs:
           fetch-depth: 0
       - uses: cocogitto/cocogitto-action@v4
         with:
-          check: true
-          check-latest-tag-only: true
+          command: check
+          args: --ignore-merge-commits
