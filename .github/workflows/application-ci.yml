@@ -1,0 +1,34 @@
+name: Application CI
+
+on:
+  pull_request:
+    paths:
+      - "application/**"
+      - ".github/workflows/application-ci.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: application-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: application
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: application/package-lock.json
+      - run: npm ci
+      - run: npm run lint:check
+      - run: npm run format:check
+      - run: npm run type-check
+      - run: npm run test
+      - run: npm run build

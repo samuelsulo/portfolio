@@ -1,0 +1,41 @@
+name: Infrastructure CI
+
+on:
+  pull_request:
+    paths:
+      - "infrastructure/**"
+      - ".github/workflows/infrastructure-ci.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: infrastructure-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: infrastructure
+    steps:
+      - uses: actions/checkout@v7
+      - uses: jdx/mise-action@v5
+        with:
+          working_directory: infrastructure
+      - run: mise exec -- tofu fmt -check -recursive
+      - run: mise exec -- terragrunt hcl fmt --check
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: jdx/mise-action@v5
+        with:
+          working_directory: infrastructure
+      - run: mise run lint
+        working-directory: infrastructure
+        env:
+          # tflint downloads its AWS ruleset from GitHub
+          GITHUB_TOKEN: ${{ github.token }}
