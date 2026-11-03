@@ -8,6 +8,7 @@ import DesignBlock from '@/components/work/DesignBlock.vue'
 import DevicesBlock from '@/components/work/DevicesBlock.vue'
 import FactsList from '@/components/work/FactsList.vue'
 import ImagesBlock from '@/components/work/ImagesBlock.vue'
+import { assetUrl } from '@/content'
 import type { CaseMaterial } from '@/types/content'
 
 const props = defineProps<{ caseId: string; materials: CaseMaterial[] }>()
@@ -33,7 +34,7 @@ function key(material: CaseMaterial, path: string): string {
 }
 
 function image(source: { src: string; alt: string }) {
-  return { src: source.src, alt: t(source.alt) }
+  return { src: assetUrl(source.src), alt: t(source.alt) }
 }
 
 const facts = computed(() =>
@@ -135,7 +136,7 @@ function onKeydown(event: KeyboardEvent, index: number) {
       <a
         v-if="selected.document"
         class="viewer__document"
-        :href="selected.document.src"
+        :href="assetUrl(selected.document.src)"
         target="_blank"
         rel="noopener noreferrer"
       >

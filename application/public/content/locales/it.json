@@ -21,7 +21,9 @@
       "dark": "Tema scuro"
     },
     "stack": "Stack",
-    "certifications": "Certificazioni"
+    "certifications": "Certificazioni",
+    "view3d": "Esplora in 3D",
+    "view2d": "Torna alla vista classica"
   },
   "hero": {
     "eyebrow": "Cloud Engineer & Web Developer",
@@ -614,7 +616,9 @@
     },
     "document": {
       "guidelines": "Linee guida del brand (PDF)"
-    }
+    },
+    "loading": "Caricamento...",
+    "loadError": "Non è stato possibile caricare questo lavoro, riprova tra qualche istante."
   },
   "stack": {
     "eyebrow": "Stack",
@@ -725,5 +729,50 @@
       "retentionPeriodKnown": "<p>I messaggi ricevuti tramite il modulo di contatto vengono conservati per {months} mesi dalla data di invio, dopodiché vengono cancellati, salvo diversi obblighi di legge.</p>",
       "retentionPeriodNone": "<p>I messaggi ricevuti tramite il modulo di contatto non vengono salvati in alcun database o sistema di archiviazione dal sito: la richiesta viene inoltrata direttamente al servizio di invio email (Amazon SES) tramite Amazon API Gateway, senza essere conservata dal sito stesso.</p>"
     }
+  },
+  "explore": {
+    "title": "Portfolio 3D",
+    "canvasLabel": "Vista 3D delle stanze del portfolio. Segue una versione testuale dei contenuti.",
+    "loading": "Caricamento delle stanze...",
+    "unsupportedTitle": "Vista 3D non disponibile",
+    "unsupportedBody": "Il browser non riesce a mostrare la grafica 3D, ma tutto è disponibile anche nella vista classica.",
+    "backTo2d": "Vista classica",
+    "prompt": "Apri {name}",
+    "helpPointer": "Frecce o WASD per camminare, Shift per correre, mouse per guardarti intorno (prima clicca sulla scena), E per interagire o entrare in un portale, B per ballare",
+    "helpTouch": "Joystick per camminare, trascina per guardare, pizzica per lo zoom, tocca il suggerimento per usare un portale",
+    "rooms": {
+      "work": "Galleria dei lavori",
+      "stack": "Sala dello stack",
+      "certifications": "Certificazioni",
+      "contact": "Contatti",
+      "hub": "Hub",
+      "cv": "CV"
+    },
+    "enter": "Entra in {name}",
+    "roomsLabel": "Stanze",
+    "download": "Apri il CV",
+    "cv": {
+      "it": "CV in italiano",
+      "en": "CV in inglese",
+      "description": "Il curriculum vitae di Samuel Sulo, in PDF che si apre in una nuova scheda.",
+      "pageAlt": "Pagina {n} del CV"
+    },
+    "dance": {
+      "title": "Balletto",
+      "open": "Balla",
+      "stop": "Stop",
+      "names": {
+        "floss": "Floss",
+        "disco": "Disco",
+        "robot": "Robot",
+        "wave": "Saluto",
+        "jacks": "Jumping jack",
+        "spin": "Piroetta",
+        "headbang": "Headbang",
+        "coding": "Programmatore"
+      }
+    },
+    "lookHint": "Clicca sulla scena, poi muovi il mouse per guardarti intorno (Esc per rilasciarlo)",
+    "openPage": "Apri come pagina"
   }
 }

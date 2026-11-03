@@ -15,7 +15,8 @@
     ],
     "technologies": ["Vue.js", "TypeScript", "AWS", "S3", "CloudFront", "Route53", "OpenTofu"],
     "url": "https://ideagelateria.com",
-    "translationKey": "projects.items.idea-bar"
+    "translationKey": "projects.items.idea-bar",
+    "screenshot": "/images/cases/idea-bar/website-desktop.webp"
   },
   {
     "id": "samuelsulo-noir27",
@@ -25,7 +26,8 @@
     "materials": ["logo", "businessCard", "reviewSign", "website", "design", "architecture"],
     "technologies": ["Vue.js", "AWS", "S3", "CloudFront", "Route53", "OpenTofu"],
     "url": "https://noir27.samuelsulo.it",
-    "translationKey": "projects.items.samuelsulo-noir27"
+    "translationKey": "projects.items.samuelsulo-noir27",
+    "screenshot": "/images/cases/samuelsulo-noir27/website-desktop.webp"
   },
   {
     "id": "samuelsulo-nexus",
@@ -35,7 +37,8 @@
     "materials": ["ecommerce", "design", "architecture"],
     "technologies": ["Vue.js", "TypeScript", "Pinia", "AWS", "OpenTofu"],
     "url": "https://nexus.samuelsulo.it",
-    "translationKey": "projects.items.samuelsulo-nexus"
+    "translationKey": "projects.items.samuelsulo-nexus",
+    "screenshot": "/images/cases/samuelsulo-nexus/website-desktop.webp"
   },
   {
     "id": "samuelsulo-pulse",
@@ -54,6 +57,7 @@
       "OpenTofu"
     ],
     "url": "https://pulse.samuelsulo.it",
-    "translationKey": "projects.items.samuelsulo-pulse"
+    "translationKey": "projects.items.samuelsulo-pulse",
+    "screenshot": "/images/cases/samuelsulo-pulse/website-desktop.webp"
   }
 ]

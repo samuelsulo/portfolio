@@ -3,7 +3,7 @@
     "id": "aws-solutions-architect-associate",
     "issuer": "Amazon Web Services",
     "status": "active",
-    "image": "/images/certifications/aws-solutions-architect-associate.png",
+    "image": "/images/certifications/aws-solutions-architect-associate.webp",
     "imageAlt": "certifications.items.aws-solutions-architect-associate.imageAlt",
     "url": "https://www.credly.com/badges/b7b6a4ec-487e-4831-9bb3-6bdbd4a1ef1f",
     "translationKey": "certifications.items.aws-solutions-architect-associate"
@@ -12,7 +12,7 @@
     "id": "aws-developer-associate",
     "issuer": "Amazon Web Services",
     "status": "expired",
-    "image": "/images/certifications/aws-developer-associate.png",
+    "image": "/images/certifications/aws-developer-associate.webp",
     "imageAlt": "certifications.items.aws-developer-associate.imageAlt",
     "url": "https://www.credly.com/badges/bbc75401-dc9f-4ecb-ac0b-988c8e6f13b6",
     "translationKey": "certifications.items.aws-developer-associate"
@@ -21,7 +21,7 @@
     "id": "aws-cloud-practitioner",
     "issuer": "Amazon Web Services",
     "status": "active",
-    "image": "/images/certifications/aws-cloud-practitioner.png",
+    "image": "/images/certifications/aws-cloud-practitioner.webp",
     "imageAlt": "certifications.items.aws-cloud-practitioner.imageAlt",
     "url": "https://www.credly.com/badges/4f64f45a-7fce-4891-abb5-54d58d6058f4",
     "translationKey": "certifications.items.aws-cloud-practitioner"

@@ -181,7 +181,10 @@ function render(lang) {
 }
 
 const out = path.resolve(root, '..', 'public', 'cv')
+// Every page of each CV as an image: the 3D view shows the first on the wall and all of them in its CV viewer.
+const previews = path.resolve(root, '..', 'public', 'images', 'cv')
 fs.mkdirSync(out, { recursive: true })
+fs.mkdirSync(previews, { recursive: true })
 const browser = await chromium.launch({
   executablePath: process.env.CHROME_PATH || undefined,
   args: process.env.CHROME_NO_SANDBOX ? ['--no-sandbox'] : [],
@@ -194,9 +197,19 @@ for (const lang of Object.keys(data).filter((k) => data[k] && data[k].labels)) {
     await page.goto('file://' + path.join(tmp, 'cv.html'))
     await page.evaluate(() => document.fonts.ready)
     const file = path.join(out, `samuelsulo-cv-${lang}.pdf`)
-    await page.pdf({ path: file, format: 'A4', printBackground: true, preferCSSPageSize: true })
+    // CV_SKIP_PDF=1 refreshes the previews only, leaving the published PDFs as they are.
+    if (!process.env.CV_SKIP_PDF) {
+      await page.pdf({ path: file, format: 'A4', printBackground: true, preferCSSPageSize: true })
+      console.log(`written ${path.relative(process.cwd(), file)}`)
+    }
+    await page.setViewportSize({ width: 794, height: 1123 })
+    const pages = page.locator('.page')
+    for (let index = 0; index < (await pages.count()); index++) {
+      const preview = path.join(previews, `samuelsulo-cv-${lang}-${index + 1}.jpg`)
+      await pages.nth(index).screenshot({ path: preview, type: 'jpeg', quality: 85 })
+      console.log(`written ${path.relative(process.cwd(), preview)}`)
+    }
     await page.close()
-    console.log(`written ${path.relative(process.cwd(), file)}`)
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true })
   }

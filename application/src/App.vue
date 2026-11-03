@@ -21,7 +21,8 @@ const workTitle = computed(() => {
 // with the active language and page for SEO and accessibility.
 watchEffect(() => {
   document.documentElement.lang = locale.value
-  document.title = workTitle.value ? `${workTitle.value} | Samuel Sulo` : t('meta.title')
+  const pageTitle = route.name === 'explore' ? t('explore.title') : workTitle.value
+  document.title = pageTitle ? `${pageTitle} | Samuel Sulo` : t('meta.title')
   document.querySelector('meta[name="description"]')?.setAttribute('content', t('meta.description'))
 })
 

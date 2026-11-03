@@ -30,6 +30,32 @@ Each work has its own page (`/work/<id>`) with a tabbed viewer of its materials:
 business card, review signs, website, design, online presence and architecture. Client works
 are real; demo works are fictional and labelled as such.
 
+## 3D view
+
+The navigation bar has a **3D** button (and **2D** to come back) that opens `/3d`: the same
+content as rooms to explore with a stickman, under the same navigation bar and footer.
+
+The visitor starts in a cyberpunk **hub** with a portal for each other room: the work
+gallery, the stack room, the certifications, the CV room (the first page of each CV on the wall,
+left out when the site has no CV) and the contact room. Each room has a portal back to the
+hub, and a list of rooms at the side of the screen jumps to any of them. The rooms are small
+and decorated with what the work is about (servers, containers, databases, a cloud, code,
+antennas), and only the room the visitor is in is drawn.
+
+Everything is on the walls with a preview, before interacting: the screenshot of each work, the
+certification badges, the stack groups with their logos, the first page of the CVs and the
+contact details. Walking up to one shows a prompt, and using it opens its details, the work page, the
+certification verification, the CV PDF or the contact section of the classic view. Controls:
+arrows or WASD to walk, Shift to run, E to interact or enter a portal, and the mouse or
+trackpad to look around: a click on the scene captures the pointer, so the camera follows it
+without pressing any button (Escape releases it, and opening a panel or the dance menu does too);
+on touch screens a joystick, dragging to look, pinching to zoom and tapping the prompt.
+The **B** key (or the Dance button) opens a wheel of eight dances for the stickman (floss, disco,
+robot, wave, jumping jacks, spin, headbang, coding), chosen by clicking or with the keys 1 to 8;
+the figure dances until the visitor walks away. The visitor's spot is remembered while they open
+a work or the classic view and come back. Browsers without WebGL see a message with a link back to the classic view, and screen readers
+get the content as a plain list.
+
 ## Cross-cutting behaviour
 
 - **Languages**: Italian (default) and English, switchable at any time. The CV link follows

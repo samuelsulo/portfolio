@@ -1,0 +1,146 @@
+{
+  "meta": ["place", "activity", "role", "year"],
+  "materials": [
+    {
+      "id": "logo",
+      "icon": "lightbulb",
+      "group": "brand",
+      "facts": ["versions", "formats", "delivery"],
+      "type": "images",
+      "tone": "warm",
+      "images": [
+        {
+          "src": "/images/cases/idea-bar/logo.webp",
+          "alt": "cases.items.idea-bar.materials.logo.alt"
+        }
+      ]
+    },
+    {
+      "id": "businessCard",
+      "icon": "card",
+      "group": "print",
+      "facts": ["content", "delivery"],
+      "type": "images",
+      "images": [
+        {
+          "src": "/images/cases/idea-bar/business-card.webp",
+          "alt": "cases.items.idea-bar.materials.businessCard.alt"
+        }
+      ]
+    },
+    {
+      "id": "reviewSign",
+      "icon": "qr",
+      "group": "print",
+      "facts": ["formats", "function", "delivery"],
+      "type": "images",
+      "images": [
+        {
+          "src": "/images/cases/idea-bar/review-sign.webp",
+          "alt": "cases.items.idea-bar.materials.reviewSign.alt1"
+        },
+        {
+          "src": "/images/cases/idea-bar/review-sticker.webp",
+          "alt": "cases.items.idea-bar.materials.reviewSign.alt2"
+        }
+      ]
+    },
+    {
+      "id": "website",
+      "icon": "browser",
+      "group": "application",
+      "facts": ["devices", "application", "service"],
+      "type": "devices",
+      "desktop": {
+        "src": "/images/cases/idea-bar/website-desktop.webp",
+        "alt": "cases.items.idea-bar.materials.website.alt.desktop"
+      },
+      "tablet": {
+        "src": "/images/cases/idea-bar/website-tablet.webp",
+        "alt": "cases.items.idea-bar.materials.website.alt.tablet"
+      },
+      "phone": {
+        "src": "/images/cases/idea-bar/website-phone.webp",
+        "alt": "cases.items.idea-bar.materials.website.alt.phone"
+      },
+      "url": "https://ideagelateria.com"
+    },
+    {
+      "id": "design",
+      "icon": "palette",
+      "group": "design",
+      "facts": [],
+      "type": "design",
+      "swatches": [
+        {
+          "id": "background",
+          "color": "#fbf8f1"
+        },
+        {
+          "id": "surface",
+          "color": "#f6f1e6"
+        },
+        {
+          "id": "text",
+          "color": "#23271f"
+        },
+        {
+          "id": "brand",
+          "color": "#234631"
+        },
+        {
+          "id": "accent",
+          "color": "#c98a45"
+        }
+      ],
+      "fonts": [
+        {
+          "role": "headings",
+          "family": "Fraunces"
+        },
+        {
+          "role": "body",
+          "family": "Work Sans"
+        }
+      ]
+    },
+    {
+      "id": "onlinePresence",
+      "icon": "map-pin",
+      "group": "visibility",
+      "facts": ["configured", "hidden"],
+      "type": "cards",
+      "cards": [
+        {
+          "id": "google",
+          "icon": "map-pin",
+          "image": null
+        },
+        {
+          "id": "reviews",
+          "icon": "qr",
+          "image": {
+            "src": "/images/cases/idea-bar/review-sign.webp",
+            "alt": "cases.items.idea-bar.materials.onlinePresence.cards.reviews.alt"
+          }
+        },
+        {
+          "id": "social",
+          "icon": "link",
+          "image": {
+            "src": "/images/cases/idea-bar/social-links.webp",
+            "alt": "cases.items.idea-bar.materials.onlinePresence.cards.social.alt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "icon": "infrastructure",
+      "group": "infrastructure",
+      "facts": ["visitor", "release", "ownership"],
+      "type": "diagram",
+      "owner": "client"
+    }
+  ]
+}

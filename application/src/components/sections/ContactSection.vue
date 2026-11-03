@@ -4,12 +4,15 @@ import { useI18n } from 'vue-i18n'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import { useContactForm } from '@/composables/useContactForm'
-import { getContent } from '@/content'
+import { assetUrl, getContent } from '@/content'
 import { resolveCvUrl } from '@/utils/cv'
 
 const { t, locale } = useI18n()
 const config = getContent().siteConfig
-const cvUrl = computed(() => resolveCvUrl(config.cvUrl, locale.value))
+const cvUrl = computed(() => {
+  const path = resolveCvUrl(config.cvUrl, locale.value)
+  return path ? assetUrl(path) : null
+})
 const { values, errors, status, handleSubmit, resetStatusIfNeeded } = useContactForm()
 
 // Honeypot: a field real visitors never see. Bots that fill it get a fake

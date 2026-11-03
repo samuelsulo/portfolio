@@ -1,14 +1,21 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import SectionHeading from '@/components/ui/SectionHeading.vue'
+import { useNearViewport } from '@/composables/useNearViewport'
 import { getContent } from '@/content'
+import { stackIconHref } from '@/utils/stack'
 
 const { t } = useI18n()
 const groups = getContent().stack
+
+// The sprite with the logos is only fetched when the section is about to be seen, not at startup.
+const section = ref<HTMLElement | null>(null)
+const isNear = useNearViewport(section)
 </script>
 
 <template>
-  <section id="stack" v-reveal class="stack">
+  <section id="stack" ref="section" v-reveal class="stack">
     <div class="container">
       <SectionHeading :eyebrow="t('stack.eyebrow')" :title="t('stack.title')" />
 
@@ -20,18 +27,15 @@ const groups = getContent().stack
           </h3>
           <ul class="stack__items">
             <li v-for="item in group.items" :key="item.label">
-              <img
-                v-if="item.icon && item.colored"
+              <svg
+                v-if="item.icon"
                 class="stack__icon"
-                :src="`/images/stack/${item.icon}.svg`"
-                alt=""
-              />
-              <span
-                v-else-if="item.icon"
-                class="stack__icon"
-                :style="{ '--icon': `url(/images/stack/${item.icon}.svg)` }"
+                :class="{ 'stack__icon--pending': !isNear }"
                 aria-hidden="true"
-              ></span>
+                focusable="false"
+              >
+                <use v-if="isNear" :href="stackIconHref(item.icon)" />
+              </svg>
               {{ item.label }}
             </li>
           </ul>
@@ -115,11 +119,15 @@ const groups = getContent().stack
   font-family: var(--font-mono);
   font-size: var(--fs-mono);
 }
+.stack__icon--pending {
+  visibility: hidden;
+}
+
+/* The logos that are drawn in one color take the color of the text; the others have their own. */
 .stack__icon {
   flex: none;
   width: 1em;
   height: 1em;
-  background-color: currentColor;
-  mask: var(--icon) center / contain no-repeat;
+  fill: currentColor;
 }
 </style>

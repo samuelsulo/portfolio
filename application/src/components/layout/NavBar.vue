@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue'
@@ -12,6 +12,15 @@ import { useClickOutside } from '@/composables/useClickOutside'
 import { useHideOnScroll } from '@/composables/useHideOnScroll'
 
 const { t } = useI18n()
+const route = useRoute()
+
+// The same content in two views: the page and the 3D rooms.
+const isExplore = computed(() => route.name === 'explore')
+const viewLink = computed(() => ({
+  to: { name: isExplore.value ? 'home' : 'explore' },
+  label: isExplore.value ? '2D' : '3D',
+  title: t(isExplore.value ? 'nav.view2d' : 'nav.view3d'),
+}))
 
 const sections = ['about', 'projects', 'stack', 'certifications', 'contact'] as const
 // The hero is observed too, so that no link is highlighted while it is on screen.
@@ -95,6 +104,14 @@ function handleKeydown(event: KeyboardEvent) {
       </nav>
 
       <div class="navbar__actions">
+        <RouterLink
+          :to="viewLink.to"
+          class="navbar__view"
+          :aria-label="viewLink.title"
+          :title="viewLink.title"
+        >
+          {{ viewLink.label }}
+        </RouterLink>
         <ThemeToggle class="navbar__lang--desktop" />
         <LanguageSwitcher class="navbar__lang navbar__lang--desktop" />
         <button
@@ -121,6 +138,9 @@ function handleKeydown(event: KeyboardEvent) {
           @click="closeMenu"
         >
           {{ link.label }}
+        </RouterLink>
+        <RouterLink :to="viewLink.to" class="navbar__mobile-link" @click="closeMenu">
+          {{ viewLink.title }}
         </RouterLink>
         <div class="navbar__mobile-tools">
           <ThemeToggle />
@@ -231,6 +251,29 @@ function handleKeydown(event: KeyboardEvent) {
 
 .navbar__lang--desktop {
   display: none;
+}
+
+.navbar__view {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding-inline: var(--space-xs);
+  border: 1px solid var(--color-neon-secondary);
+  border-radius: var(--radius-sm);
+  color: var(--color-neon-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.navbar__view:hover {
+  background-color: var(--color-neon-secondary);
+  color: var(--color-on-neon);
 }
 
 .navbar__toggle {

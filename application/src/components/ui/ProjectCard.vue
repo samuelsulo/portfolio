@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { RouterLink, type RouteLocationRaw } from 'vue-router'
+import { prefetchWork } from '@/content'
 import AppIcon from './AppIcon.vue'
 
-defineProps<{
+const props = defineProps<{
   image: string
   imageAlt: string
   title: string
@@ -19,11 +20,28 @@ defineProps<{
   openCaseLabel: string
   /** Wide horizontal layout, used for real client work. */
   lead?: boolean
+  /** The work to start fetching when the visitor shows interest in the card. */
+  prefetchId?: string
 }>()
+
+let isPrefetched = false
+
+/** A pointer resting on the card, a focus or a touch: the visitor is likely to open it next. */
+function prefetch() {
+  if (isPrefetched || !props.prefetchId) return
+  isPrefetched = true
+  prefetchWork(props.prefetchId)
+}
 </script>
 
 <template>
-  <article class="project-card" :class="{ 'project-card--lead': lead }">
+  <article
+    class="project-card"
+    :class="{ 'project-card--lead': lead }"
+    @pointerenter="prefetch"
+    @focusin="prefetch"
+    @touchstart.passive="prefetch"
+  >
     <div class="project-card__media">
       <img :src="image" :alt="imageAlt" loading="lazy" />
     </div>

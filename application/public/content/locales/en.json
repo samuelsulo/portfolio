@@ -21,7 +21,9 @@
       "dark": "Dark theme"
     },
     "stack": "Stack",
-    "certifications": "Certifications"
+    "certifications": "Certifications",
+    "view3d": "Explore in 3D",
+    "view2d": "Back to the classic view"
   },
   "hero": {
     "eyebrow": "Cloud Engineer & Web Developer",
@@ -614,7 +616,9 @@
     },
     "document": {
       "guidelines": "Brand guidelines (PDF)"
-    }
+    },
+    "loading": "Loading...",
+    "loadError": "This work could not be loaded, please try again in a moment."
   },
   "stack": {
     "eyebrow": "Stack",
@@ -725,5 +729,50 @@
       "retentionPeriodKnown": "<p>Messages received through the contact form are retained for {months} months from the date they are sent, after which they are deleted, unless a legal obligation requires otherwise.</p>",
       "retentionPeriodNone": "<p>Messages received through the contact form are not stored in any database or archive by this site: the request is forwarded directly to the email delivery service (Amazon SES) via Amazon API Gateway, without being retained by the site itself.</p>"
     }
+  },
+  "explore": {
+    "title": "3D portfolio",
+    "canvasLabel": "3D view of the portfolio rooms. A text version of the content follows.",
+    "loading": "Loading the rooms...",
+    "unsupportedTitle": "3D view not available",
+    "unsupportedBody": "Your browser cannot show 3D graphics, but everything is also available in the classic view.",
+    "backTo2d": "Classic view",
+    "prompt": "Open {name}",
+    "helpPointer": "Arrows or WASD to walk, Shift to run, mouse to look around (click the scene first), E to interact or enter a portal, B to dance",
+    "helpTouch": "Joystick to walk, drag to look, pinch to zoom, tap the prompt to use a portal",
+    "rooms": {
+      "work": "Work gallery",
+      "stack": "Stack room",
+      "certifications": "Certifications",
+      "contact": "Contact",
+      "hub": "Hub",
+      "cv": "CV"
+    },
+    "enter": "Enter {name}",
+    "roomsLabel": "Rooms",
+    "download": "Open the CV",
+    "cv": {
+      "it": "CV in Italian",
+      "en": "CV in English",
+      "description": "The curriculum vitae of Samuel Sulo, as a PDF that opens in a new tab.",
+      "pageAlt": "Page {n} of the CV"
+    },
+    "dance": {
+      "title": "Dance",
+      "open": "Dance",
+      "stop": "Stop",
+      "names": {
+        "floss": "Floss",
+        "disco": "Disco",
+        "robot": "Robot",
+        "wave": "Wave",
+        "jacks": "Jumping jacks",
+        "spin": "Spin",
+        "headbang": "Headbang",
+        "coding": "Coding"
+      }
+    },
+    "lookHint": "Click the scene, then move the mouse to look around (Esc to release it)",
+    "openPage": "Open as a page"
   }
 }

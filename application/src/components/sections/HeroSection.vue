@@ -2,12 +2,15 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import AppIcon from '@/components/ui/AppIcon.vue'
-import { getContent } from '@/content'
+import { assetUrl, getContent } from '@/content'
 import { resolveCvUrl } from '@/utils/cv'
 
 const { t, locale } = useI18n()
 const config = getContent().siteConfig
-const cvUrl = computed(() => resolveCvUrl(config.cvUrl, locale.value))
+const cvUrl = computed(() => {
+  const path = resolveCvUrl(config.cvUrl, locale.value)
+  return path ? assetUrl(path) : null
+})
 
 const hudRows = computed(() => [
   ...config.hud.map((row) => ({
@@ -70,7 +73,7 @@ const hudRows = computed(() => [
         <div class="hero__frame">
           <div class="hero__photo">
             <img
-              src="/images/profile/half-body.png"
+              :src="assetUrl('/images/profile/half-body.png')"
               :alt="t('hero.profileImageAlt')"
               class="hero__photo-image"
               width="540"

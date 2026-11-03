@@ -23,7 +23,8 @@ npm run cv
 Set `CHROME_PATH` to an installed Chrome binary to skip the Chromium download (otherwise run
 `npx playwright install chromium` once), and `CHROME_NO_SANDBOX=1` in containers. The first two
 experiences are on page 1 and the rest on page 2: if a text grows, check that nothing is cut at the
-bottom of the page. Then deploy the content with `npm run deploy:content`, no application release is needed: the site links
+bottom of the page. `npm run cv` also writes every page of each CV as a JPEG in `public/images/cv/` (`samuelsulo-cv-<lang>-<n>.jpg`), shown by the
+3D view (if the number of pages changes, update `CV_PAGES` in `src/utils/cv.ts`); run it with `CV_SKIP_PDF=1` to refresh only those and leave the PDFs untouched. Then deploy the content with `npm run deploy:content`, no application release is needed: the site links
 the PDF that matches the language of the visitor (`cvUrl` in `public/content/data/site-config.json`).
 
 ## Index

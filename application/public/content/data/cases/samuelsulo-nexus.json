@@ -1,0 +1,79 @@
+{
+  "meta": ["type", "role", "technologies", "year"],
+  "materials": [
+    {
+      "id": "ecommerce",
+      "icon": "browser",
+      "group": "application",
+      "facts": ["flow", "data", "devices"],
+      "type": "devices",
+      "desktop": {
+        "src": "/images/cases/samuelsulo-nexus/website-desktop.webp",
+        "alt": "cases.items.samuelsulo-nexus.materials.ecommerce.alt.desktop"
+      },
+      "tablet": {
+        "src": "/images/cases/samuelsulo-nexus/website-tablet.webp",
+        "alt": "cases.items.samuelsulo-nexus.materials.ecommerce.alt.tablet"
+      },
+      "phone": {
+        "src": "/images/cases/samuelsulo-nexus/website-phone.webp",
+        "alt": "cases.items.samuelsulo-nexus.materials.ecommerce.alt.phone"
+      },
+      "url": "https://nexus.samuelsulo.it"
+    },
+    {
+      "id": "design",
+      "icon": "palette",
+      "group": "design",
+      "facts": [],
+      "type": "design",
+      "swatches": [
+        {
+          "id": "background",
+          "color": "#08090c"
+        },
+        {
+          "id": "surface",
+          "color": "#12141b"
+        },
+        {
+          "id": "text",
+          "color": "#f3f4f7"
+        },
+        {
+          "id": "accent",
+          "color": "#a374ff"
+        },
+        {
+          "id": "accentAlt",
+          "color": "#5be3d9"
+        }
+      ],
+      "fonts": [
+        {
+          "role": "headings",
+          "family": "Space Grotesk"
+        },
+        {
+          "role": "body",
+          "family": "Inter"
+        }
+      ]
+    },
+    {
+      "id": "quality",
+      "icon": "security",
+      "group": "quality",
+      "facts": ["tests", "languages", "legal"],
+      "type": "facts"
+    },
+    {
+      "id": "architecture",
+      "icon": "infrastructure",
+      "group": "infrastructure",
+      "facts": ["visitor", "release", "ownership"],
+      "type": "diagram",
+      "owner": "own"
+    }
+  ]
+}

@@ -28,6 +28,8 @@ export interface ProjectItem {
   id: string
   kind: WorkKind
   image: string
+  /** The screenshot of the site of the work, shown by the 3D gallery. */
+  screenshot: string
   imageAlt: string
   materials: MaterialId[]
   technologies: string[]
@@ -89,7 +91,7 @@ export interface CaseData {
 
 export interface StackItem {
   label: string
-  /** Name of an SVG in `public/images/stack/` (without extension), when the item has a logo. */
+  /** Name of an SVG in `stack-icons/` (without extension, see `npm run stack-sprite`), when the item has a logo. */
   icon?: string
   /** Keeps the original colors of the SVG instead of tinting it with the text color. */
   colored?: boolean

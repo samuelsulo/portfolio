@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Deploy only the content of the site (texts, translations, projects, CV,
 # images and documents) to the production S3 bucket, without building or
-# releasing the application: the application fetches it at startup from
-# /content/ (see src/content/index.ts).
+# releasing the application: the application fetches it from /content/ (see
+# src/content/index.ts), at startup or when it is needed.
 #
 # The content is deployed from a git ref (default: origin/main), checked out
 # in a clean worktree, so what goes live is always committed and reviewable.
@@ -66,15 +66,26 @@ PUBLIC_DIR="$BUILD_DIR/application/public"
 echo "==> Validating the content (translation parity, cases, schema)"
 (cd "$BUILD_DIR/application" && npm ci && npm run test)
 
-# Folders of public/ that hold content. JSON files must be revalidated on
-# every visit; media can be cached briefly. None is fingerprinted, so none
-# can be cached "forever" like the hashed assets of the build.
+# Every content file is requested by the application with its version
+# (?v=<hash of its bytes>, from content/manifest.json), so it is cached for a
+# year by the browser and by CloudFront: when a file changes its URL changes
+# with it. Only the manifest is revalidated, on every visit.
+#
+# The order matters. CloudFront ignores the query string, so a version that
+# became visible while an edge still held the old bytes would pin those bytes
+# in browsers for a year. So: publish the files, purge CloudFront and wait for
+# it, and only then publish the manifest that makes the new versions visible.
+echo "==> Building the manifest of the content versions"
+MANIFEST_FILE="$BUILD_DIR/content-manifest.json"
+node "$BUILD_DIR/application/scripts/content-manifest.mjs" "$PUBLIC_DIR" "$MANIFEST_FILE"
+
 echo "==> Syncing the content to s3://$BUCKET"
 aws s3 sync "$PUBLIC_DIR/content/" "s3://$BUCKET/content/" --delete \
-  --cache-control "public, max-age=0, must-revalidate"
+  --exclude "manifest.json" \
+  --cache-control "public, max-age=31536000, immutable"
 for folder in images cv documents brand; do
   aws s3 sync "$PUBLIC_DIR/$folder/" "s3://$BUCKET/$folder/" --delete \
-    --cache-control "public, max-age=300"
+    --cache-control "public, max-age=31536000, immutable"
 done
 
 echo "==> Invalidating CloudFront distribution $DISTRIBUTION_ID"
@@ -82,6 +93,14 @@ INVALIDATION_ID=$(aws cloudfront create-invalidation \
   --distribution-id "$DISTRIBUTION_ID" \
   --paths "/content/*" "/images/*" "/cv/*" "/documents/*" "/brand/*" \
   --query 'Invalidation.Id' --output text)
+echo "==> Waiting for the invalidation $INVALIDATION_ID to complete (a few minutes)"
+aws cloudfront wait invalidation-completed \
+  --distribution-id "$DISTRIBUTION_ID" --id "$INVALIDATION_ID"
+
+echo "==> Publishing the manifest: the new versions go live now"
+aws s3 cp "$MANIFEST_FILE" "s3://$BUCKET/content/manifest.json" \
+  --content-type application/json \
+  --cache-control "public, max-age=0, must-revalidate"
 
 printf '%s' "$DEPLOY_COMMIT" | aws s3 cp - "s3://$BUCKET/_content_version" --content-type text/plain
 
