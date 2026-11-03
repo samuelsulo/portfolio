@@ -65,7 +65,7 @@ loaded". The Certifications section was introduced this way.
 
 - The version live: `aws s3 cp s3://<bucket>/_version -` and `_content_version`.
 - Open the site, check the language and theme toggles, the contact form and the new content.
-- Content is revalidated on every visit; images and PDFs are cached for 5 minutes.
+- Caching and versioning of the content: [application](../technical/application.md#loading-and-caching). The content deploy waits for the CloudFront invalidation (a few minutes) before the new versions go live.
 
 ## Roll back
 

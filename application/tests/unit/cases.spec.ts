@@ -1,13 +1,22 @@
 import { existsSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import casesData from '../../public/content/data/cases.json'
 import projects from '../../public/content/data/projects.json'
 import it_ from '../../public/content/locales/it.json'
 import en from '../../public/content/locales/en.json'
 import type { CaseData } from '../../src/types/content'
 
-const cases = casesData as unknown as Record<string, CaseData>
+// One file per work, fetched when the work is opened (see `loadCase`).
+const caseFiles = import.meta.glob('../../public/content/data/cases/*.json', {
+  eager: true,
+  import: 'default',
+})
+const cases = Object.fromEntries(
+  Object.entries(caseFiles).map(([path, data]) => [
+    path.split('/').pop()!.replace('.json', ''),
+    data,
+  ]),
+) as unknown as Record<string, CaseData>
 const publicDir = resolve(__dirname, '../../public')
 
 type Tree = { [key: string]: Tree | string }
@@ -104,5 +113,15 @@ describe('cases', () => {
       }
     }
     expect(missing).toEqual([])
+  })
+
+  it('shows in the 3D gallery the screenshot of the site of each work, which must exist', () => {
+    for (const project of projects) {
+      const devices = cases[project.id].materials.find((material) => material.type === 'devices')
+      expect(project.screenshot, project.id).toBe(
+        devices?.type === 'devices' ? devices.desktop.src : undefined,
+      )
+      expect(existsSync(resolve(__dirname, '../../public', project.screenshot.slice(1)))).toBe(true)
+    }
   })
 })

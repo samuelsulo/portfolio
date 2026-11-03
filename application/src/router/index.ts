@@ -18,6 +18,11 @@ export const router = createRouter({
       name: 'work',
       component: () => import('@/views/WorkView.vue'),
     },
+    {
+      path: '/3d',
+      name: 'explore',
+      component: () => import('@/views/ExploreView.vue'),
+    },
     { path: '/:pathMatch(.*)*', redirect: '/' },
   ],
 })

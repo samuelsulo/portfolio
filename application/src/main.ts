@@ -5,7 +5,7 @@ import './styles/tokens.css'
 import './styles/base.css'
 import App from './App.vue'
 import { loadContent } from './content'
-import { i18n } from './i18n'
+import { i18n, type SupportedLocale } from './i18n'
 import { vReveal } from './directives/reveal'
 import { initTheme } from './composables/useTheme'
 import { router } from './router'
@@ -25,9 +25,10 @@ function showLoadError(root: HTMLElement) {
 async function boot() {
   const root = document.getElementById('app')!
   try {
-    const content = await loadContent()
-    i18n.global.setLocaleMessage('it', content.messages.it)
-    i18n.global.setLocaleMessage('en', content.messages.en)
+    // Only the language of the visitor is fetched now, the other one when they switch to it.
+    const locale = i18n.global.locale.value as SupportedLocale
+    const content = await loadContent(locale)
+    i18n.global.setLocaleMessage(locale, content.messages)
   } catch (error) {
     console.error(error)
     showLoadError(root)

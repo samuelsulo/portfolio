@@ -5,6 +5,8 @@ import { defineConfig } from '@playwright/test'
 // runners), so no browser download is needed.
 export default defineConfig({
   testDir: 'tests/e2e',
+  // The 3D view renders in software in CI and under parallel load, which can take longer than the default 5s.
+  expect: { timeout: 15_000 },
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,

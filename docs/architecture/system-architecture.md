@@ -22,8 +22,9 @@ flowchart LR
 - **Reading the site**: the browser resolves `samuelsulo.it` in Route 53, reaches CloudFront
   over HTTPS and gets static files from a private S3 bucket. The bucket is not public:
   CloudFront is the only reader.
-- **Content**: at startup the app fetches `/content/*.json` from the same distribution, with
-  revalidation on every visit, so content changes show up without a rebuild.
+- **Content**: the app fetches `/content/*.json` (and the images) from the same distribution,
+  with versioned URLs that are cached for a year, so content changes show up without a rebuild.
+  What is loaded when is in [application](../technical/application.md#loading-and-caching).
 - **Contact form**: the browser calls the API on `contact.samuelsulo.it`. API Gateway
   validates the body and calls SES directly, which sends the email to the owner. There is no
   Lambda and no database: nothing a visitor writes is stored by the site.

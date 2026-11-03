@@ -10,3 +10,6 @@ export function resolveCvUrl(cv: SiteConfig['cvUrl'], locale: string): string | 
   }
   return (cv as Record<string, string>)[locale] ?? cv.en
 }
+
+/** The pages of each CV PDF (see `cv/README.md`): the 3D view shows each one as an image in `public/images/cv/`. */
+export const CV_PAGES = 2

@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { SUPPORTED_LOCALES, persistLocale, type SupportedLocale } from '@/i18n'
+import { SUPPORTED_LOCALES, switchLocale, type SupportedLocale } from '@/i18n'
 
 const { locale, t } = useI18n()
 
 function selectLocale(next: SupportedLocale) {
   if (locale.value === next) return
-  locale.value = next
-  persistLocale(next)
+  // A failed request leaves the current language in place.
+  void switchLocale(next).catch((error) => console.error(error))
 }
 </script>
 

@@ -1,0 +1,127 @@
+{
+  "meta": ["type", "role", "technologies", "year"],
+  "materials": [
+    {
+      "id": "logo",
+      "icon": "lightbulb",
+      "group": "brand",
+      "facts": ["concept", "versions", "delivery"],
+      "document": {
+        "src": "/documents/noir27-brand-guidelines.pdf",
+        "label": "cases.document.guidelines"
+      },
+      "type": "images",
+      "tone": "dark",
+      "images": [
+        {
+          "src": "/images/cases/samuelsulo-noir27/logo.webp",
+          "alt": "cases.items.samuelsulo-noir27.materials.logo.alt"
+        }
+      ]
+    },
+    {
+      "id": "businessCard",
+      "icon": "card",
+      "group": "print",
+      "facts": ["content", "delivery", "note"],
+      "type": "images",
+      "images": [
+        {
+          "src": "/images/cases/samuelsulo-noir27/business-card.webp",
+          "alt": "cases.items.samuelsulo-noir27.materials.businessCard.alt"
+        }
+      ]
+    },
+    {
+      "id": "reviewSign",
+      "icon": "qr",
+      "group": "print",
+      "facts": ["formats", "function", "delivery"],
+      "type": "images",
+      "images": [
+        {
+          "src": "/images/cases/samuelsulo-noir27/review-sign.webp",
+          "alt": "cases.items.samuelsulo-noir27.materials.reviewSign.alt1"
+        },
+        {
+          "src": "/images/cases/samuelsulo-noir27/review-sticker.webp",
+          "alt": "cases.items.samuelsulo-noir27.materials.reviewSign.alt2"
+        }
+      ]
+    },
+    {
+      "id": "website",
+      "icon": "browser",
+      "group": "application",
+      "facts": ["pages", "languages", "devices"],
+      "type": "devices",
+      "desktop": {
+        "src": "/images/cases/samuelsulo-noir27/website-desktop.webp",
+        "alt": "cases.items.samuelsulo-noir27.materials.website.alt.desktop"
+      },
+      "tablet": {
+        "src": "/images/cases/samuelsulo-noir27/website-tablet.webp",
+        "alt": "cases.items.samuelsulo-noir27.materials.website.alt.tablet"
+      },
+      "phone": {
+        "src": "/images/cases/samuelsulo-noir27/website-phone.webp",
+        "alt": "cases.items.samuelsulo-noir27.materials.website.alt.phone"
+      },
+      "url": "https://noir27.samuelsulo.it"
+    },
+    {
+      "id": "design",
+      "icon": "palette",
+      "group": "design",
+      "facts": [],
+      "type": "design",
+      "swatches": [
+        {
+          "id": "background",
+          "color": "#0b0a09"
+        },
+        {
+          "id": "surface",
+          "color": "#1a1714"
+        },
+        {
+          "id": "text",
+          "color": "#f3eee4"
+        },
+        {
+          "id": "accent",
+          "color": "#c9a668"
+        },
+        {
+          "id": "accentAlt",
+          "color": "#6b1f2a"
+        }
+      ],
+      "fonts": [
+        {
+          "role": "headings",
+          "family": "Fraunces"
+        },
+        {
+          "role": "body",
+          "family": "Inter"
+        }
+      ]
+    },
+    {
+      "id": "quality",
+      "icon": "security",
+      "group": "quality",
+      "facts": ["tests", "languages", "legal"],
+      "type": "facts"
+    },
+    {
+      "id": "architecture",
+      "icon": "infrastructure",
+      "group": "infrastructure",
+      "facts": ["visitor", "release", "ownership"],
+      "type": "diagram",
+      "owner": "own"
+    }
+  ]
+}

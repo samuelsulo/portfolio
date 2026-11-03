@@ -127,7 +127,18 @@ aws s3 sync "$APPLICATION_DIR/dist/" "s3://$BUCKET/" --delete \
   --exclude "images/*" \
   --exclude "cv/*" \
   --exclude "documents/*" \
-  --exclude "brand/*"
+  --exclude "brand/*" \
+  --exclude "theme-init.js" \
+  --exclude "favicon.svg" \
+  --exclude "apple-touch-icon.png" \
+  --exclude "og-image.jpg"
+# The files of public/ that sit at the root keep their name from release to
+# release (index.html links them as they are), so they cannot be "immutable":
+# cached for a day, which is also how long a changed one can take to show up.
+for file in theme-init.js favicon.svg apple-touch-icon.png og-image.jpg; do
+  aws s3 cp "$APPLICATION_DIR/dist/$file" "s3://$BUCKET/$file" \
+    --cache-control "public, max-age=86400"
+done
 aws s3 cp "$APPLICATION_DIR/dist/index.html" "s3://$BUCKET/index.html" \
   --cache-control "public, max-age=0, must-revalidate"
 

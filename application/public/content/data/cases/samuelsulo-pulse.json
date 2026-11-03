@@ -1,0 +1,79 @@
+{
+  "meta": ["type", "role", "technologies", "year"],
+  "materials": [
+    {
+      "id": "webapp",
+      "icon": "browser",
+      "group": "application",
+      "facts": ["sections", "data", "devices"],
+      "type": "devices",
+      "desktop": {
+        "src": "/images/cases/samuelsulo-pulse/website-desktop.webp",
+        "alt": "cases.items.samuelsulo-pulse.materials.webapp.alt.desktop"
+      },
+      "tablet": {
+        "src": "/images/cases/samuelsulo-pulse/website-tablet.webp",
+        "alt": "cases.items.samuelsulo-pulse.materials.webapp.alt.tablet"
+      },
+      "phone": {
+        "src": "/images/cases/samuelsulo-pulse/website-phone.webp",
+        "alt": "cases.items.samuelsulo-pulse.materials.webapp.alt.phone"
+      },
+      "url": "https://pulse.samuelsulo.it"
+    },
+    {
+      "id": "design",
+      "icon": "palette",
+      "group": "design",
+      "facts": [],
+      "type": "design",
+      "swatches": [
+        {
+          "id": "background",
+          "color": "#0b0d12"
+        },
+        {
+          "id": "surface",
+          "color": "#141821"
+        },
+        {
+          "id": "text",
+          "color": "#f3f5f9"
+        },
+        {
+          "id": "brand",
+          "color": "#7c8699"
+        },
+        {
+          "id": "accent",
+          "color": "#3ecfb2"
+        }
+      ],
+      "fonts": [
+        {
+          "role": "headings",
+          "family": "Inter"
+        },
+        {
+          "role": "data",
+          "family": "JetBrains Mono"
+        }
+      ]
+    },
+    {
+      "id": "quality",
+      "icon": "security",
+      "group": "quality",
+      "facts": ["tests", "languages", "legal"],
+      "type": "facts"
+    },
+    {
+      "id": "architecture",
+      "icon": "infrastructure",
+      "group": "infrastructure",
+      "facts": ["visitor", "release", "ownership"],
+      "type": "diagram",
+      "owner": "own"
+    }
+  ]
+}

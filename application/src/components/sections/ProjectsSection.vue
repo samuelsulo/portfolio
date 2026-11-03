@@ -3,7 +3,7 @@ import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import SectionHeading from '@/components/ui/SectionHeading.vue'
 import ProjectCard from '@/components/ui/ProjectCard.vue'
-import { getContent } from '@/content'
+import { assetUrl, getContent } from '@/content'
 import { WORK_FILTERS, filterWorks, type WorkFilter } from '@/utils/works'
 
 const { t } = useI18n()
@@ -50,7 +50,8 @@ const items = computed(() =>
         <ProjectCard
           v-for="item in items"
           :key="item.id"
-          :image="item.image"
+          :image="assetUrl(item.image)"
+          :prefetch-id="item.id"
           :image-alt="item.imageAlt"
           :title="item.title"
           :description="item.description"

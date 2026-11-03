@@ -1,4 +1,5 @@
 import { createI18n } from 'vue-i18n'
+import { loadMessages } from '@/content'
 
 export type SupportedLocale = 'it' | 'en'
 
@@ -50,3 +51,12 @@ export const i18n = createI18n({
   // The messages are fetched at startup, see src/content and main.ts.
   messages: {},
 })
+
+/** Switches the language, fetching its translations the first time it is chosen. */
+export async function switchLocale(next: SupportedLocale): Promise<void> {
+  if (!i18n.global.availableLocales.includes(next)) {
+    i18n.global.setLocaleMessage(next, await loadMessages(next))
+  }
+  i18n.global.locale.value = next
+  persistLocale(next)
+}

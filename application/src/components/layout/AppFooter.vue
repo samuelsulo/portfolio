@@ -6,13 +6,13 @@ import AppIcon from '@/components/ui/AppIcon.vue'
 import Kitsune from '@/components/ui/Kitsune.vue'
 import SiteVersion from '@/components/ui/SiteVersion.vue'
 import LegalPolicyView from '@/components/cookies/LegalPolicyView.vue'
-import { getContent } from '@/content'
+import { assetUrl, getContent } from '@/content'
 
 const { siteConfig } = getContent()
 
 // Root-relative, matching how every other public/ asset is referenced in
 // this codebase (see e.g. public/content/data/projects.json, HeroSection.vue).
-const BRAND_GUIDELINES_PDF_URL = '/brand/kitsune-brand-guidelines.pdf'
+const BRAND_GUIDELINES_PDF_URL = assetUrl('/brand/kitsune-brand-guidelines.pdf')
 
 const { t } = useI18n()
 const year = new Date().getFullYear()

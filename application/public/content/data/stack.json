@@ -70,10 +70,12 @@
         "icon": "docker"
       },
       {
-        "label": "CI/CD"
+        "label": "CI/CD",
+        "icon": "ci-cd"
       },
       {
-        "label": "Versioning"
+        "label": "Versioning",
+        "icon": "versioning"
       }
     ],
     "translationKey": "stack.groups.infrastructure"
@@ -98,10 +100,12 @@
         "icon": "html5"
       },
       {
-        "label": "UI/UX"
+        "label": "UI/UX",
+        "icon": "ui-ux"
       },
       {
-        "label": "Accessibility"
+        "label": "Accessibility",
+        "icon": "accessibility"
       }
     ],
     "translationKey": "stack.groups.web"
@@ -122,13 +126,16 @@
         "icon": "gnubash"
       },
       {
-        "label": "Microservices"
+        "label": "Microservices",
+        "icon": "microservices"
       },
       {
-        "label": "APIs"
+        "label": "APIs",
+        "icon": "api"
       },
       {
-        "label": "REST APIs"
+        "label": "REST APIs",
+        "icon": "rest-api"
       }
     ],
     "translationKey": "stack.groups.backend"
@@ -145,22 +152,28 @@
         "icon": "claude"
       },
       {
-        "label": "MCP"
+        "label": "MCP",
+        "icon": "mcp"
       },
       {
-        "label": "Connectors"
+        "label": "Connectors",
+        "icon": "connectors"
       },
       {
-        "label": "Skills"
+        "label": "Skills",
+        "icon": "skills"
       },
       {
-        "label": "Subagents"
+        "label": "Subagents",
+        "icon": "subagents"
       },
       {
-        "label": "Hooks"
+        "label": "Hooks",
+        "icon": "hooks"
       },
       {
-        "label": "Prompt engineering"
+        "label": "Prompt engineering",
+        "icon": "prompt-engineering"
       }
     ],
     "translationKey": "stack.groups.ai"
@@ -181,7 +194,8 @@
         "icon": "aws"
       },
       {
-        "label": "VS Code"
+        "label": "VS Code",
+        "icon": "vscode"
       },
       {
         "label": "Google Workspace",

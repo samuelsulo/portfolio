@@ -19,10 +19,13 @@ const props = withDefaults(
     maxWidth?: string
     /** CSS max-height of the dialog card. */
     maxHeight?: string
+    /** On narrow screens the dialog fills the whole screen instead of floating over the page. */
+    fullscreenOnMobile?: boolean
   }>(),
   {
     maxWidth: '640px',
     maxHeight: 'min(85vh, 720px)',
+    fullscreenOnMobile: false,
   },
 )
 
@@ -67,9 +70,16 @@ function handleKeydown(event: KeyboardEvent) {
 
 <template>
   <Transition name="app-modal">
-    <div v-if="open" class="app-modal__overlay" @click.self="close" @keydown="handleKeydown">
+    <div
+      v-if="open"
+      class="app-modal__overlay"
+      :class="{ 'app-modal__overlay--fullscreen-mobile': fullscreenOnMobile }"
+      @click.self="close"
+      @keydown="handleKeydown"
+    >
       <div
         class="app-modal glass-surface"
+        :class="{ 'app-modal--fullscreen-mobile': fullscreenOnMobile }"
         role="dialog"
         aria-modal="true"
         :aria-labelledby="titleId"
@@ -171,5 +181,23 @@ function handleKeydown(event: KeyboardEvent) {
 .app-modal-enter-from,
 .app-modal-leave-to {
   opacity: 0;
+}
+
+/* A small floating card is too small to read on a phone: fill the screen, keeping clear of the notch. */
+@media (max-width: 640px) {
+  .app-modal__overlay--fullscreen-mobile {
+    padding: 0;
+  }
+
+  .app-modal--fullscreen-mobile {
+    max-width: none;
+    height: 100vh;
+    height: 100dvh;
+    max-height: none;
+    padding: max(var(--space-md), env(safe-area-inset-top)) var(--space-md)
+      max(var(--space-sm), env(safe-area-inset-bottom));
+    border: 0;
+    border-radius: 0;
+  }
 }
 </style>

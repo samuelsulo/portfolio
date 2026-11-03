@@ -2,7 +2,7 @@
 import { useI18n } from 'vue-i18n'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import SectionHeading from '@/components/ui/SectionHeading.vue'
-import { getContent } from '@/content'
+import { assetUrl, getContent } from '@/content'
 
 const { t } = useI18n()
 const certifications = getContent().certifications
@@ -26,7 +26,7 @@ const certifications = getContent().certifications
           <div class="certifications__head">
             <img
               class="certifications__badge"
-              :src="certification.image"
+              :src="assetUrl(certification.image)"
               :alt="t(certification.imageAlt)"
               width="80"
               height="80"

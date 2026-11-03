@@ -18,11 +18,13 @@
     "type-check": "vue-tsc -b --noEmit",
     "deploy": "bash scripts/deploy.sh",
     "deploy:content": "bash scripts/deploy-content.sh",
-    "cv": "node cv/scripts/build.mjs"
+    "cv": "node cv/scripts/build.mjs",
+    "stack-sprite": "node scripts/stack-sprite.mjs"
   },
   "dependencies": {
     "@fontsource-variable/jetbrains-mono": "^5.3.0",
     "@fontsource-variable/space-grotesk": "^5.3.0",
+    "three": "^0.187.0",
     "vue": "^3.5.44",
     "vue-i18n": "^11.4.16",
     "vue-router": "^5.4.0"
@@ -30,6 +32,7 @@
   "devDependencies": {
     "@playwright/test": "1.64.1",
     "@types/node": "^26.6.6",
+    "@types/three": "^0.187.0",
     "@vitejs/plugin-vue": "^6.0.10",
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.9.0",
