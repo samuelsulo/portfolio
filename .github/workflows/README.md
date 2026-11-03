@@ -11,9 +11,9 @@ stack, Terragrunt plan/apply for the chosen cloud provider).
 
 | Workflow | File | Runs on | Purpose |
 |---|---|---|---|
-| Application CI | [`application-ci.yml`](./application-ci.yml) | Pull requests touching `application/` | Lint, format check, type check, unit tests and production build |
+| Application CI | [`application-ci.yml`](./application-ci.yml) | Pull requests | Lint, format check, type check, unit tests and production build |
 | Commits | [`commits.yml`](./commits.yml) | Pull requests | `cog check`: Conventional Commits and allowed scopes |
-| Infrastructure CI | [`infrastructure-ci.yml`](./infrastructure-ci.yml) | Pull requests touching `infrastructure/` | `tofu fmt` and `terragrunt hcl fmt` checks, then `tflint` and `trivy` (no plan or apply in CI) |
+| Infrastructure CI | [`infrastructure-ci.yml`](./infrastructure-ci.yml) | Pull requests | `tofu fmt` and `terragrunt hcl fmt` checks, then `tflint` and `trivy` (no plan or apply in CI) |
 | Secrets scan | [`secrets-scan.yml`](./secrets-scan.yml) | Pull requests and pushes to `main` | gitleaks over the full git history |
 
 ## Conventions
@@ -29,3 +29,8 @@ stack, Terragrunt plan/apply for the chosen cloud provider).
 - Third-party actions are referenced by major version (`@v7`); Dependabot
   (see [`dependabot.yml`](../dependabot.yml)) keeps them and the npm
   dependencies up to date.
+- Runners are pinned to `ubuntu-24.04`, not `ubuntu-latest`, so the image
+  changes only when this repository decides to move to a newer one.
+- Every workflow runs on every pull request, with no `paths` filter: the
+  checks are required by the branch protection of `main`, and a required
+  check that is skipped would block the merge forever.

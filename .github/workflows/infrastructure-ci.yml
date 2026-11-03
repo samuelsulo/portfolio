@@ -2,9 +2,6 @@ name: Infrastructure CI
 
 on:
   pull_request:
-    paths:
-      - "infrastructure/**"
-      - ".github/workflows/infrastructure-ci.yml"
 
 permissions:
   contents: read
@@ -14,8 +11,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  format:
-    runs-on: ubuntu-latest
+  infrastructure-format:
+    runs-on: ubuntu-24.04
     defaults:
       run:
         working-directory: infrastructure
@@ -27,8 +24,8 @@ jobs:
       - run: mise exec -- tofu fmt -check -recursive
       - run: mise exec -- terragrunt hcl fmt --check
 
-  lint:
-    runs-on: ubuntu-latest
+  infrastructure-lint:
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
       - uses: jdx/mise-action@v5

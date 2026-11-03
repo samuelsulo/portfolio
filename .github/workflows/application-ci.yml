@@ -2,9 +2,6 @@ name: Application CI
 
 on:
   pull_request:
-    paths:
-      - "application/**"
-      - ".github/workflows/application-ci.yml"
 
 permissions:
   contents: read
@@ -14,8 +11,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  check:
-    runs-on: ubuntu-latest
+  application-check:
+    runs-on: ubuntu-24.04
     defaults:
       run:
         working-directory: application
