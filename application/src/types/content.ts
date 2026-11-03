@@ -87,9 +87,17 @@ export interface CaseData {
   materials: CaseMaterial[]
 }
 
+export interface StackItem {
+  label: string
+  /** Name of an SVG in `public/images/stack/` (without extension), when the item has a logo. */
+  icon?: string
+  /** Keeps the original colors of the SVG instead of tinting it with the text color. */
+  colored?: boolean
+}
+
 export interface StackGroup {
   id: string
-  items: string[]
+  items: StackItem[]
   translationKey: string
 }
 

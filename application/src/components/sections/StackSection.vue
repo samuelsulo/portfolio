@@ -19,7 +19,21 @@ const groups = getContent().stack
             <span>{{ t(`${group.translationKey}.tag`) }}</span>
           </h3>
           <ul class="stack__items">
-            <li v-for="item in group.items" :key="item">{{ item }}</li>
+            <li v-for="item in group.items" :key="item.label">
+              <img
+                v-if="item.icon && item.colored"
+                class="stack__icon"
+                :src="`/images/stack/${item.icon}.svg`"
+                alt=""
+              />
+              <span
+                v-else-if="item.icon"
+                class="stack__icon"
+                :style="{ '--icon': `url(/images/stack/${item.icon}.svg)` }"
+                aria-hidden="true"
+              ></span>
+              {{ item.label }}
+            </li>
           </ul>
         </article>
       </div>
@@ -89,11 +103,23 @@ const groups = getContent().stack
 }
 
 .stack__items li {
+  display: inline-flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xs);
   padding: var(--space-3xs) var(--space-xs);
   border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-sm);
   background-color: var(--color-surface-alt);
   font-family: var(--font-mono);
   font-size: var(--fs-mono);
+}
+.stack__icon {
+  flex: none;
+  width: 1em;
+  height: 1em;
+  background-color: currentColor;
+  mask: var(--icon) center / contain no-repeat;
 }
 </style>

@@ -2,69 +2,211 @@
   {
     "id": "cloud",
     "items": [
-      "AWS",
-      "Serverless",
-      "Databases",
-      "Storage",
-      "Compute",
-      "Networking",
-      "Security",
-      "IAM",
-      "Monitoring"
+      {
+        "label": "AWS",
+        "icon": "aws"
+      },
+      {
+        "label": "Serverless",
+        "icon": "serverless"
+      },
+      {
+        "label": "Databases",
+        "icon": "database"
+      },
+      {
+        "label": "Storage",
+        "icon": "storage"
+      },
+      {
+        "label": "Compute",
+        "icon": "compute"
+      },
+      {
+        "label": "Networking",
+        "icon": "network"
+      },
+      {
+        "label": "Security",
+        "icon": "security"
+      },
+      {
+        "label": "IAM",
+        "icon": "iam"
+      },
+      {
+        "label": "Monitoring",
+        "icon": "monitoring"
+      }
     ],
     "translationKey": "stack.groups.cloud"
   },
   {
     "id": "infrastructure",
     "items": [
-      "Terraform",
-      "OpenTofu",
-      "Terragrunt",
-      "GitHub",
-      "Git",
-      "Docker",
-      "CI/CD",
-      "Versioning"
+      {
+        "label": "Terraform",
+        "icon": "terraform"
+      },
+      {
+        "label": "OpenTofu",
+        "icon": "opentofu"
+      },
+      {
+        "label": "Terragrunt",
+        "icon": "terragrunt",
+        "colored": true
+      },
+      {
+        "label": "GitHub",
+        "icon": "github"
+      },
+      {
+        "label": "Git",
+        "icon": "git"
+      },
+      {
+        "label": "Docker",
+        "icon": "docker"
+      },
+      {
+        "label": "CI/CD"
+      },
+      {
+        "label": "Versioning"
+      }
     ],
     "translationKey": "stack.groups.infrastructure"
   },
   {
     "id": "web",
-    "items": ["Vue 3", "Nuxt", "TypeScript", "HTML & CSS", "UI/UX", "Accessibility"],
+    "items": [
+      {
+        "label": "Vue 3",
+        "icon": "vuedotjs"
+      },
+      {
+        "label": "Nuxt",
+        "icon": "nuxt"
+      },
+      {
+        "label": "TypeScript",
+        "icon": "typescript"
+      },
+      {
+        "label": "HTML & CSS",
+        "icon": "html5"
+      },
+      {
+        "label": "UI/UX"
+      },
+      {
+        "label": "Accessibility"
+      }
+    ],
     "translationKey": "stack.groups.web"
   },
   {
     "id": "backend",
-    "items": ["Node.js", "Python", "Bash", "Microservices", "APIs", "REST APIs"],
+    "items": [
+      {
+        "label": "Node.js",
+        "icon": "nodedotjs"
+      },
+      {
+        "label": "Python",
+        "icon": "python"
+      },
+      {
+        "label": "Bash",
+        "icon": "gnubash"
+      },
+      {
+        "label": "Microservices"
+      },
+      {
+        "label": "APIs"
+      },
+      {
+        "label": "REST APIs"
+      }
+    ],
     "translationKey": "stack.groups.backend"
   },
   {
     "id": "ai",
     "items": [
-      "Claude",
-      "Claude Code",
-      "MCP",
-      "Connectors",
-      "Skills",
-      "Subagents",
-      "Hooks",
-      "Prompt engineering"
+      {
+        "label": "Claude",
+        "icon": "claude"
+      },
+      {
+        "label": "Claude Code",
+        "icon": "claude"
+      },
+      {
+        "label": "MCP"
+      },
+      {
+        "label": "Connectors"
+      },
+      {
+        "label": "Skills"
+      },
+      {
+        "label": "Subagents"
+      },
+      {
+        "label": "Hooks"
+      },
+      {
+        "label": "Prompt engineering"
+      }
     ],
     "translationKey": "stack.groups.ai"
   },
   {
     "id": "tools",
     "items": [
-      "Linux",
-      "SSH",
-      "AWS CLI",
-      "VS Code",
-      "Google Workspace",
-      "Docs",
-      "Slides",
-      "Sheets",
-      "Apps Script",
-      "Drive"
+      {
+        "label": "Linux",
+        "icon": "linux"
+      },
+      {
+        "label": "SSH",
+        "icon": "terminal"
+      },
+      {
+        "label": "AWS CLI",
+        "icon": "aws"
+      },
+      {
+        "label": "VS Code"
+      },
+      {
+        "label": "Google Workspace",
+        "icon": "googledrive"
+      },
+      {
+        "label": "Docs",
+        "icon": "googledocs"
+      },
+      {
+        "label": "Slides",
+        "icon": "googleslides"
+      },
+      {
+        "label": "Sheets",
+        "icon": "googlesheets"
+      },
+      {
+        "label": "Apps Script",
+        "icon": "googleappsscript"
+      },
+      {
+        "label": "Drive",
+        "icon": "googledrive"
+      }
     ],
     "translationKey": "stack.groups.tools"
   }
