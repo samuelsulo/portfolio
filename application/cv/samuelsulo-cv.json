@@ -3,6 +3,7 @@
   "contact": {
     "location": "Arona, Italy",
     "email": "work.samuelsulo@gmail.com",
+    "phone": "+39 345 955 1342",
     "web": "samuelsulo.it",
     "linkedin": "linkedin.com/in/work-samuelsulo",
     "github": "github.com/samuelsulo",
@@ -20,6 +21,7 @@
       "contact": "Contact",
       "present": "Present",
       "projects": "Selected projects",
+      "phone": "Phone",
       "basedIn": "Based in"
     },
     "about": "I design and build solid cloud infrastructure and modern web products. I work on AWS architecture, migrations and serverless platforms, and build web applications with Vue.js and TypeScript. I take projects from analysis and design to release and operations, and I enjoy solving problems end to end. I also build with AI tools such as Claude Code, using agentic workflows and custom skills.",
@@ -167,7 +169,7 @@
         "text": "Project and team management workspace: a dashboard with projects, tasks, team directory, analytics and an activity feed."
       }
     ],
-    "title": "Curriculum"
+    "title": "CV"
   },
   "it": {
     "role": "Cloud Engineer & Web Developer",
@@ -181,6 +183,7 @@
       "contact": "Contatti",
       "present": "Presente",
       "projects": "Progetti selezionati",
+      "phone": "Telefono",
       "basedIn": "Sede"
     },
     "about": "Progetto e realizzo infrastrutture cloud solide e prodotti web moderni. Lavoro su architetture AWS, migrazioni e piattaforme serverless, e sviluppo applicazioni web con Vue.js e TypeScript. Seguo i progetti dall'analisi e dal design fino al rilascio e alla gestione, e mi piace risolvere i problemi dall'inizio alla fine. Lavoro anche con strumenti AI come Claude Code, con flussi agentici e skill personalizzate.",
@@ -328,6 +331,6 @@
         "text": "Spazio di lavoro per progetti e team: una dashboard con progetti, attività, rubrica del team, analisi e feed delle attività."
       }
     ],
-    "title": "Curriculum"
+    "title": "CV"
   }
 }

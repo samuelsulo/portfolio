@@ -3,12 +3,11 @@ import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import SectionHeading from '@/components/ui/SectionHeading.vue'
 import ProjectCard from '@/components/ui/ProjectCard.vue'
-import projectsData from '@/data/projects.json'
-import type { ProjectItem } from '@/types/content'
+import { getContent } from '@/content'
 import { WORK_FILTERS, filterWorks, type WorkFilter } from '@/utils/works'
 
 const { t } = useI18n()
-const projects = projectsData as ProjectItem[]
+const projects = getContent().projects
 
 const filter = ref<WorkFilter>('all')
 

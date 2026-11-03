@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import it_ from '../../src/i18n/locales/it.json'
-import en from '../../src/i18n/locales/en.json'
-import projects from '../../src/data/projects.json'
-import stack from '../../src/data/stack.json'
+import it_ from '../../public/content/locales/it.json'
+import en from '../../public/content/locales/en.json'
+import projects from '../../public/content/data/projects.json'
+import stack from '../../public/content/data/stack.json'
 
 type Tree = { [key: string]: Tree | string }
 

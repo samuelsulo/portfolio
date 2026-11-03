@@ -1,10 +1,10 @@
 import { existsSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import casesData from '../../src/data/cases.json'
-import projects from '../../src/data/projects.json'
-import it_ from '../../src/i18n/locales/it.json'
-import en from '../../src/i18n/locales/en.json'
+import casesData from '../../public/content/data/cases.json'
+import projects from '../../public/content/data/projects.json'
+import it_ from '../../public/content/locales/it.json'
+import en from '../../public/content/locales/en.json'
 import type { CaseData } from '../../src/types/content'
 
 const cases = casesData as unknown as Record<string, CaseData>

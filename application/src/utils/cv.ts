@@ -1,8 +1,8 @@
 import type { SiteConfig } from '@/types/content'
 
 /**
- * The curriculum to offer for the active language: the one in that language,
- * the English one when there is none, or null when no curriculum is configured.
+ * The CV to offer for the active language: the one in that language,
+ * the English one when there is none, or null when no CV is configured.
  */
 export function resolveCvUrl(cv: SiteConfig['cvUrl'], locale: string): string | null {
   if (!cv) {

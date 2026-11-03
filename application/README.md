@@ -49,6 +49,7 @@ All commands must be run through `mise exec --` (or in a shell where `mise` has 
 - Production is the only environment: only an explicit `application/vX.Y.Z` tag can be deployed, passed with `--version` (never the currently checked-out commit): `npm run deploy -- --version application/vX.Y.Z`.
 - The resolved version is injected into the build as the `VITE_APP_VERSION` env var and shown in the footer by `src/components/ui/SiteVersion.vue`.
 - To release to production: `cog bump --package application --version X.Y.Z` (updates `CHANGELOG.md`, commits, tags `application/vX.Y.Z`, pushes, creates the GitHub Release), then `npm run deploy -- --version application/vX.Y.Z`.
+- Content-only deploys skip the build and the release: `npm run deploy:content` ([`scripts/deploy-content.sh`](./scripts/deploy-content.sh)) runs the tests on `origin/main` (or `--ref <git-ref>`), syncs `public/content`, `images`, `cv`, `documents` and `brand` to the bucket and invalidates those paths in CloudFront. The deployed commit is recorded in a `_content_version` object. `deploy.sh` never touches these paths, so an application deploy does not revert the content; it refuses to run if the bucket has no content yet. Caching: the JSON files are revalidated on every visit (`max-age=0, must-revalidate`, fetched with `cache: 'no-cache'`), the media files are cached for 5 minutes.
 - The currently live version is recorded as the plain-text content of a single `_version` object in the bucket (readable with `aws s3 cp s3://<bucket>/_version -`). It is only a snapshot of what is live now, not a deploy history: history lives in GitHub Releases instead.
 
 ## Project structure
@@ -64,8 +65,8 @@ application/
 │   │   ├── cookies/          # LegalPolicyView (Cookie Policy / Privacy Policy modal)
 │   │   └── ui/               # reusable components (cards, buttons, icons, etc.)
 │   ├── composables/          # reusable logic (scroll spy, contact form, etc.)
-│   ├── data/                 # data-driven content (projects.json, cases.json, stack.json, site-config.json)
-│   ├── i18n/                 # vue-i18n configuration + it/en translation files
+│   ├── content/              # loader that fetches the content from /content/ at startup
+│   ├── i18n/                 # vue-i18n configuration (the it/en messages are loaded by src/content)
 │   ├── services/              # integration layer with external services (contact form API)
 │   ├── styles/                # shared design tokens and reset
 │   ├── types/                  # shared TypeScript types
@@ -81,18 +82,22 @@ configured to discover them there.
 
 ## Content: how to edit it
 
-- **Prose text (bio, projects, UI labels)**: lives in the translation files `src/i18n/locales/it.json` and `src/i18n/locales/en.json`. Every key must be updated in both files.
+The content is **not part of the application bundle**. It lives in `public/content/` (`data/*.json` and `locales/{it,en}.json`), together with the media folders `public/images/`, `public/cv/`, `public/documents/` and `public/brand/`, and the application fetches it from `/content/` when it starts (see `src/content/index.ts`). Changing a text, a translation, a project, the CV or an image therefore needs **no application release**: edit, commit and run `npm run deploy:content` (see "Versioning and deploys").
+
+If a change to the content files needs a change to the application (a new field, a renamed key), bump `CONTENT_SCHEMA_VERSION` in `src/content/index.ts` and `schemaVersion` in `public/content/data/site-config.json` together, and release the application as well: an application that finds a different schema shows a "could not be loaded" message instead of a broken page.
+
+- **Prose text (bio, projects, UI labels)**: lives in the translation files `public/content/locales/it.json` and `public/content/locales/en.json`. Every key must be updated in both files.
 - **Works**: `projects.json` drives the cards on the home page, `cases.json` the materials of each work page (tabs and their blocks). Every case needs its prose under `cases.items.<id>` in both languages and its images under `public/images/cases/<id>/`; `tests/unit/cases.spec.ts` fails if a translation or an image is missing. Architecture diagrams are public, simplified drawings: never put account ids, resource names or configuration details in them.
-- **Non-translatable data for Projects and Stack** (kind, materials, technologies, images, URLs): lives in `src/data/projects.json` and `src/data/stack.json`. Each entry references a `translationKey` pointing to the corresponding block in the translation files.
-- **Contact/social data** (email, social links, the public CV link `cvUrl`, the technical readouts next to the portrait): `src/data/site-config.json`. The CV button stays hidden while `cvUrl` is `null`.
+- **Non-translatable data for Projects and Stack** (kind, materials, technologies, images, URLs): lives in `public/content/data/projects.json` and `public/content/data/stack.json`. Each entry references a `translationKey` pointing to the corresponding block in the translation files.
+- **Contact/social data** (email, social links, the public CV link `cvUrl`, the technical readouts next to the portrait): `public/content/data/site-config.json`. The CV button stays hidden while `cvUrl` is `null`.
 
 The content currently in place (bio, service list, projects, email, social links) is **placeholder** content meant to be replaced with real content without modifying any Vue component.
 
-## Curriculum
+## CV
 
-The curriculum is published as two PDFs, one per language, under `/curriculum/`. The "Resume" links
-follow the active language. The PDFs are generated from `curriculum/samuelsulo-curriculum.json` with
-`npm run curriculum`, see [`curriculum/README.md`](./curriculum/README.md).
+The CV is published as two PDFs, one per language, under `/cv/`. The "CV" links
+follow the active language. The PDFs are generated from `cv/samuelsulo-cv.json` with
+`npm run cv`, see [`cv/README.md`](./cv/README.md).
 
 ## Contact form: backend
 
@@ -106,7 +111,7 @@ If `VITE_CONTACT_API_URL` isn't set (e.g. the `contact_api` module hasn't been a
 
 This site sets no analytics, marketing or profiling cookies, and embeds no third-party content: the only browser storage in use is the technical, strictly necessary `samuelsulo-portfolio:locale` local storage entry that remembers the chosen language (see `src/i18n/index.ts`). Because there is nothing non-essential to consent to, no cookie banner is shown; the Cookie Policy states this explicitly.
 
-The Cookie Policy and Privacy Policy are both rendered by the single `src/components/cookies/LegalPolicyView.vue` component (`documentKey: 'cookiePolicy' | 'privacyPolicy'`), opened as a modal from the footer's legal links, so they work from any page. Their prose lives in the `legal.*` namespace of `src/i18n/locales/{it,en}.json`, following the same content rule as the rest of the site; the handful of values the Privacy Policy needs that are identical in every language (the privacy contact email, the business details, the AWS processing region, the last-updated date) instead live in `src/data/site-config.json` under `legal`, typed as `SiteLegalConfig` in `src/types/content.ts`, and are interpolated into the `legal.privacyPolicy.content` message as named params (`{privacyContactEmail}`, `{businessDetails}`, `{dataProcessingRegion}`, `{privacyPolicyLastUpdated}`) by `LegalPolicyView.vue`.
+The Cookie Policy and Privacy Policy are both rendered by the single `src/components/cookies/LegalPolicyView.vue` component (`documentKey: 'cookiePolicy' | 'privacyPolicy'`), opened as a modal from the footer's legal links, so they work from any page. Their prose lives in the `legal.*` namespace of `public/content/locales/{it,en}.json`, following the same content rule as the rest of the site; the handful of values the Privacy Policy needs that are identical in every language (the privacy contact email, the business details, the AWS processing region, the last-updated date) instead live in `public/content/data/site-config.json` under `legal`, typed as `SiteLegalConfig` in `src/types/content.ts`, and are interpolated into the `legal.privacyPolicy.content` message as named params (`{privacyContactEmail}`, `{businessDetails}`, `{dataProcessingRegion}`, `{privacyPolicyLastUpdated}`) by `LegalPolicyView.vue`.
 
 The contact-form retention period is the one exception: `legal.contactFormRetentionMonths` in `site-config.json` is a plain number, kept language-neutral on purpose (never a sentence, and never `null`: the real figure is determined by auditing how the backend actually works, not left undecided). `LegalPolicyView.vue` turns it into the actual sentence by calling the translated `legal.privacyPolicy.retentionPeriodKnown` message (`{months}` interpolated) when it's greater than zero, or `retentionPeriodNone` when it's `0`, so the wording itself stays correctly localized in each locale file instead of being duplicated as one shared string.
 
