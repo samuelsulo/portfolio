@@ -48,7 +48,7 @@ async function openFirstWork(page: Page) {
 }
 
 test.describe('scrolling', () => {
-  for (const id of ['about', 'projects', 'stack', 'contact']) {
+  for (const id of ['about', 'projects', 'stack', 'certifications', 'contact']) {
     test(`the menu scrolls to #${id}`, async ({ page }) => {
       await page.goto('/')
       await page.locator(`header a[href$="#${id}"]`).first().click()
@@ -63,6 +63,13 @@ test.describe('scrolling', () => {
     await page.locator('#projects').waitFor()
     await settledScrollY(page)
     expect(Math.abs(await sectionTop(page, 'projects'))).toBeLessThanOrEqual(DIRECT_LOAD_TOLERANCE)
+  })
+
+  test('opening /#hero keeps the portrait clear of the navbar', async ({ page }) => {
+    await page.goto('/#hero')
+    await page.locator('#hero').waitFor()
+    await settledScrollY(page)
+    expect(await page.evaluate(() => window.scrollY)).toBe(0)
   })
 
   test('a work page opens at the top', async ({ page }) => {

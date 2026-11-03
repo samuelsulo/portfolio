@@ -30,8 +30,9 @@
         "title": "Cloud",
         "items": [
           "AWS (advanced)",
+          "Serverless, Networking, Security, IAM",
           "AWS migrations and assessments",
-          "EC2 Image Builder",
+          "EC2 Image Builder, Monitoring",
           "Microsoft Entra, Azure, Firebase (foundational)"
         ]
       },
@@ -39,9 +40,11 @@
         "title": "Development",
         "items": [
           "JavaScript, TypeScript",
-          "Node.js, Vue.js, OCLIF",
+          "Node.js, Vue.js, Nuxt, OCLIF",
+          "Python, Bash",
+          "Microservices, REST APIs",
           "SQL and NoSQL databases",
-          "Python",
+          "HTML, CSS, UI/UX",
           "Visual Basic, Go, Prolog, Lisp (basic)"
         ]
       },
@@ -50,7 +53,7 @@
         "items": [
           "Terraform, OpenTofu, Terragrunt",
           "AWS CLI, Git, GitHub",
-          "AWS CodePipeline, GitHub Actions",
+          "AWS CodePipeline, GitHub Actions, CI/CD",
           "Azure DevOps, Docker"
         ]
       },
@@ -58,10 +61,14 @@
         "title": "AI",
         "items": [
           "Claude, Claude Code",
+          "MCP, connectors, skills, subagents, hooks",
           "Agentic coding",
-          "AI skills, Artifacts",
           "AI-assisted software development"
         ]
+      },
+      {
+        "title": "Tools",
+        "items": ["Linux, SSH, VS Code", "Google Workspace, Apps Script"]
       }
     ],
     "experience": [
@@ -125,18 +132,25 @@
         "location": "Borgomanero, Italy",
         "from": "2015",
         "to": "2020",
-        "bullets": []
+        "bullets": [
+          "Programming in Java and C++, operating systems, distributed systems and SQL databases.",
+          "Web development with HTML, CSS and JavaScript, through frontend and backend projects."
+        ]
       }
     ],
     "languages": [
       ["Italian", "Native"],
-      ["English", "Excellent"],
-      ["Albanian", "Excellent"]
+      ["Albanian", "Native"],
+      ["English", "Fluent"]
     ],
     "certifications": [
       {
         "name": "AWS Certified Solutions Architect - Associate",
         "url": "credly.com/badges/b7b6a4ec-487e-4831-9bb3-6bdbd4a1ef1f"
+      },
+      {
+        "name": "AWS Certified Developer - Associate (expired)",
+        "url": "credly.com/badges/bbc75401-dc9f-4ecb-ac0b-988c8e6f13b6"
       },
       {
         "name": "AWS Certified Cloud Practitioner",
@@ -192,8 +206,9 @@
         "title": "Cloud",
         "items": [
           "AWS (avanzato)",
+          "Serverless, Networking, Security, IAM",
           "Assessment e migrazioni su AWS",
-          "EC2 Image Builder",
+          "EC2 Image Builder, Monitoring",
           "Microsoft Entra, Azure, Firebase (base)"
         ]
       },
@@ -201,9 +216,11 @@
         "title": "Sviluppo",
         "items": [
           "JavaScript, TypeScript",
-          "Node.js, Vue.js, OCLIF",
+          "Node.js, Vue.js, Nuxt, OCLIF",
+          "Python, Bash",
+          "Microservices, REST APIs",
           "Database SQL e NoSQL",
-          "Python",
+          "HTML, CSS, UI/UX",
           "Visual Basic, Go, Prolog, Lisp (base)"
         ]
       },
@@ -212,7 +229,7 @@
         "items": [
           "Terraform, OpenTofu, Terragrunt",
           "AWS CLI, Git, GitHub",
-          "AWS CodePipeline, GitHub Actions",
+          "AWS CodePipeline, GitHub Actions, CI/CD",
           "Azure DevOps, Docker"
         ]
       },
@@ -220,10 +237,14 @@
         "title": "AI",
         "items": [
           "Claude, Claude Code",
+          "MCP, connectors, skills, subagenti, hook",
           "Agentic coding",
-          "AI skills, Artifacts",
           "Sviluppo software assistito dall'AI"
         ]
+      },
+      {
+        "title": "Strumenti",
+        "items": ["Linux, SSH, VS Code", "Google Workspace, Apps Script"]
       }
     ],
     "experience": [
@@ -287,18 +308,25 @@
         "location": "Borgomanero, Italia",
         "from": "2015",
         "to": "2020",
-        "bullets": []
+        "bullets": [
+          "Programmazione in Java e C++, sistemi operativi, sistemi distribuiti e database SQL.",
+          "Sviluppo web con HTML, CSS e JavaScript, attraverso progetti frontend e backend."
+        ]
       }
     ],
     "languages": [
       ["Italiano", "Madrelingua"],
-      ["Inglese", "Eccellente"],
-      ["Albanese", "Eccellente"]
+      ["Albanese", "Madrelingua"],
+      ["Inglese", "Fluente"]
     ],
     "certifications": [
       {
         "name": "AWS Certified Solutions Architect - Associate",
         "url": "credly.com/badges/b7b6a4ec-487e-4831-9bb3-6bdbd4a1ef1f"
+      },
+      {
+        "name": "AWS Certified Developer - Associate (scaduta)",
+        "url": "credly.com/badges/bbc75401-dc9f-4ecb-ac0b-988c8e6f13b6"
       },
       {
         "name": "AWS Certified Cloud Practitioner",

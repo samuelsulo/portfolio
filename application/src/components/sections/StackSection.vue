@@ -54,11 +54,11 @@ const groups = getContent().stack
   box-shadow: var(--shadow-sm);
 }
 
-.stack__group:nth-child(2) {
+.stack__group:nth-child(3n + 2) {
   border-top-color: var(--color-neon-secondary);
 }
 
-.stack__group:nth-child(3) {
+.stack__group:nth-child(3n) {
   border-top-color: var(--color-neon-success);
 }
 

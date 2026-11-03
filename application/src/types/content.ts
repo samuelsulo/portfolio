@@ -93,6 +93,21 @@ export interface StackGroup {
   translationKey: string
 }
 
+export interface CertificationItem {
+  id: string
+  /** The body that issued the certification (a proper name, not translated). */
+  issuer: string
+  /** Whether the certification is still valid, shown as a labelled pill on the card. */
+  status: 'active' | 'expired'
+  /** The badge image. */
+  image: string
+  /** i18n key of the badge's alt text. */
+  imageAlt: string
+  /** Public verification page, e.g. on Credly. */
+  url: string
+  translationKey: string
+}
+
 export interface HudRow {
   id: 'region' | 'infrastructure' | 'applications'
   value: string

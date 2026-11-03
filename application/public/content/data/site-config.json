@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "email": "work.samuelsulo@gmail.com",
   "phone": null,
   "location": "Italy",
@@ -18,7 +18,7 @@
     },
     {
       "id": "infrastructure",
-      "value": "OpenTofu · Terragrunt"
+      "value": "Terraform · Terragrunt"
     },
     {
       "id": "applications",

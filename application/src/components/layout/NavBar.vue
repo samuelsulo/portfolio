@@ -13,7 +13,7 @@ import { useHideOnScroll } from '@/composables/useHideOnScroll'
 
 const { t } = useI18n()
 
-const sections = ['about', 'projects', 'stack', 'contact'] as const
+const sections = ['about', 'projects', 'stack', 'certifications', 'contact'] as const
 // The hero is observed too, so that no link is highlighted while it is on screen.
 const { activeId } = useScrollSpy(['hero', ...sections])
 

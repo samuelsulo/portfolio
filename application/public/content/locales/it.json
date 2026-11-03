@@ -20,7 +20,8 @@
       "system": "Tema del sistema",
       "dark": "Tema scuro"
     },
-    "stack": "Stack"
+    "stack": "Stack",
+    "certifications": "Certificazioni"
   },
   "hero": {
     "eyebrow": "Cloud Engineer & Web Developer",
@@ -47,10 +48,11 @@
     "note": "Anche questo sito è fatto così, con codice, infrastruttura come codice e rilasci versionati.",
     "terminalLabel": "Riepilogo tecnico",
     "terminal": {
-      "cloud": "AWS: S3, CloudFront, Route 53, ACM, API Gateway, SES",
-      "iac": "OpenTofu e Terragrunt, stato su S3, produzione nell'account del cliente",
-      "apps": "Vue 3, TypeScript, Vite, test con Vitest, italiano e inglese",
-      "release": "tag versionati, changelog, deploy da riga di comando"
+      "cloud": "AWS, Serverless, Databases, Storage, Compute, Networking, Security, IAM",
+      "devops": "Terraform, OpenTofu, Terragrunt, GitHub, Git, Docker, CI/CD",
+      "apps": "Vue 3, Nuxt, TypeScript, UI/UX (web); Node.js, Python, Bash, REST APIs (backend e automazione)",
+      "ai": "Claude, Claude Code, MCP, Connectors, Skills",
+      "tools": "Linux, SSH, AWS CLI, VS Code, Google Workspace"
     }
   },
   "projects": {
@@ -172,7 +174,7 @@
       "deploy": "Deploy",
       "deploySub": "test, build, upload",
       "infra": "Infrastruttura",
-      "infraSub": "OpenTofu, Terragrunt",
+      "infraSub": "Terraform, OpenTofu, Terragrunt",
       "state": "Stato",
       "stateSub": "remoto, cifrato",
       "origin": "origine",
@@ -624,12 +626,51 @@
       },
       "infrastructure": {
         "title": "Infrastruttura e rilasci",
-        "tag": "IaC"
+        "tag": "DevOps"
       },
-      "applications": {
-        "title": "Applicazioni",
+      "web": {
+        "title": "Applicazioni web",
         "tag": "Web"
+      },
+      "backend": {
+        "title": "Backend e automazione",
+        "tag": "Services"
+      },
+      "ai": {
+        "title": "Intelligenza artificiale",
+        "tag": "AI"
+      },
+      "tools": {
+        "title": "Ambiente di lavoro",
+        "tag": "Tools"
       }
+    }
+  },
+  "certifications": {
+    "eyebrow": "Certificazioni",
+    "title": "Competenze verificate",
+    "subtitle": "Le certificazioni che ho ottenuto, verificabili pubblicamente dall'ente che le ha rilasciate.",
+    "verify": "Verifica su Credly",
+    "items": {
+      "aws-solutions-architect-associate": {
+        "title": "AWS Certified Solutions Architect - Associate",
+        "description": "Progettazione di soluzioni sicure, resilienti e scalabili su AWS, secondo i principi del Well-Architected Framework e in base ai requisiti del cliente.",
+        "imageAlt": "Badge della certificazione AWS Certified Solutions Architect - Associate"
+      },
+      "aws-developer-associate": {
+        "title": "AWS Certified Developer - Associate",
+        "description": "Sviluppo, rilascio e debug di applicazioni cloud con le API dei servizi AWS, AWS CLI e SDK, containers e pipeline CI/CD.",
+        "imageAlt": "Badge della certificazione AWS Certified Developer - Associate"
+      },
+      "aws-cloud-practitioner": {
+        "title": "AWS Certified Cloud Practitioner",
+        "description": "Conoscenza di base dei servizi AWS, dei loro usi, della sicurezza e dei costi del cloud.",
+        "imageAlt": "Badge della certificazione AWS Certified Cloud Practitioner"
+      }
+    },
+    "status": {
+      "active": "Attiva",
+      "expired": "Scaduta"
     }
   },
   "contact": {

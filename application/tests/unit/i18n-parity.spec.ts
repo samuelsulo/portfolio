@@ -3,6 +3,7 @@ import it_ from '../../public/content/locales/it.json'
 import en from '../../public/content/locales/en.json'
 import projects from '../../public/content/data/projects.json'
 import stack from '../../public/content/data/stack.json'
+import certifications from '../../public/content/data/certifications.json'
 
 type Tree = { [key: string]: Tree | string }
 
@@ -31,6 +32,13 @@ describe('translations', () => {
     }
     for (const group of stack) {
       wanted.push(`${group.translationKey}.title`, `${group.translationKey}.tag`)
+    }
+    for (const certification of certifications) {
+      wanted.push(
+        `${certification.translationKey}.title`,
+        `${certification.translationKey}.description`,
+        certification.imageAlt,
+      )
     }
     expect(wanted.filter((key) => !itKeys.has(key))).toEqual([])
     expect(wanted.filter((key) => !enKeys.has(key))).toEqual([])

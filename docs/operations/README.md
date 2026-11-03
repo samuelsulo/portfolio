@@ -6,5 +6,6 @@ incidents once the project is live.
 
 ## Index
 
-| Document | Description |
-|---|---|
+| Document                         | Description                                   |
+| -------------------------------- | --------------------------------------------- |
+| [operations.md](./operations.md) | Monitoring, routine tasks and troubleshooting |
