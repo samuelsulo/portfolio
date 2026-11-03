@@ -1,0 +1,16 @@
+# Findings accepted on purpose. Each entry says why.
+misconfigurations:
+  - id: AWS-0011
+    paths:
+      - "modules/vendor/website-hosting/main.tf"
+    statement: >-
+      A WAF in front of CloudFront is not worth its fixed monthly cost for a
+      static portfolio with no state and no user input (the contact form goes
+      to a separate, throttled API).
+  - id: AWS-0132
+    paths:
+      - "modules/vendor/website-hosting/main.tf"
+    statement: >-
+      The bucket only holds public static files, served through CloudFront;
+      server-side encryption with S3-managed keys is enough, a customer
+      managed KMS key would add cost and no protection.

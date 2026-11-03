@@ -1,0 +1,5 @@
+# Copy to mise.local.toml (git-ignored) and fill in. Values that are not
+# secret but that the repository, being public, does not publish.
+[env]
+# 12-digit ID of the AWS account that hosts production and sandbox.
+PORTFOLIO_AWS_ACCOUNT_ID = "000000000000"

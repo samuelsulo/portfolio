@@ -2,7 +2,7 @@
 
 Helper scripts backing the `mise` tasks: vendoring code from a catalog
 into [`../modules/vendor/`](../modules/vendor), and bootstrapping the
-state bucket.
+state bucket, and linting the code.
 
 Not called directly day to day: use the `mise` tasks in
 [`../mise.toml`](../mise.toml), which pass `$CATALOG_REPO` for you.
@@ -25,6 +25,11 @@ Not called directly day to day: use the `mise` tasks in
   versioning and SSE-S3 encryption, denies non-TLS requests, expires
   noncurrent versions after 90 days (keeping the 5 most recent) and tags
   the bucket. Requires the `aws` CLI. The region defaults to `eu-south-1`.
+
+- [`lint.sh`](./lint.sh) (`mise run lint`): runs `tflint` ([`.tflint.hcl`](../.tflint.hcl))
+  and `trivy` (HIGH and CRITICAL only; the findings accepted on purpose
+  are listed with their reason in [`.trivyignore.yaml`](../.trivyignore.yaml)).
+  Also run by the pre-commit hook and by CI.
 
 ## Conventions
 
