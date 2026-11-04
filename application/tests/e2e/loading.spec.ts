@@ -78,7 +78,7 @@ test.describe('loading', () => {
     await expect(page.locator('canvas.explore__canvas')).toBeVisible()
     await expect(page.locator('.explore__loading')).toHaveCount(0)
     await page.keyboard.press('m')
-    await page.locator('.explore__chip', { hasText: 'CV' }).click()
+    await page.locator('.explore__tile', { hasText: 'CV' }).click()
     await expect(page.locator('.explore__room')).toHaveText(/cv/i)
     await page.waitForLoadState('networkidle')
 
@@ -93,7 +93,7 @@ test.describe('loading', () => {
     await expect(page.locator('canvas.explore__canvas')).toBeVisible()
     await expect(page.locator('.explore__loading')).toHaveCount(0)
     await page.keyboard.press('m')
-    await page.locator('.explore__chip', { hasText: 'Stack room' }).click()
+    await page.locator('.explore__tile', { hasText: 'Stack room' }).click()
     await expect(page.locator('.explore__room')).toHaveText(/stack room/i)
     await expect.poll(() => urls.some((url) => url === '/images/stack/sprite.svg')).toBe(true)
     await page.waitForLoadState('networkidle')
