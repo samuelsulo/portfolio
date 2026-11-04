@@ -31,7 +31,7 @@ in this project:
 - **sandbox**: a disposable copy of the same stack under `sandbox.samuelsulo.it`,
   to try changes before they reach production. Unlike the scaffold's default
   of one AWS account per environment, it runs in the **same account and
-  region** as production (this is my own portfolio, not a client account).
+  region** as production (a single personal account).
   What keeps the two apart is the name prefix (`portfolio-sbx` vs
   `portfolio-prd`), the state key (it contains the environment folder), the
   domains and the SES identity (a `+sandbox` address, because identities are
@@ -49,7 +49,7 @@ in this project:
   `terragrunt` versions (`mise install`).
 - AWS CLI profile for the target environment, named in that environment's
   `account.hcl`: the account's own credentials directly, or a profile
-  with `role_arn` (+ `source_profile`) or SSO into the client's
+  with `role_arn` (+ `source_profile`) or SSO into a
   cross-account role. Terragrunt itself never assumes the role.
 - The state bucket of the target account, created once with
   `mise run state:create-bucket <aws-profile>` (see

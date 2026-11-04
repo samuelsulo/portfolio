@@ -69,6 +69,14 @@ const isLooking = ref(false)
 const wheelFirst = ref<HTMLButtonElement | null>(null)
 const selected = ref<Interactable | null>(null)
 
+const POINTER_CONTROLS = ['walk', 'run', 'jump', 'look', 'interact', 'dance', 'menu'] as const
+const TOUCH_CONTROLS = ['walk', 'jump', 'look', 'zoom', 'interact'] as const
+
+// The scene is exactly as big as the screen and never scrolls: the page behind it is locked while it is shown.
+// The sheets and panels on top keep their own scroll. A class, not an inline style, because the modal resets that.
+onMounted(() => document.documentElement.classList.add('explore-lock'))
+onBeforeUnmount(() => document.documentElement.classList.remove('explore-lock'))
+
 // --- The sheet: what has a page of its own is shown over the scene, not by leaving it ---
 const SHEET_KINDS: Interactable['kind'][] = ['work', 'contact', 'about', 'cv']
 
@@ -393,9 +401,14 @@ onBeforeUnmount(() => {
 
         <div class="explore__hud">
           <p class="explore__room" aria-live="polite">{{ t(`explore.rooms.${room}`) }}</p>
-          <button type="button" class="explore__menu-button" @click="openMenu">
-            <kbd>M</kbd>
-            {{ t('explore.menu') }}
+          <button
+            type="button"
+            class="explore__round explore__menu-button"
+            :aria-label="t('explore.menu')"
+            :title="t('explore.menu')"
+            @click="openMenu"
+          >
+            <AppIcon name="menu" :size="22" />
           </button>
         </div>
 
@@ -408,9 +421,15 @@ onBeforeUnmount(() => {
           {{ t('explore.lookHint') }}
         </p>
 
-        <button v-if="!isMenuOpen" type="button" class="explore__dance" @click="openDanceMenu">
-          <kbd>B</kbd>
-          {{ t('explore.dance.open') }}
+        <button
+          v-if="!isMenuOpen"
+          type="button"
+          class="explore__round explore__dance"
+          :aria-label="t('explore.dance.open')"
+          :title="t('explore.dance.open')"
+          @click="openDanceMenu"
+        >
+          <AppIcon name="music" :size="22" />
         </button>
 
         <div
@@ -470,20 +489,51 @@ onBeforeUnmount(() => {
                       }
                     "
                     type="button"
-                    class="explore__chip"
+                    class="explore__tile"
                     :class="{ 'is-active': id === room }"
                     :aria-current="id === room ? 'true' : undefined"
                     @click="goToRoom(id)"
                   >
+                    <AppIcon name="map-pin" :size="16" />
                     {{ t(`explore.rooms.${id}`) }}
                   </button>
                 </li>
               </ul>
             </nav>
             <h3 class="explore__menu-heading">{{ t('explore.controls') }}</h3>
-            <p class="explore__help explore__help--pointer">{{ t('explore.helpPointer') }}</p>
-            <p class="explore__help explore__help--touch">{{ t('explore.helpTouch') }}</p>
-            <RouterLink :to="{ name: 'home' }" class="explore__exit">
+            <table class="explore__controls explore__controls--pointer">
+              <thead>
+                <tr>
+                  <th scope="col">{{ t('explore.controlsKey') }}</th>
+                  <th scope="col">{{ t('explore.controlsAction') }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="id in POINTER_CONTROLS" :key="id">
+                  <th scope="row">
+                    <kbd>{{ t(`explore.controlsPointer.${id}.key`) }}</kbd>
+                  </th>
+                  <td>{{ t(`explore.controlsPointer.${id}.action`) }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="explore__controls explore__controls--touch">
+              <thead>
+                <tr>
+                  <th scope="col">{{ t('explore.controlsKey') }}</th>
+                  <th scope="col">{{ t('explore.controlsAction') }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="id in TOUCH_CONTROLS" :key="id">
+                  <th scope="row">
+                    <kbd>{{ t(`explore.controlsTouch.${id}.key`) }}</kbd>
+                  </th>
+                  <td>{{ t(`explore.controlsTouch.${id}.action`) }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <RouterLink :to="{ name: 'home' }" class="explore__exit" :title="t('explore.exitHint')">
               <AppIcon name="arrow-left" :size="16" />
               {{ t('explore.backTo2d') }}
             </RouterLink>
@@ -493,6 +543,17 @@ onBeforeUnmount(() => {
         <div ref="joystick" class="explore__joystick" aria-hidden="true">
           <div class="explore__knob" />
         </div>
+
+        <button
+          v-if="!isMenuOpen"
+          type="button"
+          class="explore__round explore__jump"
+          :aria-label="t('explore.jump')"
+          :title="t('explore.jump')"
+          @click="explorer?.jump()"
+        >
+          <AppIcon name="arrow-up" :size="22" />
+        </button>
 
         <button
           v-if="nearby && !selected && !sheetItem"
@@ -609,10 +670,11 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .explore {
-  position: relative;
-  /* No navbar and no footer: the stage is the whole viewport. */
-  height: 100dvh;
-  min-height: 480px;
+  /* No navbar and no footer: the stage is exactly the screen, fixed so that the page cannot scroll under it. */
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
   background-color: var(--color-bg);
 }
 
@@ -702,9 +764,7 @@ onBeforeUnmount(() => {
 }
 
 .explore__room,
-.explore__exit,
-.explore__menu-button,
-.explore__help {
+.explore__exit {
   margin: 0;
   padding: var(--space-3xs) var(--space-xs);
   border: 1px solid var(--color-border-strong);
@@ -728,34 +788,35 @@ onBeforeUnmount(() => {
   pointer-events: auto;
 }
 
-.explore__menu-button {
+/* Round icon buttons: the menu (top) and the dance (bottom right). */
+.explore__round {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2xs);
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 50%;
+  background-color: var(--color-glass);
   color: var(--color-text);
   cursor: pointer;
   pointer-events: auto;
+  backdrop-filter: blur(6px);
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    background-color 0.2s;
 }
 
-.explore__menu-button kbd {
-  padding: 0 var(--space-3xs);
-  border: 1px solid currentcolor;
-  border-radius: 4px;
-}
-
-.explore__exit:hover,
-.explore__menu-button:hover {
+.explore__round:hover {
   border-color: var(--color-neon-primary);
   color: var(--color-neon-primary);
 }
 
-.explore__help {
-  margin: 0 0 var(--space-xs);
-  color: var(--color-text-muted);
-}
-
-.explore__help--touch {
-  display: none;
+.explore__exit:hover {
+  border-color: var(--color-neon-primary);
+  color: var(--color-neon-primary);
 }
 
 .explore__joystick {
@@ -789,16 +850,12 @@ onBeforeUnmount(() => {
     display: block;
   }
 
-  .explore__help--pointer {
+  .explore__controls--pointer {
     display: none;
   }
 
-  .explore__help--touch {
-    display: block;
-  }
-
-  .explore__menu-button kbd {
-    display: none;
+  .explore__controls--touch {
+    display: table;
   }
 }
 
@@ -927,8 +984,8 @@ onBeforeUnmount(() => {
 }
 
 .explore__menu-rooms {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: var(--space-2xs);
   margin: 0 0 var(--space-sm);
   padding: 0;
@@ -944,26 +1001,83 @@ onBeforeUnmount(() => {
   letter-spacing: 0.08em;
 }
 
-.explore__chip {
-  flex-shrink: 0;
-  padding: var(--space-3xs) var(--space-xs);
+.explore__tile {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  width: 100%;
+  padding: var(--space-xs) var(--space-sm);
   border: 1px solid var(--color-border-strong);
-  border-radius: 999px;
+  border-radius: var(--radius-md);
   background-color: var(--color-glass);
-  color: var(--color-text-muted);
+  color: var(--color-text);
   font-family: var(--font-mono);
   font-size: var(--fs-mono);
+  text-align: left;
   cursor: pointer;
 }
 
-.explore__chip:hover,
-.explore__chip.is-active {
+.explore__tile svg {
+  flex-shrink: 0;
+}
+
+.explore__tile:hover,
+.explore__tile.is-active {
   border-color: var(--color-neon-secondary);
   color: var(--color-neon-secondary);
 }
 
-.explore__chip.is-active {
+.explore__tile.is-active {
   background-color: rgba(var(--color-neon-secondary-rgb), 0.14);
+}
+
+.explore__controls {
+  width: 100%;
+  margin: 0 0 var(--space-sm);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  font-size: var(--fs-small);
+}
+
+.explore__controls--touch {
+  display: none;
+}
+
+.explore__controls th,
+.explore__controls td {
+  padding: var(--space-2xs) var(--space-sm);
+  text-align: left;
+  font-weight: normal;
+}
+
+.explore__controls thead th {
+  background-color: var(--color-glass);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.explore__controls tbody tr + tr > * {
+  border-top: 1px solid var(--color-border);
+}
+
+.explore__controls tbody th {
+  width: 36%;
+  white-space: nowrap;
+}
+
+.explore__controls kbd {
+  padding: var(--space-3xs) var(--space-xs);
+  border: 1px solid var(--color-neon-primary);
+  border-radius: var(--radius-sm);
+  color: var(--color-neon-primary);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
 }
 
 .explore__look {
@@ -994,23 +1108,8 @@ onBeforeUnmount(() => {
   position: absolute;
   right: var(--space-sm);
   bottom: var(--space-sm);
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2xs);
-  padding: var(--space-3xs) var(--space-xs);
-  border: 1px solid var(--color-neon-secondary);
-  border-radius: var(--radius-sm);
-  background-color: var(--color-glass);
+  border-color: var(--color-neon-secondary);
   color: var(--color-neon-secondary);
-  font-family: var(--font-mono);
-  font-size: var(--fs-mono);
-  cursor: pointer;
-}
-
-.explore__dance kbd {
-  padding: 0 var(--space-3xs);
-  border: 1px solid currentcolor;
-  border-radius: var(--radius-3xs, 4px);
 }
 
 .explore__dance:hover {
@@ -1018,13 +1117,23 @@ onBeforeUnmount(() => {
   color: var(--color-on-neon);
 }
 
+/* Touch only: a keyboard has Space. Above the dance button, in reach of the right thumb. */
+.explore__jump {
+  display: none;
+  position: absolute;
+  right: var(--space-sm);
+  bottom: calc(76px + 48px + var(--space-xs));
+  border-color: var(--color-neon-primary);
+  color: var(--color-neon-primary);
+}
+
 @media (pointer: coarse) {
   .explore__dance {
     bottom: 76px;
   }
 
-  .explore__dance kbd {
-    display: none;
+  .explore__jump {
+    display: inline-flex;
   }
 }
 
@@ -1199,5 +1308,14 @@ onBeforeUnmount(() => {
   .explore__rotate {
     display: flex;
   }
+}
+</style>
+
+<style>
+/* Unscoped: the lock is on the document, outside this component. */
+html.explore-lock,
+html.explore-lock body {
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 </style>

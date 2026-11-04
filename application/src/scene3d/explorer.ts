@@ -30,6 +30,7 @@ import {
   PANEL_SIZE,
   START_SPAWN,
   decorOf,
+  groundAt,
   itemsInRoom,
   moveDirection,
   nearestInteractable,
@@ -53,7 +54,15 @@ import {
   type CardColors,
   type CardSpec,
 } from './cards'
-import { dancePose, walkPose, type DanceId } from './dances'
+import {
+  dancePose,
+  jumpPose,
+  startJump,
+  stepJump,
+  walkPose,
+  type DanceId,
+  type JumpState,
+} from './dances'
 import { createInput } from './input'
 import type { PlayerState } from './session'
 import { createStickman } from './stickman'
@@ -91,6 +100,8 @@ export interface Explorer {
   interact(): void
   /** Moves the player to another room, as a portal does. */
   goTo(room: RoomId): void
+  /** Makes the figure jump, same as pressing Space (nothing happens in mid air). */
+  jump(): void
   /** Makes the figure dance until it is moved or told to stop (null). */
   dance(id: DanceId | null): void
   /** Stops drawing frames (e.g. under a full screen sheet) to save the battery, and starts again. */
@@ -476,6 +487,7 @@ export function createExplorer(options: ExplorerOptions): Explorer {
   let pitch = 0.45
   let distance = 6.5
   let walkPhase = 0
+  let jumping: JumpState = { height: 0, speed: 0 }
   let currentDance: { id: DanceId; start: number } | null = null
 
   function setDance(id: DanceId | null) {
@@ -503,6 +515,7 @@ export function createExplorer(options: ExplorerOptions): Explorer {
     // The figure looks where the camera does.
     heading = spawn.yaw + Math.PI
     nearby = null
+    jumping = { height: 0, speed: 0 }
     if (currentDance) setDance(null)
     options.onNearby(null)
     options.onRoom(room)
@@ -621,12 +634,25 @@ export function createExplorer(options: ExplorerOptions): Explorer {
     pitch = Math.min(1.2, Math.max(0.1, pitch + orbit.z))
     distance = Math.min(9, Math.max(3, distance + input.consumeZoom()))
 
+    // The feet at the start of the frame decide what is in the way and what is stood on.
+    const feet = jumping.height
+    if (!paused && input.consumeJump()) {
+      const started = startJump(jumping, groundAt(position, currentRoom, feet))
+      if (started !== jumping) {
+        jumping = started
+        lastActivity = now
+        if (currentDance) setDance(null)
+      }
+    }
+
     const move = paused ? { x: 0, z: 0 } : input.movement()
     const direction = moveDirection(move, yaw)
     const strength = Math.min(1, Math.hypot(direction.x, direction.z))
-    if (strength > 0.05) {
+    const walking = strength > 0.05
+    let speed = 0
+    if (walking) {
       lastActivity = now
-      const speed = (input.running() ? RUN_SPEED : WALK_SPEED) * strength
+      speed = (input.running() ? RUN_SPEED : WALK_SPEED) * strength
       const next = resolveMove(
         position,
         {
@@ -634,6 +660,8 @@ export function createExplorer(options: ExplorerOptions): Explorer {
           z: position.z + (direction.z / strength) * speed * dt,
         },
         currentRoom,
+        undefined,
+        feet,
       )
       position.x = next.x
       position.z = next.z
@@ -645,6 +673,16 @@ export function createExplorer(options: ExplorerOptions): Explorer {
       walkPhase += dt * speed * 2.2
       // Walking away ends the dance.
       if (currentDance) setDance(null)
+    }
+
+    // Vertical step after the move: the figure lands on, or falls off, whatever is now under it.
+    jumping = stepJump(jumping, dt, groundAt(position, currentRoom, feet))
+    const airborne = jumping.height > groundAt(position, currentRoom, jumping.height)
+
+    if (airborne) {
+      player.apply(jumpPose(jumping.speed))
+      player.root.rotation.y = heading
+    } else if (walking) {
       player.apply(walkPose(walkPhase, Math.min(1, speed / WALK_SPEED)))
       player.root.rotation.y = heading
     } else if (currentDance) {
@@ -655,7 +693,7 @@ export function createExplorer(options: ExplorerOptions): Explorer {
       player.apply(walkPose(walkPhase, 0))
       player.root.rotation.y = heading
     }
-    player.root.position.set(position.x, 0, position.z)
+    player.root.position.set(position.x, jumping.height, position.z)
 
     for (let index = pendingImages.length - 1; index >= 0; index--) {
       const { item, show } = pendingImages[index]
@@ -671,7 +709,7 @@ export function createExplorer(options: ExplorerOptions): Explorer {
 
     // Third person camera, orbiting around the figure's chest. The walls are
     // see-through, so it can sit outside the room.
-    target.set(position.x, CAMERA_HEIGHT, position.z)
+    target.set(position.x, CAMERA_HEIGHT + jumping.height, position.z)
     camera.position.set(
       target.x + Math.sin(yaw) * Math.cos(pitch) * distance,
       target.y + Math.sin(pitch) * distance,
@@ -745,6 +783,7 @@ export function createExplorer(options: ExplorerOptions): Explorer {
     },
     interact,
     goTo: teleport,
+    jump: () => input.jump(),
     dance: setDance,
     suspend(next) {
       if (next === suspended) return

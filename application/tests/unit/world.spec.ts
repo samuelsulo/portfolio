@@ -1,11 +1,13 @@
 import { describe, expect, it } from 'vitest'
 import {
   DECOR,
+  decorOf,
   DESTINATIONS,
   HUB,
   ROOMS,
   START_POSITION,
   buildInteractables,
+  groundAt,
   isWalkable,
   itemsInRoom,
   moveDirection,
@@ -185,5 +187,27 @@ describe('3D world', () => {
         }
       }
     }
+  })
+})
+
+describe('standing on props', () => {
+  const rack = decorOf(HUB).find((item) => item.kind === 'rack')!
+  const beside = { x: rack.position.x, z: rack.position.z }
+
+  it('treats a prop as a wall below its top and as a floor above it', () => {
+    expect(isWalkable(beside, HUB, undefined, 0)).toBe(false)
+    expect(isWalkable(beside, HUB, undefined, rack.top)).toBe(true)
+    expect(groundAt(beside, HUB, 0)).toBe(0)
+    expect(groundAt(beside, HUB, rack.top)).toBe(rack.top)
+  })
+
+  it('gives every solid prop a top and none to the others', () => {
+    for (const item of DECOR) expect(item.top > 0, item.kind).toBe(item.solid !== null)
+  })
+
+  it('lets a jump of the player reach the top of every prop', async () => {
+    const { JUMP_SPEED, GRAVITY } = await import('../../src/scene3d/dances')
+    const apex = JUMP_SPEED ** 2 / (2 * GRAVITY)
+    for (const item of DECOR) expect(item.top, item.kind).toBeLessThan(apex)
   })
 })

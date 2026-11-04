@@ -1,6 +1,6 @@
 # Issue Template
 
-Templates for opening GitHub issues during the development of a client
+Templates for opening GitHub issues during the development of this
 project, to track work uniformly from the high-level objective down to
 the individual bug.
 
