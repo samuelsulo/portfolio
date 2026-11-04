@@ -69,8 +69,8 @@ const isLooking = ref(false)
 const wheelFirst = ref<HTMLButtonElement | null>(null)
 const selected = ref<Interactable | null>(null)
 
-const POINTER_CONTROLS = ['walk', 'run', 'look', 'interact', 'dance', 'menu'] as const
-const TOUCH_CONTROLS = ['walk', 'look', 'zoom', 'interact'] as const
+const POINTER_CONTROLS = ['walk', 'run', 'jump', 'look', 'interact', 'dance', 'menu'] as const
+const TOUCH_CONTROLS = ['walk', 'jump', 'look', 'zoom', 'interact'] as const
 
 // The scene is exactly as big as the screen and never scrolls: the page behind it is locked while it is shown.
 // The sheets and panels on top keep their own scroll. A class, not an inline style, because the modal resets that.
@@ -543,6 +543,17 @@ onBeforeUnmount(() => {
         <div ref="joystick" class="explore__joystick" aria-hidden="true">
           <div class="explore__knob" />
         </div>
+
+        <button
+          v-if="!isMenuOpen"
+          type="button"
+          class="explore__round explore__jump"
+          :aria-label="t('explore.jump')"
+          :title="t('explore.jump')"
+          @click="explorer?.jump()"
+        >
+          <AppIcon name="arrow-up" :size="22" />
+        </button>
 
         <button
           v-if="nearby && !selected && !sheetItem"
@@ -1106,9 +1117,23 @@ onBeforeUnmount(() => {
   color: var(--color-on-neon);
 }
 
+/* Touch only: a keyboard has Space. Above the dance button, in reach of the right thumb. */
+.explore__jump {
+  display: none;
+  position: absolute;
+  right: var(--space-sm);
+  bottom: calc(76px + 48px + var(--space-xs));
+  border-color: var(--color-neon-primary);
+  color: var(--color-neon-primary);
+}
+
 @media (pointer: coarse) {
   .explore__dance {
     bottom: 76px;
+  }
+
+  .explore__jump {
+    display: inline-flex;
   }
 }
 

@@ -77,6 +77,47 @@ export function walkPose(phase: number, amount: number): Pose {
   return pose
 }
 
+/** Jump physics (metres and seconds). The apex is JUMP_SPEED^2 / (2 * GRAVITY), about 2.25 m: enough to climb onto a rack. */
+export const JUMP_SPEED = 10.4
+export const GRAVITY = 24
+
+export interface JumpState {
+  /** Height of the feet above the floor. */
+  height: number
+  /** Vertical speed, positive going up. */
+  speed: number
+}
+
+/** Starts a jump, only when standing (on the floor or on a prop at `ground`): pressing the key in mid air does nothing. */
+export function startJump(state: JumpState, ground = 0): JumpState {
+  return state.height > ground || state.speed !== 0
+    ? state
+    : { height: state.height, speed: JUMP_SPEED }
+}
+
+/**
+ * Moves a jump forward by `dt` seconds. `ground` is the height of what is under the feet: the
+ * figure lands on it, and falls when it is no longer there (walking off the edge of a prop).
+ */
+export function stepJump(state: JumpState, dt: number, ground = 0): JumpState {
+  if (state.height <= ground && state.speed <= 0) return { height: ground, speed: 0 }
+  const speed = state.speed - GRAVITY * dt
+  const height = state.height + speed * dt
+  return height <= ground && speed <= 0 ? { height: ground, speed: 0 } : { height, speed }
+}
+
+/** In the air: the arms go up and the knees are tucked, more so while going up. */
+export function jumpPose(speed: number): Pose {
+  const pose = restPose()
+  const rise = Math.max(-1, Math.min(1, speed / JUMP_SPEED))
+  const tuck = 0.35 + 0.35 * Math.max(0, rise)
+  pose.legLeft = limb(-0.3 * tuck, 0, tuck * 1.2)
+  pose.legRight = limb(0.2 * tuck, 0, tuck * 0.8)
+  pose.armLeft = limb(0, 0.5 + 0.9 * Math.max(0, rise), 0)
+  pose.armRight = limb(0, -(0.5 + 0.9 * Math.max(0, rise)), 0)
+  return pose
+}
+
 const mix = (from: number, to: number, amount: number) => from + (to - from) * amount
 
 type Dance = (t: number) => Pose

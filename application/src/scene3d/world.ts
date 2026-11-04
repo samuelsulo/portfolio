@@ -81,6 +81,8 @@ export interface Decor {
   height: number
   /** The floor area it takes up, null when the player can walk through or under it. */
   solid: Rect | null
+  /** How high the top of the solid is, where the player can stand after a jump (0 without a solid). */
+  top: number
 }
 
 export const HUB: RoomId = 'hub'
@@ -141,6 +143,20 @@ const FOOTPRINT: Partial<Record<DecorKind, [number, number]>> = {
   pedestal: [0.9, 0.9],
 }
 
+/** The height of the top of each standing prop, matching how tall it is drawn in `props.ts`. */
+const TOP: Partial<Record<DecorKind, number>> = {
+  rack: 2,
+  desk: 0.78,
+  database: 1.4,
+  containers: 1.2,
+  lock: 1.2,
+  antenna: 0.3,
+  pedestal: 1.1,
+}
+
+/** A solid at most this much above the feet is stepped on instead of being a wall. */
+export const STEP_HEIGHT = 0.1
+
 function decor(
   room: RoomId,
   kind: DecorKind,
@@ -156,6 +172,7 @@ function decor(
     position: { x, z },
     rotationY,
     height,
+    top: footprint ? (TOP[kind] ?? 0) : 0,
     solid: footprint
       ? {
           minX: x - footprint[0],
@@ -220,10 +237,30 @@ function inside(rect: Rect, point: Vec2, margin: number): boolean {
   )
 }
 
-/** Whether a player of that radius can stand at the point: inside the walls and not in a prop. */
-export function isWalkable(point: Vec2, room: RoomId, radius = PLAYER_RADIUS): boolean {
+/**
+ * Whether a player of that radius, with the feet at the height `feet`, can stand at the point: inside
+ * the walls and not in a prop. A prop whose top is within a step of the feet (or below them) is not
+ * in the way: the player is above it.
+ */
+export function isWalkable(point: Vec2, room: RoomId, radius = PLAYER_RADIUS, feet = 0): boolean {
   if (!inside(roomRect(roomById(room)), point, radius)) return false
-  return !decorOf(room).some((item) => item.solid && inside(item.solid, point, -radius))
+  return !decorOf(room).some(
+    (item) => item.solid && item.top > feet + STEP_HEIGHT && inside(item.solid, point, -radius),
+  )
+}
+
+/**
+ * The height of the floor under the point for a player with the feet at `feet`: the top of the
+ * highest prop they are above (the same area that blocks them from the side), else 0.
+ */
+export function groundAt(point: Vec2, room: RoomId, feet: number, radius = PLAYER_RADIUS): number {
+  let ground = 0
+  for (const item of decorOf(room)) {
+    if (item.solid && item.top <= feet + STEP_HEIGHT && inside(item.solid, point, -radius)) {
+      ground = Math.max(ground, item.top)
+    }
+  }
+  return ground
 }
 
 /**
@@ -231,12 +268,18 @@ export function isWalkable(point: Vec2, room: RoomId, radius = PLAYER_RADIUS): b
  * straight move is blocked it tries each axis alone, so the player slides along
  * an obstacle instead of sticking to it.
  */
-export function resolveMove(from: Vec2, to: Vec2, room: RoomId, radius = PLAYER_RADIUS): Vec2 {
-  if (isWalkable(to, room, radius)) return to
+export function resolveMove(
+  from: Vec2,
+  to: Vec2,
+  room: RoomId,
+  radius = PLAYER_RADIUS,
+  feet = 0,
+): Vec2 {
+  if (isWalkable(to, room, radius, feet)) return to
   const alongX = { x: to.x, z: from.z }
-  if (isWalkable(alongX, room, radius)) return alongX
+  if (isWalkable(alongX, room, radius, feet)) return alongX
   const alongZ = { x: from.x, z: to.z }
-  if (isWalkable(alongZ, room, radius)) return alongZ
+  if (isWalkable(alongZ, room, radius, feet)) return alongZ
   return from
 }
 

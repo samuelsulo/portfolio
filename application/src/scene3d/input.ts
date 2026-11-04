@@ -6,6 +6,10 @@ export interface Input {
   /** Walking intent: `x` to the right, `z` forward, each from -1 to 1. */
   movement(): Vec2
   running(): boolean
+  /** Whether a jump was asked for since the last call (Space or the jump button). */
+  consumeJump(): boolean
+  /** Asks for a jump, e.g. from the on-screen button. */
+  jump(): void
   /** The camera turn since the last call: `x` around the player, `z` up and down (radians). */
   consumeOrbit(): Vec2
   /** The camera distance change since the last call. */
@@ -34,6 +38,7 @@ export function createInput({ canvas, joystick, onLockChange }: InputOptions): I
   let orbitX = 0
   let orbitZ = 0
   let zoom = 0
+  let jumpRequested = false
   const stick = { x: 0, z: 0 }
 
   function isTyping(target: EventTarget | null): boolean {
@@ -51,6 +56,11 @@ export function createInput({ canvas, joystick, onLockChange }: InputOptions): I
       event.target instanceof HTMLElement && ['BUTTON', 'A'].includes(event.target.tagName)
     if (event.code === 'KeyE' || (event.code === 'Enter' && !onControl)) {
       handle.onInteract?.()
+      return
+    }
+    if (event.code === 'Space') {
+      // On a focused button, Space is its own click.
+      if (!onControl) jumpRequested = true
       return
     }
     keys.add(event.code)
@@ -201,6 +211,14 @@ export function createInput({ canvas, joystick, onLockChange }: InputOptions): I
       const z = (pressed('ArrowUp', 'KeyW') ? 1 : 0) - (pressed('ArrowDown', 'KeyS') ? 1 : 0)
       return { x: x + stick.x, z: z + stick.z }
     },
+    consumeJump() {
+      const value = jumpRequested
+      jumpRequested = false
+      return value
+    },
+    jump() {
+      if (enabled) jumpRequested = true
+    },
     running: () => keys.has('ShiftLeft') || keys.has('ShiftRight'),
     consumeOrbit() {
       const orbit = { x: orbitX, z: orbitZ }
@@ -219,6 +237,7 @@ export function createInput({ canvas, joystick, onLockChange }: InputOptions): I
         // The cursor is needed for the panels and the menus.
         if (isLocked()) document.exitPointerLock()
         keys.clear()
+        jumpRequested = false
         releaseStick()
         pointers.clear()
       }

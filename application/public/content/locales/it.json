@@ -773,6 +773,7 @@
     "lookHint": "Clicca sulla scena, poi muovi il mouse per guardarti intorno (Esc per rilasciarlo)",
     "openPage": "Apri come pagina",
     "menu": "Menu",
+    "jump": "Salta",
     "menuTitle": "Menu",
     "menuHint": "Premi M per aprire o chiudere questo menu",
     "controls": "Comandi",
@@ -789,6 +790,10 @@
       "run": {
         "key": "Shift",
         "action": "Corri"
+      },
+      "jump": {
+        "key": "Spazio",
+        "action": "Salta"
       },
       "look": {
         "key": "Mouse",
@@ -811,6 +816,10 @@
       "walk": {
         "key": "Joystick",
         "action": "Cammina"
+      },
+      "jump": {
+        "key": "Pulsante",
+        "action": "Salta (il pulsante con la freccia)"
       },
       "look": {
         "key": "Trascina",

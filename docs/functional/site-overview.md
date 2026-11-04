@@ -46,10 +46,10 @@ Everything is on the walls with a preview, before interacting: the screenshot of
 certification badges, the stack groups with their logos, the first page of the CVs and the
 contact details. Walking up to one shows a prompt, and using it opens its details, the work page, the
 certification verification, the CV PDF or the contact section of the classic view. Controls:
-arrows or WASD to walk, Shift to run, E to interact or enter a portal, and the mouse or
+arrows or WASD to walk, Shift to run, Space to jump (high enough to climb onto the racks, desks, containers and the other props, and to jump down from them), E to interact or enter a portal, and the mouse or
 trackpad to look around: a click on the scene captures the pointer, so the camera follows it
 without pressing any button (Escape releases it, and opening a panel or the dance menu does too);
-on touch screens a joystick, dragging to look, pinching to zoom and tapping the prompt.
+on touch screens a joystick, a round arrow button to jump, dragging to look, pinching to zoom and tapping the prompt.
 The scene is exactly as big as the screen and the page behind it never scrolls; only the sheets
 opened over it (work, CV, about, contact) and the menu scroll. A round burger button (or **M**)
 opens the menu: the rooms as tiles, a table of the controls and the link to the 2D version of the

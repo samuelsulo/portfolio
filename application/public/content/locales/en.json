@@ -773,6 +773,7 @@
     "lookHint": "Click the scene, then move the mouse to look around (Esc to release it)",
     "openPage": "Open as a page",
     "menu": "Menu",
+    "jump": "Jump",
     "menuTitle": "Menu",
     "menuHint": "Press M to open or close this menu",
     "controls": "Controls",
@@ -789,6 +790,10 @@
       "run": {
         "key": "Shift",
         "action": "Run"
+      },
+      "jump": {
+        "key": "Space",
+        "action": "Jump"
       },
       "look": {
         "key": "Mouse",
@@ -811,6 +816,10 @@
       "walk": {
         "key": "Joystick",
         "action": "Walk"
+      },
+      "jump": {
+        "key": "Button",
+        "action": "Jump (the arrow button)"
       },
       "look": {
         "key": "Drag",
