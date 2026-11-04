@@ -738,7 +738,7 @@
     "unsupportedBody": "Your browser cannot show 3D graphics, but everything is also available in the classic view.",
     "backTo2d": "Classic view",
     "prompt": "Open {name}",
-    "helpPointer": "Arrows or WASD to walk, Shift to run, mouse to look around (click the scene first), E to interact or enter a portal, B to dance",
+    "helpPointer": "Arrows or WASD to walk, Shift to run, mouse to look around (click the scene first), E to interact or enter a portal, B to dance, M for the menu",
     "helpTouch": "Joystick to walk, drag to look, pinch to zoom, tap the prompt to use a portal",
     "rooms": {
       "work": "Work gallery",
@@ -773,6 +773,12 @@
       }
     },
     "lookHint": "Click the scene, then move the mouse to look around (Esc to release it)",
-    "openPage": "Open as a page"
+    "openPage": "Open as a page",
+    "menu": "Menu",
+    "menuTitle": "Menu",
+    "menuHint": "Press M to open or close this menu",
+    "controls": "Controls",
+    "rotateHint": "Rotate your device to landscape for a better view",
+    "rotateDismiss": "Continue anyway"
   }
 }

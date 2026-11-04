@@ -62,6 +62,9 @@ const nearby = ref<Interactable | null>(null)
 const room = ref<RoomId>('hub')
 const isFlashing = ref(false)
 const isDanceMenuOpen = ref(false)
+const isMenuOpen = ref(false)
+const isRotateHintDismissed = ref(false)
+const menuFirst = ref<HTMLButtonElement | null>(null)
 const isLooking = ref(false)
 const wheelFirst = ref<HTMLButtonElement | null>(null)
 const selected = ref<Interactable | null>(null)
@@ -228,8 +231,26 @@ function pickDance(id: DanceId | null) {
   closeDanceMenu()
 }
 
+// --- The menu: rooms, controls and the way back to the classic view, opened with M or its button ---
+function openMenu() {
+  if (!explorer.value || selected.value || sheetItem.value) return
+  if (isDanceMenuOpen.value) closeDanceMenu()
+  isMenuOpen.value = true
+  void nextTick(() => menuFirst.value?.focus())
+}
+
+function closeMenu() {
+  isMenuOpen.value = false
+}
+
+function goToRoom(id: RoomId) {
+  closeMenu()
+  explorer.value?.goTo(id)
+}
+
 function openItem(item: Interactable) {
   if (isDanceMenuOpen.value) closeDanceMenu()
+  if (isMenuOpen.value) closeMenu()
   if (SHEET_KINDS.includes(item.kind)) {
     openSheet(item)
     return
@@ -250,6 +271,7 @@ function goTo(location: Parameters<typeof router.push>[0]) {
 function onKeydown(event: KeyboardEvent) {
   if (event.key === 'Escape') {
     if (selected.value) closePanel()
+    else if (isMenuOpen.value) closeMenu()
     else if (isDanceMenuOpen.value) closeDanceMenu()
     // The sheet closes itself on Escape while the focus is in it; this covers the focus being elsewhere
     // (a link opened straight on a sheet), without closing it twice.
@@ -268,7 +290,13 @@ function onKeydown(event: KeyboardEvent) {
     return
   }
   if (sheetItem.value) return
+  if (event.code === 'KeyM' && !event.repeat) {
+    if (isMenuOpen.value) closeMenu()
+    else openMenu()
+    return
+  }
   if (event.code === 'KeyB' && !event.repeat) {
+    if (isMenuOpen.value) return
     if (isDanceMenuOpen.value) closeDanceMenu()
     else openDanceMenu()
     return
@@ -280,7 +308,9 @@ function onKeydown(event: KeyboardEvent) {
 }
 
 // The scene stops listening while anything is open on top of it, and stops drawing under a sheet.
-const isPaused = computed(() => Boolean(selected.value || isDanceMenuOpen.value || sheetItem.value))
+const isPaused = computed(() =>
+  Boolean(selected.value || isDanceMenuOpen.value || isMenuOpen.value || sheetItem.value),
+)
 watchEffect(() => {
   explorer.value?.setPaused(isPaused.value)
   explorer.value?.suspend(Boolean(sheetItem.value))
@@ -363,34 +393,22 @@ onBeforeUnmount(() => {
 
         <div class="explore__hud">
           <p class="explore__room" aria-live="polite">{{ t(`explore.rooms.${room}`) }}</p>
-          <RouterLink :to="{ name: 'home' }" class="explore__exit">
-            <AppIcon name="arrow-left" :size="16" />
-            {{ t('explore.backTo2d') }}
-          </RouterLink>
+          <button type="button" class="explore__menu-button" @click="openMenu">
+            <kbd>M</kbd>
+            {{ t('explore.menu') }}
+          </button>
         </div>
 
-        <nav class="explore__rooms" :aria-label="t('explore.roomsLabel')">
-          <button
-            v-for="id in rooms"
-            :key="id"
-            type="button"
-            class="explore__chip"
-            :class="{ 'is-active': id === room }"
-            :aria-current="id === room ? 'true' : undefined"
-            @click="explorer?.goTo(id)"
-          >
-            {{ t(`explore.rooms.${id}`) }}
-          </button>
-        </nav>
-
         <p
-          v-if="!isLoading && !isLooking && !selected && !sheetItem && !isDanceMenuOpen"
+          v-if="
+            !isLoading && !isLooking && !selected && !sheetItem && !isDanceMenuOpen && !isMenuOpen
+          "
           class="explore__look"
         >
           {{ t('explore.lookHint') }}
         </p>
 
-        <button type="button" class="explore__dance" @click="openDanceMenu">
+        <button v-if="!isMenuOpen" type="button" class="explore__dance" @click="openDanceMenu">
           <kbd>B</kbd>
           {{ t('explore.dance.open') }}
         </button>
@@ -425,8 +443,52 @@ onBeforeUnmount(() => {
           </div>
         </div>
 
-        <p class="explore__help explore__help--pointer">{{ t('explore.helpPointer') }}</p>
-        <p class="explore__help explore__help--touch">{{ t('explore.helpTouch') }}</p>
+        <div
+          v-if="isMenuOpen"
+          class="explore__menu glass-surface"
+          role="dialog"
+          :aria-label="t('explore.menuTitle')"
+          @click.self="closeMenu"
+        >
+          <div class="explore__menu-card">
+            <button
+              type="button"
+              class="explore__close"
+              :aria-label="t('common.close')"
+              @click="closeMenu"
+            >
+              <AppIcon name="close" :size="18" />
+            </button>
+            <h2 class="explore__panel-title">{{ t('explore.menuTitle') }}</h2>
+            <nav :aria-label="t('explore.roomsLabel')">
+              <ul class="explore__menu-rooms">
+                <li v-for="(id, index) in rooms" :key="id">
+                  <button
+                    :ref="
+                      (element) => {
+                        if (index === 0) menuFirst = element as HTMLButtonElement | null
+                      }
+                    "
+                    type="button"
+                    class="explore__chip"
+                    :class="{ 'is-active': id === room }"
+                    :aria-current="id === room ? 'true' : undefined"
+                    @click="goToRoom(id)"
+                  >
+                    {{ t(`explore.rooms.${id}`) }}
+                  </button>
+                </li>
+              </ul>
+            </nav>
+            <h3 class="explore__menu-heading">{{ t('explore.controls') }}</h3>
+            <p class="explore__help explore__help--pointer">{{ t('explore.helpPointer') }}</p>
+            <p class="explore__help explore__help--touch">{{ t('explore.helpTouch') }}</p>
+            <RouterLink :to="{ name: 'home' }" class="explore__exit">
+              <AppIcon name="arrow-left" :size="16" />
+              {{ t('explore.backTo2d') }}
+            </RouterLink>
+          </div>
+        </div>
 
         <div ref="joystick" class="explore__joystick" aria-hidden="true">
           <div class="explore__knob" />
@@ -441,6 +503,18 @@ onBeforeUnmount(() => {
           <kbd>E</kbd>
           <span>{{ promptFor(nearby) }}</span>
         </button>
+
+        <div
+          v-if="!isRotateHintDismissed && !isLoading"
+          class="explore__rotate"
+          role="dialog"
+          :aria-label="t('explore.rotateHint')"
+        >
+          <p>{{ t('explore.rotateHint') }}</p>
+          <BaseButton @click="isRotateHintDismissed = true">
+            {{ t('explore.rotateDismiss') }}
+          </BaseButton>
+        </div>
 
         <div class="explore__flash" :class="{ 'is-on': isFlashing }" aria-hidden="true" />
 
@@ -536,8 +610,8 @@ onBeforeUnmount(() => {
 <style scoped>
 .explore {
   position: relative;
-  /* The navbar (73px) stays on screen, the stage takes the rest of the viewport. */
-  height: calc(100dvh - 73px);
+  /* No navbar and no footer: the stage is the whole viewport. */
+  height: 100dvh;
   min-height: 480px;
   background-color: var(--color-bg);
 }
@@ -629,6 +703,7 @@ onBeforeUnmount(() => {
 
 .explore__room,
 .explore__exit,
+.explore__menu-button,
 .explore__help {
   margin: 0;
   padding: var(--space-3xs) var(--space-xs);
@@ -653,18 +728,30 @@ onBeforeUnmount(() => {
   pointer-events: auto;
 }
 
-.explore__exit:hover {
+.explore__menu-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  color: var(--color-text);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.explore__menu-button kbd {
+  padding: 0 var(--space-3xs);
+  border: 1px solid currentcolor;
+  border-radius: 4px;
+}
+
+.explore__exit:hover,
+.explore__menu-button:hover {
   border-color: var(--color-neon-primary);
   color: var(--color-neon-primary);
 }
 
 .explore__help {
-  position: absolute;
-  left: var(--space-sm);
-  bottom: var(--space-sm);
-  max-width: min(420px, 60vw);
+  margin: 0 0 var(--space-xs);
   color: var(--color-text-muted);
-  pointer-events: none;
 }
 
 .explore__help--touch {
@@ -708,10 +795,10 @@ onBeforeUnmount(() => {
 
   .explore__help--touch {
     display: block;
-    left: auto;
-    right: var(--space-sm);
-    max-width: 45vw;
-    text-align: right;
+  }
+
+  .explore__menu-button kbd {
+    display: none;
   }
 }
 
@@ -817,14 +904,44 @@ onBeforeUnmount(() => {
   font-size: var(--fs-mono);
 }
 
-.explore__rooms {
+/* Menu */
+.explore__menu {
   position: absolute;
-  top: calc(var(--space-sm) + 48px);
-  right: var(--space-sm);
+  inset: 0;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-sm);
+  background-color: var(--color-scrim);
+}
+
+.explore__menu-card {
+  position: relative;
+  width: min(520px, 100%);
+  max-height: 100%;
+  overflow-y: auto;
+  padding: var(--space-md);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+}
+
+.explore__menu-rooms {
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--space-2xs);
+  margin: 0 0 var(--space-sm);
+  padding: 0;
+  list-style: none;
+}
+
+.explore__menu-heading {
+  margin: 0 0 var(--space-2xs);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .explore__chip {
@@ -1062,5 +1179,25 @@ onBeforeUnmount(() => {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-xs);
+}
+/* Only a phone held upright: the rooms are wide, so ask for landscape (it cannot be forced on the web). */
+.explore__rotate {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background-color: var(--color-scrim);
+  text-align: center;
+}
+
+@media (pointer: coarse) and (orientation: portrait) {
+  .explore__rotate {
+    display: flex;
+  }
 }
 </style>
