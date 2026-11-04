@@ -12,6 +12,12 @@ async function openExplore(page: Page) {
   await expect(page.locator('.explore__loading')).toHaveCount(0)
 }
 
+/** Opens the menu with M and jumps to a room from its list. */
+async function goToRoom(page: Page, name: string) {
+  await page.keyboard.press('m')
+  await page.locator('.explore__chip', { hasText: name }).click()
+}
+
 test.describe('3D view', () => {
   test('does not download the 3D engine until the visitor opens it', async ({ page }) => {
     const scripts: string[] = []
@@ -49,7 +55,7 @@ test.describe('3D view', () => {
     await expect(page.locator('.explore__room')).toHaveText(/hub/i)
 
     // The room list jumps to a room, where the portal back is right in front.
-    await page.locator('.explore__chip', { hasText: 'Work gallery' }).click()
+    await goToRoom(page, 'Work gallery')
     await expect(page.locator('.explore__room')).toHaveText(/work gallery/i)
     await expect(page.locator('.explore__prompt')).toContainText('Hub')
 
@@ -59,10 +65,11 @@ test.describe('3D view', () => {
 
   test('resumes where the visitor was after leaving the page', async ({ page }) => {
     await openExplore(page)
-    await page.locator('.explore__chip', { hasText: 'Stack room' }).click()
+    await goToRoom(page, 'Stack room')
     await expect(page.locator('.explore__room')).toHaveText(/stack room/i)
 
     // Opening a work, the contact or the classic view leaves the page.
+    await page.keyboard.press('m')
     await page.locator('.explore__exit').click()
     await expect(page.locator('#hero')).toBeVisible()
     await page.locator('header a.navbar__view').click()
@@ -133,11 +140,25 @@ test.describe('3D view', () => {
     await expect(page.locator('.cv-viewer__page')).toHaveCount(2)
   })
 
-  test('keeps the navbar and goes back to the classic view', async ({ page }) => {
-    await page.goto('/3d')
-    await expect(page.locator('header.navbar')).toBeVisible()
-    await expect(page.locator('footer')).toHaveCount(1)
-    await page.locator('header a.navbar__view').click()
+  test('fills the screen and has a menu with the rooms and the way back to the classic view', async ({
+    page,
+  }) => {
+    await openExplore(page)
+    await expect(page.locator('header.navbar')).toHaveCount(0)
+    await expect(page.locator('footer')).toHaveCount(0)
+
+    // M and the button both open the menu, M and Escape close it.
+    await page.keyboard.press('m')
+    await expect(page.locator('.explore__menu')).toBeVisible()
+    await page.keyboard.press('m')
+    await expect(page.locator('.explore__menu')).toHaveCount(0)
+    await page.locator('.explore__menu-button').click()
+    await expect(page.locator('.explore__menu')).toBeVisible()
+    await page.keyboard.press('Escape')
+    await expect(page.locator('.explore__menu')).toHaveCount(0)
+
+    await page.keyboard.press('m')
+    await page.locator('.explore__exit').click()
     await expect(page).toHaveURL(/\/$/)
     await expect(page.locator('#hero')).toBeVisible()
   })
