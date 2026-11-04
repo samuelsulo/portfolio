@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## application/v1.6.0 - 2026-11-04
+#### Features
+- (**application**) add jumping in the 3D view and restyle its menu and controls (#13) - (d2e973e) - Samuel Sulo
+
+- - -
+
 ## application/v1.5.0 - 2026-11-04
 #### Features
 - (**application**) make the 3D view fullscreen with a menu for rooms and controls (#12) - (fbf7553) - Samuel Sulo
