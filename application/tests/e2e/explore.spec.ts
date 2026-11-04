@@ -15,7 +15,7 @@ async function openExplore(page: Page) {
 /** Opens the menu with M and jumps to a room from its list. */
 async function goToRoom(page: Page, name: string) {
   await page.keyboard.press('m')
-  await page.locator('.explore__chip', { hasText: name }).click()
+  await page.locator('.explore__tile', { hasText: name }).click()
 }
 
 test.describe('3D view', () => {
@@ -161,5 +161,18 @@ test.describe('3D view', () => {
     await page.locator('.explore__exit').click()
     await expect(page).toHaveURL(/\/$/)
     await expect(page.locator('#hero')).toBeVisible()
+  })
+
+  test('never scrolls the page and fills the screen', async ({ page }) => {
+    await openExplore(page)
+    const metrics = await page.evaluate(() => ({
+      overflow: getComputedStyle(document.documentElement).overflow,
+      scrollable: document.documentElement.scrollHeight - window.innerHeight,
+      height: document.querySelector('.explore')!.getBoundingClientRect().height,
+      viewport: window.innerHeight,
+    }))
+    expect(metrics.overflow).toBe('hidden')
+    expect(metrics.scrollable).toBeLessThanOrEqual(0)
+    expect(metrics.height).toBe(metrics.viewport)
   })
 })

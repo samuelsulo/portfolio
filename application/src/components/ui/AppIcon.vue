@@ -34,6 +34,7 @@ export type IconName =
   | 'palette'
   | 'map-pin'
   | 'link'
+  | 'music'
 
 const props = withDefaults(
   defineProps<{
@@ -79,6 +80,7 @@ const paths: Record<IconName, string> = {
   'map-pin':
     '<path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/>',
   link: '<path d="M10 13a5 5 0 0 0 7.1 0l2.9-2.9a5 5 0 0 0-7.1-7.1l-1.2 1.2"/><path d="M14 11a5 5 0 0 0-7.1 0L4 13.9a5 5 0 0 0 7.1 7.1l1.2-1.2"/>',
+  music: '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
   moon: '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>',
   loader:
     '<path d="M12 3v3"/><path d="m16.95 7.05 2.12-2.12"/><path d="M21 12h-3"/><path d="m16.95 16.95 2.12 2.12"/><path d="M12 18v3"/><path d="m7.05 16.95-2.12 2.12"/><path d="M3 12h3"/><path d="m7.05 7.05-2.12-2.12"/>',

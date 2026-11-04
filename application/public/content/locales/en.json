@@ -736,10 +736,8 @@
     "loading": "Loading the rooms...",
     "unsupportedTitle": "3D view not available",
     "unsupportedBody": "Your browser cannot show 3D graphics, but everything is also available in the classic view.",
-    "backTo2d": "Classic view",
+    "backTo2d": "2D version",
     "prompt": "Open {name}",
-    "helpPointer": "Arrows or WASD to walk, Shift to run, mouse to look around (click the scene first), E to interact or enter a portal, B to dance, M for the menu",
-    "helpTouch": "Joystick to walk, drag to look, pinch to zoom, tap the prompt to use a portal",
     "rooms": {
       "work": "Work gallery",
       "stack": "Stack room",
@@ -779,6 +777,53 @@
     "menuHint": "Press M to open or close this menu",
     "controls": "Controls",
     "rotateHint": "Rotate your device to landscape for a better view",
-    "rotateDismiss": "Continue anyway"
+    "rotateDismiss": "Continue anyway",
+    "controlsKey": "Control",
+    "controlsAction": "Action",
+    "exitHint": "Back to the classic site, without the 3D scene",
+    "controlsPointer": {
+      "walk": {
+        "key": "WASD",
+        "action": "Walk"
+      },
+      "run": {
+        "key": "Shift",
+        "action": "Run"
+      },
+      "look": {
+        "key": "Mouse",
+        "action": "Look around (click the scene first)"
+      },
+      "interact": {
+        "key": "E",
+        "action": "Interact or enter a portal"
+      },
+      "dance": {
+        "key": "B",
+        "action": "Dance"
+      },
+      "menu": {
+        "key": "M",
+        "action": "Menu"
+      }
+    },
+    "controlsTouch": {
+      "walk": {
+        "key": "Joystick",
+        "action": "Walk"
+      },
+      "look": {
+        "key": "Drag",
+        "action": "Look around"
+      },
+      "zoom": {
+        "key": "Pinch",
+        "action": "Zoom"
+      },
+      "interact": {
+        "key": "Tap",
+        "action": "Use the prompt to interact"
+      }
+    }
   }
 }

@@ -736,10 +736,8 @@
     "loading": "Caricamento delle stanze...",
     "unsupportedTitle": "Vista 3D non disponibile",
     "unsupportedBody": "Il browser non riesce a mostrare la grafica 3D, ma tutto è disponibile anche nella vista classica.",
-    "backTo2d": "Vista classica",
+    "backTo2d": "Versione 2D",
     "prompt": "Apri {name}",
-    "helpPointer": "Frecce o WASD per camminare, Shift per correre, mouse per guardarti intorno (prima clicca sulla scena), E per interagire o entrare in un portale, B per ballare, M per il menu",
-    "helpTouch": "Joystick per camminare, trascina per guardare, pizzica per lo zoom, tocca il suggerimento per usare un portale",
     "rooms": {
       "work": "Galleria dei lavori",
       "stack": "Sala dello stack",
@@ -779,6 +777,53 @@
     "menuHint": "Premi M per aprire o chiudere questo menu",
     "controls": "Comandi",
     "rotateHint": "Ruota il dispositivo in orizzontale per una visione migliore",
-    "rotateDismiss": "Continua comunque"
+    "rotateDismiss": "Continua comunque",
+    "controlsKey": "Comando",
+    "controlsAction": "Azione",
+    "exitHint": "Torna al sito classico, senza scena 3D",
+    "controlsPointer": {
+      "walk": {
+        "key": "WASD",
+        "action": "Cammina"
+      },
+      "run": {
+        "key": "Shift",
+        "action": "Corri"
+      },
+      "look": {
+        "key": "Mouse",
+        "action": "Guarda intorno (clicca prima sulla scena)"
+      },
+      "interact": {
+        "key": "E",
+        "action": "Interagisci o entra in un portale"
+      },
+      "dance": {
+        "key": "B",
+        "action": "Balla"
+      },
+      "menu": {
+        "key": "M",
+        "action": "Menu"
+      }
+    },
+    "controlsTouch": {
+      "walk": {
+        "key": "Joystick",
+        "action": "Cammina"
+      },
+      "look": {
+        "key": "Trascina",
+        "action": "Guarda intorno"
+      },
+      "zoom": {
+        "key": "Pizzica",
+        "action": "Zoom"
+      },
+      "interact": {
+        "key": "Tocca",
+        "action": "Usa il suggerimento per interagire"
+      }
+    }
   }
 }
