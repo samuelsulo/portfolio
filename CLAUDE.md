@@ -1,22 +1,18 @@
 # CLAUDE.md: Project Guardrails
 
 This file instructs whoever works on this repository (human or AI assistant)
-on how to operate within this project. It applies to **every client**:
-the structure, conventions and rules are standard and are not to be
-reinvented project by project. If a client request seems to require
-deviating from these rules, stop and flag the deviation instead of
-proceeding autonomously (see "Changes that require manual review").
+on how to operate within this project. The structure, conventions and rules
+below are fixed and are not to be reinvented. If a request seems to require
+deviating from them, stop and flag the deviation instead of proceeding
+autonomously (see "Changes that require manual review").
 
-This file covers only what is cross-cutting across every client project,
-regardless of cloud provider or application type. Provider-specific and
-Terraform-specific rules live in `infrastructure/CLAUDE.md`, brought in
-by the infrastructure scaffold itself (see
-[`infrastructure/README.md`](./infrastructure/README.md)). Application
-stack-specific conventions live wherever that stack's convention defines
-them (see [`application/README.md`](./application/README.md)). Do not
-duplicate rules already defined there into this file, or vice versa:
-each concept has a single place it is documented, and everything else
-refers to it instead of repeating it.
+This file covers only what is cross-cutting. Terraform and AWS rules live in
+`infrastructure/CLAUDE.md`, brought in by the infrastructure scaffold itself
+(see [`infrastructure/README.md`](./infrastructure/README.md)). Application
+conventions live in [`application/README.md`](./application/README.md). Do not
+duplicate rules already defined there into this file, or vice versa: each
+concept has a single place it is documented, and everything else refers to it
+instead of repeating it.
 
 ## 1. Repository Structure
 
@@ -28,24 +24,19 @@ likewise fixed: add content inside the existing subfolders, do not
 introduce new top-level documentation categories without flagging it
 first.
 
-`brand/` holds the client's brand assets (palette, logo, business card, fonts, the brand manual);
+`brand/` holds the brand assets (palette, logo, business card, fonts, the brand manual);
 it is not documentation, which is why it lives outside `docs/`.
 
-Issue templates in `.github/ISSUE_TEMPLATE/` are standard across every
-client project and must not be modified.
+Issue templates in `.github/ISSUE_TEMPLATE/` come from the project template
+and must not be modified.
 
-## 2. Client Engagement Model
+## 2. Hosting and Data
 
-Regardless of which cloud provider or application stack a project uses:
-
-- Production lives exclusively in the client's own cloud account/tenant,
-  never in mine.
-- Access to the client's environment is granted through a role or
-  mechanism the client can revoke autonomously at any time; no permanent
-  or shared credentials.
-- No personal client data (email, contact form submissions, customer
-  data, ...) is stored or processed outside the client's own
-  infrastructure without their explicit consent.
+- Production lives in the owner's own AWS account.
+- No permanent credentials are stored in the repository or in CI: AWS access
+  comes from the profile in the owner's terminal.
+- No personal data of visitors (email, contact form submissions, ...) is
+  stored or processed outside the owner's own infrastructure.
 
 ## 3. Component Versioning
 
@@ -60,7 +51,7 @@ and [`README.md`](./README.md)).
 
 ## 4. Required Documentation
 
-Every project, before closure, must have in `docs/`: functional
+The project must have in `docs/`: functional
 documentation, technical documentation, architecture documentation,
 a deployment guide, an operations guide, and handover documentation.
 Keep documentation up to date whenever a change to the code or the
@@ -72,13 +63,12 @@ Stop the work and explicitly flag it before proceeding if a request
 implies any of the following:
 
 - Introducing user authentication, restricted areas, e-commerce/payments,
-  where not already part of the agreed project scope.
-- Anything that moves the project closer to a SaaS/multi-tenant model,
-  with centralized management of multiple clients in the same account or
-  stack.
+  analytics or any tracking, where not already part of the project scope.
+- Deploying from CI, or storing any credential for production outside the
+  owner's terminal.
 
 In these cases: propose the solution, explain why it falls outside the
-standard scope, and wait for explicit confirmation before implementing.
+current scope, and wait for explicit confirmation before implementing.
 
 ## 6. General Conventions
 

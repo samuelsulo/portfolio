@@ -115,7 +115,7 @@ fi
 echo "==> Syncing dist/ to s3://$BUCKET"
 # Hashed assets (JS/CSS/fonts): cached forever, safe because the filename
 # changes on every content change. index.html: never cached, so a deploy
-# is visible immediately without waiting on a client's stale cache. The
+# is visible immediately without waiting on a visitor's stale cache. The
 # version marker lives outside dist/, excluded from --delete so it is
 # never pruned by it.
 aws s3 sync "$APPLICATION_DIR/dist/" "s3://$BUCKET/" --delete \

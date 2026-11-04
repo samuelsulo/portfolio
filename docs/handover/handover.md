@@ -1,7 +1,7 @@
 # Handover
 
-The portfolio is the owner's own, so this is a note to keep the project maintainable, not a
-delivery to a client. It points to the other documents instead of repeating them.
+Notes to keep the project maintainable over time. They point to the other documents instead of
+repeating them.
 
 ## What exists
 

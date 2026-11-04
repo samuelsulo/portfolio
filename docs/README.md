@@ -26,5 +26,5 @@ project once it is live.
 
 ## Handover Documentation ([handover/](handover/))
 
-The project closure document: what was delivered, where access and
-credentials live, known issues, and remaining work.
+Notes to keep the project maintainable: what exists, where access and
+credentials live, known limits, and remaining work.
