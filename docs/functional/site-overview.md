@@ -50,7 +50,10 @@ arrows or WASD to walk, Shift to run, E to interact or enter a portal, and the m
 trackpad to look around: a click on the scene captures the pointer, so the camera follows it
 without pressing any button (Escape releases it, and opening a panel or the dance menu does too);
 on touch screens a joystick, dragging to look, pinching to zoom and tapping the prompt.
-The **B** key (or the Dance button) opens a wheel of eight dances for the stickman (floss, disco,
+The scene is exactly as big as the screen and the page behind it never scrolls; only the sheets
+opened over it (work, CV, about, contact) and the menu scroll. A round burger button (or **M**)
+opens the menu: the rooms as tiles, a table of the controls and the link to the 2D version of the
+site. The **B** key (or the round dance button with a music note) opens a wheel of eight dances for the stickman (floss, disco,
 robot, wave, jumping jacks, spin, headbang, coding), chosen by clicking or with the keys 1 to 8;
 the figure dances until the visitor walks away. The visitor's spot is remembered while they open
 a work or the classic view and come back. Browsers without WebGL see a message with a link back to the classic view, and screen readers
