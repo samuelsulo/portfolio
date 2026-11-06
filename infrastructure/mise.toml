@@ -17,10 +17,6 @@ run = "scripts/catalog-list.sh \"$CATALOG_REPO\""
 description = "Vendor a module from the catalog"
 run = "scripts/catalog-vendor.sh \"$CATALOG_REPO\""
 
-[tasks."state:create-bucket"]
-description = "Create and configure the account-wide OpenTofu state bucket: <aws-profile> [region]"
-run = "scripts/state-create-bucket.sh"
-
 [tasks.lint]
 description = "Static checks: tflint and trivy"
 run = "scripts/lint.sh"

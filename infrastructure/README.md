@@ -10,7 +10,7 @@ AWS infrastructure managed with Terragrunt and OpenTofu.
 ├── units/        # reusable Terragrunt units wrapping the modules
 ├── modules/      # reusable OpenTofu modules
 ├── templates/    # starting points to copy when adding environments, regions, stacks, units
-├── scripts/      # helpers behind the mise tasks (catalog vendoring, state bucket)
+├── scripts/      # helpers behind the mise tasks (catalog vendoring)
 ├── mise.toml     # pinned tool versions and tasks
 └── CLAUDE.md     # guardrails for whoever works on this folder
 ```

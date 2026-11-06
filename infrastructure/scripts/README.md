@@ -1,8 +1,7 @@
 # Scripts
 
 Helper scripts backing the `mise` tasks: vendoring code from a catalog
-into [`../modules/vendor/`](../modules/vendor), and bootstrapping the
-state bucket, and linting the code.
+into [`../modules/vendor/`](../modules/vendor), and linting the code.
 
 Not called directly day to day: use the `mise` tasks in
 [`../mise.toml`](../mise.toml), which pass `$CATALOG_REPO` for you.
@@ -17,14 +16,6 @@ Not called directly day to day: use the `mise` tasks in
   `modules/<module>` into `modules/vendor/<module>` (replacing anything
   already there), and writes a `VENDORED.md` provenance file (source,
   name, ref, commit, date) alongside it.
-- [`state-create-bucket.sh`](./state-create-bucket.sh) (`mise run
-  state:create-bucket <aws-profile> [region]`): creates, once per
-  account, the shared state bucket `tfstate-<account-id>-<region>-an`
-  (the `state_bucket` of [`../live/root.hcl`](../live/root.hcl)) in the
-  account-regional namespace. It blocks public access, enables
-  versioning and SSE-S3 encryption, denies non-TLS requests, expires
-  noncurrent versions after 90 days (keeping the 5 most recent) and tags
-  the bucket. Requires the `aws` CLI. The region defaults to `eu-south-1`.
 
 - [`lint.sh`](./lint.sh) (`mise run lint`): runs `tflint` ([`.tflint.hcl`](../.tflint.hcl))
   and `trivy` (HIGH and CRITICAL only; the findings accepted on purpose
@@ -34,8 +25,7 @@ Not called directly day to day: use the `mise` tasks in
 ## Conventions
 
 - Plain bash (`set -euo pipefail`), no other runtime dependency beyond
-  `git` (and the `aws` CLI for `state-create-bucket.sh`).
+  `git`.
 - Idempotent: re-running `catalog-vendor.sh` for the same `<module>/<version>`
   overwrites the destination with the same content and the same
-  `VENDORED.md`; `state-create-bucket.sh` does nothing if the bucket already
-  exists, and never modifies an existing one.
+  `VENDORED.md`.
