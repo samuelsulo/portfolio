@@ -1,5 +1,9 @@
 mock_provider "aws" {}
 
+mock_provider "aws" {
+  alias = "dns"
+}
+
 variables {
   api_gateway_name                 = "example-contact"
   ses_template_name                = "example-contact"

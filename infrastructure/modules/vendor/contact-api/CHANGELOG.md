@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## contact-api/v4.0.0 - 2026-11-06
+#### Features
+- <span style="background-color: #d73a49; color: white; padding: 2px 6px; border-radius: 3px; font-weight: bold; font-size: 0.85em;">BREAKING</span>(**contact-api**) create the Route 53 records with an aws.dns provider - (01771ac) - Samuel Sulo
+
+- - -
+
 ## contact-api/v3.0.1 - 2026-10-14
 #### Bug Fixes
 - (**contact-api**) require TLS 1.2 on the custom domain - (951a161) - Samuel Sulo

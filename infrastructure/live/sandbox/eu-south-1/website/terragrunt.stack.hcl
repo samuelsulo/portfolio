@@ -4,7 +4,7 @@ unit "website_hosting" {
 
   values = {
     domain_name     = "sandbox.samuelsulo.it"
-    route53_zone_id = "Z056385545KJLOV8R9W3"
+    route53_zone_id = "Z0695209U987U7SXURE7" # samuelsulo.it in network-hub
 
     # Disposable environment: allow `destroy` to empty the bucket.
     s3_bucket_force_destroy = true
@@ -23,6 +23,6 @@ unit "contact_api" {
     email               = "work.samuelsulo+sandbox@gmail.com"
     website_domain_name = "sandbox.samuelsulo.it"
     domain_name         = "contact.sandbox.samuelsulo.it"
-    route53_zone_id     = "Z056385545KJLOV8R9W3"
+    route53_zone_id     = "Z0695209U987U7SXURE7" # samuelsulo.it in network-hub
   }
 }

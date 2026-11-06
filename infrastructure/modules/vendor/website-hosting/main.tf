@@ -101,6 +101,8 @@ resource "aws_acm_certificate" "this" {
 }
 
 resource "aws_route53_record" "cert_validation" {
+  provider = aws.dns
+
   for_each = {
     for dvo in aws_acm_certificate.this.domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
@@ -124,6 +126,8 @@ resource "aws_acm_certificate_validation" "this" {
 }
 
 resource "aws_route53_record" "alias" {
+  provider = aws.dns
+
   zone_id = var.route53_zone_id
   name    = var.domain_name
   type    = "A"
@@ -136,6 +140,8 @@ resource "aws_route53_record" "alias" {
 }
 
 resource "aws_route53_record" "redirect_alias" {
+  provider = aws.dns
+
   for_each = toset(var.redirect_domain_names)
 
   zone_id = var.route53_zone_id

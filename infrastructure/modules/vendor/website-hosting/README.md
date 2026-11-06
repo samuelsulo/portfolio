@@ -36,8 +36,11 @@ existing one via `route53_zone_id`.
 ## Notes
 
 - The module doesn't configure an `aws` provider: whoever consumes it must
-  pass both the default provider and an `aws.us_east_1` alias, required to
-  request the ACM certificate used by CloudFront:
+  pass the default provider and two aliases: `aws.us_east_1`, required to
+  request the ACM certificate used by CloudFront, and `aws.dns`, used only
+  for the Route 53 records (certificate validation and aliases), so the hosted
+  zone can live in another account. For a zone of the same account, pass
+  `aws.dns = aws`:
 
   ```hcl
   module "website" {
@@ -46,6 +49,7 @@ existing one via `route53_zone_id`.
     providers = {
       aws            = aws
       aws.us_east_1  = aws.us_east_1
+      aws.dns        = aws.dns
     }
 
     s3_bucket_name                        = "example-website-123456789012-eu-south-1-an"

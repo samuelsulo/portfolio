@@ -7,6 +7,10 @@ mock_provider "aws" {
 }
 
 mock_provider "aws" {
+  alias = "dns"
+}
+
+mock_provider "aws" {
   alias = "us_east_1"
 
   mock_resource "aws_acm_certificate" {

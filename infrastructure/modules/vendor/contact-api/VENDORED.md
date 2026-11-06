@@ -7,6 +7,6 @@ Copied verbatim from the catalog. Do not modify directly: re-run
 |---|---|
 | Source | https://github.com/samuelsulo/opentofu-aws-catalog.git |
 | Module | contact-api |
-| Ref | contact-api/v3.0.1 |
-| Commit | 9f596603e65dc92a88eb3330e9cbd4316ba1cfff |
-| Vendored on | 2026-11-02 |
+| Ref | contact-api/v4.0.0 |
+| Commit | c3b2f4d68559e9091359638fcf770c781370e1a4 |
+| Vendored on | 2026-11-06 |

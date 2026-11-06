@@ -9,6 +9,11 @@ Resource names derive from `environment_name_prefix` in
 `aws.us_east_1` alias provider, which the module needs for the ACM
 certificate required by CloudFront.
 
+The unit also generates an `aws.dns` alias provider, used only for the Route 53
+records: the hosted zone is in the network-hub account of the organization, so
+the provider assumes a role of that account (`awslz-dns-legacy`, transitional,
+until the project runs in a workload account and uses `awslz-dns-<account name>`).
+
 ## Values
 
 | Value | Required | Description |

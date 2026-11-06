@@ -288,7 +288,7 @@ The domain (`domain_name`) is **regional**, not edge/CloudFront: the
 required ACM certificate must therefore exist in the same region as the
 API, unlike the [`website-hosting`](../website-hosting) module (which uses
 CloudFront and requires the certificate in `us-east-1`). Because of this,
-the module doesn't need a second `aws` provider alias.
+the certificate needs no region alias.
 
 The module never creates a Route 53 hosted zone: it expects to receive an
 existing one via `route53_zone_id`, used both for the ACM certificate's
@@ -301,8 +301,22 @@ with no stage prefix.
 ## Notes
 
 - The module doesn't configure an `aws` provider: whoever consumes it
-  passes their own default provider, with no need for extra aliases
-  (unlike `website-hosting`, which requires `aws.us_east_1`).
+  passes their own default provider and an `aws.dns` alias, used only for
+  the Route 53 records (certificate validation and the alias), so the hosted
+  zone can live in another account. For a zone of the same account, pass
+  `aws.dns = aws`:
+
+  ```hcl
+  module "contact_api" {
+    source = "./vendor/contact-api"
+
+    providers = {
+      aws     = aws
+      aws.dns = aws.dns
+    }
+    # ...
+  }
+  ```
 - The mandatory tags (`Project`, `Owner`, `Environment`, `ManagedBy`) come
   automatically from the `default_tags` of the provider in the project
   that consumes the module: the module doesn't declare its own `tags`
