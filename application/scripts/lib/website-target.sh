@@ -1,22 +1,22 @@
 # shellcheck shell=bash disable=SC2034
 # Sourced by deploy.sh and deploy-content.sh: resolves where the website
 # lives from the outputs of the website stack under
-# infrastructure/live/production/eu-south-1/website (via
+# infrastructure/live/workload-prod/eu-south-1/website (via
 # 'terragrunt stack output'), never guessed or hardcoded.
 #
 # Expects ROOT_DIR to be set. Sets AWS_PROFILE (exported), BUCKET,
 # DISTRIBUTION_ID and CONTACT_API_DOMAIN.
 #
 # AWS credentials: uses the AWS_PROFILE already set in the terminal, or the
-# aws_profile of infrastructure/live/production/account.hcl otherwise.
+# aws_profile of infrastructure/live/workload-prod/account.hcl otherwise.
 
 resolve_website_target() {
-  local stack_dir="$ROOT_DIR/infrastructure/live/production/eu-south-1/website"
+  local stack_dir="$ROOT_DIR/infrastructure/live/workload-prod/eu-south-1/website"
 
   # The AWS CLI profile of the production account, the same one Terragrunt
-  # uses (see infrastructure/live/production/account.hcl).
+  # uses (see infrastructure/live/workload-prod/account.hcl).
   if [[ -z "${AWS_PROFILE:-}" ]]; then
-    AWS_PROFILE=$(sed -n 's/^ *aws_profile *= *"\(.*\)"/\1/p' "$ROOT_DIR/infrastructure/live/production/account.hcl")
+    AWS_PROFILE=$(sed -n 's/^ *aws_profile *= *"\(.*\)"/\1/p' "$ROOT_DIR/infrastructure/live/workload-prod/account.hcl")
     export AWS_PROFILE
   fi
 
@@ -40,7 +40,7 @@ resolve_website_target() {
 
   if [[ -z "$BUCKET" || -z "$DISTRIBUTION_ID" ]]; then
     echo "Could not read the S3 bucket / CloudFront distribution from the website stack outputs." >&2
-    echo "  Has 'terragrunt stack run apply' been run in infrastructure/live/production/eu-south-1/website?" >&2
+    echo "  Has 'terragrunt stack run apply' been run in infrastructure/live/workload-prod/eu-south-1/website?" >&2
     exit 1
   fi
 }

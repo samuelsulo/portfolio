@@ -2,7 +2,7 @@
 # Build application/ and deploy it to the production S3 bucket + CloudFront
 # distribution. Bucket name, distribution ID and the contact API's base URL
 # are read from the outputs of the website stack under
-# infrastructure/live/production/eu-south-1/website (via
+# infrastructure/live/workload-prod/eu-south-1/website (via
 # 'terragrunt stack output'), never guessed or hardcoded.
 #
 # Version tracking: deploys the commit pointed at by an explicit
@@ -16,7 +16,7 @@
 # history lives in GitHub Releases instead.
 #
 # AWS credentials: uses the AWS_PROFILE already set in the terminal, or the
-# aws_profile of infrastructure/live/production/account.hcl otherwise.
+# aws_profile of infrastructure/live/workload-prod/account.hcl otherwise.
 #
 # Content (public/content, images, cv, documents, brand) is not deployed
 # here: it has its own, release-free deploy, see deploy-content.sh. This
