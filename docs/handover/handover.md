@@ -15,9 +15,9 @@ repeating them.
 
 | What            | Where                                                                                     |
 | --------------- | ----------------------------------------------------------------------------------------- |
-| AWS account id  | `PORTFOLIO_AWS_ACCOUNT_ID` in the git-ignored `infrastructure/mise.local.toml`            |
+| AWS account ids | `PORTFOLIO_*_AWS_ACCOUNT_ID` in the git-ignored `infrastructure/mise.local.toml`          |
 | AWS credentials | The AWS CLI profile in the owner's terminal; nothing is stored in the repository or in CI |
-| Terraform state | S3 bucket of the account, one state file per stack                                        |
+| Terraform state | State bucket of the organization, one state file per stack                                |
 | Releases        | GitHub releases, created by `cog bump` with the `gh` CLI                                  |
 | Domain          | Registered in Route 53 with automatic renewal                                             |
 | Contact mailbox | The address set in the `contact_api` unit; the SES identity must stay verified            |

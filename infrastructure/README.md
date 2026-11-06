@@ -22,38 +22,34 @@ See each subfolder's README for details:
 - [`templates/`](./templates)
 - [`scripts/`](./scripts)
 
-## Environments
+## Accounts
 
-Each environment has a top-level folder under [`live/`](./live). Two exist
-in this project:
+Each account of the landing zone has a top-level folder under [`live/`](./live).
+Two exist in this project:
 
-- **production**: the live website, `samuelsulo.it`.
-- **sandbox**: a disposable copy of the same stack under `sandbox.samuelsulo.it`,
-  to try changes before they reach production. Unlike the scaffold's default
-  of one AWS account per environment, it runs in the **same account and
-  region** as production (a single personal account).
-  What keeps the two apart is the name prefix (`portfolio-sbx` vs
-  `portfolio-prd`), the state key (it contains the environment folder), the
-  domains and the SES identity (a `+sandbox` address, because identities are
-  unique per address in an account and region). It is defined but not applied:
-  run `plan` and `apply` from `live/sandbox/eu-south-1/website` when needed.
+- **workload-prod**: the live website, `samuelsulo.it`.
+- **sandbox**: a disposable copy of the same stack under `sbx.samuelsulo.it`,
+  to try changes before they reach production. It runs in the `sandbox` account
+  of the organization. It is defined but not applied: run `plan` and `apply` from
+  `live/sandbox/eu-south-1/website` when needed.
 
 ## Prerequisites
 
-- The AWS account ID is not kept in the repository. `live/*/account.hcl`
-  reads it from `PORTFOLIO_AWS_ACCOUNT_ID`, which you set in
-  `infrastructure/mise.local.toml` (git-ignored; copy
-  [`mise.local.example.toml`](./mise.local.example.toml) and run
-  `mise trust`). Terragrunt fails with a clear error while it is unset.
+- The IDs of the AWS accounts are not kept in the repository, which is public.
+  `live/*/account.hcl` and `live/root.hcl` read them from the environment:
+  `PORTFOLIO_WORKLOAD_PROD_AWS_ACCOUNT_ID`, `PORTFOLIO_SANDBOX_AWS_ACCOUNT_ID`,
+  `PORTFOLIO_STATE_AWS_ACCOUNT_ID` (devops, where the state is) and
+  `PORTFOLIO_DNS_AWS_ACCOUNT_ID` (network-hub, where the hosted zone is). Set them
+  in `infrastructure/mise.local.toml` (git-ignored; copy
+  [`mise.local.example.toml`](./mise.local.example.toml) and run `mise trust`).
+  Terragrunt fails with a clear error while one is unset.
 - [`mise`](https://mise.jdx.dev), which installs the pinned `opentofu` and
   `terragrunt` versions (`mise install`).
-- AWS CLI profile for the target environment, named in that environment's
-  `account.hcl`: the account's own credentials directly, or a profile
-  with `role_arn` (+ `source_profile`) or SSO into a
-  cross-account role. Terragrunt itself never assumes the role.
-- The state bucket of the target account, created once with
-  `mise run state:create-bucket <aws-profile>` (see
-  [`live/`](./live#state-bucket)).
+- AWS CLI profile of the target account, named in that account's `account.hcl`
+  (`awslz-<account name>`, from IAM Identity Center: `aws sso login --sso-session
+  awslz`). Terragrunt itself never assumes a role for the provider.
+- The state bucket is the one of the organization, in the devops account of the
+  landing zone: nothing to create (see [`live/`](./live#state-bucket)).
 
 ## Static checks
 

@@ -1,6 +1,5 @@
 locals {
-  aws_account_id    = get_env("PORTFOLIO_AWS_ACCOUNT_ID")
-  aws_profile       = "ss-admin"
-  environment       = "production"
-  environment_short = "prd"
+  aws_account_id = get_env("PORTFOLIO_WORKLOAD_PROD_AWS_ACCOUNT_ID")
+  aws_profile    = "awslz-workload-prod"
+  account_name   = "workload-prod"
 }

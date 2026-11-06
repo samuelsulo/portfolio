@@ -20,11 +20,11 @@ touching a folder.
   the catalog itself, never editing the vendored copy.
 - Never run `terraform` or `tofu` directly, except where a README says
   so. Workflow commands go through `terragrunt`, with tools and tasks
-  from `mise` (`mise run catalog:vendor`, `mise run state:create-bucket`).
+  from `mise` (`mise run catalog:vendor`).
 - Run Terragrunt from a stack's own directory, never from the repository
   root.
-- Never `apply` to `production` without a manually reviewed `plan`
-  first. Treat any change touching `live/production/` or cross-account
+- Never `apply` to `workload-prod` without a manually reviewed `plan`
+  first. Treat any change touching `live/workload-prod/` or cross-account
   role behavior with extra care.
 - Don't create AWS resources directly in a stack if a unit already
   covers, or should cover, that competency.

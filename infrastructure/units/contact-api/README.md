@@ -4,15 +4,15 @@ Contact form backend: API Gateway calling Amazon SES directly (no Lambda
 or database), behind a custom domain with an ACM certificate. Wraps
 [`modules/vendor/contact-api`](../../modules/vendor/contact-api).
 
-Resource names derive from `environment_name_prefix` in
+Resource names derive from `name_prefix` in
 [`root.hcl`](../../live/root.hcl). The email bodies are
 [`templates/contact.html`](./templates/contact.html) and
 [`templates/contact.txt`](./templates/contact.txt).
 
 The unit also generates an `aws.dns` alias provider, used only for the Route 53
 records: the hosted zone is in the network-hub account of the organization, so
-the provider assumes a role of that account (`awslz-dns-legacy`, transitional,
-until the project runs in a workload account and uses `awslz-dns-<account name>`).
+the provider assumes the role `awslz-dns-<account name>` of that account, which
+the landing zone gives to the account the project is deployed to.
 
 ## Values
 

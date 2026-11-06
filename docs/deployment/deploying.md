@@ -13,15 +13,14 @@ different release rules:
 
 - Tools installed with `mise` (`mise install`), see the root [README](../../README.md).
 - AWS credentials for the production account in the terminal (`AWS_PROFILE`, or the profile
-  named in `infrastructure/live/production/account.hcl`).
-- For infrastructure only: `PORTFOLIO_AWS_ACCOUNT_ID` in `infrastructure/mise.local.toml`
-  (git-ignored) and, on a new account, the state bucket
-  (`mise run state:create-bucket <aws-profile>`).
+  named in `infrastructure/live/workload-prod/account.hcl`).
+- For infrastructure only: the `PORTFOLIO_*_AWS_ACCOUNT_ID` variables in
+  `infrastructure/mise.local.toml` (git-ignored), see `infrastructure/README.md`.
 
 ## Infrastructure
 
 ```
-cd infrastructure/live/production/eu-south-1/website
+cd infrastructure/live/workload-prod/eu-south-1/website
 terragrunt stack run plan
 terragrunt stack run apply
 ```

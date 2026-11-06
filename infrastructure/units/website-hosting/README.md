@@ -4,15 +4,15 @@ Static website hosting: private S3 bucket behind CloudFront (with Origin
 Access Control), ACM certificate and Route 53 alias record. Wraps
 [`modules/vendor/website-hosting`](../../modules/vendor/website-hosting).
 
-Resource names derive from `environment_name_prefix` in
+Resource names derive from `name_prefix` in
 [`root.hcl`](../../live/root.hcl). The unit also generates an
 `aws.us_east_1` alias provider, which the module needs for the ACM
 certificate required by CloudFront.
 
 The unit also generates an `aws.dns` alias provider, used only for the Route 53
 records: the hosted zone is in the network-hub account of the organization, so
-the provider assumes a role of that account (`awslz-dns-legacy`, transitional,
-until the project runs in a workload account and uses `awslz-dns-<account name>`).
+the provider assumes the role `awslz-dns-<account name>` of that account, which
+the landing zone gives to the account the project is deployed to.
 
 ## Values
 

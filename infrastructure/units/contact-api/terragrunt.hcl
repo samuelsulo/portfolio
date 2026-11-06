@@ -9,9 +9,8 @@ terraform {
 
 # The Route 53 records are created through an `aws.dns` alias provider, because
 # the hosted zone is in the network-hub account of the organization. It assumes
-# the role that account gives to the one this project is deployed from. The role
-# below is the transitional one of the old account: use
-# `awslz-dns-<account name>` once the project runs in a workload account.
+# the role `awslz-dns-<account name>` that account gives to the one this project
+# is deployed from (see ADR 0009 of the landing zone).
 generate "provider_dns" {
   path      = "provider_dns.tf"
   if_exists = "overwrite_terragrunt"
@@ -22,10 +21,10 @@ provider "aws" {
   profile = "${include.root.locals.aws_profile}"
 
   assume_role {
-    role_arn = "arn:aws:iam::000000000000:role/awslz-dns-legacy"
+    role_arn = "arn:aws:iam::${include.root.locals.dns_account_id}:role/awslz-dns-${include.root.locals.account_name}"
   }
 
-  allowed_account_ids = ["000000000000"]
+  allowed_account_ids = ["${include.root.locals.dns_account_id}"]
 
   default_tags {
     tags = local.default_tags
@@ -35,7 +34,7 @@ EOF
 }
 
 locals {
-  name = "${include.root.locals.environment_name_prefix}-contact"
+  name = "${include.root.locals.name_prefix}-contact"
 }
 
 inputs = {

@@ -28,15 +28,15 @@ The `website` stack of each environment instantiates two units:
 - `contact-api`: API Gateway calling SES directly, custom domain and certificate, and the
   SES email template.
 
-## Environments
+## Accounts
 
-`production` is the live site. `sandbox` is a defined but not applied copy under
-`sandbox.samuelsulo.it`, kept apart from production by name prefix, state key, domains and
-SES identity (same account and region, because this is a personal project). See
-[`infrastructure/README.md`](../../infrastructure/README.md#environments).
+`workload-prod` is the live site. `sandbox` is a defined but not applied copy under
+`sbx.samuelsulo.it`, in the `sandbox` account of the organization. See
+[`infrastructure/README.md`](../../infrastructure/README.md#accounts).
 
-## State and account
+## State and accounts
 
-State lives in an S3 bucket of the account, one state file per stack. The account id is never
-committed: it is read from `PORTFOLIO_AWS_ACCOUNT_ID`, set in the git-ignored
+State lives in the state bucket of the organization, one state file per stack, reached with the
+role `awslz-tfstate-access` of each account. The IDs of the accounts are never committed: they are
+read from `PORTFOLIO_*_AWS_ACCOUNT_ID` variables, set in the git-ignored
 `infrastructure/mise.local.toml`.

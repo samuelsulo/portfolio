@@ -11,8 +11,8 @@ hierarchy below.
 ```
 live/
 ├── root.hcl                             # shared provider + backend config, included by every stack
-└── <environment>/                       # production, sandbox
-    ├── account.hcl                      # aws_account_id, aws_profile, environment(_short)
+└── <account name>/                      # workload-prod, sandbox
+    ├── account.hcl                      # aws_account_id, aws_profile, account_name
     ├── _global/                         # account-wide services (budgets, route53, ...)
     │   ├── region.hcl                   # fixed to us-east-1
     │   └── <stack>/terragrunt.stack.hcl
@@ -25,17 +25,16 @@ live/
 ### `_global`
 
 Resources that exist once per account (AWS Budgets, Route53, IAM, ...)
-live in `<environment>/_global/` instead of under a region. They still
+live in `<account name>/_global/` instead of under a region. They still
 need a provider region, so `_global/region.hcl` pins `us-east-1`, the
 canonical API region for these services. `find_in_parent_folders()`
 picks the closest `region.hcl`, so `root.hcl` needs no special case and
 the state key gets its own `_global` segment.
 
-Each environment normally lives in its own AWS account, so the top-level
-folder is named after the environment and `account.hcl` defines both the
-account and the environment. `sandbox` is the exception: it reuses the
-account and region of `production`, kept apart by its name prefix and state
-key (see [`../README.md`](../README.md#environments)). `account.hcl` and `region.hcl` each declare a single
+Each account of the landing zone has its own top-level folder, named after the
+account (`workload-prod`, `sandbox`), and `account.hcl` defines it. The IDs of
+the accounts are not in the repository, which is public: `account.hcl` reads them
+from the environment (see [`../README.md`](../README.md#prerequisites)). `account.hcl` and `region.hcl` each declare a single
 `locals` block; `root.hcl` reads both via `find_in_parent_folders()`
 and exposes them (plus the values it derives from them, like the state
 bucket name and `default_tags`) to every unit instantiated below.
@@ -57,31 +56,24 @@ it. Responsible for what units must not configure themselves:
 
 ### State bucket
 
-The S3 bucket named in `root.hcl` (`tfstate-<account-id>-<region>-an`, in
-the account-regional namespace) holds the state of every project in the
-account and must exist before the first `init`. Create it once per account
-with [`state-create-bucket.sh`](../scripts/state-create-bucket.sh):
-
-```
-mise run state:create-bucket <aws-profile> [region]
-```
-
-The script does nothing if the bucket already exists. See
-[`../scripts/`](../scripts) for what it configures.
+The state of every stack is kept in the state bucket of the organization,
+`awslz-tfstate-<devops account id>-<region>-an`, which the landing zone
+creates. The key is `portfolio/<account name>/<region>/<stack>/terraform.tfstate`.
+The backend assumes the role `awslz-tfstate-access` of the target account, which
+can only reach the keys of that account.
 
 ### Name prefix
 
-`root.hcl` derives `environment_name_prefix` (`<project_short>-<environment_short>`)
-from `project_short` and the environment, so names follow one convention
-across every unit. Units read it from `include.root.locals` and build each
-resource name from it, adding their own suffix where the scope requires it
-(e.g. an S3 bucket with the `-an` suffix, which requires account and
-region). It is not passed to modules as an `input`.
+`root.hcl` sets `name_prefix` to the project (`portfolio`), the base of every
+resource name. Units read it from `include.root.locals` and build each resource
+name from it, adding their own suffix where the scope requires it (e.g. an S3
+bucket with the `-an` suffix, which requires account and region). It is not
+passed to modules as an `input`.
 
 ## Stacks
 
 A stack (`terragrunt.stack.hcl`) wires up a set of units for its
-account/region/environment via `unit` blocks, each pointing its `source`
+account and region via `unit` blocks, each pointing its `source`
 at a unit under [`../units/`](../units) and supplying the environment-specific
 `values` the unit expects (see that unit's `README.md`).
 
