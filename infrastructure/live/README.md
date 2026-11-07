@@ -58,9 +58,9 @@ it. Responsible for what units must not configure themselves:
 
 The state of every stack is kept in the state bucket of the organization,
 `awslz-tfstate-<devops account id>-<region>-an`, which the landing zone
-creates. The key is `portfolio/<account name>/<region>/<stack>/terraform.tfstate`.
-The backend assumes the role `awslz-tfstate-access` of the target account, which
-can only reach the keys of that account.
+creates. The key is `<account id>/portfolio/<region>/<stack>/terraform.tfstate`.
+The bucket policy lets an account write only the keys that start with its own ID, so the
+backend needs no role.
 
 ### Name prefix
 
