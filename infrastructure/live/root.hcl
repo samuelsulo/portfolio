@@ -21,16 +21,18 @@ locals {
   # The repository is public, so the IDs of the accounts are not kept in it:
   # they come from the environment (see mise.local.example.toml).
   # State variables: the state bucket of the organization, in the devops account
-  # of the landing zone. The backend assumes the role of this account that can
-  # reach only the keys of this account.
+  # of the landing zone. The bucket policy lets an account write only the keys
+  # that start with its own ID, so the key is built from the ID of the account
+  # that owns the stack. No role is needed.
   state_account_id = get_env("PORTFOLIO_STATE_AWS_ACCOUNT_ID")
 
   # Account of the landing zone that holds the hosted zone of the domain
   dns_account_id = get_env("PORTFOLIO_DNS_AWS_ACCOUNT_ID")
-  state_region     = "eu-south-1"
-  state_bucket     = "awslz-tfstate-${local.state_account_id}-${local.state_region}-an"
-  state_role_arn   = "arn:aws:iam::${local.aws_account_id}:role/awslz-tfstate-access"
-  state_key        = "${local.project}/${replace(path_relative_to_include(), ".terragrunt-stack/", "")}/terraform.tfstate"
+  state_region   = "eu-south-1"
+  state_bucket   = "awslz-tfstate-${local.state_account_id}-${local.state_region}-an"
+  # The first segment of the path is the account folder, replaced by the ID
+  state_path = replace(path_relative_to_include(), ".terragrunt-stack/", "")
+  state_key  = "${local.aws_account_id}/${local.project}/${join("/", slice(split("/", local.state_path), 1, length(split("/", local.state_path))))}/terraform.tfstate"
 }
 
 # Use OpenTofu instead of Terraform (version pinned in mise.toml)
@@ -75,7 +77,6 @@ remote_state {
     region       = local.state_region
     profile      = local.aws_profile
     use_lockfile = true
-    assume_role  = { role_arn = local.state_role_arn }
   }
   generate = {
     path      = "backend.tf"

@@ -36,7 +36,8 @@ The `website` stack of each environment instantiates two units:
 
 ## State and accounts
 
-State lives in the state bucket of the organization, one state file per stack, reached with the
-role `awslz-tfstate-access` of each account. The IDs of the accounts are never committed: they are
+State lives in the state bucket of the organization, one state file per stack, under the key
+`<account id>/portfolio/<region>/<stack>/...`: the bucket policy lets an account write only the keys
+that start with its own ID. The IDs of the accounts are never committed: they are
 read from `PORTFOLIO_*_AWS_ACCOUNT_ID` variables, set in the git-ignored
 `infrastructure/mise.local.toml`.
