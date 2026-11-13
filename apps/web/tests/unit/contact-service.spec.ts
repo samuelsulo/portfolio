@@ -3,7 +3,7 @@ import {
   ContactApiNotConfiguredError,
   ContactApiRequestError,
   submitContactForm,
-} from '../../src/services/contactService'
+} from '../../src/services/contact-service'
 
 const sampleValues = {
   name: 'Ada Lovelace',
@@ -21,7 +21,9 @@ describe('submitContactForm', () => {
   it('throws ContactApiNotConfiguredError when no endpoint is configured', async () => {
     vi.stubEnv('VITE_CONTACT_API_URL', '')
 
-    await expect(submitContactForm(sampleValues)).rejects.toBeInstanceOf(ContactApiNotConfiguredError)
+    await expect(submitContactForm(sampleValues)).rejects.toBeInstanceOf(
+      ContactApiNotConfiguredError,
+    )
   })
 
   it('posts the form values as JSON to the /email operation of the configured endpoint', async () => {
@@ -35,7 +37,7 @@ describe('submitContactForm', () => {
       'https://api.example.com/email',
       expect.objectContaining({
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'apps/web/json' },
         body: JSON.stringify(sampleValues),
       }),
     )

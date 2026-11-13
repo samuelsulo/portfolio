@@ -8,7 +8,7 @@ repeating them.
 - A live site on `samuelsulo.it` and its contact API on `contact.samuelsulo.it`, in the
   owner's AWS account ([architecture](../architecture/system-architecture.md)).
 - The application, the infrastructure as code, the brand assets and the CV, versioned
-  separately with `application/`, `infrastructure/` and `brand/` tags.
+  separately with `apps/web/`, `infrastructure/` and `brand/` tags.
 - Documentation in this folder, plus a README for every module, unit and the application.
 
 ## Where access lives

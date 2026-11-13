@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
-# Build application/ and deploy it to the production S3 bucket + CloudFront
+# Build apps/web/ and deploy it to the production S3 bucket + CloudFront
 # distribution. Bucket name, distribution ID and the contact API's base URL
 # are read from the outputs of the website stack under
 # infrastructure/live/workload-prod/eu-south-1/website (via
 # 'terragrunt stack output'), never guessed or hardcoded.
 #
 # Version tracking: deploys the commit pointed at by an explicit
-# 'application/vX.Y.Z' tag, passed with --version (not necessarily the
+# 'web/vX.Y.Z' tag (or a legacy 'application/vX.Y.Z' one, to roll back to a
+# release made before the app moved to apps/web), passed with --version (not necessarily the
 # currently checked out commit). The version is injected into the build as
 # VITE_APP_VERSION and, once deployed, recorded as the plain-text content
 # of a single '_version' object in the bucket, so the currently live
@@ -24,7 +25,7 @@
 # live is not reverted to the one the tag was cut with.
 #
 # Usage:
-#   ./scripts/deploy.sh --version application/vX.Y.Z
+#   ./scripts/deploy.sh --version web/vX.Y.Z
 set -euo pipefail
 
 TAG=""
@@ -43,13 +44,13 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ -z "$TAG" ]]; then
-  echo "Usage: $0 --version <application/vX.Y.Z>" >&2
+  echo "Usage: $0 --version <web/vX.Y.Z>" >&2
   echo "  Deploys must name the exact tag to release, e.g.:" >&2
-  echo "    $0 --version application/v1.0.1" >&2
+  echo "    $0 --version web/v1.0.1" >&2
   exit 1
 fi
-if [[ ! "$TAG" =~ ^application/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-  echo "'$TAG' does not match the expected 'application/vX.Y.Z' format." >&2
+if [[ ! "$TAG" =~ ^(web|application)/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+  echo "'$TAG' does not match the expected 'web/vX.Y.Z' format." >&2
   exit 1
 fi
 
@@ -60,17 +61,17 @@ for bin in mise aws node npm git; do
   fi
 done
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 VERSION_MARKER_KEY="_version"
 
 # Strip the "application/v" prefix, not just "application/": the site's
 # own footer.version i18n key already renders "v{version}" (company
 # standard, see SiteVersion.vue), so VITE_APP_VERSION must be the bare
 # "X.Y.Z" or the footer would show a doubled "vv1.0.0".
-VERSION="${TAG#application/v}"
+VERSION="${TAG#*/v}"
 
 # shellcheck source=lib/website-target.sh
-source "$ROOT_DIR/application/scripts/lib/website-target.sh"
+source "$ROOT_DIR/apps/web/scripts/lib/website-target.sh"
 resolve_website_target
 
 CONTACT_API_URL=""
@@ -93,7 +94,12 @@ BUILD_DIR="$(mktemp -d)"
 echo "==> Checking out tag $TAG (commit ${DEPLOY_COMMIT:0:7}) into a clean worktree"
 git -C "$ROOT_DIR" worktree add --detach --quiet "$BUILD_DIR" "$DEPLOY_COMMIT"
 trap 'git -C "$ROOT_DIR" worktree remove --force "$BUILD_DIR" >/dev/null 2>&1 || true' EXIT
-APPLICATION_DIR="$BUILD_DIR/application"
+# Tags made before the move to apps/web have the app in application/.
+if [[ -d "$BUILD_DIR/apps/web" ]]; then
+  APPLICATION_DIR="$BUILD_DIR/apps/web"
+else
+  APPLICATION_DIR="$BUILD_DIR/application"
+fi
 
 echo "==> Installing dependencies"
 (cd "$APPLICATION_DIR" && npm ci)

@@ -1,7 +1,7 @@
 # Application
 
-Technical map of [`application/`](../../application). Commands, scripts and the content
-editing rules are in its [README](../../application/README.md); this page explains how the
+Technical map of [`apps/web/`](../../application). Commands, scripts and the content
+editing rules are in its [README](../../apps/web/README.md); this page explains how the
 parts fit together.
 
 ## Stack
@@ -14,7 +14,7 @@ Prettier and `vue-tsc`.
 ## Content is separate from the code
 
 The prose, the data files, the images, the CV and the documents are not bundled. They live in
-`application/public/` (`content/data/*.json`, `content/locales/{it,en}.json`, `images/`, `cv/`,
+`apps/web/public/` (`content/data/*.json`, `content/locales/{it,en}.json`, `images/`, `cv/`,
 `documents/`, `brand/`) and the browser fetches them (`src/content/index.ts`), what every page needs before mounting
 the app and the rest when it is needed (see [Loading and caching](#loading-and-caching)).
 
@@ -102,7 +102,7 @@ the number of objects of a room low.
 
 ## Stack logos and badges
 
-The logos of the stack are authored as separate SVGs in `application/stack-icons/` (the file name
+The logos of the stack are authored as separate SVGs in `apps/web/stack-icons/` (the file name
 is the `icon` of `stack.json`) and built into one sprite, `public/images/stack/sprite.svg`, with
 `npm run stack-sprite`: the site then downloads all of them in one request instead of about
 thirty. The sprite is committed, and a unit test fails when it is out of date or misses an icon.
@@ -171,7 +171,7 @@ To add a decoration, add its kind and a builder in `props.ts` and list it in `DE
 ## CV
 
 Two PDFs (Italian and English) generated from a single JSON source with `npm run cv`. They
-are content: published by the content deploy. See [`application/cv/`](../../application/cv).
+are content: published by the content deploy. See [`apps/web/cv/`](../../apps/web/cv).
 
 ## Quality gates
 

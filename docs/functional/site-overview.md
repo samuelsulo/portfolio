@@ -82,5 +82,5 @@ tracking cookies and loads no third-party content; the only browser storage is t
 ## Editing the content
 
 Texts, projects, stack, certifications and the CV are content, not code: the procedure is in
-the [application README](../../application/README.md#content-how-to-edit-it). The CV is
-generated from its own source, see [`application/cv/`](../../application/cv).
+the [application README](../../apps/web/README.md#content-how-to-edit-it). The CV is
+generated from its own source, see [`apps/web/cv/`](../../apps/web/cv).

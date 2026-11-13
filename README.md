@@ -45,7 +45,7 @@ recruiter, this README is the short tour of what I build and how I work.
   Vitest and end-to-end tests with Playwright. On every pull request CI runs
   them plus Conventional Commits checks, `tflint`, `trivy` and a `gitleaks`
   secret scan over the whole history.
-- **Disciplined releases.** `application`, `infrastructure` and `brand` are
+- **Disciplined releases.** `apps/web`, `infrastructure` and `brand` are
   versioned independently with git tags, changelogs and GitHub Releases
   managed by cocogitto. Deploys name an exact tag and record what is live.
 - **Safe access to production.** No credentials stored in the repository or in
@@ -70,7 +70,7 @@ recruiter, this README is the short tour of what I build and how I work.
 ```
 portfolio/
 ├── infrastructure/   # AWS infrastructure as code (OpenTofu + Terragrunt)
-├── application/      # the website (Vue 3 + TypeScript), content and CV source
+├── apps/web/      # the website (Vue 3 + TypeScript), content and CV source
 ├── brand/            # palette, logo, business card, fonts, brand manual
 ├── docs/             # functional, technical, architecture, deployment, operations
 ├── .github/          # issue templates and CI workflows
@@ -83,7 +83,7 @@ portfolio/
 
 See each subfolder's README for details:
 - [`infrastructure/`](./infrastructure)
-- [`application/`](./application)
+- [`apps/web/`](./apps/web)
 - [`brand/`](./brand)
 - [`docs/`](./docs)
 
@@ -102,7 +102,7 @@ Tools are managed by [`mise`](https://mise.jdx.dev) (see
 [`mise.toml`](./mise.toml)), including
 [`lefthook`](https://lefthook.dev), which manages git hooks,
 [`cocogitto`](https://docs.cocogitto.io), which enforces Conventional
-Commits and manages the changelog and version tags of `application/`,
+Commits and manages the changelog and version tags of `apps/web/`,
 `infrastructure/` and `brand/`, and the
 [GitHub CLI](https://cli.github.com)
 (`gh`), used to publish GitHub releases on bump, and the
@@ -118,20 +118,20 @@ After cloning, install once the git hooks defined in
 lefthook install
 ```
 
-To release a new version of `application/`, `infrastructure/` or
+To release a new version of `apps/web/`, `infrastructure/` or
 `brand/` once it contains code or
 assets, from the repository root:
 
 ```
-cog bump --package application --auto
+cog bump --package web --auto
 cog bump --package infrastructure --auto
 cog bump --package brand --auto
 ```
 
 This updates the `CHANGELOG.md` inside the corresponding folder
-(`application/CHANGELOG.md`, `infrastructure/CHANGELOG.md` or
+(`apps/web/CHANGELOG.md`, `infrastructure/CHANGELOG.md` or
 `brand/CHANGELOG.md`),
-creates the bump commit and tags it `application/vX.Y.Z`,
+creates the bump commit and tags it `web/vX.Y.Z`,
 `infrastructure/vX.Y.Z` or `brand/vX.Y.Z`, per
 the versioning convention in [`CLAUDE.md`](./CLAUDE.md). It then
 pushes the commit and the tag, and creates the corresponding GitHub

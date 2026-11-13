@@ -4,7 +4,7 @@ import {
   type ContactFormErrors,
   type ContactFormValues,
 } from '@/utils/validation'
-import { submitContactForm } from '@/services/contactService'
+import { submitContactForm } from '@/services/contact-service'
 
 export type ContactFormStatus = 'idle' | 'loading' | 'success' | 'error'
 

@@ -44,18 +44,18 @@ All commands must be run through `mise exec --` (or in a shell where `mise` has 
 ## Versioning and deploys
 
 - Every notable change is recorded in [`CHANGELOG.md`](./CHANGELOG.md), in [Keep a Changelog](https://keepachangelog.com/) format.
-- Production releases are tracked with `application/vX.Y.Z` git tags, created with `cog bump --package application --version X.Y.Z` (see the root [`README.md`](../README.md) for cocogitto conventions), not branches or a deploy log.
+- Production releases are tracked with `web/vX.Y.Z` git tags, created with `cog bump --package web --version X.Y.Z` (see the root [`README.md`](../README.md) for cocogitto conventions), not branches or a deploy log.
 - Deploys are run from the terminal with [`scripts/deploy.sh`](./scripts/deploy.sh) (`npm run deploy --`), never from CI: build, tests, S3 sync and CloudFront invalidation all happen locally, against the AWS credentials of that terminal. Bucket name, CloudFront distribution ID and the contact API's URL are read from the outputs of the website stack (`infrastructure/live/workload-prod/eu-south-1/website`) via `terragrunt stack output`, never guessed or hardcoded.
-- Production is the only environment: only an explicit `application/vX.Y.Z` tag can be deployed, passed with `--version` (never the currently checked-out commit): `npm run deploy -- --version application/vX.Y.Z`.
+- Production is the only environment: only an explicit `web/vX.Y.Z` tag can be deployed, passed with `--version` (never the currently checked-out commit): `npm run deploy -- --version web/vX.Y.Z`.
 - The resolved version is injected into the build as the `VITE_APP_VERSION` env var and shown in the footer by `src/components/ui/SiteVersion.vue`.
-- To release to production: `cog bump --package application --version X.Y.Z` (updates `CHANGELOG.md`, commits, tags `application/vX.Y.Z`, pushes, creates the GitHub Release), then `npm run deploy -- --version application/vX.Y.Z`.
+- To release to production: `cog bump --package web --version X.Y.Z` (updates `CHANGELOG.md`, commits, tags `web/vX.Y.Z`, pushes, creates the GitHub Release), then `npm run deploy -- --version web/vX.Y.Z`.
 - Content-only deploys skip the build and the release: `npm run deploy:content` ([`scripts/deploy-content.sh`](./scripts/deploy-content.sh)) runs the tests on `origin/main` (or `--ref <git-ref>`), syncs `public/content`, `images`, `cv`, `documents` and `brand` to the bucket and invalidates those paths in CloudFront. The deployed commit is recorded in a `_content_version` object. `deploy.sh` never touches these paths, so an application deploy does not revert the content; it refuses to run if the bucket has no content yet. It builds `content/manifest.json` (hashes of every file) and publishes it last, after invalidating CloudFront and waiting for it. Caching and what loads when: [`docs/technical/application.md`](../docs/technical/application.md#loading-and-caching).
 - The currently live version is recorded as the plain-text content of a single `_version` object in the bucket (readable with `aws s3 cp s3://<bucket>/_version -`). It is only a snapshot of what is live now, not a deploy history: history lives in GitHub Releases instead.
 
 ## Project structure
 
 ```text
-application/
+apps/web/
 ├── public/                  # static assets served as-is (favicon, placeholder images)
 ├── src/
 │   ├── components/
@@ -117,7 +117,7 @@ The contact-form retention period is the one exception: `legal.contactFormRetent
 
 All `legal.*` fields in `site-config.json` are filled in with real, confirmed values for this site: `dataProcessingRegion` is `AWS eu-south-1 (Milan, Italy)` (confirmed from `infrastructure/live/workload-prod/eu-south-1/region.hcl`); `contactFormRetentionMonths` is `0`, because the contact form's backend (`infrastructure/modules/vendor/contact-api`) has API Gateway call Amazon SES directly, with no Lambda or database in between, so no submission is ever stored by the site itself; `businessDetails` is an empty string, since the controller is an individual with no registered business/VAT/address to disclose (the message template is written so an empty value degrades to a clean sentence, not a dangling placeholder); `privacyPolicyLastUpdated` is an ISO date (`2026-09-05`), kept unambiguous and locale-neutral on purpose (never a worded date like "5 September 2026", which would carry an English month name into the Italian text verbatim).
 
-If this site ever adds analytics, a Maps/YouTube embed, or any other non-essential tracker, it must be gated behind a proper consent banner (accept/reject/customize, equal prominence, granular per category) before it loads, not added silently under this current "necessary only" setup — see the `vue-webapp-standard` skill's cookie-consent reference for the full mechanism to add at that point.
+If this site ever adds analytics, a Maps/YouTube embed, or any other non-essential tracker, it must be gated behind a proper consent banner (accept/reject/customize, equal prominence, granular per category) before it loads, not added silently under this current "necessary only" setup - see the `vue-webapp-standard` skill's cookie-consent reference for the full mechanism to add at that point.
 
 ## Accessibility and responsiveness
 

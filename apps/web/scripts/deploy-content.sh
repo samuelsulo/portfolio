@@ -43,9 +43,9 @@ for bin in mise aws node npm git; do
   fi
 done
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 # shellcheck source=lib/website-target.sh
-source "$ROOT_DIR/application/scripts/lib/website-target.sh"
+source "$ROOT_DIR/apps/web/scripts/lib/website-target.sh"
 resolve_website_target
 
 echo "==> Resolving $REF"
@@ -61,10 +61,10 @@ BUILD_DIR="$(mktemp -d)"
 echo "==> Checking out commit ${DEPLOY_COMMIT:0:7} into a clean worktree"
 git -C "$ROOT_DIR" worktree add --detach --quiet "$BUILD_DIR" "$DEPLOY_COMMIT"
 trap 'git -C "$ROOT_DIR" worktree remove --force "$BUILD_DIR" >/dev/null 2>&1 || true' EXIT
-PUBLIC_DIR="$BUILD_DIR/application/public"
+PUBLIC_DIR="$BUILD_DIR/apps/web/public"
 
 echo "==> Validating the content (translation parity, cases, schema)"
-(cd "$BUILD_DIR/application" && npm ci && npm run test)
+(cd "$BUILD_DIR/apps/web" && npm ci && npm run test)
 
 # Every content file is requested by the application with its version
 # (?v=<hash of its bytes>, from content/manifest.json), so it is cached for a
@@ -77,7 +77,7 @@ echo "==> Validating the content (translation parity, cases, schema)"
 # it, and only then publish the manifest that makes the new versions visible.
 echo "==> Building the manifest of the content versions"
 MANIFEST_FILE="$BUILD_DIR/content-manifest.json"
-node "$BUILD_DIR/application/scripts/content-manifest.mjs" "$PUBLIC_DIR" "$MANIFEST_FILE"
+node "$BUILD_DIR/apps/web/scripts/content-manifest.mjs" "$PUBLIC_DIR" "$MANIFEST_FILE"
 
 echo "==> Syncing the content to s3://$BUCKET"
 aws s3 sync "$PUBLIC_DIR/content/" "s3://$BUCKET/content/" --delete \
@@ -99,7 +99,7 @@ aws cloudfront wait invalidation-completed \
 
 echo "==> Publishing the manifest: the new versions go live now"
 aws s3 cp "$MANIFEST_FILE" "s3://$BUCKET/content/manifest.json" \
-  --content-type application/json \
+  --content-type apps/web/json \
   --cache-control "public, max-age=0, must-revalidate"
 
 printf '%s' "$DEPLOY_COMMIT" | aws s3 cp - "s3://$BUCKET/_content_version" --content-type text/plain

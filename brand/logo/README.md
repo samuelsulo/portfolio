@@ -27,7 +27,7 @@ kept in [`component/`](./component), and its history is in
 - **The portfolio** (`samuelsulo.it`): the navigation bar mark and the footer
   signature, and the "Brand guidelines" link next to it that opens the manual.
   The PDF is published as a static asset at
-  `application/public/brand/kitsune-brand-guidelines.pdf`, a copy of the manual
+  `apps/web/public/brand/kitsune-brand-guidelines.pdf`, a copy of the manual
   that must be updated whenever the manual changes.
 - **Websites developed for clients**: shipped as a standard component by the
   `vue-webapp-standard` skill, retinted to each client's palette, as a quiet

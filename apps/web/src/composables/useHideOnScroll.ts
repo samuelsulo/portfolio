@@ -3,11 +3,11 @@
  *
  * Scroll-direction tracking for a mobile app bar / bottom nav that should
  * hide on scroll-down and reveal on scroll-up, like most modern mobile
- * sites/apps — see references/navigation.md for the full rationale and the
+ * sites/apps - see references/navigation.md for the full rationale and the
  * CSS pattern (`transform`/`opacity` only, never height/display) that
  * consumes `isVisible`.
  *
- * Only active below `maxWidth` — desktop layouts normally have room for a
+ * Only active below `maxWidth` - desktop layouts normally have room for a
  * static header, so `isVisible` stays permanently true above that width.
  */
 import { onMounted, onUnmounted, ref } from 'vue'

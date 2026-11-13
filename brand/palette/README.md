@@ -2,7 +2,7 @@
 
 The colors of the brand, defined once in [`samuelsulo-palette.json`](./samuelsulo-palette.json).
 The logo, the manual and the business card read them from this file. The
-portfolio uses the same values as design tokens in `application/src/styles/tokens.css`:
+portfolio uses the same values as design tokens in `apps/web/src/styles/tokens.css`:
 a dark theme (neon on near-black) and a light theme with deeper tones.
 
 | Role | Name | HEX | CMYK (print recipe) |

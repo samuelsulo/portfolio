@@ -6,7 +6,7 @@ different release rules:
 | Part                              | Versioned                             | Command                                          |
 | --------------------------------- | ------------------------------------- | ------------------------------------------------ |
 | Infrastructure                    | `infrastructure/vX.Y.Z` tag           | `terragrunt stack run plan` / `apply`            |
-| Application code                  | `application/vX.Y.Z` tag              | `npm run deploy -- --version application/vX.Y.Z` |
+| Application code                  | `web/vX.Y.Z` tag              | `npm run deploy -- --version web/vX.Y.Z` |
 | Content (texts, data, images, CV) | No tag: the git commit is the version | `npm run deploy:content`                         |
 
 ## Prerequisites
@@ -31,14 +31,14 @@ Details: [`infrastructure/README.md`](../../infrastructure/README.md).
 ## Application
 
 1. Make sure the work is merged to `main` and the checks are green.
-2. `cog bump --package application --auto` updates the changelog, tags, pushes and creates
+2. `cog bump --package web --auto` updates the changelog, tags, pushes and creates
    the GitHub Release.
-3. `npm run deploy -- --version application/vX.Y.Z` runs the tests, builds, syncs to S3,
+3. `npm run deploy -- --version web/vX.Y.Z` runs the tests, builds, syncs to S3,
    invalidates CloudFront and records the version in the `_version` object.
 
 The script reads the bucket, distribution and contact API URL from the infrastructure
 outputs and never touches the content paths. Details:
-[`application/README.md`](../../application/README.md#versioning-and-deploys).
+[`apps/web/README.md`](../../apps/web/README.md#versioning-and-deploys).
 
 ## Content
 
@@ -46,7 +46,7 @@ outputs and never touches the content paths. Details:
 tests, sync of `content`, `images`, `cv`, `documents` and `brand`, CloudFront invalidation,
 and the commit recorded in `_content_version`.
 
-To change the CV, edit `application/cv/samuelsulo-cv.json`, run `npm run cv`, commit the
+To change the CV, edit `apps/web/cv/samuelsulo-cv.json`, run `npm run cv`, commit the
 PDFs and deploy the content.
 
 ## When the content schema changes

@@ -2,7 +2,7 @@
 // Colors come from brand/palette, fonts from brand/fonts and the Kitsune mark from brand/logo, so the
 // CV follows the brand: change the palette or the content and rebuild.
 //
-//   npm run cv        (from application/)
+//   npm run cv        (from apps/web/)
 //
 // Set CHROME_PATH to an installed Chrome binary to skip the Chromium download, and
 // CHROME_NO_SANDBOX=1 in containers.

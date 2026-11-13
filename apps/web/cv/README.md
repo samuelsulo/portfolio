@@ -13,7 +13,7 @@ instead of editing them. Colors come from [`brand/palette`](../../brand/palette)
 
 ## Rebuild
 
-From `application/`:
+From `apps/web/`:
 
 ```
 npm ci

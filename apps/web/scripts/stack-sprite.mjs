@@ -3,7 +3,7 @@
 // src/scene3d/cards.ts). The sources are the files of `stack-icons/`, the sprite is written to
 // `public/images/stack/sprite.svg` and committed, like the CV previews.
 //
-//   npm run stack-sprite        (from application/)
+//   npm run stack-sprite        (from apps/web/)
 //
 // Add a logo: put its SVG in `stack-icons/` (the file name is the `icon` of `stack.json`) and
 // run the command. A unit test fails when the sprite is out of date.

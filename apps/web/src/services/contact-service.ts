@@ -39,7 +39,7 @@ export async function submitContactForm(values: ContactFormValues): Promise<void
 
   const response = await fetch(`${baseUrl}/email`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'apps/web/json' },
     body: JSON.stringify(values),
   })
 
