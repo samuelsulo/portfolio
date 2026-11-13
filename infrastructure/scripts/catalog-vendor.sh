@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# catalog-vendor.sh — vendors a module from a catalog repo tag into a local
+# catalog-vendor.sh - vendors a module from a catalog repo tag into a local
 # infrastructure directory, in plain bash.
 #
 # Usage: catalog-vendor.sh <catalog-repo-owner/repo> <module>/<version>

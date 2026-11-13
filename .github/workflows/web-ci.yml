@@ -1,4 +1,4 @@
-name: Application CI
+name: Web CI
 
 on:
   pull_request:
@@ -7,22 +7,22 @@ permissions:
   contents: read
 
 concurrency:
-  group: application-ci-${{ github.ref }}
+  group: web-ci-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  application-check:
+  web-check:
     runs-on: ubuntu-24.04
     defaults:
       run:
-        working-directory: application
+        working-directory: apps/web
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
-          cache-dependency-path: application/package-lock.json
+          cache-dependency-path: apps/web/package-lock.json
       - run: npm ci
       - run: npm run lint:check
       - run: npm run format:check

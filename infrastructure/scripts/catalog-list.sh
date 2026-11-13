@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# catalog-list.sh — lists module/version tags available in a catalog repo.
+# catalog-list.sh - lists module/version tags available in a catalog repo.
 #
 # Usage: catalog-list.sh <catalog-repo-owner/repo>
 

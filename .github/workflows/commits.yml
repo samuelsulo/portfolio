@@ -20,4 +20,5 @@ jobs:
       - uses: cocogitto/cocogitto-action@v4
         with:
           command: check
-          args: --ignore-merge-commits
+          # Only the commits of the pull request: older history may predate the convention.
+          args: --ignore-merge-commits origin/${{ github.base_ref }}..HEAD
