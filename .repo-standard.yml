@@ -1,0 +1,16 @@
+# Which profile and parts this repo has, so an audit knows what to expect.
+# Edit it in the same change that adds or removes a part.
+standard: 1
+
+profile: product
+
+parts:
+  apps: [web]
+  packages: false
+  infrastructure: single-account
+  brand: true
+
+versioning: per-component
+
+# The tag of template-project this repo was last aligned with.
+template: v0.1.2
