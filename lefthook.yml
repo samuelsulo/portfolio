@@ -39,4 +39,6 @@ pre-commit:
 pre-push:
   commands:
     conventional-commits:
-      run: cog check
+      # Only the commits not on the remote yet: the history before the
+      # conventional commits setup does not follow the scope rules.
+      run: cog check --ignore-merge-commits origin/main..HEAD
