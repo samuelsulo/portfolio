@@ -4,23 +4,26 @@ AWS infrastructure managed with Terragrunt and OpenTofu.
 
 ## Structure
 
+Follows the `aws-terragrunt-standard` layout:
+
 ```
-.
-├── live/         # environments, regions and stacks: what gets deployed where
-├── units/        # reusable Terragrunt units wrapping the modules
-├── modules/      # reusable OpenTofu modules
-├── templates/    # starting points to copy when adding environments, regions, stacks, units
-├── scripts/      # helpers behind the mise tasks (catalog vendoring)
-├── mise.toml     # pinned tool versions and tasks
-└── CLAUDE.md     # guardrails for whoever works on this folder
+infrastructure/
+├── catalog/              # what can be deployed
+│   ├── modules/vendor/   # 1:1 copies from the module catalog, never modified
+│   ├── modules/local/    # modules written for this project (none yet)
+│   ├── units/            # website-hosting, contact-api: one per AWS competency
+│   └── stacks/           # website: the two units wired together
+├── live/                 # where it is deployed: one folder per AWS account
+│   ├── root.hcl          # provider, state backend and tags
+│   ├── workload-prod/    # the live website
+│   └── sandbox/          # a disposable copy
+├── scripts/              # helpers behind the mise tasks (catalog vendoring, lint)
+├── mise.toml             # pinned tool versions and tasks
+└── CLAUDE.md             # guardrails for whoever works on this folder
 ```
 
-See each subfolder's README for details:
-- [`live/`](./live)
-- [`units/`](./units)
-- [`modules/`](./modules)
-- [`templates/`](./templates)
-- [`scripts/`](./scripts)
+See each folder's README for details: [`catalog/`](./catalog), [`live/`](./live),
+[`scripts/`](./scripts).
 
 ## Accounts
 
@@ -31,7 +34,7 @@ Two exist in this project:
 - **sandbox**: a disposable copy of the same stack under `sbx.samuelsulo.it`,
   to try changes before they reach production. It runs in the `sandbox` account
   of the organization. It is defined but not applied: run `plan` and `apply` from
-  `live/sandbox/eu-south-1/website` when needed.
+  `live/sandbox/eu-south-1` when needed.
 
 ## Prerequisites
 
@@ -59,23 +62,24 @@ runs on commit through `lefthook` and on every pull request in CI.
 ## Quickstart
 
 ```
-cd live/<environment>/<region>/<stack>
-terragrunt stack run plan
-terragrunt stack run apply
+cd live/<account>/<region>      # e.g. live/workload-prod/eu-south-1
+terragrunt stack run plan       # saves the plan under .plans/
+terragrunt stack run apply      # applies only the saved plan
 ```
 
-Apply to production only after a manually reviewed plan. See
-[`live/`](./live#usage) for details.
+Apply only after a manually reviewed plan. See [`live/`](./live#usage) for details.
 
-## Scaffolding
+## Adding things
 
-New environments, regions, stacks and units are created by copying the
-matching file from [`templates/`](./templates).
+There are no templates: copy an existing file of the same kind and adapt it. A new
+deployable is a stack in [`catalog/stacks/`](./catalog/stacks) plus a `stack` block in
+`live/<account>/<region>/terragrunt.stack.hcl`; a new unit goes in
+[`catalog/units/`](./catalog/units). See [`catalog/`](./catalog).
 
 ## Catalog
 
-Catalog modules are copied 1:1 into `modules/vendor/` and never
-modified afterwards. Units are written per project, in `units/`:
+Modules of the module catalog are copied 1:1 into `catalog/modules/vendor/` and never
+modified afterwards. Units and stacks are written per project:
 
 ```
 mise run catalog:list
@@ -83,4 +87,4 @@ mise run catalog:vendor <name>/<tag>
 ```
 
 See [`scripts/`](./scripts) for what the tasks do and
-[`modules/vendor/`](./modules/vendor) for the rules on vendored code.
+[`catalog/modules/vendor/`](./catalog/modules/vendor) for the rules on vendored code.

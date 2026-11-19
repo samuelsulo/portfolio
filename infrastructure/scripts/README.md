@@ -1,7 +1,7 @@
 # Scripts
 
 Helper scripts backing the `mise` tasks: vendoring code from a catalog
-into [`../modules/vendor/`](../modules/vendor), and linting the code.
+into [`../catalog/modules/vendor/`](../catalog/modules/vendor), and linting the code.
 
 Not called directly day to day: use the `mise` tasks in
 [`../mise.toml`](../mise.toml), which pass `$CATALOG_REPO` for you.
@@ -13,7 +13,7 @@ Not called directly day to day: use the `mise` tasks in
   `git ls-remote --tags`.
 - [`catalog-vendor.sh`](./catalog-vendor.sh) (`mise run catalog:vendor
   <module>/<version>`): shallow-clones the catalog at that tag, copies
-  `modules/<module>` into `modules/vendor/<module>` (replacing anything
+  `modules/<module>` into `catalog/modules/vendor/<module>` (replacing anything
   already there), and writes a `VENDORED.md` provenance file (source,
   name, ref, commit, date) alongside it.
 

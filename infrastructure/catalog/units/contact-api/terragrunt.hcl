@@ -4,7 +4,7 @@ include "root" {
 }
 
 terraform {
-  source = "${find_in_parent_folders("modules/vendor")}//contact-api"
+  source = "${dirname(find_in_parent_folders("root.hcl"))}/../catalog/modules/vendor//contact-api"
 }
 
 # The Route 53 records are created through an `aws.dns` alias provider, because

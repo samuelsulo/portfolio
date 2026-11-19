@@ -20,7 +20,7 @@ different release rules:
 ## Infrastructure
 
 ```
-cd infrastructure/live/workload-prod/eu-south-1/website
+cd infrastructure/live/workload-prod/eu-south-1
 terragrunt stack run plan
 terragrunt stack run apply
 ```

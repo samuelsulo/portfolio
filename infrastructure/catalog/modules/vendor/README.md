@@ -18,7 +18,7 @@
   catalog.
 - If a catalog module does not exactly cover the scope required by the
   project, it must not be adapted here: either multiple modules are
-  combined in a stack under [`../../live/`](../../live), or (if the scope is generic) a new module is added
+  combined in a stack under [`../../stacks/`](../../stacks), or (if the scope is generic) a new module is added
   to the catalog itself. If instead the need is genuinely specific to
   this client, the module must be written in [`../local/`](../local), not
   here.
@@ -31,7 +31,7 @@ mise run catalog:vendor <name>/<tag>
 ```
 
 `catalog:vendor` copies `modules/<name>/` from the catalog, at the given
-tag, into `modules/vendor/<name>/` and writes
-`modules/vendor/<name>/VENDORED.md` with the provenance (source, module
+tag, into `catalog/modules/vendor/<name>/` and writes
+`catalog/modules/vendor/<name>/VENDORED.md` with the provenance (source, module
 name, tag, commit, date). After copying, wrap the module in a unit under
 [`../../units/`](../../units).

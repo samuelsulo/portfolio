@@ -8,6 +8,6 @@ project and can be modified freely.
 
 ## Adding a Module
 
-Create `modules/local/<name>/{main,variables,outputs,versions}.tf` +
+Create `catalog/modules/local/<name>/{main,variables,outputs,versions}.tf` +
 `README.md` by hand, matching the file set of the other modules. After
 filling it in, wrap it in a unit under [`../../units/`](../../units).

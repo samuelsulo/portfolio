@@ -2,10 +2,10 @@
 
 Contact form backend: API Gateway calling Amazon SES directly (no Lambda
 or database), behind a custom domain with an ACM certificate. Wraps
-[`modules/vendor/contact-api`](../../modules/vendor/contact-api).
+[`catalog/modules/vendor/contact-api`](../../modules/vendor/contact-api).
 
 Resource names derive from `name_prefix` in
-[`root.hcl`](../../live/root.hcl). The email bodies are
+[`root.hcl`](../../../live/root.hcl). The email bodies are
 [`templates/contact.html`](./templates/contact.html) and
 [`templates/contact.txt`](./templates/contact.txt).
 

@@ -10,7 +10,7 @@
 #                    `git ls-remote --tags`)
 #
 # Copies modules/<module> from the catalog tag "<module>/<version>" into
-# modules/vendor/<module>, replacing anything already there, and writes a
+# catalog/modules/vendor/<module>, replacing anything already there, and writes a
 # VENDORED.md provenance file alongside it.
 
 set -euo pipefail
@@ -35,7 +35,7 @@ commit=$(git -C "$tmp_dir" rev-parse HEAD)
 vendored_on=$(date -u +%Y-%m-%d)
 
 src_dir="$tmp_dir/modules/$module"
-dest_dir="modules/vendor/$module"
+dest_dir="catalog/modules/vendor/$module"
 
 if [[ ! -d "$src_dir" ]]; then
   echo "Module \"$module\" not found in catalog at ref \"$ref\"" >&2

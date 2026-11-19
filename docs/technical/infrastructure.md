@@ -14,14 +14,15 @@ Terragrunt orchestrates OpenTofu. Both are pinned with `mise`. Static checks (`t
 
 | Layer   | Folder                                 | Role                                                               |
 | ------- | -------------------------------------- | ------------------------------------------------------------------ |
-| Modules | `modules/vendor/`                      | Vendored, never edited, from the infrastructure catalog            |
-| Units   | `units/`                               | Terragrunt wrappers of the modules, written for this project       |
-| Stacks  | `live/<environment>/<region>/<stack>/` | Wire units to an environment and give their values                 |
-| Root    | `live/root.hcl`                        | Shared provider, state backend and tags, identical for every stack |
+| Modules | `catalog/modules/vendor/`                    | Vendored, never edited, from the infrastructure catalog            |
+| Units   | `catalog/units/`                             | Terragrunt wrappers of the modules, written for this project       |
+| Stacks  | `catalog/stacks/`                            | Wire units into a deployable, with no account-specific value       |
+| Live    | `live/<account>/<region>/terragrunt.stack.hcl` | One `stack` block per deployable, with the values of that account |
+| Root    | `live/root.hcl`                              | Shared provider, state backend and tags, identical for every stack |
 
 ## What is deployed
 
-The `website` stack of each environment instantiates two units:
+The `website` stack, instantiated in each account, wires two units:
 
 - `website-hosting`: private S3 bucket behind CloudFront (Origin Access Control), ACM
   certificate and Route 53 alias.
