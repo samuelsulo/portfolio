@@ -25,7 +25,7 @@
     "imageAlt": "projects.items.samuelsulo-noir27.imageAlt",
     "materials": ["logo", "businessCard", "reviewSign", "website", "design", "architecture"],
     "technologies": ["Vue.js", "AWS", "S3", "CloudFront", "Route53", "OpenTofu"],
-    "url": "https://noir27.samuelsulo.it",
+    "url": "https://noir27-e3ive6.sbx.samuelsulo.it",
     "translationKey": "projects.items.samuelsulo-noir27",
     "screenshot": "/images/cases/samuelsulo-noir27/website-desktop.webp"
   },
@@ -36,7 +36,7 @@
     "imageAlt": "projects.items.samuelsulo-nexus.imageAlt",
     "materials": ["ecommerce", "design", "architecture"],
     "technologies": ["Vue.js", "TypeScript", "Pinia", "AWS", "OpenTofu"],
-    "url": "https://nexus.samuelsulo.it",
+    "url": "https://nexus-l5f7km.sbx.samuelsulo.it",
     "translationKey": "projects.items.samuelsulo-nexus",
     "screenshot": "/images/cases/samuelsulo-nexus/website-desktop.webp"
   },
@@ -56,7 +56,7 @@
       "AWS",
       "OpenTofu"
     ],
-    "url": "https://pulse.samuelsulo.it",
+    "url": "https://pulse-5ayhwk.sbx.samuelsulo.it",
     "translationKey": "projects.items.samuelsulo-pulse",
     "screenshot": "/images/cases/samuelsulo-pulse/website-desktop.webp"
   }
