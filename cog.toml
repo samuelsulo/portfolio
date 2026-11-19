@@ -7,6 +7,6 @@ post_package_bump_hooks = [
 ]
 
 [packages]
-application = { path = "web" }
+web = { path = "apps/web" }
 infrastructure = { path = "infrastructure" }
 brand = { path = "brand" }
