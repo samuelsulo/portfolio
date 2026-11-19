@@ -13,7 +13,7 @@ import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const brand = path.resolve(root, '..', '..', 'brand')
+const brand = path.resolve(root, '..', '..', '..', 'brand')
 const data = JSON.parse(fs.readFileSync(path.join(root, 'samuelsulo-cv.json'), 'utf8'))
 const palette = JSON.parse(
   fs.readFileSync(path.join(brand, 'palette', 'samuelsulo-palette.json'), 'utf8'),
