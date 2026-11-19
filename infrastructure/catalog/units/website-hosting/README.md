@@ -2,10 +2,10 @@
 
 Static website hosting: private S3 bucket behind CloudFront (with Origin
 Access Control), ACM certificate and Route 53 alias record. Wraps
-[`modules/vendor/website-hosting`](../../modules/vendor/website-hosting).
+[`catalog/modules/vendor/website-hosting`](../../modules/vendor/website-hosting).
 
 Resource names derive from `name_prefix` in
-[`root.hcl`](../../live/root.hcl). The unit also generates an
+[`root.hcl`](../../../live/root.hcl). The unit also generates an
 `aws.us_east_1` alias provider, which the module needs for the ACM
 certificate required by CloudFront.
 

@@ -4,7 +4,7 @@ include "root" {
 }
 
 terraform {
-  source = "${find_in_parent_folders("modules/vendor")}//website-hosting"
+  source = "${dirname(find_in_parent_folders("root.hcl"))}/../catalog/modules/vendor//website-hosting"
 }
 
 # The module requests its ACM certificate through an `aws.us_east_1` alias

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Build apps/web/ and deploy it to the production S3 bucket + CloudFront
 # distribution. Bucket name, distribution ID and the contact API's base URL
-# are read from the outputs of the website stack under
-# infrastructure/live/workload-prod/eu-south-1/website (via
-# 'terragrunt stack output'), never guessed or hardcoded.
+# are read from the outputs of the website stack, instantiated in
+# infrastructure/live/workload-prod/eu-south-1 (via 'terragrunt stack output'),
+# never guessed or hardcoded.
 #
 # Version tracking: deploys the commit pointed at by an explicit
 # 'web/vX.Y.Z' tag (or a legacy 'application/vX.Y.Z' one, to roll back to a

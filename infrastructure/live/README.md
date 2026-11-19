@@ -1,7 +1,8 @@
 # Live
 
-Terragrunt stacks: the environment-specific wiring that instantiates
-units from [`../units/`](../units) for a given account/region/environment.
+Where things are deployed: one folder per AWS account, and in each region one
+`terragrunt.stack.hcl` that instantiates the stacks of [`../catalog/stacks/`](../catalog/stacks)
+with the values of that account.
 [`root.hcl`](./root.hcl) is included by every stack and stays identical
 across all of them; everything that differs lives in the folder
 hierarchy below.
@@ -15,11 +16,10 @@ live/
     ├── account.hcl                      # aws_account_id, aws_profile, account_name
     ├── _global/                         # account-wide services (budgets, route53, ...)
     │   ├── region.hcl                   # fixed to us-east-1
-    │   └── <stack>/terragrunt.stack.hcl
+    │   └── terragrunt.stack.hcl         # one `stack` block per catalog stack, when there is one
     └── <region>/                        # e.g. eu-south-1
         ├── region.hcl                   # aws_region(_short)
-        └── <stack>/                     # e.g. website-hosting
-            └── terragrunt.stack.hcl
+        └── terragrunt.stack.hcl         # one `stack` block per catalog stack
 ```
 
 ### `_global`
@@ -51,7 +51,7 @@ it. Responsible for what units must not configure themselves:
   provider per stack: resources that must live in `us-east-1` (e.g. the
   ACM certificate for CloudFront) go in a `_global` stack.
 - Configures the S3 `remote_state` backend, with a state key derived
-  from `project` and `path_relative_to_include()`, so every stack
+  from the account ID, `project` and the stack path, so every unit
   gets its own state file without repeating backend config anywhere.
 
 ### State bucket
@@ -72,34 +72,41 @@ passed to modules as an `input`.
 
 ## Stacks
 
-A stack (`terragrunt.stack.hcl`) wires up a set of units for its
-account and region via `unit` blocks, each pointing its `source`
-at a unit under [`../units/`](../units) and supplying the environment-specific
-`values` the unit expects (see that unit's `README.md`).
+`live/<account>/<region>/terragrunt.stack.hcl` has one `stack` block per deployable,
+pointing at a stack of [`../catalog/stacks/`](../catalog/stacks) and giving the values
+listed in its README:
+
+```hcl
+stack "website" {
+  source = "${dirname(find_in_parent_folders("root.hcl"))}/../catalog/stacks/website"
+  path   = "website"
+
+  values = { ... }
+}
+```
+
+`path` becomes a segment of the state key, `<account id>/portfolio/<region>/<path>/<unit>/`.
+Never rename it: a different key makes OpenTofu see an empty state.
 
 ## Adding a Stack
 
-Copy [`../templates/stack/terragrunt.stack.hcl`](../templates/stack/terragrunt.stack.hcl)
-to `<environment>/<region>/<stack-name>/terragrunt.stack.hcl`, with a
-`unit` block per unit it wires up, each `source` pointing at the unit
-under `../units/` and `values` filled in per that unit's `README.md`.
-Add `account.hcl`/`region.hcl` first if the environment/region doesn't
-exist yet under `live/`, copying them from
-[`../templates/`](../templates).
+Write it in [`../catalog/stacks/`](../catalog/stacks), then add a `stack` block for it to
+`<account>/<region>/terragrunt.stack.hcl`. A new account or region gets its `account.hcl` or
+`region.hcl` by copying an existing one.
 
 ## Usage
 
-Run from the stack's own directory:
+Run from the account and region folder that holds the `terragrunt.stack.hcl`:
 
 ```
-cd live/<environment>/<region>/<stack>
+cd live/<account>/<region>
 terragrunt stack run plan
 terragrunt stack run apply
 ```
 
 `mise.toml` pins the `opentofu` and `terragrunt` versions used across the
 project and sets `TG_OUT_DIR`, so `plan` saves its plan files under `.plans/`
-in the stack directory and `apply` runs only those saved plans (with
+in that folder and `apply` runs only those saved plans (with
 `-auto-approve`): review the plan before applying, and run `plan` again if
 the state changed in the meantime.
 

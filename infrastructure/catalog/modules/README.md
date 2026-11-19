@@ -1,8 +1,8 @@
 # Modules
 
 Reusable OpenTofu modules, one per AWS competency, wrapped by the
-Terragrunt units in [`../units/`](../units) and instantiated by the
-stacks in [`../live/`](../live).
+Terragrunt units in [`../units/`](../units), wired by the stacks in
+[`../stacks/`](../stacks) and instantiated in [`../../live/`](../../live).
 
 ## Structure
 
@@ -27,6 +27,6 @@ Apply to modules in both subfolders:
 - Every variable and output has a `description`: each module's README
   Input/Output tables mirror them.
 - Modules do not configure the backend or the AWS provider itself:
-  that is [`../live/root.hcl`](../live/root.hcl)'s responsibility, so the same module works unchanged in
-  every environment.
+  that is [`../../live/root.hcl`](../../live/root.hcl)'s responsibility, so the same module works unchanged in
+  every account.
 
