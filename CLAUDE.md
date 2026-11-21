@@ -1,12 +1,22 @@
 # CLAUDE.md: Project Guardrails
 
-Rules that apply to every repository live in the `repo-standard` skill, and AWS, Terragrunt and
-OpenTofu rules in the `aws-terragrunt-standard` skill. This file adds only what is specific to this
-project (profile `product`, see `.repo-standard.yml`). If a request seems to require deviating from
-these rules, stop and flag it instead of proceeding autonomously.
+AWS, Terragrunt and OpenTofu rules live in the `aws-terragrunt-standard` skill. If a request seems
+to require deviating from these rules, stop and flag it instead of proceeding autonomously.
 
-Must hold even if the skills are not loaded:
+## How we work
 
+Plan with the AI agent, turn the plan into issues, solve each issue with its own pull request that
+closes it, and commit with Conventional Commits (scope from `cog.toml`). The method and the git
+strategy are in [`docs/working-method.md`](./docs/working-method.md).
+
+## Rules
+
+- Write code, comments, configuration, commit messages and Markdown in English. Content delivered
+  in another language (site copy, i18n files) is the exception.
+- Prefer kebab-case for file and folder names, unless the language or framework has its own
+  convention, which is then followed.
+- Put a `README.md` in every structural folder.
+- Never put credentials in the repository or in CI.
 - Never use the em dash. Use a comma, period, colon, semicolon, parentheses or ` - `.
 - Never mention the AI tool used for development, in code, comments, configuration, commit messages
   or any content delivered, unless the owner explicitly asks for it in a specific case. The only exception is the name of
@@ -15,10 +25,9 @@ Must hold even if the skills are not loaded:
 
 ## Structure
 
-Top-level folders are fixed and are not renamed or moved: `apps/`, `infrastructure/`, `brand/`, `docs/`, `.github/`. The subfolders of `docs/`
-are fixed too: add content inside them. Provider and Terraform rules are in
+Top-level folders are fixed and are not renamed or moved: `apps/`, `infrastructure/`, `brand/`, `docs/`, `.github/`. The structure of `docs/`
+follows the needs of the project. Provider and Terraform rules are in
 `infrastructure/CLAUDE.md`, application conventions in [`apps/web/README.md`](./apps/web/README.md).
-Issue templates in `.github/ISSUE_TEMPLATE/` come from `template-project` and are not modified here.
 
 `brand/` holds the brand assets (palette, logo, business card, fonts, the brand manual); it is not documentation, which is why it lives outside `docs/`.
 

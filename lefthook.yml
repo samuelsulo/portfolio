@@ -5,8 +5,6 @@ commit-msg:
 
 pre-commit:
   commands:
-    repo-check-style:
-      run: scripts/check-style.sh --staged
     infrastructure-fmt-tofu:
       root: "infrastructure/"
       glob: "infrastructure/**/*.{tf,tfvars}"

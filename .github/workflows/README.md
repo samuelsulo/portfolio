@@ -17,4 +17,4 @@ check is never skipped.
 
 - List every workflow in the table above in the same change that adds it.
 - Runners are pinned to `ubuntu-24.04` and third-party actions to a major version.
-- A component adds its own workflow when it is created: see the `repo-standard` skill.
+- A component adds its own workflow when it is created.

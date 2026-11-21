@@ -2,6 +2,10 @@
 
 This folder collects all project documentation.
 
+## Working Method ([working-method.md](working-method.md))
+
+From plan to pull request, git strategy, commits and minimum checks.
+
 ## Technical Documentation ([technical/](technical/))
 
 Documents related to the technical part of the project.
